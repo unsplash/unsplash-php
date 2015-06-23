@@ -24,7 +24,8 @@ class ConnectionTest extends \PHPUnit_Framework_TestCase
 			'client_secret' => getenv('APPLICATION_SECRET_KEY'),
 			'redirect_uri' => getenv('REDIRECT_URI')
 		]);
-		$this->connection  = new Unsplash\Connection($this->credentials);
+
+		$this->connection  = new Unsplash\Connection(getenv('APPLICATION_ID'), getenv('APPLICATION_SECRET_KEY'), getenv('REDIRECT_URI'));
 	}
 
 	public function testConnectionUrlConstruction()

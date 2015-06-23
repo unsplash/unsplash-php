@@ -9,18 +9,25 @@ class Connection
 	private $credentials;
 	private $client;
 
-	public function __construct($credentials)
+	public function __construct($clientId, $clientSecret, $redirectUri = null, $access_token = null, $refresh_token = null, $expire_at = null)
 	{
-		$this->credentials = $credentials;
-		$this->client = new Client();
+		$this->credentials = new Credential([
+			'client_id' => $clientId,
+			'client_secret' => $clientSecret,
+			'redirect_uri' => $redirectUri,
+			'access_token' => $access_token,
+			'refresh_token' => $refresh_token,
+			'expire_at' => $expire_at
+		]);
+
+		$this->client = new Client(['base_uri' => 'http://staging.unsplash.com']);
 	}
 
 	public function generateToken($token, $grant_type = 'authorization_code')
 	{
-		print $grant_type;
 		$query = $this->getTokenQuery($token, $grant_type);
 
-		$res = $this->client->post("http://staging.unsplash.com/oauth/token?{$query}");
+		$res = $this->client->post("oauth/token?{$query}");
 
 		$body = json_decode($res->getBody(), true);
 
@@ -29,6 +36,11 @@ class Connection
 		$this->credentials->expire_at = $body['created_at'] + $body['expires_in'];
 
 		return $body;
+	}
+
+	public function regenerateToken()
+	{
+		$this->generateToken($this->credentials->refresh_token, 'refresh_token');
 	}
 
 	public function getAuthorizationToken()
@@ -75,19 +87,11 @@ class Connection
 
 	public function hasTokenInformations()
 	{
-		if (isset($this->credentials->access_token, $this->credentials->refresh_token, $this->credentials->expire_at)) {
-			return true;
-		}
-
-		return false;
+		return !is_null($this->credentials->refresh_token) && !is_null($this->credentials->expire_at);
 	}
 
 	public function tokenHasExpired()
 	{
-		if ($this->hasTokenInformations() && $this->credentials->expire_at < time()) {
-			return true;
-		}
-
-		return false;
+		return $this->hasTokenInformations() && $this->credentials->expire_at <= time();
 	}
 }
