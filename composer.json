@@ -1,0 +1,30 @@
+{
+  "name": "crewlabs/unsplash",
+  "description": "Wrapper to access information from Unsplash API more easily",
+  "minimum-stability": "stable",
+  "license": "CC0",
+  "authors": [
+    {
+      "name": "Charles Lalonde",
+      "email": "charles@pickcrew.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.5.0",
+    "guzzlehttp/guzzle": "~6.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.7.4",
+    "php-vcr/php-vcr": "dev-master",
+    "php-vcr/phpunit-testlistener-vcr": "*",
+    "vlucas/phpdotenv": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {
+      "Crew\\Unsplash\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "Crew\\Unsplash\\Tests\\": "tests/"
+  }
+}
