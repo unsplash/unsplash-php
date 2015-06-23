@@ -37,14 +37,18 @@ class Endpoint
 		return $this->statusCode;
 	}
 
+	public function getBody()
+	{
+		return $this->getBody();
+	}
+
 	protected function get($path, $query = [])
 	{
 		$this->renewConnectionIfNeeded();
 
 		$res = $this->client->get($path, ['query' => $query, 'headers' => ['Authorization' => $this->connection->getAuthorizationToken()]]);
 
-		$this->headers = $res->getHeaders();
-		$this->statusCode = $res->getStatusCode();
+		$this->setResVariable($res);
 
 		return json_decode($res->getBody(), true);
 	}
@@ -55,10 +59,16 @@ class Endpoint
 
 		$res = $this->client->post($path, [$params], ['query' => $query, 'headers' => ['Authorization' => $this->connection->getAuthorizationToken()]]);
 
-		$this->headers = $res->getHeaders();
-		$this->statusCode = $res->getStatusCode();
+		$this->setResVariable($res);
 
 		return $res->getStatusCode() >= 200 & $res->getStatusCode() < 300;
+	}
+
+	private function setResVariable($res)
+	{
+		$this->headers = $res->getHeaders();
+		$this->statusCode = $res->getStatusCode();
+		$this->body = $res->getBody();
 	}
 
 	private function renewConnectionIfNeeded()

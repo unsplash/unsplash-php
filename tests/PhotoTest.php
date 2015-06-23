@@ -3,6 +3,7 @@
 namespace Crew\Unsplash\Tests;
 
 use \Crew\Unsplash as Unsplash;
+use \Dotenv\Dotenv;
 use \VCR\VCR;
 
 class PhotoTest extends \PHPUnit_Framework_TestCase
@@ -10,6 +11,8 @@ class PhotoTest extends \PHPUnit_Framework_TestCase
 	public function setUp()
 	{
 		VCR::turnOn();
+		$dotenv = new Dotenv(__DIR__);
+		$dotenv->load();
 
 		$this->connection  = new Unsplash\Connection(getenv('APPLICATION_ID'), getenv('APPLICATION_SECRET_KEY'));
 		$this->photo = new Unsplash\Photo($this->connection);
@@ -54,7 +57,7 @@ class PhotoTest extends \PHPUnit_Framework_TestCase
 	// public function testPostPhotos()
 	// {
 	// 	$this->connection  = new Unsplash\Connection(getenv('APPLICATION_ID'), getenv('APPLICATION_SECRET_KEY'), null, null, getenv('REFRESH_TOKEN'), time()-10);
-		
+
 	// 	$photo = fopen('photo.jpg', 'w');
 
 	// 	VCR::insertCassette('create_photo.yml');

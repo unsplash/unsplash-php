@@ -14,8 +14,8 @@ class CuratedBatch extends Endpoint
 		return $this->get("curated_batches", ['page' => $page, 'per_page' => $per_page]);
 	}
 
-	public function photos($curatedBatchId)
+	public function photos($curatedBatchId, $page = 1, $per_page = 10)
 	{
-		return $this->get("curated_batches/{$curatedBatchId}/photos");
+		return $this->get("curated_batches/{$curatedBatchId}/photos", ['page' => $page, 'per_page' => $per_page]);
 	}
 }

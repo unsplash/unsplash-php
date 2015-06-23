@@ -3,6 +3,7 @@
 namespace Crew\Unsplash\Tests;
 
 use \Crew\Unsplash as Unsplash;
+use \Dotenv\Dotenv;
 use \VCR\VCR;
 
 class CuratedBatchTest extends \PHPUnit_Framework_TestCase
@@ -10,6 +11,8 @@ class CuratedBatchTest extends \PHPUnit_Framework_TestCase
 	public function setUp()
 	{
 		VCR::turnOn();
+		$dotenv = new Dotenv(__DIR__);
+		$dotenv->load();
 
 		$this->connection  = new Unsplash\Connection(getenv('APPLICATION_ID'), getenv('APPLICATION_SECRET_KEY'));
 		$this->curatedBatch = new Unsplash\CuratedBatch($this->connection);
@@ -19,7 +22,7 @@ class CuratedBatchTest extends \PHPUnit_Framework_TestCase
 	{
 		VCR::insertCassette('find_curated_batch.yml');
 
-		$curatedBatch = $this->curatedBatch->find('68');
+		$curatedBatch = $this->curatedBatch->find(68);
 
 		VCR::eject();
 
