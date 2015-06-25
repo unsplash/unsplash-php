@@ -12,7 +12,19 @@ class ConnectionTest extends BaseTest
 	{
 		parent::setUp();
 
-		$this->connection  = new Unsplash\Connection($this->provider);
+		// If the class is not cloned, the mock method will get stick 
+		// to it
+		$provider = clone $this->provider;
+
+		$provider->shouldReceive('getAuthorizationUrl')->times(1)->andReturn('http://api.staging.unsplash.com/oauth/authorize?client_id=mock_client_id&client_secret=mock_secret&redirect_uri=none');
+		
+		$provider->shouldReceive('getAccessToken')->times(1)->andReturn((object)[
+			'accessToken' => 'mock_access_token_1',
+			'refreshToken' => 'mock_refresh_token_1',
+			'expires' => time() + 3600
+		]);
+
+		$this->connection  = new Unsplash\Connection($provider);
 	}
 
 	public function testConnectionUrlConstruction()

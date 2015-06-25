@@ -19,8 +19,8 @@ class Photo extends Endpoint
 		return $this->get("photos/search", ['query' => $search, 'category' => $category, 'page' => $page, 'per_page' => $per_page]);
 	}
 
-	public function create($filename, $file)
+	public function create($file)
 	{
-		return $this->post("photos", ['multipart' => ['name' => $filename, 'contents' => $file]]);
+		return $this->post("photos", [], [], [['name' => 'photo', 'contents' => $file]]);
 	}
 }

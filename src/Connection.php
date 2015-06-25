@@ -58,7 +58,7 @@ class Connection
 		if (! is_null($this->token)) {
 			// Validate if the token object link to this class is expire
 			// refresh it if it's the case
-			if ($this->token->expires < time()) {
+			if (isset($this->token->expires) && $this->token->expires < time()) {
 				$this->refreshToken();
 			}
 

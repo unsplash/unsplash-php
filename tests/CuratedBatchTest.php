@@ -3,24 +3,20 @@
 namespace Crew\Unsplash\Tests;
 
 use \Crew\Unsplash as Unsplash;
-use \Dotenv\Dotenv;
 use \VCR\VCR;
 
-class CuratedBatchTest extends \PHPUnit_Framework_TestCase
+class CuratedBatchTest extends BaseTest
 {
 	public function setUp()
 	{
-		VCR::turnOn();
-		$dotenv = new Dotenv(__DIR__);
-		$dotenv->load();
+		parent::setUp();
 
-		$this->connection  = new Unsplash\Connection(getenv('APPLICATION_ID'), getenv('APPLICATION_SECRET_KEY'));
-		$this->curatedBatch = new Unsplash\CuratedBatch($this->connection);
+		$this->curatedBatch = new Unsplash\CuratedBatch($this->provider, (object)['accessToken' => $this->accessToken]);
 	}
 
 	public function testFindCuratedBatch()
 	{
-		VCR::insertCassette('find_curated_batch.yml');
+		VCR::insertCassette('curated_batches.yml');
 
 		$curatedBatch = $this->curatedBatch->find(68);
 
@@ -32,7 +28,7 @@ class CuratedBatchTest extends \PHPUnit_Framework_TestCase
 
 	public function testFindAllCuratedBatches()
 	{
-		VCR::insertCassette('find_all_curated_batches.yml');
+		VCR::insertCassette('curated_batches.yml');
 
 		$curatedBatches = $this->curatedBatch->findAll();
 
@@ -44,7 +40,7 @@ class CuratedBatchTest extends \PHPUnit_Framework_TestCase
 
 	public function testFindCuratedBatchPhotos()
 	{
-		VCR::insertCassette('find_curated_batch_photos.yml');
+		VCR::insertCassette('curated_batches.yml');
 
 		$curatedBatchesPhotos = $this->curatedBatch->photos(68);
 

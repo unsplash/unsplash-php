@@ -3,24 +3,20 @@
 namespace Crew\Unsplash\Tests;
 
 use \Crew\Unsplash as Unsplash;
-use \Dotenv\Dotenv;
 use \VCR\VCR;
 
-class PhotoTest extends \PHPUnit_Framework_TestCase
+class PhotoTest extends BaseTest
 {
 	public function setUp()
 	{
-		VCR::turnOn();
-		$dotenv = new Dotenv(__DIR__);
-		$dotenv->load();
+		parent::setUp();
 
-		$this->connection  = new Unsplash\Connection(getenv('APPLICATION_ID'), getenv('APPLICATION_SECRET_KEY'));
-		$this->photo = new Unsplash\Photo($this->connection);
+		$this->photo = new Unsplash\Photo($this->provider, (object)['accessToken' => $this->accessToken]);
 	}
 
 	public function testFindPhoto()
 	{
-		VCR::insertCassette('find_photo.yml');
+		VCR::insertCassette('photos.yml');
 
 		$photo = $this->photo->find('ZUaqqMxtxYk');
 
@@ -32,7 +28,7 @@ class PhotoTest extends \PHPUnit_Framework_TestCase
 
 	public function testFindAllPhotos()
 	{
-		VCR::insertCassette('find_all_photo.yml');
+		VCR::insertCassette('photos.yml');
 
 		$photos = $this->photo->findAll();
 
@@ -44,7 +40,7 @@ class PhotoTest extends \PHPUnit_Framework_TestCase
 
 	public function testSearchPhotos()
 	{
-		VCR::insertCassette('search_photo.yml');
+		VCR::insertCassette('photos.yml');
 
 		$photos = $this->photo->search('coffee');
 
@@ -54,16 +50,18 @@ class PhotoTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals(10, count($photos));
 	}
 
-	// public function testPostPhotos()
-	// {
-	// 	$this->connection  = new Unsplash\Connection(getenv('APPLICATION_ID'), getenv('APPLICATION_SECRET_KEY'), null, null, getenv('REFRESH_TOKEN'), time()-10);
+	public function testPostPhotos()
+	{
+		// Due to a bug in VCR I need to stop the VCR
+		// Cause file are not supported
+		VCR::turnOff();
+		
+		$photo = fopen(__dir__.'/images/land-test.jpeg', 'r');
 
-	// 	$photo = fopen('photo.jpg', 'w');
+		$photo = $this->photo->create($photo);
 
-	// 	VCR::insertCassette('create_photo.yml');
+		$this->assertEquals(201, $this->photo->getStatusCode());
 
-	// 	$photo = $this->photo->create('image_name', $photo);
-
-	// 	VCR::eject();
-	// } 
+		VCR::turnOn();
+	} 
 }

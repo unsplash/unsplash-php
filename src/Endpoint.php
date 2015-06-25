@@ -11,9 +11,9 @@ class Endpoint
 	private $headers = null;
 	private $statusCode = null;
 
-	public function __construct(Connection $connection)
+	public function __construct(Provider\Unsplash $provider, \stdClass $token = null)
 	{
-		$this->connection = $connection;
+		$this->connection = new Connection($provider, $token);
 		$this->client = new Client(['base_uri' => 'http://api.staging.unsplash.com']);
 	}
 
@@ -44,8 +44,6 @@ class Endpoint
 
 	protected function get($path, $query = [])
 	{
-		$this->renewConnectionIfNeeded();
-
 		$res = $this->client->get($path, ['query' => $query, 'headers' => ['Authorization' => $this->connection->getAuthorizationToken()]]);
 
 		$this->setResVariable($res);
@@ -53,16 +51,24 @@ class Endpoint
 		return json_decode($res->getBody(), true);
 	}
 
-	protected function post($path, $params = [], $query = [])
+	protected function post($path, $params = [], $query = [], $multipart = [])
 	{
-		$this->renewConnectionIfNeeded();
-
-		$res = $this->client->post($path, [$params], ['query' => $query, 'headers' => ['Authorization' => $this->connection->getAuthorizationToken()]]);
+		$res = $this->client->post($path, ['query' => $query, 'headers' => ['Authorization' => $this->connection->getAuthorizationToken()], 'form_params' => $params, 'multipart' => $multipart]);
 
 		$this->setResVariable($res);
 
-		return $res->getStatusCode() >= 200 & $res->getStatusCode() < 300;
+		return json_decode($res->getBody(), true);
 	}
+
+	protected function put($path, $params)
+	{
+		$res = $this->client->put($path, ['headers' => ['Authorization' => $this->connection->getAuthorizationToken()], 'form_params' => $params]);
+
+		$this->setResVariable($res);
+
+		return json_decode($res->getBody(), true);
+	}
+
 
 	private function setResVariable($res)
 	{
@@ -71,11 +77,8 @@ class Endpoint
 		$this->body = $res->getBody();
 	}
 
-	private function renewConnectionIfNeeded()
+	public function setHttpClient($client)
 	{
-		print($this->connection->tokenHasExpired());
-		if ($this->connection->tokenHasExpired()) {
-			$this->connection->regenerateToken();
-		}
+		$this->client = $client;
 	}
 }

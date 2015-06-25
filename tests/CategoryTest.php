@@ -3,24 +3,20 @@
 namespace Crew\Unsplash\Tests;
 
 use \Crew\Unsplash as Unsplash;
-use \Dotenv\Dotenv;
 use \VCR\VCR;
 
-class CategoryTest extends \PHPUnit_Framework_TestCase
+class CategoryTest extends BaseTest
 {
 	public function setUp()
 	{
-		VCR::turnOn();
-		$dotenv = new Dotenv(__DIR__);
-		$dotenv->load();
+		parent::setUp();
 
-		$this->connection  = new Unsplash\Connection(getenv('APPLICATION_ID'), getenv('APPLICATION_SECRET_KEY'));
-		$this->category = new Unsplash\Category($this->connection);
+		$this->category = new Unsplash\Category($this->provider, (object)['accessToken' => $this->accessToken]);
 	}
 
 	public function testFindCategory()
 	{
-		VCR::insertCassette('find_category.yml');
+		VCR::insertCassette('categories.yml');
 
 		$category = $this->category->find(2);
 
@@ -32,7 +28,7 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
 
 	public function testFindAllCategory()
 	{
-		VCR::insertCassette('find_all_categories.yml');
+		VCR::insertCassette('categories.yml');
 
 		$categories = $this->category->findAll();
 
@@ -44,7 +40,7 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
 
 	public function testFindCategoryPhotos()
 	{
-		VCR::insertCassette('find_category_photos.yml');
+		VCR::insertCassette('categories.yml');
 
 		$categoryPhotos = $this->category->photos(2);
 

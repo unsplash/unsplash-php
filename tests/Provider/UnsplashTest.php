@@ -3,15 +3,15 @@
 namespace Crew\Unsplash\Tests\Provider;
 
 use Mockery as m;
-use \Crew\Unsplash\Provider as Provider;
+use Crew\Unsplash\Provider;
 
 class UnsplashTest extends \PHPUnit_Framework_TestCase
 {
-    protected $provider;
+    public static $unsplashProvider;
 
-    protected function setUp()
+    public static function setUpBeforeClass()
     {
-        $this->provider = new Provider\Unsplash([
+        self::$unsplashProvider = new \Crew\Unsplash\Provider\Unsplash([
             'clientId' => 'mock_client_id',
             'clientSecret' => 'mock_secret',
             'redirectUri' => 'none',
@@ -26,7 +26,7 @@ class UnsplashTest extends \PHPUnit_Framework_TestCase
 
     public function testAuthorizationUrl()
     {
-        $url = $this->provider->getAuthorizationUrl();
+        $url = self::$unsplashProvider->getAuthorizationUrl();
         $uri = parse_url($url);
         parse_str($uri['query'], $query);
 
@@ -36,12 +36,12 @@ class UnsplashTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('scope', $query);
         $this->assertArrayHasKey('response_type', $query);
         $this->assertArrayHasKey('approval_prompt', $query);
-        $this->assertNotNull($this->provider->state);
+        $this->assertNotNull(self::$unsplashProvider->state);
     }
 
     public function testUrlAuthorize()
     {
-        $url = $this->provider->urlAuthorize();
+        $url = self::$unsplashProvider->urlAuthorize();
         $uri = parse_url($url);
 
         $this->assertEquals('/oauth/authorize', $uri['path']);
@@ -49,7 +49,7 @@ class UnsplashTest extends \PHPUnit_Framework_TestCase
 
     public function testUrlAccessToken()
     {
-        $url = $this->provider->urlAccessToken();
+        $url = self::$unsplashProvider->urlAccessToken();
         $uri = parse_url($url);
 
         $this->assertEquals('/oauth/token', $uri['path']);
@@ -63,9 +63,9 @@ class UnsplashTest extends \PHPUnit_Framework_TestCase
         $client = m::mock('Guzzle\Service\Client');
         $client->shouldReceive('setBaseUrl')->times(1);
         $client->shouldReceive('post->send')->times(1)->andReturn($response);
-        $this->provider->setHttpClient($client);
+        self::$unsplashProvider->setHttpClient($client);
 
-        $token = $this->provider->getAccessToken('authorization_code', ['code' => 'mock_authorization_code']);
+        $token = self::$unsplashProvider->getAccessToken('authorization_code', ['code' => 'mock_authorization_code']);
 
         $this->assertEquals('mock_access_token', $token->accessToken);
         $this->assertLessThanOrEqual(time() + 3600, $token->expires);
@@ -76,12 +76,12 @@ class UnsplashTest extends \PHPUnit_Framework_TestCase
 
     public function testDefaultScopes()
     {
-        $this->assertEquals(['public', 'read_user'], $this->provider->getScopes());
+        $this->assertEquals(['public', 'read_user'], self::$unsplashProvider->getScopes());
     }
 
     public function testAuthorizationHeader()
     {
-        $this->assertEquals('Bearer', $this->provider->authorizationHeader);
+        $this->assertEquals('Bearer', self::$unsplashProvider->authorizationHeader);
     }
 
     public function testUserData()
@@ -97,14 +97,14 @@ class UnsplashTest extends \PHPUnit_Framework_TestCase
         $client->shouldReceive('setDefaultOption')->times(4);
         $client->shouldReceive('post->send')->times(1)->andReturn($postResponse);
         $client->shouldReceive('get->send')->times(4)->andReturn($getResponse);
-        $this->provider->setHttpClient($client);
+        self::$unsplashProvider->setHttpClient($client);
 
-        $token = $this->provider->getAccessToken('authorization_code', ['code' => 'mock_authorization_code']);
-        $user = $this->provider->getUserDetails($token);
+        $token = self::$unsplashProvider->getAccessToken('authorization_code', ['code' => 'mock_authorization_code']);
+        $user = self::$unsplashProvider->getUserDetails($token);
 
-        $this->assertEquals('mock_id', $this->provider->getUserUid($token));
-        $this->assertNull($this->provider->getUserScreenName($token));
-        $this->assertEquals('mock_email', $this->provider->getUserEmail($token));
+        $this->assertEquals('mock_id', self::$unsplashProvider->getUserUid($token));
+        $this->assertNull(self::$unsplashProvider->getUserScreenName($token));
+        $this->assertEquals('mock_email', self::$unsplashProvider->getUserEmail($token));
         $this->assertEquals('mock_email', $user->email);
     }
 }

@@ -3,25 +3,40 @@
 namespace Crew\Unsplash\Tests;
 
 use Mockery as m;
+use \VCR\VCR;
 
-class BaseTest extends \PHPUnit_Framework_TestCase
+abstract class BaseTest extends \PHPUnit_Framework_TestCase
 {
 	protected $provider = null;
+	protected $accessToken = '2f09ba393391aa7e6427d1fd69b1341ee8c220cd3407a47162cff3ecddf4f88d';
 
 	public function setUp()
 	{
-		$this->provider = m::mock('alias:Crew\Unsplash\Provider\Unsplash', [
+		$this->provider = m::mock('Crew\Unsplash\Provider\Unsplash', [
 			'clientId' => 'mock_client_id',
             'clientSecret' => 'mock_secret',
             'redirectUri' => 'none'
 		]);
 		$this->provider->client_id = 'mock_client_id';
-		$this->provider->shouldReceive('getAuthorizationUrl')->times(1)->andReturn('http://api.staging.unsplash.com/oauth/authorize?client_id=mock_client_id&client_secret=mock_secret&redirect_uri=none');
-		
-		$this->provider->shouldReceive('getAccessToken')->times(1)->andReturn((object)[
-			'accessToken' => 'mock_access_token_1',
-			'refreshToken' => 'mock_refresh_token_1',
-			'expires' => time() + 3600
-		]);
+
+		VCR::turnOn();
+	}
+
+	/**
+ 	 * getPrivateMethod
+ 	 *
+ 	 * @author	Joe Sexton <joe@webtipblog.com>
+ 	 * @param 	string $className
+ 	 * @param 	string $methodName
+ 	 * @return	ReflectionMethod
+ 	 */
+	public function executePrivateMethod($object, $methodName, $params = []) {
+		$className = get_class($object);
+
+		$reflector = new \ReflectionClass( $className );
+		$method = $reflector->getMethod( $methodName );
+		$method->setAccessible( true );
+ 
+		return $method->invokeArgs($object, $params);
 	}
 }
