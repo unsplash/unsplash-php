@@ -11,13 +11,16 @@
   ],
   "require": {
     "php": ">=5.5.0",
-    "guzzlehttp/guzzle": "~6.0"
+    "guzzlehttp/guzzle": "~6.0",
+    "league/oauth2-client": "~0.12"
+
   },
   "require-dev": {
     "phpunit/phpunit": "~4.7.4",
     "php-vcr/php-vcr": "dev-master",
     "php-vcr/phpunit-testlistener-vcr": "*",
-    "vlucas/phpdotenv": "dev-master"
+    "vlucas/phpdotenv": "dev-master",
+    "mockery/mockery": "dev-master"
   },
   "autoload": {
     "psr-4": {
@@ -25,6 +28,8 @@
     }
   },
   "autoload-dev": {
-    "Crew\\Unsplash\\Tests\\": "tests/"
+    "psr-4": {
+      "Crew\\Unsplash\\Tests\\": "tests/"
+    }
   }
 }

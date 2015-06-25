@@ -2,96 +2,69 @@
 
 namespace Crew\Unsplash;
 
-use GuzzleHttp\Client as Client;
+use Crew\Unsplash\Provider;
+use \League\OAuth2\Client\Grant\RefreshToken;
 
 class Connection
 {
-	private $credentials;
-	private $client;
+	private $provider;
+	private $token;
 
-	public function __construct($clientId, $clientSecret, $redirectUri = null, $access_token = null, $refresh_token = null, $expire_at = null)
+	public function __construct(Provider\Unsplash $provider, \stdClass $token = null)
 	{
-		$this->credentials = new Credential([
-			'client_id' => $clientId,
-			'client_secret' => $clientSecret,
-			'redirect_uri' => $redirectUri,
-			'access_token' => $access_token,
-			'refresh_token' => $refresh_token,
-			'expire_at' => $expire_at
-		]);
-
-		$this->client = new Client(['base_uri' => 'http://staging.unsplash.com']);
-	}
-
-	public function generateToken($token, $grant_type = 'authorization_code')
-	{
-		$query = $this->getTokenQuery($token, $grant_type);
-
-		$res = $this->client->post("oauth/token?{$query}");
-
-		$body = json_decode($res->getBody(), true);
-
-		$this->credentials->access_token = $body['access_token'];
-		$this->credentials->refresh_token = $body['refresh_token'];
-		$this->credentials->expire_at = $body['created_at'] + $body['expires_in'];
-
-		return $body;
-	}
-
-	public function regenerateToken()
-	{
-		$this->generateToken($this->credentials->refresh_token, 'refresh_token');
-	}
-
-	public function getAuthorizationToken()
-	{
-		$authorizationToken = "Client-ID {$this->credentials->client_id}";
-
-		if (! is_null($this->credentials->access_token)) {
-			$authorizationToken = "Bearer {$this->credentials->access_token}";
-		}
-
-		return $authorizationToken;
+		$this->provider = $provider;
+		$this->token = $token;
 	}
 
 	public function getConnectionUrl()
 	{
-		$htmlQuery = http_build_query($this->credentials->toArray());
-
-		return "http://api.staging.unsplash.com/oauth/authorize?{$htmlQuery}";
+		return $this->provider->getAuthorizationUrl();
 	}
 
-	private function getTokenQuery($token, $grant_type = 'authorization_code')
+	public function generateToken($code)
 	{
-		$params = [
-			'client_id' => $this->credentials->client_id,
-			'client_secret' => $this->credentials->client_secret,
-		];
+		$this->token = $this->provider->getAccessToken('authorization_code', [
+	        'code' => $code
+	    ]);
 
-		if ($grant_type == 'authorization_code') {
-			$params += [
-				'code' => $token,
-				'redirect_uri' => $this->credentials->redirect_uri,
-				'grant_type' => 'authorization_code',
-				'scope' => $this->credentials->scope ?: 'public'
-			];
-		} else {
-			$params += [
-				'grant_type' => 'refresh_token',
-				'refresh_token' => $token
-			];
+	    return $this->token;
+	}
+
+	public function setToken(\stdClass $token)
+	{
+		$this->token = $token;
+	}
+
+	public function refreshToken()
+	{
+		if (is_null($this->token)) {
+			// @todo return an error
+			return null;
 		}
 
-		return http_build_query($params);
+		$grant = new RefreshToken();
+
+		$this->token = $this->provider->getAccessToken($grant, [
+			'refresh_token' => $this->token->refreshToken
+		]);
+
+		return $this->token;
 	}
 
-	public function hasTokenInformations()
+	public function getAuthorizationToken()
 	{
-		return !is_null($this->credentials->refresh_token) && !is_null($this->credentials->expire_at);
-	}
+		$authorizationToken = "Client-ID {$this->provider->client_id}";
 
-	public function tokenHasExpired()
-	{
-		return $this->hasTokenInformations() && $this->credentials->expire_at <= time();
+		if (! is_null($this->token)) {
+			// Validate if the token object link to this class is expire
+			// refresh it if it's the case
+			if ($this->token->expires < time()) {
+				$this->refreshToken();
+			}
+
+			$authorizationToken = "Bearer {$this->token->accessToken}";
+		}
+
+		return $authorizationToken;
 	}
 }
