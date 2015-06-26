@@ -1,4 +1,4 @@
 vendor/*
 tests/fixtures/*.yml
 tests/.env
-photo.jpg
+report/*

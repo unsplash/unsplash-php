@@ -27,7 +27,7 @@ class EndpointTest extends BaseTest
 
 	public function testRequest()
 	{
-		$res = $this->executePrivateMethod($this->endpoint, 'get', ['path', []]);
+		$res = $this->endpoint->__call('get', ['path', []]);
 
 		$waitedRes = [['name'=>'mock_name', 'other_info'=>'moke_info'], ['name'=>'mock_name_1', 'other_info'=>'moke_info_3']];
 
@@ -36,14 +36,16 @@ class EndpointTest extends BaseTest
 
 	public function testStatusCodeAfterRequest()
 	{
-		$res = $this->executePrivateMethod($this->endpoint, 'get', ['path', []]);
+		$res = $this->endpoint->__call('get', ['path', []]);
+
 
 		$this->assertEquals(200, $this->endpoint->getStatusCode());
 	}
 
 	public function testHeadersAfterRequest()
 	{
-		$res = $this->executePrivateMethod($this->endpoint, 'get', ['path', []]);
+		$res = $this->endpoint->__call('get', ['path', []]);
+
 
 		$this->assertEquals('Bar', $this->endpoint->getHeaders('X-Foo'));
 	}

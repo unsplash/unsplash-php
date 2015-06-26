@@ -8,7 +8,7 @@ use \VCR\VCR;
 abstract class BaseTest extends \PHPUnit_Framework_TestCase
 {
 	protected $provider = null;
-	protected $accessToken = '2f09ba393391aa7e6427d1fd69b1341ee8c220cd3407a47162cff3ecddf4f88d';
+	protected $accessToken = 'f6bbae941202599676563d06640b4cd99b8cbcf54daae19eb112fbeff92647df';
 
 	public function setUp()
 	{

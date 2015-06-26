@@ -78,6 +78,13 @@ class ConnectionTest extends BaseTest
 		]);
 	}
 
+	public function testRegenerateTokenWithNoToken()
+	{
+		$token = $this->connection->refreshToken();
+
+		$this->assertEquals(null, $token);
+	}
+
 	public function testRegenerateTokenOnAuthorization()
 	{
 		$this->connection->setToken((object)[

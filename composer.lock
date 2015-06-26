@@ -591,12 +591,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/padraic/mockery.git",
-                "reference": "3aee65d0a6a9b5e3e8b95a4a4b7830257e7ed608"
+                "reference": "6566f313837fa1074c34457bfdce1cfdc8dc50ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padraic/mockery/zipball/3aee65d0a6a9b5e3e8b95a4a4b7830257e7ed608",
-                "reference": "3aee65d0a6a9b5e3e8b95a4a4b7830257e7ed608",
+                "url": "https://api.github.com/repos/padraic/mockery/zipball/6566f313837fa1074c34457bfdce1cfdc8dc50ce",
+                "reference": "6566f313837fa1074c34457bfdce1cfdc8dc50ce",
                 "shasum": ""
             },
             "require": {
@@ -648,7 +648,7 @@
                 "test double",
                 "testing"
             ],
-            "time": "2015-06-24 10:20:26"
+            "time": "2015-06-26 15:01:58"
         },
         {
             "name": "php-vcr/php-vcr",

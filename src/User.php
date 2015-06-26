@@ -11,7 +11,7 @@ class User extends Endpoint
 
 	public function photos($userId, $page = 1, $per_page = 10)
 	{
-		return $this->get("users/{$userId}/photos", ['page' => $page, 'per_page' => $per_page]);
+		return $this->get("users/{$userId}/photos", ['query' => ['page' => $page, 'per_page' => $per_page]]);
 	}
 
 	public function current()
@@ -21,6 +21,6 @@ class User extends Endpoint
 
 	public function update(Array $parameters)
 	{
-		return $this->put("me", $parameters);
+		return $this->put("me", ['json' => $parameters]);
 	}
 }

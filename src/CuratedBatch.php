@@ -11,11 +11,11 @@ class CuratedBatch extends Endpoint
 
 	public function findAll($page = 1, $per_page = 10)
 	{
-		return $this->get("curated_batches", ['page' => $page, 'per_page' => $per_page]);
+		return $this->get("curated_batches", ['query' => ['page' => $page, 'per_page' => $per_page]]);
 	}
 
 	public function photos($curatedBatchId, $page = 1, $per_page = 10)
 	{
-		return $this->get("curated_batches/{$curatedBatchId}/photos", ['page' => $page, 'per_page' => $per_page]);
+		return $this->get("curated_batches/{$curatedBatchId}/photos", ['query' => ['page' => $page, 'per_page' => $per_page]]);
 	}
 }

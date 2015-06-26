@@ -26,6 +26,18 @@ class UserTest extends BaseTest
 		$this->assertEquals('dechuck', $user['username']);
 	}
 
+	public function testFindUnknownUser()
+	{
+		VCR::insertCassette('users.yml');
+
+		$user = $this->user->find('badbadnotgooduser');
+
+		VCR::eject();
+
+		$this->assertEquals(404, $this->user->getStatusCode());
+		$this->assertEquals(false, $this->user->isGoodRequest());
+	}
+
 	public function testFindCurrentUser()
 	{
 		VCR::insertCassette('users.yml');
@@ -35,6 +47,20 @@ class UserTest extends BaseTest
 		VCR::eject();
 
 		$this->assertEquals(200, $this->user->getStatusCode());
+	}
+
+	public function testFindCurrentUserOnUnconnectedUser()
+	{
+		$this->user = new Unsplash\User($this->provider);
+
+		VCR::insertCassette('users.yml');
+
+		$user = $this->user->current();
+
+		VCR::eject();
+
+		$this->assertEquals(401, $this->user->getStatusCode());
+		$this->assertEquals(false, $this->user->isGoodRequest());
 	}
 
 	public function testFindUserPhotos()
@@ -51,13 +77,19 @@ class UserTest extends BaseTest
 
 	public function testUpdateUser()
 	{
-		VCR::insertCassette('users.yml');
+		$this->markTestIncomplete(
+          'Due to an issue with VCR, we do not run this test.'
+        );
 		
-		$updatedUser = $this->user->update(['instagram_username'=>'dechuck1']);
+		$newInstagramUsername = 'dechuck'.time();
+
+		VCR::insertCassette('users.yml');
+
+		$updatedUser = $this->user->update(['instagram_username'=>$newInstagramUsername]);
 
 		VCR::eject();
 
 		$this->assertEquals(200, $this->user->getStatusCode());
-		$this->assertEquals('dechuck1', $updatedUser['instagram_username']);
+		$this->assertEquals($newInstagramUsername, $updatedUser['instagram_username']);
 	}
 }

@@ -2,7 +2,8 @@
 
 namespace Crew\Unsplash;
 
-use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Uri;
 
 class Endpoint
 {
@@ -11,10 +12,13 @@ class Endpoint
 	private $headers = null;
 	private $statusCode = null;
 
+	private $acceptedHttpMethod = ['get', 'post', 'put'];
+
 	public function __construct(Provider\Unsplash $provider, \stdClass $token = null)
 	{
 		$this->connection = new Connection($provider, $token);
-		$this->client = new Client(['base_uri' => 'http://api.staging.unsplash.com']);
+
+		$this->setHttpClient();
 	}
 
 	public function getHeaders($headerKey = null)
@@ -24,8 +28,6 @@ class Endpoint
 		if (! is_null($headerKey) && isset($this->headers[$headerKey])) {
 			if (is_array($this->headers[$headerKey]) && count($this->headers[$headerKey]) == 1) {
 				$header = $this->headers[$headerKey][0];
-			} else {
-				$header = $this->headers[$headerKey];
 			}
 		}
 
@@ -39,46 +41,48 @@ class Endpoint
 
 	public function getBody()
 	{
-		return $this->getBody();
+		return $this->body;
 	}
 
-	protected function get($path, $query = [])
+	public function isGoodRequest()
 	{
-		$res = $this->client->get($path, ['query' => $query, 'headers' => ['Authorization' => $this->connection->getAuthorizationToken()]]);
-
-		$this->setResVariable($res);
-
-		return json_decode($res->getBody(), true);
+		return $this->statusCode >= 200 && $this->statusCode < 300;
 	}
 
-	protected function post($path, $params = [], $query = [], $multipart = [])
+	public function __call($method, $arguments)
 	{
-		$res = $this->client->post($path, ['query' => $query, 'headers' => ['Authorization' => $this->connection->getAuthorizationToken()], 'form_params' => $params, 'multipart' => $multipart]);
+		if (in_array($method, $this->acceptedHttpMethod)) {
+			$uri = $arguments[0];
+			$params = isset($arguments[1]) ? $arguments[1] : [];
 
-		$this->setResVariable($res);
+			$response = $this->client->send(
+				new Request($method, new Uri($uri)),
+				$params
+			);
 
-		return json_decode($res->getBody(), true);
+			$this->setResVariable($response);
+
+			return $this->getBody();
+		}
 	}
 
-	protected function put($path, $params)
+	private function setResVariable($response)
 	{
-		$res = $this->client->put($path, ['headers' => ['Authorization' => $this->connection->getAuthorizationToken()], 'form_params' => $params]);
-
-		$this->setResVariable($res);
-
-		return json_decode($res->getBody(), true);
+		$this->headers = $response->getHeaders();
+		$this->statusCode = $response->getStatusCode();
+		$this->body = json_decode($response->getBody()->getContents(), true);
 	}
 
-
-	private function setResVariable($res)
+	/**
+	 * By default the http client is the client who's build in the constructor
+	 * But it is possible to pass a different client if neccessary.
+	 */
+	public function setHttpClient($client = null)
 	{
-		$this->headers = $res->getHeaders();
-		$this->statusCode = $res->getStatusCode();
-		$this->body = $res->getBody();
-	}
-
-	public function setHttpClient($client)
-	{
-		$this->client = $client;
+		if (! is_null($client)) {
+			$this->client = $client;
+		} else {
+			$this->client = new HttpClient($this->connection->getAuthorizationToken());
+		}
 	}
 }
