@@ -4,20 +4,27 @@ namespace Crew\Unsplash\Tests;
 
 use Mockery as m;
 use \VCR\VCR;
+use Dotenv\Dotenv;
+use \League\OAuth2\Client\Token\AccessToken;
 
 abstract class BaseTest extends \PHPUnit_Framework_TestCase
 {
 	protected $provider = null;
-	protected $accessToken = 'f6bbae941202599676563d06640b4cd99b8cbcf54daae19eb112fbeff92647df';
+	protected $accessToken;
 
 	public function setUp()
 	{
-		$this->provider = m::mock('Crew\Unsplash\Provider\Unsplash', [
+		$dotenv = new Dotenv(__DIR__);
+		$dotenv->load();
+		
+		$this->provider = m::mock('Crew\Unsplash\Provider', [
 			'clientId' => 'mock_client_id',
             'clientSecret' => 'mock_secret',
             'redirectUri' => 'none'
 		]);
 		$this->provider->client_id = 'mock_client_id';
+
+		$this->accessToken = new AccessToken(['access_token' => getenv('ACCESS_TOKEN')]);
 
 		VCR::turnOn();
 	}

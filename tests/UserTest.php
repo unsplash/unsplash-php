@@ -11,68 +11,71 @@ class UserTest extends BaseTest
 	{
 		parent::setUp();
 
-		$this->user = new Unsplash\User($this->provider, (object)['accessToken' => $this->accessToken]);
+		$connection = new Unsplash\Connection($this->provider, $this->accessToken);
+		Unsplash\HttpClient::$connection = $connection;
 	}
 
 	public function testFindUser()
 	{
 		VCR::insertCassette('users.yml');
 
-		$user = $this->user->find('dechuck');
+		$user = Unsplash\User::find('dechuck');
 
 		VCR::eject();
 
-		$this->assertEquals(200, $this->user->getStatusCode());
-		$this->assertEquals('dechuck', $user['username']);
+		$this->assertEquals('dechuck', $user->username);
 	}
 
+	/**
+	 * @expectedException Crew\Unsplash\Exception
+	 * @expectedExceptionCode 404
+	 */
 	public function testFindUnknownUser()
 	{
 		VCR::insertCassette('users.yml');
 
-		$user = $this->user->find('badbadnotgooduser');
+		$user = Unsplash\User::find('badbadnotgooduser');
 
 		VCR::eject();
-
-		$this->assertEquals(404, $this->user->getStatusCode());
-		$this->assertEquals(false, $this->user->isGoodRequest());
 	}
 
 	public function testFindCurrentUser()
 	{
 		VCR::insertCassette('users.yml');
 
-		$user = $this->user->current();
+		$user = Unsplash\User::current();
 
 		VCR::eject();
 
-		$this->assertEquals(200, $this->user->getStatusCode());
+		// $this->assertEquals(200, $this->user->getStatusCode());
 	}
 
+	/**
+	 * @expectedException Crew\Unsplash\Exception
+	 * @expectedExceptionCode 401
+	 */
 	public function testFindCurrentUserOnUnconnectedUser()
 	{
-		$this->user = new Unsplash\User($this->provider);
+		$connection = new Unsplash\Connection($this->provider);
+		Unsplash\HttpClient::$connection = $connection;
 
 		VCR::insertCassette('users.yml');
 
-		$user = $this->user->current();
+		$user = Unsplash\User::current();
 
 		VCR::eject();
-
-		$this->assertEquals(401, $this->user->getStatusCode());
-		$this->assertEquals(false, $this->user->isGoodRequest());
 	}
 
 	public function testFindUserPhotos()
 	{
 		VCR::insertCassette('users.yml');
 
-		$userPhotos = $this->user->photos('lukechesser');
+		$user = Unsplash\User::find('lukechesser');
+		$photos = $user->photos();
 
 		VCR::eject();
 
-		$this->assertEquals(200, $this->user->getStatusCode());
-		$this->assertEquals(8, count($userPhotos));
+		$this->assertEquals(8, $photos->count());
 	}
 
 	public function testUpdateUser()
@@ -84,12 +87,11 @@ class UserTest extends BaseTest
 		$newInstagramUsername = 'dechuck'.time();
 
 		VCR::insertCassette('users.yml');
-
-		$updatedUser = $this->user->update(['instagram_username'=>$newInstagramUsername]);
+		$user = Unsplash\User::find('dechuck');
+		$user->update(['instagram_username'=>$newInstagramUsername]);
 
 		VCR::eject();
 
-		$this->assertEquals(200, $this->user->getStatusCode());
-		$this->assertEquals($newInstagramUsername, $updatedUser['instagram_username']);
+		$this->assertEquals($newInstagramUsername, $user->instagram_username);
 	}
 }

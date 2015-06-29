@@ -3,6 +3,7 @@
 namespace Crew\Unsplash\Tests;
 
 use \Crew\Unsplash as Unsplash;
+use \League\OAuth2\Client\Token\AccessToken;
 
 class ConnectionTest extends BaseTest
 {
@@ -16,12 +17,12 @@ class ConnectionTest extends BaseTest
 		// to it
 		$provider = clone $this->provider;
 
-		$provider->shouldReceive('getAuthorizationUrl')->times(1)->andReturn('http://api.staging.unsplash.com/oauth/authorize?client_id=mock_client_id&client_secret=mock_secret&redirect_uri=none');
+		$provider->shouldReceive('getAuthorizationUrl')->times(1)->andReturn("{getenv(SITE_URI)}/oauth/authorize?client_id=mock_client_id&client_secret=mock_secret&redirect_uri=none");
 		
 		$provider->shouldReceive('getAccessToken')->times(1)->andReturn((object)[
-			'accessToken' => 'mock_access_token_1',
-			'refreshToken' => 'mock_refresh_token_1',
-			'expires' => time() + 3600
+			'access_token' => 'mock_access_token_1',
+			'refresh_token' => 'mock_refresh_token_1',
+			'expires_in' => time() + 3600
 		]);
 
 		$this->connection  = new Unsplash\Connection($provider);
@@ -30,7 +31,7 @@ class ConnectionTest extends BaseTest
 	public function testConnectionUrlConstruction()
 	{
 		$url = $this->connection->getConnectionUrl();
-		$testedUrl = 'http://api.staging.unsplash.com/oauth/authorize?client_id=mock_client_id&client_secret=mock_secret&redirect_uri=none';
+		$testedUrl = "{getenv(SITE_URI)}/oauth/authorize?client_id=mock_client_id&client_secret=mock_secret&redirect_uri=none";
 
 		$this->assertEquals($testedUrl, $url);
 	}
@@ -42,11 +43,11 @@ class ConnectionTest extends BaseTest
 
 	public function testAccessTokenAsAuthorizationToken()
 	{
-		$this->connection->setToken((object)[
-			'accessToken' => 'mock_access_token',
-			'refreshToken' => 'mock_refresh_token',
-			'expires' => time() + 3600
-		]);
+		$this->connection->setToken(new AccessToken([
+			'access_token' => 'mock_access_token',
+			'refresh_token' => 'mock_refresh_token',
+			'expires_in' => time() + 3600
+		]));
 
 		$this->assertEquals('Bearer mock_access_token', $this->connection->getAuthorizationToken());
 	}
@@ -56,26 +57,23 @@ class ConnectionTest extends BaseTest
 		$token = $this->connection->generateToken('mock_code');
 
 		$this->assertEquals($token, (object)[
-			'accessToken' => 'mock_access_token_1',
-			'refreshToken' => 'mock_refresh_token_1',
-			'expires' => time() + 3600
+			'access_token' => 'mock_access_token_1',
+			'refresh_token' => 'mock_refresh_token_1',
+			'expires_in' => time() + 3600
 		]);
 	}
 
 	public function testRegenerateToken()
 	{
-		$this->connection->setToken((object)[
-			'accessToken' => 'mock_access_token',
-			'refreshToken' => 'mock_refresh_token',
-			'expires' => time() + 3600
-		]);
+		$this->connection->setToken(new AccessToken([
+			'access_token' => 'mock_access_token',
+			'refresh_token' => 'mock_refresh_token',
+			'expires_in' => time() + 3600
+		]));
+
 		$token = $this->connection->refreshToken();
 
-		$this->assertEquals($token, (object)[
-			'accessToken' => 'mock_access_token_1',
-			'refreshToken' => 'mock_refresh_token_1',
-			'expires' => time() + 3600
-		]);
+		$this->assertEquals('mock_access_token_1', $token->accessToken);
 	}
 
 	public function testRegenerateTokenWithNoToken()
@@ -87,11 +85,11 @@ class ConnectionTest extends BaseTest
 
 	public function testRegenerateTokenOnAuthorization()
 	{
-		$this->connection->setToken((object)[
-			'accessToken' => 'mock_access_token',
-			'refreshToken' => 'mock_refresh_token',
-			'expires' => time() - 3600
-		]);
+		$this->connection->setToken(new AccessToken([
+			'access_token' => 'mock_access_token',
+			'refresh_token' => 'mock_refresh_token',
+			'expires_in' => -3600
+		]));
 
 		$this->assertEquals('Bearer mock_access_token_1', $this->connection->getAuthorizationToken());
 	}

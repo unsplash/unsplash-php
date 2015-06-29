@@ -11,43 +11,53 @@ class PhotoTest extends BaseTest
 	{
 		parent::setUp();
 
-		$this->photo = new Unsplash\Photo($this->provider, (object)['accessToken' => $this->accessToken]);
+		$connection = new Unsplash\Connection($this->provider, $this->accessToken);
+		Unsplash\HttpClient::$connection = $connection;
 	}
 
 	public function testFindPhoto()
 	{
 		VCR::insertCassette('photos.yml');
 
-		$photo = $this->photo->find('ZUaqqMxtxYk');
+		$photo = Unsplash\Photo::find('ZUaqqMxtxYk');
 
 		VCR::eject();
 
-		$this->assertEquals(200, $this->photo->getStatusCode());
-		$this->assertEquals('ZUaqqMxtxYk', $photo['id']);
+		$this->assertEquals('ZUaqqMxtxYk', $photo->id);
 	}
 
 	public function testFindAllPhotos()
 	{
 		VCR::insertCassette('photos.yml');
 
-		$photos = $this->photo->findAll();
+		$photos = Unsplash\Photo::all();
 
 		VCR::eject();
 
-		$this->assertEquals(200, $this->photo->getStatusCode());
-		$this->assertEquals(10, count($photos));
+		$this->assertEquals(10, $photos->count());
 	}
 
 	public function testSearchPhotos()
 	{
 		VCR::insertCassette('photos.yml');
 
-		$photos = $this->photo->search('coffee');
+		$photos = Unsplash\Photo::search('coffee');
 
 		VCR::eject();
 
-		$this->assertEquals(200, $this->photo->getStatusCode());
-		$this->assertEquals(10, count($photos));
+		$this->assertEquals(10, $photos->count());
+	}
+
+	public function testPhotographer()
+	{
+		VCR::insertCassette('photos.yml');
+
+		$photo = Unsplash\Photo::find('ZUaqqMxtxYk');
+		$photographer = $photo->photographer();
+
+		VCR::eject();
+
+		$this->assertEquals($photo->user['username'], $photographer->username);
 	}
 
 	public function testPostPhotos()
@@ -55,15 +65,13 @@ class PhotoTest extends BaseTest
 		$this->markTestIncomplete(
           'Due to an issue with VCR, we do not run this test.'
         );
-
-		$photo = fopen(__dir__.'/images/land-test.txt', 'r');
 		
 		VCR::insertCassette('photos.yml');
 		
-		$photo = $this->photo->create($photo);
+		$photo = $this->photo->create(__dir__.'/images/land-test.txt');
 		
 		VCR::eject();
 
-		$this->assertEquals(201, $this->photo->getStatusCode());
+		// $this->assertEquals(201, $this->photo->getStatusCode());
 	} 
 }

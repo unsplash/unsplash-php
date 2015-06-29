@@ -2,87 +2,108 @@
 
 namespace Crew\Unsplash;
 
-use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Psr7\Uri;
-
 class Endpoint
 {
-	private $connection = null;
-	private $client = null;
-	private $headers = null;
-	private $statusCode = null;
+	/**
+	 * All parameters that an endpoint can have
+	 * @var array
+	 */
+	private $parameters;
 
-	private $acceptedHttpMethod = ['get', 'post', 'put'];
+	/**
+	 * List of accepted http action that the application can execute
+	 * @var array
+	 */
+	private static $acceptedHttpMethod = ['get', 'post', 'put'];
 
-	public function __construct(Provider\Unsplash $provider, \stdClass $token = null)
+	/**
+	 * Construct an new endpoint object and set the parameters
+	 * from an array
+	 * 
+	 * @param array
+	 */
+	public function __construct($parameters = [])
 	{
-		$this->connection = new Connection($provider, $token);
-
-		$this->setHttpClient();
-	}
-
-	public function getHeaders($headerKey = null)
-	{
-		$header = $this->headers;
-
-		if (! is_null($headerKey) && isset($this->headers[$headerKey])) {
-			if (is_array($this->headers[$headerKey]) && count($this->headers[$headerKey]) == 1) {
-				$header = $this->headers[$headerKey][0];
-			}
-		}
-
-		return $header;
-	}
-
-	public function getStatusCode()
-	{
-		return $this->statusCode;
-	}
-
-	public function getBody()
-	{
-		return $this->body;
-	}
-
-	public function isGoodRequest()
-	{
-		return $this->statusCode >= 200 && $this->statusCode < 300;
-	}
-
-	public function __call($method, $arguments)
-	{
-		if (in_array($method, $this->acceptedHttpMethod)) {
-			$uri = $arguments[0];
-			$params = isset($arguments[1]) ? $arguments[1] : [];
-
-			$response = $this->client->send(
-				new Request($method, new Uri($uri)),
-				$params
-			);
-
-			$this->setResVariable($response);
-
-			return $this->getBody();
-		}
-	}
-
-	private function setResVariable($response)
-	{
-		$this->headers = $response->getHeaders();
-		$this->statusCode = $response->getStatusCode();
-		$this->body = json_decode($response->getBody()->getContents(), true);
+		// Cast array in case it's a stdClass
+		$this->parameters = (array)$parameters;
 	}
 
 	/**
-	 * By default the http client is the client who's build in the constructor
-	 * But it is possible to pass a different client if neccessary.
+	 * Merge the old parameters with the new one
+	 * 
+	 * @param  Array $parameter The parameters to update on the object
+	 * @return void
 	 */
-	public function setHttpClient($client = null)
+	public function update(Array $parameters)
 	{
-		if (! is_null($client)) {
-			$this->client = $client;
-		} else {
-			$this->client = new HttpClient($this->connection->getAuthorizationToken());
+		$this->parameters = array_merge($this->parameters, (array)$parameters);
+	}
+
+	/**
+	 * Magic method to retrieve a specific parameter in the parameters array
+	 * 
+	 * @param  string $key
+	 * @return mixed
+	 */
+	public function __get($key)
+	{
+		return $this->parameters[$key];
+	}
+
+	/**
+	 * Validate if the http method is accepted and send a http request to it.
+	 * Retrieve error from the request and throw a new error
+	 * 
+	 * @param  string $method Http action to trigger
+	 * @param  array $arguments Array containing all the parameters pass to the magic method
+	 * 
+	 * @throws Crew\Unsplash\Exception if the http request failed
+	 *
+	 * @see Crew\Unsplash\HttpClient::send()
+	 * 
+	 * @return string
+	 */
+	public static function __callStatic($method, $arguments)
+	{
+		//  Validate if the $method is part of the accepted http method array
+		if (in_array($method, self::$acceptedHttpMethod)) {
+			$httpClient = new HttpClient();
+
+			$response = $httpClient->send($method, $arguments);
+
+			//  Validate if the request failed
+			if (! self::goodRequest($response)) {
+				throw new Exception(self::getErrorMessage($response), $response->getStatusCode());
+			}
+
+			return $response->getBody();
 		}
+	}
+
+	/**
+	 * Retrieve the response status code and determine if the request was a success or not
+	 * 
+	 * @param  GuzzleHttp\Psr7\Response $response of the http request
+	 * @return boolean
+	 */
+	public static function goodRequest($response)
+	{
+		return $response->getstatusCode() >= 200 && $response->getstatusCode() < 300;
+	}
+
+	/**
+	 * Retrieve the error message in the body
+	 * 
+	 * @param  GuzzleHttp\Psr7\Response $response of the http request
+	 * @return string
+	 */
+	public static function getErrorMessage($response)
+	{
+		$message = json_decode($response->getBody(), true);
+		if (is_array($message) && isset($message['error'])) {
+			$message = $message['error'];
+		}
+
+		return $message;
 	}
 }

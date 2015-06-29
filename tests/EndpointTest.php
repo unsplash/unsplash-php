@@ -4,10 +4,11 @@ namespace Crew\Unsplash\Tests;
 
 use Crew\Unsplash;
 use Mockery as m;
-use GuzzleHttp\Client;
-use GuzzleHttp\Handler\MockHandler;
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Psr7\Response;
+// use GuzzleHttp\Client;
+// use GuzzleHttp\Handler\MockHandler;
+// use GuzzleHttp\HandlerStack;
+// use GuzzleHttp\Psr7\Response;
+use \VCR\VCR;
 
 class EndpointTest extends BaseTest
 {
@@ -15,38 +16,52 @@ class EndpointTest extends BaseTest
 	{
 		parent::setUp();
 
-        $mock = new MockHandler([
-		    new Response(200, ['X-Foo' => 'Bar'], '[{"name": "mock_name", "other_info": "moke_info"}, {"name": "mock_name_1", "other_info": "moke_info_3"}]'),
-		]);
-
-		$handler = HandlerStack::create($mock);
-
-        $this->endpoint = new Unsplash\Endpoint($this->provider);
-        $this->endpoint->setHttpClient(new Client(['handler' => $handler]));
+        $connection = new Unsplash\Connection($this->provider, $this->accessToken);
+		Unsplash\HttpClient::$connection = $connection;
 	}
 
 	public function testRequest()
 	{
-		$res = $this->endpoint->__call('get', ['path', []]);
+		VCR::insertCassette('endpoint.yml');
+		
+		$res = Unsplash\Endpoint::__callStatic('get', ['categories/2', []]);
+		
+		VCR::eject();
+		
+		$body = json_decode($res);
 
-		$waitedRes = [['name'=>'mock_name', 'other_info'=>'moke_info'], ['name'=>'mock_name_1', 'other_info'=>'moke_info_3']];
-
-		$this->assertEquals($waitedRes, $res);
+		$this->assertEquals(2, $body->id);
 	}
 
-	public function testStatusCodeAfterRequest()
+	public function testRequestWithBadMethod()
 	{
-		$res = $this->endpoint->__call('get', ['path', []]);
+		$res = Unsplash\Endpoint::__callStatic('back', ['categories/2', []]);
 
-
-		$this->assertEquals(200, $this->endpoint->getStatusCode());
+		$this->assertNull($res);
 	}
 
-	public function testHeadersAfterRequest()
+	public function testGoodRequest()
 	{
-		$res = $this->endpoint->__call('get', ['path', []]);
+		$response = m::mock('Guzzle\Http\Message\Response');
+        $response->shouldReceive('getStatusCode')->times(2)->andReturn(200);
 
+        $this->assertTrue(Unsplash\Endpoint::goodRequest($response));
+	}
 
-		$this->assertEquals('Bar', $this->endpoint->getHeaders('X-Foo'));
+	public function testBadRequest()
+	{
+		$response = m::mock('Guzzle\Http\Message\Response');
+        $response->shouldReceive('getStatusCode')->times(2)->andReturn(404);
+
+        $this->assertFalse(Unsplash\Endpoint::goodRequest($response));
+	}
+
+	public function testParametersUpdate()
+	{
+		$endpoint = new Unsplash\Endpoint(['test' => 'mock', 'test_1' => 'mock_1']);
+		$endpoint->update(['test' => 'mock_test']);
+
+		$this->assertEquals('mock_test', $endpoint->test);
+		$this->assertEquals('mock_1', $endpoint->test_1);
 	}
 }

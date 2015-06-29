@@ -11,42 +11,66 @@ class CategoryTest extends BaseTest
 	{
 		parent::setUp();
 
-		$this->category = new Unsplash\Category($this->provider, (object)['accessToken' => $this->accessToken]);
+		$connection = new Unsplash\Connection($this->provider, $this->accessToken);
+		Unsplash\HttpClient::$connection = $connection;
 	}
 
 	public function testFindCategory()
 	{
 		VCR::insertCassette('categories.yml');
 
-		$category = $this->category->find(2);
+		$category = Unsplash\Category::find(2);
 
 		VCR::eject();
 
-		$this->assertEquals(200, $this->category->getStatusCode());
-		$this->assertEquals(2, $category['id']);
+		$this->assertEquals(2, $category->id);
+	}
+
+	/**
+	 * @expectedException Crew\Unsplash\Exception
+	 * @expectedExceptionCode 404
+	 */
+	public function testErrorOnNoCategory()
+	{
+		VCR::insertCassette('categories.yml');
+
+		$category = Unsplash\Category::find(1);
+
+		VCR::eject();
 	}
 
 	public function testFindAllCategory()
 	{
 		VCR::insertCassette('categories.yml');
 
-		$categories = $this->category->findAll();
+		$categories = Unsplash\Category::all();
 
 		VCR::eject();
 
-		$this->assertEquals(200, $this->category->getStatusCode());
-		$this->assertEquals(6, count($categories));
+		$this->assertEquals(6, $categories->count());
 	}
 
 	public function testFindCategoryPhotos()
 	{
 		VCR::insertCassette('categories.yml');
 
-		$categoryPhotos = $this->category->photos(2);
+		$category = Unsplash\Category::find(2);
+		$photos = $category->photos();
 
 		VCR::eject();
 
-		$this->assertEquals(200, $this->category->getStatusCode());
-		$this->assertEquals(10, count($categoryPhotos));
+		$this->assertEquals(10, $photos->count());
+	}
+
+	public function testFindNoPhotoForACategory()
+	{
+		VCR::insertCassette('categories.yml');
+
+		$category = Unsplash\Category::find(2);
+		$photos = $category->photos(2000);
+
+		VCR::eject();
+
+		$this->assertEquals(0, $photos->count());
 	}
 }

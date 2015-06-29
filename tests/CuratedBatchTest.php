@@ -11,42 +11,54 @@ class CuratedBatchTest extends BaseTest
 	{
 		parent::setUp();
 
-		$this->curatedBatch = new Unsplash\CuratedBatch($this->provider, (object)['accessToken' => $this->accessToken]);
+		$connection = new Unsplash\Connection($this->provider, $this->accessToken);
+		Unsplash\HttpClient::$connection = $connection;
 	}
 
 	public function testFindCuratedBatch()
 	{
 		VCR::insertCassette('curated_batches.yml');
 
-		$curatedBatch = $this->curatedBatch->find(68);
+		$curatedBatch = Unsplash\CuratedBatch::find(68);
 
 		VCR::eject();
 
-		$this->assertEquals(200, $this->curatedBatch->getStatusCode());
-		$this->assertEquals('68', $curatedBatch['id']);
+		$this->assertEquals('68', $curatedBatch->id);
+	}
+
+	/**
+	 * @expectedException Crew\Unsplash\Exception
+	 * @expectedExceptionCode 404
+	 */
+	public function testErrorOnNoCategory()
+	{
+		VCR::insertCassette('categories.yml');
+
+		$curatedBatch = Unsplash\CuratedBatch::find(300);
+
+		VCR::eject();
 	}
 
 	public function testFindAllCuratedBatches()
 	{
 		VCR::insertCassette('curated_batches.yml');
 
-		$curatedBatches = $this->curatedBatch->findAll();
+		$curatedBatches = Unsplash\CuratedBatch::all();
 
 		VCR::eject();
 
-		$this->assertEquals(200, $this->curatedBatch->getStatusCode());
-		$this->assertEquals(10, count($curatedBatches));
+		$this->assertEquals(10, $curatedBatches->count());
 	}
 
 	public function testFindCuratedBatchPhotos()
 	{
 		VCR::insertCassette('curated_batches.yml');
 
-		$curatedBatchesPhotos = $this->curatedBatch->photos(68);
+		$curatedBatch = Unsplash\CuratedBatch::find(68);
+		$photos = $curatedBatch->photos();
 
 		VCR::eject();
 
-		$this->assertEquals(200, $this->curatedBatch->getStatusCode());
-		$this->assertEquals(10, count($curatedBatchesPhotos));
+		$this->assertEquals(10, $photos->count());
 	}
 }

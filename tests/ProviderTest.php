@@ -1,17 +1,17 @@
 <?php 
 
-namespace Crew\Unsplash\Tests\Provider;
+namespace Crew\Unsplash\Tests;
 
 use Mockery as m;
-use Crew\Unsplash\Provider;
+use Crew\Unsplash;
 
-class UnsplashTest extends \PHPUnit_Framework_TestCase
+class ProviderTest extends \PHPUnit_Framework_TestCase
 {
     public static $unsplashProvider;
 
     public static function setUpBeforeClass()
     {
-        self::$unsplashProvider = new \Crew\Unsplash\Provider\Unsplash([
+        self::$unsplashProvider = new Unsplash\Provider([
             'clientId' => 'mock_client_id',
             'clientSecret' => 'mock_secret',
             'redirectUri' => 'none',
