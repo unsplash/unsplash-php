@@ -17,6 +17,7 @@ class ConnectionTest extends BaseTest
 		// to it
 		$provider = clone $this->provider;
 
+		// @todo this function doesn't quit work with scopes
 		$provider->shouldReceive('getAuthorizationUrl')->times(1)->andReturn("{getenv(SITE_URI)}/oauth/authorize?client_id=mock_client_id&client_secret=mock_secret&redirect_uri=none");
 		
 		$provider->shouldReceive('getAccessToken')->times(1)->andReturn((object)[

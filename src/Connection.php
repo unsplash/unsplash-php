@@ -22,11 +22,14 @@ class Connection
 
 	/**
 	 * Retrieve the url that generate the authorization code
-	 * 
+	 *
+	 * @param  array $scope Scopes to includes in the authorization url
 	 * @return string
 	 */
-	public function getConnectionUrl()
+	public function getConnectionUrl($scopes)
 	{
+		$this->provider->setScopes($scopes)
+
 		return $this->provider->getAuthorizationUrl();
 	}
 
