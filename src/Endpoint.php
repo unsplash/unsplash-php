@@ -72,12 +72,19 @@ class Endpoint
 			$response = $httpClient->send($method, $arguments);
 
 			//  Validate if the request failed
-			if (! self::goodRequest($response)) {
+			if (! self::isGoodRequest($response)) {
 				throw new Exception(self::getErrorMessage($response), $response->getStatusCode());
 			}
 
-			return $response->getBody();
+			return $response;
 		}
+	}
+
+	protected static function getArray($responseBody, $object)
+	{
+		return array_map(function ($array) use($object) {
+			return new $object($array);
+		}, json_decode($responseBody, true));
 	}
 
 	/**
@@ -86,7 +93,7 @@ class Endpoint
 	 * @param  GuzzleHttp\Psr7\Response $response of the http request
 	 * @return boolean
 	 */
-	public static function goodRequest($response)
+	private static function isGoodRequest($response)
 	{
 		return $response->getstatusCode() >= 200 && $response->getstatusCode() < 300;
 	}
@@ -97,13 +104,15 @@ class Endpoint
 	 * @param  GuzzleHttp\Psr7\Response $response of the http request
 	 * @return string
 	 */
-	public static function getErrorMessage($response)
+	private static function getErrorMessage($response)
 	{
 		$message = json_decode($response->getBody(), true);
-		if (is_array($message) && isset($message['error'])) {
-			$message = $message['error'];
+		$errors = [];
+
+		if (is_array($message) && isset($message['errors'])) {
+			$errors = $message['errors'];
 		}
 
-		return $message;
+		return $errors;
 	}
 }

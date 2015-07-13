@@ -10,13 +10,14 @@ class Category extends Endpoint
 	 * Retrieve the a Category object from the id specified
 	 *
 	 * @param  integer $id Id of the category to find
-	 * @return Category
 	 *
-	 * @example Crew\Unsplash\Category::find(2);
+	 * @api
+	 * 
+	 * @return Category
 	 */
 	public static function find($id)
 	{
-		$category = json_decode(self::get("categories/{$id}"), true);
+		$category = json_decode(self::get("categories/{$id}")->getBody(), true);
 		
 		return new self($category);
 	}
@@ -29,17 +30,15 @@ class Category extends Endpoint
 	 * @param  integer $per_page Number of element in a page
 	 * @return ArrayObject of Category
 	 *
-	 * @example Crew\Unsplash\Category::all(2, 20);
-	 * @example Crew\Unsplash\Category::all(5);
-	 * @example Crew\Unsplash\Category::all();
+	 * @api
 	 */
 	public static function all($page = 1, $per_page = 10)
 	{
-		$categories = json_decode(self::get("categories", ['query' => ['page' => $page, 'per_page' => $per_page]]), true);
+		$categories = self::get("categories", ['query' => ['page' => $page, 'per_page' => $per_page]]);
 
-		$categories = array_map(function ($category) {return new self($category);}, $categories);
+		$categoriesArray = self::getArray($categories->getBody(), get_called_class());
 
-		return new \ArrayObject($categories);
+		return new ArrayObject($categoriesArray, $categories->getHeaders());
 	}
 
 	/**
@@ -48,16 +47,21 @@ class Category extends Endpoint
 	 * 
 	 * @param  integer $page Page from which the photos need to be retrieve
 	 * @param  integer $per_page Number of element in a page
-	 * @return ArrayObject of Photo
+	 *
+	 * @api
+	 * 
 	 */
 	public function photos($page = 1, $per_page = 10)
 	{
 		if (! isset($this->photos["{$page}-{$per_page}"])) {
-			$photos = json_decode(self::get("categories/{$this->id}/photos", ['query' => ['page' => $page, 'per_page' => $per_page]]), true);
+			$photos = self::get("categories/{$this->id}/photos", ['query' => ['page' => $page, 'per_page' => $per_page]]);
 		
-			$this->photos["{$page}-{$per_page}"] = array_map(function ($photo) {return new Photo($photo);}, $photos);
+			$this->photos["{$page}-{$per_page}"] = [
+				'body' => self::getArray($photos->getBody(), __NAMESPACE__.'\\Photo'),
+				'headers' => $photos->getHeaders()
+			];
 		}
 
-		return new \ArrayObject($this->photos["{$page}-{$per_page}"]);
+		return new ArrayObject($this->photos["{$page}-{$per_page}"]['body'], $this->photos["{$page}-{$per_page}"]['headers']);
 	}
 }

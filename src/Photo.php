@@ -11,12 +11,10 @@ class Photo extends Endpoint
 	 *
 	 * @param  string $id Id of the photo to find
 	 * @return Photo
-	 *
-	 * @example Crew\Unsplash\Photo::find('fd234f');
 	 */
 	public static function find($id)
 	{
-		$photo = json_decode(self::get("photos/{$id}"), true);
+		$photo = json_decode(self::get("photos/{$id}")->getBody(), true);
 		
 		return new self($photo);
 	}
@@ -28,18 +26,14 @@ class Photo extends Endpoint
 	 * @param  integer $page Page from which the photos need to be retrieve
 	 * @param  integer $per_page Number of element in a page
 	 * @return ArrayObject of Photo
-	 *
-	 * @example Crew\Unsplash\Photo::all(2, 20);
-	 * @example Crew\Unsplash\Photo::all(5);
-	 * @example Crew\Unsplash\Photo::all();
 	 */
 	public static function all($page = 1, $per_page = 10)
 	{
-		$photos = json_decode(self::get("photos", ['query' => ['page' => $page, 'per_page' => $per_page]]), true);
+		$photos = self::get("photos", ['query' => ['page' => $page, 'per_page' => $per_page]]);
 
-		$photos = array_map(function ($photo) {return new self($photo);}, $photos);
+		$photosArray = self::getArray($photos->getBody(), get_called_class());
 
-		return new \ArrayObject($photos);
+		return new ArrayObject($photosArray, $photos->getHeaders());
 	}
 
 	/**
@@ -51,17 +45,14 @@ class Photo extends Endpoint
 	 * @param  integer $page Page from which the photos need to be retrieve
 	 * @param  integer $per_page Number of element in a page
 	 * @return ArrayObject of Photo
-	 *
-	 * @example Crew\Unsplash\Photo::search('coffee');
-	 * @example Crew\Unsplash\Photo::all('coffee', 3);
 	 */
 	public static function search($search, $category = null, $page = 1, $per_page = 10)
 	{
-		$photos = json_decode(self::get("photos/search", ['query' => ['query' => $search, 'category' => $category, 'page' => $page, 'per_page' => $per_page]]), true);
+		$photos = self::get("photos/search", ['query' => ['query' => $search, 'category' => $category, 'page' => $page, 'per_page' => $per_page]]);
 
-		$photos = array_map(function ($photo) {return new self($photo);}, $photos);
+		$photosArray = self::getArray($photos->getBody(), get_called_class());
 
-		return new \ArrayObject($photos);
+		return new ArrayObject($photosArray, $photos->getHeaders());
 	}
 
 	/**
@@ -74,7 +65,7 @@ class Photo extends Endpoint
 	{
 		$file = fopen($filePath, 'r');
 
-		$photo = json_decode($this->post("photos", ['multipart' => [['name' => 'photo', 'contents' => $file]]]));
+		$photo = json_decode($this->post("photos", ['multipart' => [['name' => 'photo', 'contents' => $file]]])->getBody());
 
 		return new self($photo);
 	}

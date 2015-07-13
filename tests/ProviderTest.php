@@ -39,6 +39,17 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull(self::$unsplashProvider->state);
     }
 
+    public function testAuthorizationUrlWithScopes()
+    {
+        $scopes = ['public', 'read_user'];
+        self::$unsplashProvider->setScopes($scopes);
+        $url = self::$unsplashProvider->getAuthorizationUrl();
+        $uri = parse_url($url);
+        parse_str($uri['query'], $query);
+
+        $this->assertEquals(implode(',', $scopes), $query['scope']);
+    }
+
     public function testUrlAuthorize()
     {
         $url = self::$unsplashProvider->urlAuthorize();

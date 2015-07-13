@@ -11,12 +11,10 @@ class User extends Endpoint
 	 *
 	 * @param  string $username Username of the user to find
 	 * @return User
-	 *
-	 * @example Crew\Unsplash\User::find('lukechesser');
 	 */
 	public static function find($username)
 	{
-		$user = json_decode(self::get("users/{$username}"), true);
+		$user = json_decode(self::get("users/{$username}")->getBody(), true);
 		
 		return new self($user);
 	}
@@ -32,12 +30,15 @@ class User extends Endpoint
 	public function photos($page = 1, $per_page = 10)
 	{
 		if (! isset($this->photos["{$page}-{$per_page}"])) {
-			$photos = json_decode(self::get("users/{$this->username}/photos", ['query' => ['page' => $page, 'per_page' => $per_page]]), true);
+			$photos = self::get("users/{$this->username}/photos", ['query' => ['page' => $page, 'per_page' => $per_page]]);
 		
-			$this->photos["{$page}-{$per_page}"] = array_map(function ($photo) {return new Photo($photo);}, $photos);
+			$this->photos["{$page}-{$per_page}"] = [
+				'body' => self::getArray($photos->getBody(), __NAMESPACE__.'\\Photo'),
+				'headers' => $photos->getHeaders()
+			];
 		}
 
-		return new \ArrayObject($this->photos["{$page}-{$per_page}"]);
+		return new ArrayObject($this->photos["{$page}-{$per_page}"]['body'], $this->photos["{$page}-{$per_page}"]['headers']);
 	}
 
  	/**
@@ -45,12 +46,10 @@ class User extends Endpoint
 	 *
 	 * @param  string $username Username of the user to find
 	 * @return User
-	 *
-	 * @example Crew\Unsplash\User::current();
 	 */
 	public static function current()
 	{
-		$user = json_decode(self::get("me"), true);
+		$user = json_decode(self::get("me")->getBody(), true);
 		
 		return new self($user);
 	}
@@ -63,7 +62,7 @@ class User extends Endpoint
 	 */
 	public function update(Array $parameters)
 	{
-		$user = json_decode($this->put("me", ['json' => $parameters]), true);
+		$user = json_decode($this->put("me", ['json' => $parameters])->getBody(), true);
 
 		parent::update($user);
 	}

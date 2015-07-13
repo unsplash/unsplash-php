@@ -15,7 +15,7 @@ class CuratedBatch extends Endpoint
 	 */
 	public static function find($id)
 	{
-		$curatedBatch = json_decode(self::get("curated_batches/{$id}"), true);
+		$curatedBatch = json_decode(self::get("curated_batches/{$id}")->getBody(), true);
 		
 		return new self($curatedBatch);
 	}
@@ -26,18 +26,14 @@ class CuratedBatch extends Endpoint
 	 * @param  integer $page Page from which the curated batches need to be retrieve
 	 * @param  integer $per_page Number of element in a page
 	 * @return ArrayObject of CuratedBatch
-	 *
-	 * @example Crew\Unsplash\CuratedBatch::all(2, 20);
-	 * @example Crew\Unsplash\CuratedBatch::all(5);
-	 * @example Crew\Unsplash\CuratedBatch::all();
 	 */
 	public static function all($page = 1, $per_page = 10)
 	{
-		$curatedBatches = json_decode(self::get("curated_batches", ['query' => ['page' => $page, 'per_page' => $per_page]]), true);
+		$curatedBatches = self::get("curated_batches", ['query' => ['page' => $page, 'per_page' => $per_page]]);
 
-		$curatedBatches = array_map(function ($curatedBatch) {return new self($curatedBatch);}, $curatedBatches);
+		$curatedBatchesArray = self::getArray($curatedBatches->getBody(), get_called_class());
 
-		return new \ArrayObject($curatedBatches);
+		return new ArrayObject($curatedBatchesArray, $curatedBatches->getHeaders());
 	}
 
 	/**
@@ -49,11 +45,14 @@ class CuratedBatch extends Endpoint
 	public function photos()
 	{
 		if (! isset($this->photos)) {
-			$photos = json_decode(self::get("curated_batches/{$this->id}/photos"), true);
+			$photos = self::get("curated_batches/{$this->id}/photos");
 
-			$this->photos = array_map(function ($photo) {return new Photo($photo);}, $photos);
+			$this->photos = [
+				'body' => self::getArray($photos->getBody(), __NAMESPACE__.'\\Photo'),
+				'headers' => $photos->getHeaders()
+			];
 		}
 
-		return new \ArrayObject($this->photos);
+		return new ArrayObject($this->photos['body'], $this->photos['headers']);
 	}
 }

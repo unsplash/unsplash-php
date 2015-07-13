@@ -22,7 +22,7 @@ abstract class BaseTest extends \PHPUnit_Framework_TestCase
             'clientSecret' => 'mock_secret',
             'redirectUri' => 'none'
 		]);
-		$this->provider->client_id = 'mock_client_id';
+		$this->provider->clientId = 'mock_client_id';
 
 		$this->accessToken = new AccessToken(['access_token' => getenv('ACCESS_TOKEN')]);
 

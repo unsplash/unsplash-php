@@ -26,9 +26,11 @@ class Connection
 	 * @param  array $scope Scopes to includes in the authorization url
 	 * @return string
 	 */
-	public function getConnectionUrl($scopes)
+	public function getConnectionUrl($scopes = [])
 	{
-		$this->provider->setScopes($scopes)
+		if (! empty($scopes)) {
+			$this->provider->setScopes($scopes);
+		}
 
 		return $this->provider->getAuthorizationUrl();
 	}
@@ -92,7 +94,7 @@ class Connection
 	 */
 	public function getAuthorizationToken()
 	{
-		$authorizationToken = "Client-ID {$this->provider->client_id}";
+		$authorizationToken = "Client-ID {$this->provider->clientId}";
 
 		if (! is_null($this->token)) {
 			// Validate if the token object link to this class is expire

@@ -28,7 +28,7 @@ class EndpointTest extends BaseTest
 		
 		VCR::eject();
 		
-		$body = json_decode($res);
+		$body = json_decode($res->getBody());
 
 		$this->assertEquals(2, $body->id);
 	}
@@ -38,22 +38,6 @@ class EndpointTest extends BaseTest
 		$res = Unsplash\Endpoint::__callStatic('back', ['categories/2', []]);
 
 		$this->assertNull($res);
-	}
-
-	public function testGoodRequest()
-	{
-		$response = m::mock('Guzzle\Http\Message\Response');
-        $response->shouldReceive('getStatusCode')->times(2)->andReturn(200);
-
-        $this->assertTrue(Unsplash\Endpoint::goodRequest($response));
-	}
-
-	public function testBadRequest()
-	{
-		$response = m::mock('Guzzle\Http\Message\Response');
-        $response->shouldReceive('getStatusCode')->times(2)->andReturn(404);
-
-        $this->assertFalse(Unsplash\Endpoint::goodRequest($response));
 	}
 
 	public function testParametersUpdate()
