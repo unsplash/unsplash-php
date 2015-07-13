@@ -14,8 +14,12 @@ abstract class BaseTest extends \PHPUnit_Framework_TestCase
 
 	public function setUp()
 	{
-		$dotenv = new Dotenv(__DIR__);
-		$dotenv->load();
+		// Only load env file if it exist.
+		// It will use the env variable on server if there's no file
+		if (file_exists(__DIR__ . '/.env')) {
+			$dotenv = new Dotenv(__DIR__);
+			$dotenv->load();
+		}
 		
 		$this->provider = m::mock('Crew\Unsplash\Provider', [
 			'clientId' => 'mock_client_id',

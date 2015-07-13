@@ -1,0 +1,185 @@
+
+-
+    request:
+        method: GET
+        url: 'http://api.lvh.me:3000/categories/2'
+        headers:
+            Host: 'api.lvh.me:3000'
+            Accept-Encoding: null
+            User-Agent: 'GuzzleHttp/6.0.2 curl/7.38.0 PHP/5.6.11'
+            Authorization: 'Bearer 6552724cd07a5a0e06a4f7e4dce7e316f86b7a2efa1e2df8f7cd0079856d9773'
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: 'OK '
+        headers:
+            Access-Control-Allow-Origin: '*'
+            Access-Control-Request-Method: '*'
+            Cache-Control: 'max-age=7200, public'
+            Content-Type: application/json
+            Content-Length: '156'
+            Etag: 'W/"774a94faad40d8ff1576ea0f74638058"'
+            X-Request-Id: 30eec967-18b3-466e-90c5-d68e8147a191
+            X-Ratelimit-Limit: '5000'
+            X-Ratelimit-Remaining: '4988'
+            X-Runtime: '0.039001'
+            Server: 'WEBrick/1.3.1 (Ruby/2.1.5/2014-11-13)'
+            Date: 'Mon, 13 Jul 2015 20:30:10 GMT'
+            Connection: Keep-Alive
+        body: '{"id":2,"title":"Buildings","photo_count":3925,"links":{"self":"http://api.lvh.me:3000/categories/2","photos":"http://api.lvh.me:3000/categories/2/photos"}}'
+-
+    request:
+        method: GET
+        url: 'http://api.lvh.me:3000/categories/1'
+        headers:
+            Host: 'api.lvh.me:3000'
+            Accept-Encoding: null
+            User-Agent: 'GuzzleHttp/6.0.2 curl/7.38.0 PHP/5.6.11'
+            Authorization: 'Bearer 6552724cd07a5a0e06a4f7e4dce7e316f86b7a2efa1e2df8f7cd0079856d9773'
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '404'
+            message: 'Not Found '
+        headers:
+            Content-Type: application/json
+            Access-Control-Allow-Origin: '*'
+            Access-Control-Request-Method: '*'
+            Content-Length: '1209'
+            Cache-Control: no-cache
+            X-Request-Id: 3565352e-9a98-48f8-bd42-00d6351057c1
+            X-Ratelimit-Limit: '5000'
+            X-Ratelimit-Remaining: '4987'
+            X-Runtime: '0.025794'
+            Server: 'WEBrick/1.3.1 (Ruby/2.1.5/2014-11-13)'
+            Date: 'Mon, 13 Jul 2015 20:30:10 GMT'
+            Connection: Keep-Alive
+        body: '{"errors":["Couldn''t find Category with ''id''=1"],"trace":["/Users/charles/.rvm/gems/ruby-2.1.5/gems/activerecord-4.2.1/lib/active_record/relation/finder_methods.rb:336:in `raise_record_not_found_exception!''","/Users/charles/.rvm/gems/ruby-2.1.5/gems/activerecord-4.2.1/lib/active_record/relation/finder_methods.rb:456:in `find_one''","/Users/charles/.rvm/gems/ruby-2.1.5/gems/activerecord-4.2.1/lib/active_record/relation/finder_methods.rb:435:in `find_with_ids''","/Users/charles/.rvm/gems/ruby-2.1.5/gems/activerecord-4.2.1/lib/active_record/relation/finder_methods.rb:71:in `find''","/Users/charles/.rvm/gems/ruby-2.1.5/gems/activerecord-4.2.1/lib/active_record/querying.rb:3:in `find''","/Users/charles/.rvm/gems/ruby-2.1.5/gems/activerecord-4.2.1/lib/active_record/core.rb:131:in `find''","/Volumes/Sites/unsplash/app/api/unsplash_api/v1/categories.rb:25:in `block (3 levels) in \u003cclass:Categories\u003e''","/Users/charles/.rvm/gems/ruby-2.1.5/gems/grape-0.11.0/lib/grape/endpoint.rb:47:in `call''","/Users/charles/.rvm/gems/ruby-2.1.5/gems/grape-0.11.0/lib/grape/endpoint.rb:47:in `block in generate_api_method''","/Users/charles/.rvm/gems/ruby-2.1.5/gems/grape-0.11.0/lib/grape/endpoint.rb:247:in `call''"]}'
+-
+    request:
+        method: GET
+        url: 'http://api.lvh.me:3000/categories?page=1&per_page=10'
+        headers:
+            Host: 'api.lvh.me:3000'
+            Accept-Encoding: null
+            User-Agent: 'GuzzleHttp/6.0.2 curl/7.38.0 PHP/5.6.11'
+            Authorization: 'Bearer 6552724cd07a5a0e06a4f7e4dce7e316f86b7a2efa1e2df8f7cd0079856d9773'
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: 'OK '
+        headers:
+            Access-Control-Allow-Origin: '*'
+            Access-Control-Request-Method: '*'
+            Cache-Control: 'max-age=7200, public'
+            Content-Type: application/json
+            Content-Length: '943'
+            Etag: 'W/"67efe9e91a62dc70f05920de0f378d85"'
+            X-Request-Id: 2a272e00-9237-45ac-bcab-c789206e4d7f
+            X-Ratelimit-Limit: '5000'
+            X-Ratelimit-Remaining: '4986'
+            X-Runtime: '0.026483'
+            Server: 'WEBrick/1.3.1 (Ruby/2.1.5/2014-11-13)'
+            Date: 'Mon, 13 Jul 2015 20:30:10 GMT'
+            Connection: Keep-Alive
+        body: '[{"id":2,"title":"Buildings","photo_count":3925,"links":{"self":"http://api.lvh.me:3000/categories/2","photos":"http://api.lvh.me:3000/categories/2/photos"}},{"id":3,"title":"Food \u0026 Drink","photo_count":518,"links":{"self":"http://api.lvh.me:3000/categories/3","photos":"http://api.lvh.me:3000/categories/3/photos"}},{"id":4,"title":"Nature","photo_count":10525,"links":{"self":"http://api.lvh.me:3000/categories/4","photos":"http://api.lvh.me:3000/categories/4/photos"}},{"id":8,"title":"Objects","photo_count":2191,"links":{"self":"http://api.lvh.me:3000/categories/8","photos":"http://api.lvh.me:3000/categories/8/photos"}},{"id":6,"title":"People","photo_count":3427,"links":{"self":"http://api.lvh.me:3000/categories/6","photos":"http://api.lvh.me:3000/categories/6/photos"}},{"id":7,"title":"Technology","photo_count":385,"links":{"self":"http://api.lvh.me:3000/categories/7","photos":"http://api.lvh.me:3000/categories/7/photos"}}]'
+-
+    request:
+        method: GET
+        url: 'http://api.lvh.me:3000/categories/2/photos?page=1&per_page=10'
+        headers:
+            Host: 'api.lvh.me:3000'
+            Accept-Encoding: null
+            User-Agent: 'GuzzleHttp/6.0.2 curl/7.38.0 PHP/5.6.11'
+            Authorization: 'Bearer 6552724cd07a5a0e06a4f7e4dce7e316f86b7a2efa1e2df8f7cd0079856d9773'
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: 'OK '
+        headers:
+            Access-Control-Allow-Origin: '*'
+            Access-Control-Request-Method: '*'
+            Link: '<http://api.lvh.me:3000/categories/2/photos?page=393&per_page=10>; rel="last", <http://api.lvh.me:3000/categories/2/photos?page=2&per_page=10>; rel="next"'
+            X-Total: '3923'
+            X-Per-Page: '10'
+            Cache-Control: 'max-age=7200, public'
+            Content-Type: application/json
+            Content-Length: '8824'
+            Etag: 'W/"1a912ddf044bfe9ec90cb6bc54ce24ed"'
+            X-Request-Id: 2f3888e9-3f86-4c88-9904-a0b815ec4dac
+            X-Ratelimit-Limit: '5000'
+            X-Ratelimit-Remaining: '4985'
+            X-Runtime: '0.086576'
+            Server: 'WEBrick/1.3.1 (Ruby/2.1.5/2014-11-13)'
+            Date: 'Mon, 13 Jul 2015 20:30:11 GMT'
+            Connection: Keep-Alive
+        body: '[{"id":"yTKNczZNg6w","user":{"id":"eq1Vlm2A0Is","username":"injadseren","name":"injad seren","links":{"self":"http://api.lvh.me:3000/users/injadseren","html":"http://lvh.me:3000/injadseren","photos":"http://api.lvh.me:3000/users/injadseren/photos"}},"urls":{"regular":"https://unsplash.imgix.net/photo-1434419648470-860b20f17e95?q=75\u0026fm=jpg\u0026w=1080\u0026fit=max\u0026s=6b368e439a39ab92441cc6b96aa9ffad","small":"https://unsplash.imgix.net/photo-1434419648470-860b20f17e95?q=75\u0026fm=jpg\u0026w=400\u0026fit=max\u0026s=d52a2d2243f74e649039df3fc4211d4c","thumb":"https://unsplash.imgix.net/photo-1434419648470-860b20f17e95?q=75\u0026fm=jpg\u0026w=200\u0026fit=max\u0026s=201e70367cd934a6c0a8098969cdd952"},"links":{"self":"http://api.lvh.me:3000/photos/yTKNczZNg6w","html":"http://lvh.me:3000/photos/yTKNczZNg6w","download":"http://lvh.me:3000/photos/yTKNczZNg6w/download"}},{"id":"rlt-VEjMTTU","user":{"id":"eq1Vlm2A0Is","username":"injadseren","name":"injad seren","links":{"self":"http://api.lvh.me:3000/users/injadseren","html":"http://lvh.me:3000/injadseren","photos":"http://api.lvh.me:3000/users/injadseren/photos"}},"urls":{"regular":"https://ununsplash.imgix.net/photo-1434419587252-3d3fe698d1f5?q=75\u0026fm=jpg\u0026w=1080\u0026fit=max\u0026s=108089a76b7cd87466edd1cdf78d826f","small":"https://ununsplash.imgix.net/photo-1434419587252-3d3fe698d1f5?q=75\u0026fm=jpg\u0026w=400\u0026fit=max\u0026s=73f738e3a48bf381355c59201f722179","thumb":"https://ununsplash.imgix.net/photo-1434419587252-3d3fe698d1f5?q=75\u0026fm=jpg\u0026w=200\u0026fit=max\u0026s=d4bb73bc503fa8b15c2e805b713e0c24"},"links":{"self":"http://api.lvh.me:3000/photos/rlt-VEjMTTU","html":"http://lvh.me:3000/photos/rlt-VEjMTTU","download":"http://lvh.me:3000/photos/rlt-VEjMTTU/download"}},{"id":"VolSIAaTTQg","user":{"id":"chUmAbytuMI","username":"mehranb","name":"Mehran Babaee","links":{"self":"http://api.lvh.me:3000/users/mehranb","html":"http://lvh.me:3000/mehranb","photos":"http://api.lvh.me:3000/users/mehranb/photos"}},"urls":{"regular":"https://ununsplash.imgix.net/photo-1434418105442-121a94cf20c7?q=75\u0026fm=jpg\u0026w=1080\u0026fit=max\u0026s=df7e0420b8c9e9d3cfd48ab11404a064","small":"https://ununsplash.imgix.net/photo-1434418105442-121a94cf20c7?q=75\u0026fm=jpg\u0026w=400\u0026fit=max\u0026s=d8de9b419f78dab9af0cf0b5fc67f666","thumb":"https://ununsplash.imgix.net/photo-1434418105442-121a94cf20c7?q=75\u0026fm=jpg\u0026w=200\u0026fit=max\u0026s=85dd1265c56652b48daa3e06d1dbc4c3"},"links":{"self":"http://api.lvh.me:3000/photos/VolSIAaTTQg","html":"http://lvh.me:3000/photos/VolSIAaTTQg","download":"http://lvh.me:3000/photos/VolSIAaTTQg/download"}},{"id":"zyr3kKFIklY","user":{"id":"uVPR0EktPmA","username":"arman","name":"Arman Ali","links":{"self":"http://api.lvh.me:3000/users/arman","html":"http://lvh.me:3000/arman","photos":"http://api.lvh.me:3000/users/arman/photos"}},"urls":{"regular":"https://unsplash.imgix.net/photo-1434417006447-a7f063932ff7?q=75\u0026fm=jpg\u0026w=1080\u0026fit=max\u0026s=3caef5bf4d51a2e330278d528d6f34c0","small":"https://unsplash.imgix.net/photo-1434417006447-a7f063932ff7?q=75\u0026fm=jpg\u0026w=400\u0026fit=max\u0026s=d4a4f9682b3805176727d639a92d3d22","thumb":"https://unsplash.imgix.net/photo-1434417006447-a7f063932ff7?q=75\u0026fm=jpg\u0026w=200\u0026fit=max\u0026s=aae208fea246fec08aab653fb942e16b"},"links":{"self":"http://api.lvh.me:3000/photos/zyr3kKFIklY","html":"http://lvh.me:3000/photos/zyr3kKFIklY","download":"http://lvh.me:3000/photos/zyr3kKFIklY/download"}},{"id":"eQ-j8C78Ahc","user":{"id":"LQjAE9GrJQE","username":"charles_ray","name":"Charles Ray","links":{"self":"http://api.lvh.me:3000/users/charles_ray","html":"http://lvh.me:3000/charles_ray","photos":"http://api.lvh.me:3000/users/charles_ray/photos"}},"urls":{"regular":"https://unsplash.imgix.net/photo-1434414556968-afa5c441b8af?q=75\u0026fm=jpg\u0026w=1080\u0026fit=max\u0026s=70452744aa3413765a04e272a00e8c90","small":"https://unsplash.imgix.net/photo-1434414556968-afa5c441b8af?q=75\u0026fm=jpg\u0026w=400\u0026fit=max\u0026s=363d787a56612c7ebcd28026e1dae1bf","thumb":"https://unsplash.imgix.net/photo-1434414556968-afa5c441b8af?q=75\u0026fm=jpg\u0026w=200\u0026fit=max\u0026s=09a2fd99652e779d81c568a325dd9526"},"links":{"self":"http://api.lvh.me:3000/photos/eQ-j8C78Ahc","html":"http://lvh.me:3000/photos/eQ-j8C78Ahc","download":"http://lvh.me:3000/photos/eQ-j8C78Ahc/download"}},{"id":"ySXIFxrkRZA","user":{"id":"ejTWqEmQ88Q","username":"katmurph","name":"Katherine Murphy","links":{"self":"http://api.lvh.me:3000/users/katmurph","html":"http://lvh.me:3000/katmurph","photos":"http://api.lvh.me:3000/users/katmurph/photos"}},"urls":{"regular":"https://ununsplash.imgix.net/photo-1434411812418-ba04a973b7c9?q=75\u0026fm=jpg\u0026w=1080\u0026fit=max\u0026s=865cc42f8ae436d1cacc6b5e49b8a515","small":"https://ununsplash.imgix.net/photo-1434411812418-ba04a973b7c9?q=75\u0026fm=jpg\u0026w=400\u0026fit=max\u0026s=58536e9ee3aa8f7dd8355fc30de001dd","thumb":"https://ununsplash.imgix.net/photo-1434411812418-ba04a973b7c9?q=75\u0026fm=jpg\u0026w=200\u0026fit=max\u0026s=69dfe9cec0d1ee20e028a87f10af6ce4"},"links":{"self":"http://api.lvh.me:3000/photos/ySXIFxrkRZA","html":"http://lvh.me:3000/photos/ySXIFxrkRZA","download":"http://lvh.me:3000/photos/ySXIFxrkRZA/download"}},{"id":"8-FQOGMsu_Y","user":{"id":"ejTWqEmQ88Q","username":"katmurph","name":"Katherine Murphy","links":{"self":"http://api.lvh.me:3000/users/katmurph","html":"http://lvh.me:3000/katmurph","photos":"http://api.lvh.me:3000/users/katmurph/photos"}},"urls":{"regular":"https://ununsplash.imgix.net/photo-1434411704645-0f5c2d02aba2?q=75\u0026fm=jpg\u0026w=1080\u0026fit=max\u0026s=9f346447f5ff1e8d161bed8be8051ee3","small":"https://ununsplash.imgix.net/photo-1434411704645-0f5c2d02aba2?q=75\u0026fm=jpg\u0026w=400\u0026fit=max\u0026s=8b0fe09bda33501f0252bed2b5c5ce5b","thumb":"https://ununsplash.imgix.net/photo-1434411704645-0f5c2d02aba2?q=75\u0026fm=jpg\u0026w=200\u0026fit=max\u0026s=2be35aab76237e675990e4153fb43244"},"links":{"self":"http://api.lvh.me:3000/photos/8-FQOGMsu_Y","html":"http://lvh.me:3000/photos/8-FQOGMsu_Y","download":"http://lvh.me:3000/photos/8-FQOGMsu_Y/download"}},{"id":"-YxiT_myxt4","user":{"id":"ejTWqEmQ88Q","username":"katmurph","name":"Katherine Murphy","links":{"self":"http://api.lvh.me:3000/users/katmurph","html":"http://lvh.me:3000/katmurph","photos":"http://api.lvh.me:3000/users/katmurph/photos"}},"urls":{"regular":"https://ununsplash.imgix.net/photo-1434411676411-49b721f5c766?q=75\u0026fm=jpg\u0026w=1080\u0026fit=max\u0026s=a16ac5eefc8c97028689c65a2f73550a","small":"https://ununsplash.imgix.net/photo-1434411676411-49b721f5c766?q=75\u0026fm=jpg\u0026w=400\u0026fit=max\u0026s=dd6299c9dad706ca4ddb2ca20ff2cdf7","thumb":"https://ununsplash.imgix.net/photo-1434411676411-49b721f5c766?q=75\u0026fm=jpg\u0026w=200\u0026fit=max\u0026s=1c656e72020f4a4d384060936049964c"},"links":{"self":"http://api.lvh.me:3000/photos/-YxiT_myxt4","html":"http://lvh.me:3000/photos/-YxiT_myxt4","download":"http://lvh.me:3000/photos/-YxiT_myxt4/download"}},{"id":"Iw_jfplweG8","user":{"id":"ejTWqEmQ88Q","username":"katmurph","name":"Katherine Murphy","links":{"self":"http://api.lvh.me:3000/users/katmurph","html":"http://lvh.me:3000/katmurph","photos":"http://api.lvh.me:3000/users/katmurph/photos"}},"urls":{"regular":"https://unsplash.imgix.net/photo-1434411616921-8dcc1bfa4865?q=75\u0026fm=jpg\u0026w=1080\u0026fit=max\u0026s=e2c13e7dbc97317a7b94b16de6085bf8","small":"https://unsplash.imgix.net/photo-1434411616921-8dcc1bfa4865?q=75\u0026fm=jpg\u0026w=400\u0026fit=max\u0026s=9fac22bd77281286db6a0d1388599724","thumb":"https://unsplash.imgix.net/photo-1434411616921-8dcc1bfa4865?q=75\u0026fm=jpg\u0026w=200\u0026fit=max\u0026s=fd5251384a7f3bf0c906ae479555e759"},"links":{"self":"http://api.lvh.me:3000/photos/Iw_jfplweG8","html":"http://lvh.me:3000/photos/Iw_jfplweG8","download":"http://lvh.me:3000/photos/Iw_jfplweG8/download"}},{"id":"DteeqGeYjxg","user":{"id":"ejTWqEmQ88Q","username":"katmurph","name":"Katherine Murphy","links":{"self":"http://api.lvh.me:3000/users/katmurph","html":"http://lvh.me:3000/katmurph","photos":"http://api.lvh.me:3000/users/katmurph/photos"}},"urls":{"regular":"https://ununsplash.imgix.net/photo-1434411552403-ecbe0c646aaf?q=75\u0026fm=jpg\u0026w=1080\u0026fit=max\u0026s=b006b79b4765ac72a621788117c3ec06","small":"https://ununsplash.imgix.net/photo-1434411552403-ecbe0c646aaf?q=75\u0026fm=jpg\u0026w=400\u0026fit=max\u0026s=4198bbe956582834001f692ae1241e1b","thumb":"https://ununsplash.imgix.net/photo-1434411552403-ecbe0c646aaf?q=75\u0026fm=jpg\u0026w=200\u0026fit=max\u0026s=932fe9aa0d9a72bee5a4e71af2903f30"},"links":{"self":"http://api.lvh.me:3000/photos/DteeqGeYjxg","html":"http://lvh.me:3000/photos/DteeqGeYjxg","download":"http://lvh.me:3000/photos/DteeqGeYjxg/download"}}]'
+-
+    request:
+        method: GET
+        url: 'http://api.lvh.me:3000/categories/2/photos?page=2000&per_page=10'
+        headers:
+            Host: 'api.lvh.me:3000'
+            Accept-Encoding: null
+            User-Agent: 'GuzzleHttp/6.0.2 curl/7.38.0 PHP/5.6.11'
+            Authorization: 'Bearer 6552724cd07a5a0e06a4f7e4dce7e316f86b7a2efa1e2df8f7cd0079856d9773'
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: 'OK '
+        headers:
+            Access-Control-Allow-Origin: '*'
+            Access-Control-Request-Method: '*'
+            Link: '<http://api.lvh.me:3000/categories/2/photos?page=1&per_page=10>; rel="first", <http://api.lvh.me:3000/categories/2/photos?page=1999&per_page=10>; rel="prev"'
+            X-Total: '3923'
+            X-Per-Page: '10'
+            Cache-Control: 'max-age=7200, public'
+            Content-Type: application/json
+            Content-Length: '2'
+            Etag: 'W/"d751713988987e9331980363e24189ce"'
+            X-Request-Id: 65b9ea5c-5122-446b-adea-8e7b31dbc146
+            X-Ratelimit-Limit: '5000'
+            X-Ratelimit-Remaining: '4984'
+            X-Runtime: '0.085617'
+            Server: 'WEBrick/1.3.1 (Ruby/2.1.5/2014-11-13)'
+            Date: 'Mon, 13 Jul 2015 20:30:11 GMT'
+            Connection: Keep-Alive
+        body: '[]'
+-
+    request:
+        method: GET
+        url: 'http://api.lvh.me:3000/curated_batches/300'
+        headers:
+            Host: 'api.lvh.me:3000'
+            Accept-Encoding: null
+            User-Agent: 'GuzzleHttp/6.0.2 curl/7.38.0 PHP/5.6.11'
+            Authorization: 'Bearer 6552724cd07a5a0e06a4f7e4dce7e316f86b7a2efa1e2df8f7cd0079856d9773'
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '404'
+            message: 'Not Found '
+        headers:
+            Content-Type: application/json
+            Access-Control-Allow-Origin: '*'
+            Access-Control-Request-Method: '*'
+            Content-Length: '1224'
+            Cache-Control: no-cache
+            X-Request-Id: 836408b5-6bb2-4e28-aa57-605e9027da4a
+            X-Ratelimit-Limit: '5000'
+            X-Ratelimit-Remaining: '4982'
+            X-Runtime: '0.119547'
+            Server: 'WEBrick/1.3.1 (Ruby/2.1.5/2014-11-13)'
+            Date: 'Mon, 13 Jul 2015 20:30:11 GMT'
+            Connection: Keep-Alive
+        body: '{"errors":["Couldn''t find CuratedBatch with ''id''=300"],"trace":["/Users/charles/.rvm/gems/ruby-2.1.5/gems/activerecord-4.2.1/lib/active_record/relation/finder_methods.rb:336:in `raise_record_not_found_exception!''","/Users/charles/.rvm/gems/ruby-2.1.5/gems/activerecord-4.2.1/lib/active_record/relation/finder_methods.rb:456:in `find_one''","/Users/charles/.rvm/gems/ruby-2.1.5/gems/activerecord-4.2.1/lib/active_record/relation/finder_methods.rb:435:in `find_with_ids''","/Users/charles/.rvm/gems/ruby-2.1.5/gems/activerecord-4.2.1/lib/active_record/relation/finder_methods.rb:71:in `find''","/Users/charles/.rvm/gems/ruby-2.1.5/gems/activerecord-4.2.1/lib/active_record/querying.rb:3:in `find''","/Users/charles/.rvm/gems/ruby-2.1.5/gems/activerecord-4.2.1/lib/active_record/core.rb:131:in `find''","/Volumes/Sites/unsplash/app/api/unsplash_api/v1/curated_batches.rb:23:in `block (3 levels) in \u003cclass:CuratedBatches\u003e''","/Users/charles/.rvm/gems/ruby-2.1.5/gems/grape-0.11.0/lib/grape/endpoint.rb:47:in `call''","/Users/charles/.rvm/gems/ruby-2.1.5/gems/grape-0.11.0/lib/grape/endpoint.rb:47:in `block in generate_api_method''","/Users/charles/.rvm/gems/ruby-2.1.5/gems/grape-0.11.0/lib/grape/endpoint.rb:247:in `call''"]}'
