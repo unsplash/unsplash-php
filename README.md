@@ -2,11 +2,11 @@
 
 [ ![Codeship Status for CrewLabs/Unsplash-PHP](https://codeship.com/projects/60048560-0bba-0133-b04d-265ef25499ca/status?branch=master)](https://codeship.com/projects/90915)
 
-A php wrapper to connect and interact with the Unsplash API.
+A PHP client for the [Unsplash API][official documentation].
 
 ## Installation
 
-The php wrapper is a composer package. Only add this line to your composer.json
+`Unsplash-PHP` uses [Composer](https://getcomposer.org/). Add this to your composer.json file:
 
 ```
 {
@@ -16,7 +16,7 @@ The php wrapper is a composer package. Only add this line to your composer.json
 }
 ```
 
-And update your composer.lock file
+Then update your composer.lock file:
 
 `php composer.phar update`
 
@@ -24,60 +24,58 @@ And update your composer.lock file
 
 ### Configuration
 
-You need to configure the wrapper before being able to use it. In a file that is call at every request *(i.e. The file who called the vender/autoload.php)*
+Before using, configure the client with your application ID and secret. If you don't have an application ID and secret, follow the steps from the [Unsplash API](official documentation) to register your application.
 
 ```
 Crew\Unsplash\HttpClient::$connection = Crew\Unsplash\Connection(
 	new Crew\Unsplash\Provider([
-			'clientId' => 'mock_client_id',
-            'clientSecret' => 'mock_secret',
-            'redirectUri' => 'none'
+			'clientId' => 'YOUR APPLICATION ID',
+      'clientSecret' => 'YOUR APPLICATION SECRET',
+      'redirectUri' => 'https://your-application.com/oauth/callback'
 	]);
 );
 ```
 
-### Private Scopes
+### Scopes
 
-To access the method that are private, you need to retrieve an access token first.
+The current scopes defined by the [Unsplash API](official documentation) are:
 
-#### Retrieve the authorization url
+- `public` (Access a user's public data)
+- `read_user` (Access a user's private data)
+- `write_user` (Edit and create user data)
+- `read_photos` (Access private information from a user's photos)
+- `write_photos` (Post and edit photos for a user)
 
-When you want to generate the authorization url, you need to specify which scope you want access to.
+If you're only using the `public` scope (i.e. nothing requiring a specific logged-in user), you're ready to go!
 
-*The current scopes are*
-
-- public (Access user's public data)
-- read_user (Access user's private data)
-- write_user (Edit and create user data)
-- read_photos (Access private information from user photos)
-- write_photos (Post and edit photos for users)
-
+To access actions that are non-public (i.e. uploading a photo to a specific account), you'll need a user's permission to access their data. Direct them to an authorization URL (configuring any scopes before generating the authorization URL):
 
 ```
 $scopes = ['public', 'write_user']
 Crew\Unsplash\HttpClient::$connection->getConnectionUrl($scopes);
 ```
 
-### Authorize the application
-
-You need to retrieve the code returned by the authorization url and use it to generate an access token
+Upon authorization, Unsplash will return to you an authentication code via your OAuth
+callback handler. With that you can generate an access token:
 
 `Crew\Unsplash\HttpClient::$connection->generateToken($code);`
 
-From this point, you can execute method that need private scope
+With the token you can now access any additional non-public actions available for the authorized user.
 
 ### API methods
 
-Some parameters are identical accross all the methods.
+Some parameters are identical accross all methods:
 
-`$page` Define the page on which the elements are retrieve. *Default 1*
+  param     | Description
+------------|-----------------------------------------------------
+`$per_page` | Defines the number of objects per page. *Default 10*
+`$page`     | Defines the offset page. *Default 1*
 
-`$per_page` Define the elements presents by page. *Default 10*
-
-The method that return multiple object, actually return an ArrayObject, which can act like a normal array.
+*Note: The methods that return multiple objects return an `ArrayObject`, which acts like a normal array.*
 
 #### Category
-Retrieve informations related to the categories
+
+Retrieve category information:
 
 `Crew\Unsplash\Category::all($page, $per_page);`
 
@@ -89,7 +87,8 @@ $photos = $category->photos($page, $per_page)
 ```
 
 #### Curated Batch
-Retrieve informations related to the curated batches
+
+Retrieve curated batch information:
 
 `Crew\Unsplash\CuratedBatch::all($page, $per_page);`
 
@@ -101,7 +100,8 @@ $photos = $batch->photos($page, $per_page);
 ```
 
 #### Photo
-Retrieve informations related to the photos
+
+Retrieve photo information:
 
 `Crew\Unsplash\Photo::all($page, $per_page);`
 `Crew\Unsplash\Photo::search(string $search, integer $category_id, $page, $per_page);`
@@ -114,7 +114,8 @@ $photo->photographer();
 ```
 
 #### User
-Retrieve information related to a user
+
+Retrieve user information:
 
 `Crew\Unsplash\User::find($username)`
 
@@ -131,3 +132,6 @@ $user->update([$key => value]);
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/CrewLabs/Unsplash-PHP. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant code](http://contributor-covenant.org/) of conduct.
+
+
+[official documentation]: https://unsplash.com/documentation
