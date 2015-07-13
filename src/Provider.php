@@ -18,7 +18,7 @@ class Provider extends AbstractProvider
 	 * Define the default scope of the wrapper
 	 * @var array
 	 */
-	public $scopes = ['public', 'read_user'];
+	public $scopes = ['public'];
 
 	/**
 	 * Define the authorize url
@@ -63,8 +63,7 @@ class Provider extends AbstractProvider
             'uid' => $response->uuid,
             'name' => $response->first_name . ' ' . $response->last_name,
             'firstname' => $response->first_name,
-            'lastname' => $response->last_name,
-            'email' => $response->email
+            'lastname' => $response->last_name
         ]);
 
         return $user;

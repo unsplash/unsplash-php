@@ -101,13 +101,13 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
         $postResponse->shouldReceive('getBody')->times(1)->andReturn('{"access_token": "mock_access_token","token_type": "Bearer","expires_in": "mock_expires","refresh_token": "mock_refresh_token","scope": "scope1 scope2"}');
 
         $getResponse = m::mock('Guzzle\Http\Message\Response');
-        $getResponse->shouldReceive('getBody')->times(4)->andReturn('{"first_name": "mock_first_name","last_name": "mock_last_name","email": "mock_email","picture": "mock_image_url","promo_code": "teypo","uuid": "mock_id"}');
+        $getResponse->shouldReceive('getBody')->times(3)->andReturn('{"first_name": "mock_first_name","last_name": "mock_last_name", "picture": "mock_image_url","promo_code": "teypo","uuid": "mock_id"}');
 
         $client = m::mock('Guzzle\Service\Client');
-        $client->shouldReceive('setBaseUrl')->times(5);
-        $client->shouldReceive('setDefaultOption')->times(4);
+        $client->shouldReceive('setBaseUrl')->times(4);
+        $client->shouldReceive('setDefaultOption')->times(3);
         $client->shouldReceive('post->send')->times(1)->andReturn($postResponse);
-        $client->shouldReceive('get->send')->times(4)->andReturn($getResponse);
+        $client->shouldReceive('get->send')->times(3)->andReturn($getResponse);
         self::$unsplashProvider->setHttpClient($client);
 
         $token = self::$unsplashProvider->getAccessToken('authorization_code', ['code' => 'mock_authorization_code']);
@@ -115,7 +115,5 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('mock_id', self::$unsplashProvider->getUserUid($token));
         $this->assertNull(self::$unsplashProvider->getUserScreenName($token));
-        $this->assertEquals('mock_email', self::$unsplashProvider->getUserEmail($token));
-        $this->assertEquals('mock_email', $user->email);
     }
 }
