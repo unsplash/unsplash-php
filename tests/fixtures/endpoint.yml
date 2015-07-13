@@ -1,0 +1,31 @@
+
+-
+    request:
+        method: GET
+        url: 'http://api.lvh.me:3000/categories/2'
+        headers:
+            Host: 'api.lvh.me:3000'
+            Accept-Encoding: null
+            User-Agent: 'GuzzleHttp/6.0.2 curl/7.38.0 PHP/5.6.11'
+            Authorization: 'Bearer 6552724cd07a5a0e06a4f7e4dce7e316f86b7a2efa1e2df8f7cd0079856d9773'
+            Accept: null
+    response:
+        status:
+            http_version: '1.1'
+            code: '200'
+            message: 'OK '
+        headers:
+            Access-Control-Allow-Origin: '*'
+            Access-Control-Request-Method: '*'
+            Cache-Control: 'max-age=7200, public'
+            Content-Type: application/json
+            Content-Length: '156'
+            Etag: 'W/"774a94faad40d8ff1576ea0f74638058"'
+            X-Request-Id: fbb75ef7-2811-4e53-9022-204c35c60896
+            X-Ratelimit-Limit: '5000'
+            X-Ratelimit-Remaining: '4979'
+            X-Runtime: '0.027152'
+            Server: 'WEBrick/1.3.1 (Ruby/2.1.5/2014-11-13)'
+            Date: 'Mon, 13 Jul 2015 20:30:11 GMT'
+            Connection: Keep-Alive
+        body: '{"id":2,"title":"Buildings","photo_count":3925,"links":{"self":"http://api.lvh.me:3000/categories/2","photos":"http://api.lvh.me:3000/categories/2/photos"}}'

@@ -13,6 +13,11 @@ use GuzzleHttp\Psr7\Request;
 class HttpClient
 {
 	private $httpClient;
+	private $host = 'api.unsplash.com';
+	private $scheme = 'https';
+
+	const TEST_MODE = 'test';
+	const STAGING_MODE = 'staging';
 
 	/**
 	 * Crew\Unsplash\Connection object link to the HttpClient
@@ -28,6 +33,7 @@ class HttpClient
 	 */
 	public function __construct()
 	{
+		$this->setHostAndScheme();
 		$this->httpClient = new Client(['handler' => $this->setHandler(self::$connection->getAuthorizationToken())]);
 	}
 
@@ -53,6 +59,24 @@ class HttpClient
 	}
 
 	/**
+	 * Retrieve the host to which the client will send the request
+	 * @return string
+	 */
+	public function getHost()
+	{
+		return $this->host;
+	}
+
+	/**
+	 * Retrieve the scheme to which the client will send the request
+	 * @return string
+	 */
+	public function getScheme()
+	{
+		return $this->scheme;
+	}
+
+	/**
 	 * Generate a new handler that will manage the http request.
 	 *
 	 * Some middleware are also set to manage the authorization header and 
@@ -75,11 +99,22 @@ class HttpClient
 		
 		// Set the request ui
 		$stack->push(Middleware::mapRequest(function (Request $request) {
-			$uri = $request->getUri()->withHost('api.staging.unsplash.com')->withScheme('http');
+			$uri = $request->getUri()->withHost($this->host)->withScheme($this->scheme);
 
 		    return $request->withUri($uri);
 		}), 'set_host');
 
 		return $stack;
+	}
+
+	/**
+	 * Set the host and the scheme information if it's run in test mode or staging mode.
+	 */
+	private function setHostAndScheme()
+	{
+		if (getenv('ENV_MODE') !== null && in_array(getenv('ENV_MODE'), [self::STAGING_MODE, self::TEST_MODE])) {
+			$this->host = getenv('API_HOST');
+			$this->scheme = getenv('API_SCHEME');
+		}
 	}
 }
