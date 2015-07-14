@@ -21,9 +21,9 @@ Before using, configure the client with your application ID and secret. If you d
 ```php
 Crew\Unsplash\HttpClient::$connection = Crew\Unsplash\Connection(
 	new Crew\Unsplash\Provider([
-			'clientId' => 'YOUR APPLICATION ID',
-      'clientSecret' => 'YOUR APPLICATION SECRET',
-      'redirectUri' => 'https://your-application.com/oauth/callback'
+		'clientId'     => 'YOUR APPLICATION ID',
+		'clientSecret' => 'YOUR APPLICATION SECRET',
+		'redirectUri'  => 'https://your-application.com/oauth/callback'
 	]);
 );
 ```
