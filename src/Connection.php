@@ -11,8 +11,8 @@ class Connection
 	public $token;
 
 	/**
-	 * @param Provider Oauth2 provider to interact with the Unsplash API
-	 * @param League\OAuth2\Client\Token\AccessToken|null Token information if some are already create for the user
+	 * @param Provider OAuth2 provider object to interact with the Unsplash API
+	 * @param League\OAuth2\Client\Token\AccessToken|null Token information if one already exists for the user
 	 */
 	public function __construct(Provider $provider, AccessToken $token = null)
 	{
@@ -21,9 +21,9 @@ class Connection
 	}
 
 	/**
-	 * Retrieve the url that generate the authorization code
+	 * Retrieve the URL that generates the authorization code
 	 *
-	 * @param  array $scope Scopes to includes in the authorization url
+	 * @param  array $scope Scopes to include in the authorization URL
 	 * @return string
 	 */
 	public function getConnectionUrl($scopes = [])
@@ -38,7 +38,7 @@ class Connection
 	/**
 	 * Generate a new access token object from an authorization code
 	 * 
-	 * @param  string $code Authorization code provide by the Unsplash Oauth2 service
+	 * @param  string $code Authorization code provided by the Unsplash OAuth2 service
 	 * @return League\OAuth2\Client\Token\AccessToken
 	 */
 	public function generateToken($code)
@@ -51,9 +51,9 @@ class Connection
 	}
 
 	/**
-	 * Set a new access token to the connection object
+	 * Assign a new access token to the connection object
 	 * 
-	 * @param AccessToken $token Access token to add to the connection object
+	 * @param AccessToken $token Access token to assign to the connection object
 	 */
 	public function setToken(AccessToken $token)
 	{
@@ -61,9 +61,7 @@ class Connection
 	}
 
 	/**
-	 * Refresh an expired token from the refresh token.
-	 * Generate a new AccessToken object from the stdClass provide
-	 * by the getAccessToken method
+	 * Refresh an expired token and generate a new AccessToken object.
 	 * 
 	 * @return League\OAuth2\Client\Token\AccessToken
 	 */
@@ -85,10 +83,9 @@ class Connection
 	}
 
 	/**
-	 * Generate the authorization string pass in the header
-	 * Validate if a token is linked to the connection object.
-	 * Use the client id if it's not the case.
-	 * The method also refresh the acces token if it's expired
+	 * Generate the authorization string to pass in via the http header.
+	 * Check if a token is linked to the connection object and use the client ID if there is not.
+	 * The method will also refresh the access token if it has expired.
 	 * 
 	 * @return String
 	 */

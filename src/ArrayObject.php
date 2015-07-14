@@ -35,7 +35,7 @@ class ArrayObject extends \ArrayObject
 	}
 
 	/**
-	 * Total page for this call
+	 * Total number of pages for this call
 	 * @return int Total page
 	 */
 	public function totalPages()
@@ -44,7 +44,7 @@ class ArrayObject extends \ArrayObject
 	}
 
 	/**
-	 * Current page number base on the Link header
+	 * Current page number based on the Link header
 	 * @return int Current page number
 	 */
 	public function currentPage()
@@ -59,7 +59,7 @@ class ArrayObject extends \ArrayObject
 	}
 
 	/**
-	 * Retrive array contrain all pages for each position
+	 * Retrieve array containing all pages for each position
 	 * @return array
 	 */
 	public function getPages()
@@ -68,7 +68,7 @@ class ArrayObject extends \ArrayObject
 	}
 
 	/**
-	 * Return an array with containing the page number for all position
+	 * Return an array containing the page number for all positions:
 	 * last, previous, next, first
 	 * If the page number for a specific position doesn't exist (i.e it is the current page),
 	 * the position will return null
@@ -79,7 +79,7 @@ class ArrayObject extends \ArrayObject
 		$links = explode(',', $this->headers[self::LINK][0]);
 
 		foreach ($links as $link) {
-			// Run two preg_math to retrieve specific element in the string
+			// Run two preg_match to retrieve specific element in the string
 			// snce the page attributes is not always at the same position,
 			// we can't retireve both information in the same regex
 			preg_match('/page=([^&>]*)/', $link, $page);

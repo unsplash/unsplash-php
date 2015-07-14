@@ -11,14 +11,13 @@ class Endpoint
 	private $parameters;
 
 	/**
-	 * List of accepted http action that the application can execute
+	 * List of accepted http actions
 	 * @var array
 	 */
 	private static $acceptedHttpMethod = ['get', 'post', 'put'];
 
 	/**
-	 * Construct an new endpoint object and set the parameters
-	 * from an array
+	 * Construct a new endpoint object and set the parameters from an array
 	 * 
 	 * @param array
 	 */
@@ -29,7 +28,7 @@ class Endpoint
 	}
 
 	/**
-	 * Merge the old parameters with the new one
+	 * Merge old parameters with the new one
 	 * 
 	 * @param  Array $parameter The parameters to update on the object
 	 * @return void
@@ -51,13 +50,13 @@ class Endpoint
 	}
 
 	/**
-	 * Validate if the http method is accepted and send a http request to it.
+	 * Check if the HTTP method is accepted and send a HTTP request to it.
 	 * Retrieve error from the request and throw a new error
 	 * 
-	 * @param  string $method Http action to trigger
+	 * @param  string $method HTTP action to trigger
 	 * @param  array $arguments Array containing all the parameters pass to the magic method
 	 * 
-	 * @throws Crew\Unsplash\Exception if the http request failed
+	 * @throws Crew\Unsplash\Exception if the HTTP request failed
 	 *
 	 * @see Crew\Unsplash\HttpClient::send()
 	 * 
@@ -88,9 +87,9 @@ class Endpoint
 	}
 
 	/**
-	 * Retrieve the response status code and determine if the request was a success or not
+	 * Retrieve the response status code and determine if the request was successful.
 	 * 
-	 * @param  GuzzleHttp\Psr7\Response $response of the http request
+	 * @param  GuzzleHttp\Psr7\Response $response of the HTTP request
 	 * @return boolean
 	 */
 	private static function isGoodRequest($response)
@@ -101,7 +100,7 @@ class Endpoint
 	/**
 	 * Retrieve the error message in the body
 	 * 
-	 * @param  GuzzleHttp\Psr7\Response $response of the http request
+	 * @param  GuzzleHttp\Psr7\Response $response of the HTTP request
 	 * @return string
 	 */
 	private static function getErrorMessage($response)

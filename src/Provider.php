@@ -9,19 +9,19 @@ use League\OAuth2\Client\Entity\User;
 class Provider extends AbstractProvider
 {
 	/**
-	 * The basic authorization header is a bearer token
+	 * The default authorization header uses a bearer token
 	 * @var string
 	 */
 	public $authorizationHeader = 'Bearer';
 
 	/**
-	 * Define the default scope of the wrapper
+	 * Define the default scope.
 	 * @var array
 	 */
 	public $scopes = ['public'];
 
 	/**
-	 * Define the authorize url
+	 * Define the authorize URL
 	 * 
 	 * @return string
 	 */
@@ -51,8 +51,8 @@ class Provider extends AbstractProvider
 	}
 
 	/**
-	 * @param  GuzzleHttp\Psr7\Response $response Http response
-	 * @param  AccessToken $token Access token information of the current user
+	 * @param  GuzzleHttp\Psr7\Response $response HTTP response
+	 * @param  AccessToken $token Access token information for the current user
 	 * @return stdClass
 	 */
 	public function userDetails($response, AccessToken $token)
@@ -70,8 +70,8 @@ class Provider extends AbstractProvider
 	}
 
 	/**
-	 * @param  GuzzleHttp\Psr7\Response $response Http response
-	 * @param  AccessToken $token Access token information of the current user
+	 * @param  GuzzleHttp\Psr7\Response $response HTTP response
+	 * @param  AccessToken $token Access token information for the current user
 	 * @return string
 	 */
 	public function userUid($response, AccessToken $token)
