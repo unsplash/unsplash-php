@@ -68,10 +68,10 @@ class PhotoTest extends BaseTest
 		
 		VCR::insertCassette('photos.yml');
 		
-		$photo = $this->photo->create(__dir__.'/images/land-test.txt');
+		$photo = Unsplash\Photo::create(__dir__.'/images/land-test.txt');
 		
 		VCR::eject();
 
-		// $this->assertEquals(201, $this->photo->getStatusCode());
+		$this->assertInstanceOf('Photo', $photo);
 	} 
 }

@@ -30,6 +30,7 @@ abstract class BaseTest extends \PHPUnit_Framework_TestCase
 
 		$this->accessToken = new AccessToken(['access_token' => getenv('ACCESS_TOKEN')]);
 
+		VCR::configure()->setStorage('json');
 		VCR::turnOn();
 	}
 
