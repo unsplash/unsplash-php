@@ -1,12 +1,12 @@
 [{
     "request": {
         "method": "GET",
-        "url": "http:\/\/api.lvh.me:3000\/categories\/2",
+        "url": "https:\/\/api.unsplash.com\/categories\/2",
         "headers": {
-            "Host": "api.lvh.me:3000",
+            "Host": "api.unsplash.com",
             "Accept-Encoding": null,
             "User-Agent": "GuzzleHttp\/6.0.2 curl\/7.38.0 PHP\/5.6.11",
-            "Authorization": "Bearer 5c4719b57ffecb3f9c632e1dee5bb8055437c3accb23776f291fa4b1e231323e",
+            "Authorization": "Bearer 582c5d7ebe28bd707751a43c8e22dc5c0a4ba0a60dbe69d520677f47b7cfcc1b",
             "Accept": null
         }
     },
@@ -14,23 +14,22 @@
         "status": {
             "http_version": "1.1",
             "code": "200",
-            "message": "OK "
+            "message": "OK"
         },
         "headers": {
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Request-Method": "*",
             "Cache-Control": "max-age=7200, public",
             "Content-Type": "application\/json",
-            "Content-Length": "156",
-            "Etag": "W\/\"774a94faad40d8ff1576ea0f74638058\"",
-            "X-Request-Id": "5bd52dc2-571a-4ad4-8516-ebb03bd5c0a3",
-            "X-Ratelimit-Limit": "5000",
-            "X-Ratelimit-Remaining": "4974",
-            "X-Runtime": "0.029086",
-            "Server": "WEBrick\/1.3.1 (Ruby\/2.1.5\/2014-11-13)",
-            "Date": "Wed, 15 Jul 2015 21:02:20 GMT",
-            "Connection": "Keep-Alive"
+            "Content-Length": "166",
+            "ETag": "W\/\"0185fc5699c64d30a2be3ea05b02adfa\"",
+            "X-Request-Id": "ba037cc4-dd45-48a0-a03f-c2fb6c15bf6d",
+            "X-RateLimit-Limit": "5000",
+            "X-RateLimit-Remaining": "4984",
+            "X-Runtime": "0.028218",
+            "Connection": "keep-alive",
+            "Server": "thin"
         },
-        "body": "{\"id\":2,\"title\":\"Buildings\",\"photo_count\":3925,\"links\":{\"self\":\"http:\/\/api.lvh.me:3000\/categories\/2\",\"photos\":\"http:\/\/api.lvh.me:3000\/categories\/2\/photos\"}}"
+        "body": "{\"id\":2,\"title\":\"Buildings\",\"photo_count\":4738,\"links\":{\"self\":\"https:\/\/api.unsplash.com:80\/categories\/2\",\"photos\":\"https:\/\/api.unsplash.com:80\/categories\/2\/photos\"}}"
     }
 }]

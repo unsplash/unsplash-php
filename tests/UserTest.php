@@ -75,7 +75,7 @@ class UserTest extends BaseTest
 
 		VCR::eject();
 
-		$this->assertEquals(8, $photos->count());
+		$this->assertEquals(10, $photos->count());
 	}
 
 	public function testUpdateUser()
