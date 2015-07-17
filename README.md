@@ -48,7 +48,7 @@ Crew\Unsplash\HttpClient::$connection->getConnectionUrl($scopes);
 ```
 
 Upon authorization, Unsplash will return to you an authentication code via your OAuth
-callback handler. With that you can generate an access token:
+callback handler. Use it to generate an access token:
 
 ```php
 Crew\Unsplash\HttpClient::$connection->generateToken($code);
@@ -146,7 +146,7 @@ $user->update([$key => value]);
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/CrewLabs/Unsplash-PHP. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant code](http://contributor-covenant.org/) of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/CrewLabs/Unsplash-PHP. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org/) code of conduct.
 
 
 [official documentation]: https://unsplash.com/documentation
