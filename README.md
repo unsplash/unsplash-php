@@ -58,7 +58,7 @@ With the token you can now access any additional non-public actions available fo
 
 ### API methods
 
-Some parameters are identical accross all methods:
+Some parameters are identical across all methods:
 
   param     | Description
 ------------|-----------------------------------------------------
