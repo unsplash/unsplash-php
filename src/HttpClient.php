@@ -7,6 +7,7 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Handler\CurlHandler;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Uri;
+use \League\OAuth2\Client\Token\AccessToken;
 
 use GuzzleHttp\Psr7\Request;
 
@@ -31,6 +32,67 @@ class HttpClient
 	public function __construct()
 	{
 		$this->httpClient = new Client(['handler' => $this->setHandler(self::$connection->getAuthorizationToken())]);
+	}
+
+	/**
+	 * Init the $connection object that is used accross all request in the API
+	 *
+	 * $credentials 			array 	Credentials needed for the API request
+	 * 		['applicationId'] 	string 	Application id. This value is needed accross all the request
+	 * 		['secret']			string  Application secret. Application secret is needed for the OAuth authentification
+	 * 		['callbackUrl'] 	string  Callback url. The OAuth authentification will redirect the user to this url.
+	 *
+	 * $accessToken 			array 	Access Token informations
+	 * 		['access_token']	string 	Access Token create on the OAuth
+	 * 		['refresh_token']	string 	Refresh Token necessary when the access token is expired
+	 * 		['expires_in']		int 	Define in how many time the access token will be expired
+	 * 
+	 * @param  Array $credentials see above
+	 * @param  Array| \League\OAuth2\Client\Token\accessToken $accessToken 	see above
+	 * @return Void
+	 */
+	public static function init($credentials = [], $accessToken = [])
+	{
+		$token = null;
+		if (! empty($accessToken)) {
+			$token = self::initAccessToken($accessToken);
+		}
+
+		self::$connection = new Connection(self::initProvider($credentials), $token);
+	}
+
+	/**
+	 * Create a unsplash provider from the credentials provide by the user.
+	 * If the only credential set is the applicationId, the private call won't work
+	 * since access token can't be created witouth the secret and the callback url
+	 * 
+	 * @param  array $credentials 	see HttpClient::init documentation
+	 * @return Provider  		  	Provider object used for the authentification
+	 */
+	private static function initProvider($credentials = [])
+	{
+		return new Provider([
+				'clientId'     => isset($credentials['applicationId']) ? $credentials['applicationId'] : null,
+				'clientSecret' => isset($credentials['secret']) ? $credentials['secret'] : null,
+				'redirectUri'  => isset($credentials['callbackUrl']) ? $credentials['callbackUrl'] : null
+			]);
+	}
+
+	/**
+	 * Create a Access Token the provider can use for the authentification
+	 * 
+	 * @param  mixed $accessToken 	see HttpClient::init documentation
+	 * @return \League\OAuth2\Client\Token\AccessToken | null
+	 */
+	private static function initAccessToken($accessToken)
+	{
+		if (is_array($accessToken)) {
+			return new AccessToken($accessToken);
+		} elseif (is_a($accessToken, '\League\OAuth2\Client\Token\AccessToken')) {
+			return $accessToken;
+		} else {
+			return null;
+		}
 	}
 
 	/**

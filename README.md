@@ -18,14 +18,14 @@ composer require crewlabs/unsplash
 
 Before using, configure the client with your application ID and secret. If you don't have an application ID and secret, follow the steps from the [Unsplash API](official documentation) to register your application.
 
+For all the public call, only application id is required.
+
 ```php
-Crew\Unsplash\HttpClient::$connection = Crew\Unsplash\Connection(
-	new Crew\Unsplash\Provider([
-		'clientId'     => 'YOUR APPLICATION ID',
-		'clientSecret' => 'YOUR APPLICATION SECRET',
-		'redirectUri'  => 'https://your-application.com/oauth/callback'
-	]);
-);
+Crew\Unsplash\HttpClient::init([
+	'applicationId'	=> 'YOUR APPLICATION ID',
+	'secret'		=> 'YOUR APPLICATION SECRET',
+	'callbackUrl'	=> 'https://your-application.com/oauth/callback'
+]);
 ```
 
 ### Scopes
@@ -57,6 +57,8 @@ Crew\Unsplash\HttpClient::$connection->generateToken($code);
 With the token you can now access any additional non-public actions available for the authorized user.
 
 ### API methods
+
+For more informations about the the response for each call, do not hesitate do go read the [official documentation]: https://unsplash.com/documentation. 
 
 Some parameters are identical across all methods:
 

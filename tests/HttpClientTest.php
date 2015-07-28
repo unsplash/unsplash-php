@@ -23,12 +23,48 @@ class HttpClientTest extends BaseTest
 		$this->connection = new Unsplash\Connection($provider, $this->accessToken);
 	}
 
+	public function tearDown()
+	{
+		Unsplash\HttpClient::$connection = null;
+	}
+
 	public function testAssignStaticConnection()
 	{
 		Unsplash\HttpClient::$connection = $this->connection;
 
 		$this->assertEquals($this->connection, Unsplash\HttpClient::$connection);
 	}
+
+	public function testInitConnection()
+	{
+		Unsplash\HttpClient::init([
+			'applicationId' => 'mock_application_id',
+		]);
+
+		$this->assertInstanceOf('Crew\Unsplash\Connection', Unsplash\HttpClient::$connection);
+		$this->assertEquals('Client-ID mock_application_id', Unsplash\HttpClient::$connection->getAuthorizationToken());
+	}
+
+	public function testInitConnectionWithAccessTokenArray()
+	{
+		Unsplash\HttpClient::init([
+			'applicationId' => 'mock_application_id',
+		], [
+			'access_token'  => 'mock_access_token'
+		]);
+
+		$this->assertEquals('Bearer mock_access_token', Unsplash\HttpClient::$connection->getAuthorizationToken());
+	}
+
+	public function testInitConnectionWithAccessTokenObject()
+	{
+		Unsplash\HttpClient::init([
+			'applicationId' => 'mock_application_id',
+		], $this->accessToken);
+
+		$this->assertEquals('Bearer ' . getenv('ACCESS_TOKEN'), Unsplash\HttpClient::$connection->getAuthorizationToken());
+	}
+
 
 	public function testRequestSendThroughClient()
 	{
