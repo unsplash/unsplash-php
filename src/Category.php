@@ -24,11 +24,11 @@ class Category extends Endpoint
 
 	/**
 	 * Retrieve all the categories on a specific page.
-	 * The function retrieve an ArrayObject that contain Category object.
+	 * Returns an ArrayObject that contains Category objects.
 	 * 
-	 * @param  integer $page Page from which the categories need to be retrieve
-	 * @param  integer $per_page Number of element in a page
-	 * @return ArrayObject of Category
+	 * @param  integer $page Page from which the categories need to be retrieved
+	 * @param  integer $per_page Number of elements on a page
+	 * @return ArrayObject of Category objects.
 	 *
 	 * @api
 	 */
@@ -43,7 +43,7 @@ class Category extends Endpoint
 
 	/**
 	 * Retrieve all the photos for a specific category on a specific page.
-	 * The function retrieve an ArrayObject that contain Photo object.
+	 * Returns an ArrayObject that contains Photo objects.
 	 * 
 	 * @param  integer $page Page from which the photos need to be retrieve
 	 * @param  integer $per_page Number of element in a page

@@ -10,7 +10,7 @@ class CuratedBatch extends Endpoint
 	/**
 	 * Retrieve a specific curated batch
 	 * 
-	 * @param  int $id Id of the currated batch to retrieve
+	 * @param  int $id Id of the curated batch
 	 * @return CuratedBatch
 	 */
 	public static function find($id)
@@ -21,10 +21,10 @@ class CuratedBatch extends Endpoint
 	}
 
 	/**
-	 * Retrieve all the curated batches for a given pages
+	 * Retrieve all curated batches for a given page
 	 * 
-	 * @param  integer $page Page from which the curated batches need to be retrieve
-	 * @param  integer $per_page Number of element in a page
+	 * @param  integer $page Page from which the curated batches need to be retrieved
+	 * @param  integer $per_page Number of elements on a page
 	 * @return ArrayObject of CuratedBatch
 	 */
 	public static function all($page = 1, $per_page = 10)
@@ -37,8 +37,8 @@ class CuratedBatch extends Endpoint
 	}
 
 	/**
-	 * Retrieve all the photos for a specific curated batches on a specific page.
-	 * The function retrieve an ArrayObject that contain Photo object.
+	 * Retrieve all the photos for a specific curated batch
+	 * Returns an ArrayObject that contains Photo objects.
 	 * 
 	 * @return ArrayObject of Photo
 	 */

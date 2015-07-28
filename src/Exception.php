@@ -6,7 +6,6 @@ class Exception extends \Exception
 {
 	/**
 	 * Override the constructor to accept an array instead of a string
-	 * We than transform the array into a string
 	 * @param array          $message  Array containing the errors
 	 * @param integer        $code     Error code
 	 * @param Exception|null $previous Previous Exception object

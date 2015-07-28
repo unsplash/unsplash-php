@@ -7,9 +7,9 @@ class User extends Endpoint
 	private $photos;
 
 	/**
-	 * Retrieve the a User object from the username specified
+	 * Retrieve a User object from the username specified
 	 *
-	 * @param  string $username Username of the user to find
+	 * @param  string $username Username of the user
 	 * @return User
 	 */
 	public static function find($username)
@@ -20,12 +20,12 @@ class User extends Endpoint
 	}
 
 	/**
-	 * Retrieve all the photos for a specific user on a specific page.
-	 * The function retrieve an ArrayObject that contain Photo object.
+	 * Retrieve all the photos for a specific user on a given page.
+	 * Returns an ArrayObject that contains Photo objects.
 	 * 
-	 * @param  integer $page Page from which the photos need to be retrieve
-	 * @param  integer $per_page Number of element in a page
-	 * @return ArrayObject of Photo
+	 * @param  integer $page Page from which the photos are to be retrieved
+	 * @param  integer $per_page Number of elements on a page
+	 * @return ArrayObject of Photos
 	 */
 	public function photos($page = 1, $per_page = 10)
 	{
@@ -42,9 +42,8 @@ class User extends Endpoint
 	}
 
  	/**
-	 * Retrieve the a User object of the connect user.
+	 * Retrieve a User object of the logged-in user.
 	 *
-	 * @param  string $username Username of the user to find
 	 * @return User
 	 */
 	public static function current()
@@ -55,9 +54,9 @@ class User extends Endpoint
 	}
 
 	/**
-	 * Update specific parameters on a user
+	 * Update specific parameters on the logged-in user
 	 * 
-	 * @param  Array $parameters Array containing the parameters to update on a user
+	 * @param  Array $parameters Array containing the parameters to update
 	 * @return void
 	 */
 	public function update(Array $parameters)

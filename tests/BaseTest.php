@@ -41,7 +41,7 @@ abstract class BaseTest extends \PHPUnit_Framework_TestCase
 						            }
 						        }
 							)
-						->enableRequestMatchers(array('method', 'url', 'host', 'query_string', 'body', 'post_fields', 'validate_authorization'));;
+						->enableRequestMatchers(array('method', 'url', 'host', 'query_string', 'body', 'post_fields', 'validate_authorization'));
 		VCR::turnOn();
 	}
 
