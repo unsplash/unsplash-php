@@ -16,9 +16,6 @@ class HttpClient
 	private $host = 'api.unsplash.com';
 	private $scheme = 'https';
 
-	const TEST_MODE = 'test';
-	const STAGING_MODE = 'staging';
-
 	/**
 	 * Crew\Unsplash\Connection object link to the HttpClient
 	 * Need to be set on the class before running anything else
@@ -33,7 +30,6 @@ class HttpClient
 	 */
 	public function __construct()
 	{
-		$this->setHostAndScheme();
 		$this->httpClient = new Client(['handler' => $this->setHandler(self::$connection->getAuthorizationToken())]);
 	}
 
@@ -56,24 +52,6 @@ class HttpClient
 		);
 
 		return $response;
-	}
-
-	/**
-	 * Retrieve the host to which the client will send the request
-	 * @return string
-	 */
-	public function getHost()
-	{
-		return $this->host;
-	}
-
-	/**
-	 * Retrieve the scheme to which the client will send the request
-	 * @return string
-	 */
-	public function getScheme()
-	{
-		return $this->scheme;
 	}
 
 	/**
@@ -106,14 +84,4 @@ class HttpClient
 		return $stack;
 	}
 
-	/**
-	 * Set the host and the scheme information depending on test or staging mode.
-	 */
-	private function setHostAndScheme()
-	{
-		if (getenv('ENV_MODE') !== null && in_array(getenv('ENV_MODE'), [self::STAGING_MODE, self::TEST_MODE])) {
-			$this->host = getenv('API_HOST');
-			$this->scheme = getenv('API_SCHEME');
-		}
-	}
 }

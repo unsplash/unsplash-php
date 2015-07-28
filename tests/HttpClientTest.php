@@ -21,15 +21,6 @@ class HttpClientTest extends BaseTest
 		]);
 
 		$this->connection = new Unsplash\Connection($provider, $this->accessToken);
-		$this->testMode = Unsplash\HttpClient::TEST_MODE;
-	}
-
-	public function tearDown()
-	{
-		// Since we change the ENV_MODE for some test
-		// We set the test mode back to be sure all the further 
-		// tests work
-		putenv("ENV_MODE=test");
 	}
 
 	public function testAssignStaticConnection()
@@ -62,43 +53,4 @@ class HttpClientTest extends BaseTest
 		$this->assertEquals('Bearer mock_access_token_1', Unsplash\HttpClient::$connection->getAuthorizationToken());
 	}
 
-	public function testHostInTestMode()
-	{
-		putenv("ENV_MODE={$this->testMode}");
-
-		Unsplash\HttpClient::$connection = $this->connection;
-		$client = new Unsplash\HttpClient();
-
-		$this->assertEquals(getenv('API_HOST'), $client->getHost());
-	}
-
-	public function testSchemeInTestMode()
-	{
-		putenv("ENV_MODE={$this->testMode}");
-
-		Unsplash\HttpClient::$connection = $this->connection;
-		$client = new Unsplash\HttpClient();
-
-		$this->assertEquals(getenv('API_SCHEME'), $client->getScheme());
-	}
-
-	public function testHostInStagingMode()
-	{
-		putenv("ENV_MODE=production");
-
-		Unsplash\HttpClient::$connection = $this->connection;
-		$client = new Unsplash\HttpClient();
-
-		$this->assertEquals('api.unsplash.com', $client->getHost());
-	}
-
-	public function testSchemeInProductionMode()
-	{
-		putenv("ENV_MODE=production");
-
-		Unsplash\HttpClient::$connection = $this->connection;
-		$client = new Unsplash\HttpClient();
-
-		$this->assertEquals('https', $client->getScheme());
-	}
 }

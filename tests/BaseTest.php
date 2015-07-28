@@ -30,6 +30,18 @@ abstract class BaseTest extends \PHPUnit_Framework_TestCase
 
 		$this->accessToken = new AccessToken(['access_token' => getenv('ACCESS_TOKEN')]);
 
+		VCR::configure()->setStorage('json')
+						->addRequestMatcher(
+								'validate_authorization',
+								function (\VCR\Request $first, \VCR\Request $second) {
+						            if ($first->getHeaders()['Authorization'] == $second->getHeaders()['Authorization']) {
+							            return true;
+						            } else {
+						            	return false;
+						            }
+						        }
+							)
+						->enableRequestMatchers(array('method', 'url', 'host', 'query_string', 'body', 'post_fields', 'validate_authorization'));
 		VCR::turnOn();
 	}
 

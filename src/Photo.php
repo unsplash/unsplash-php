@@ -65,7 +65,7 @@ class Photo extends Endpoint
 	{
 		$file = fopen($filePath, 'r');
 
-		$photo = json_decode($this->post("photos", ['multipart' => [['name' => 'photo', 'contents' => $file]]])->getBody());
+		$photo = json_decode(self::post("photos", ['multipart' => [['name' => 'photo', 'contents' => $file]]])->getBody(), true);
 
 		return new self($photo);
 	}
