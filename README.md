@@ -58,7 +58,7 @@ With the token you can now access any additional non-public actions available fo
 
 ### API methods
 
-For more informations about the the response for each call, do not hesitate do go read the [official documentation]: https://unsplash.com/documentation. 
+For more information about the the responses for each call, refer to the [official documentation](official-documentation).
 
 Some parameters are identical across all methods:
 
