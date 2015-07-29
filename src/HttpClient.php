@@ -35,17 +35,17 @@ class HttpClient
 	}
 
 	/**
-	 * Init the $connection object that is used accross all request in the API
+	 * Initialize the $connection object that is used for all requests to the API
 	 *
 	 * $credentials 			array 	Credentials needed for the API request
-	 * 		['applicationId'] 	string 	Application id. This value is needed accross all the request
-	 * 		['secret']			string  Application secret. Application secret is needed for the OAuth authentification
-	 * 		['callbackUrl'] 	string  Callback url. The OAuth authentification will redirect the user to this url.
+	 * 		['applicationId'] 	string 	Application id. This value is needed accross all requests
+	 * 		['secret']			string  Application secret. Application secret is needed for OAuth authentification
+	 * 		['callbackUrl'] 	string  Callback url. After OAuth authentification, the user will be redirected to this url.
 	 *
-	 * $accessToken 			array 	Access Token informations
-	 * 		['access_token']	string 	Access Token create on the OAuth
+	 * $accessToken 			array 	Access Token information
+	 * 		['access_token']	string 	Access Token identifier
 	 * 		['refresh_token']	string 	Refresh Token necessary when the access token is expired
-	 * 		['expires_in']		int 	Define in how many time the access token will be expired
+	 * 		['expires_in']		int 	Define in when the access token will expire
 	 * 
 	 * @param  Array $credentials see above
 	 * @param  Array| \League\OAuth2\Client\Token\accessToken $accessToken 	see above
@@ -62,9 +62,9 @@ class HttpClient
 	}
 
 	/**
-	 * Create a unsplash provider from the credentials provide by the user.
-	 * If the only credential set is the applicationId, the private call won't work
-	 * since access token can't be created witouth the secret and the callback url
+	 * Create an unsplash provider from the credentials provided by the user.
+	 * If only the `applicationId` is set, non-public scoped permissions
+	 * won't work since access tokens can't be created without the secret and callback url
 	 * 
 	 * @param  array $credentials 	see HttpClient::init documentation
 	 * @return Provider  		  	Provider object used for the authentification
@@ -79,7 +79,7 @@ class HttpClient
 	}
 
 	/**
-	 * Create a Access Token the provider can use for the authentification
+	 * Create an Access Token the provider can use for authentification
 	 * 
 	 * @param  mixed $accessToken 	see HttpClient::init documentation
 	 * @return \League\OAuth2\Client\Token\AccessToken | null
@@ -97,7 +97,6 @@ class HttpClient
 
 	/**
 	 * Send an http request through the http client.
-	 * Generate a new request method in whith the http method and the URI is passed
 	 * 
 	 * @param  string $method http method sent
 	 * @param  array $argument Array containing the URI to send the request and the parameters of the request
@@ -117,7 +116,7 @@ class HttpClient
 	}
 
 	/**
-	 * Generate a new handler that will manage the http requests.
+	 * Generate a new handler that will manage the HTTP requests.
 	 *
 	 * Some middleware are also configured to manage the authorization header and request URI
 	 * 
