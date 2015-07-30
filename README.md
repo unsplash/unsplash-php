@@ -18,19 +18,19 @@ composer require crewlabs/unsplash
 
 Before using, configure the client with your application ID and secret. If you don't have an application ID and secret, follow the steps from the [Unsplash API](official documentation) to register your application.
 
+Note that if you're just using actions that require the [`public` permission scope](#permission-scopes], only the `applicationId` is required.
+
 ```php
-Crew\Unsplash\HttpClient::$connection = Crew\Unsplash\Connection(
-	new Crew\Unsplash\Provider([
-		'clientId'     => 'YOUR APPLICATION ID',
-		'clientSecret' => 'YOUR APPLICATION SECRET',
-		'redirectUri'  => 'https://your-application.com/oauth/callback'
-	]);
-);
+Crew\Unsplash\HttpClient::init([
+	'applicationId'	=> 'YOUR APPLICATION ID',
+	'secret'		=> 'YOUR APPLICATION SECRET',
+	'callbackUrl'	=> 'https://your-application.com/oauth/callback'
+]);
 ```
 
-### Scopes
+### Permission Scopes
 
-The current scopes defined by the [Unsplash API](official documentation) are:
+The current permission scopes defined by the [Unsplash API](official documentation) are:
 
 - `public` (Access a user's public data)
 - `read_user` (Access a user's private data)
@@ -38,7 +38,7 @@ The current scopes defined by the [Unsplash API](official documentation) are:
 - `read_photos` (Access private information from a user's photos)
 - `write_photos` (Post and edit photos for a user)
 
-If you're only using the `public` scope (i.e. nothing requiring a specific logged-in user), you're ready to go!
+If you're only using the `public` permissions scope (i.e. nothing requiring a specific logged-in user), you're ready to go!
 
 To access actions that are non-public (i.e. uploading a photo to a specific account), you'll need a user's permission to access their data. Direct them to an authorization URL (configuring any scopes before generating the authorization URL):
 
@@ -57,6 +57,8 @@ Crew\Unsplash\HttpClient::$connection->generateToken($code);
 With the token you can now access any additional non-public actions available for the authorized user.
 
 ### API methods
+
+For more information about the the responses for each call, refer to the [official documentation](official-documentation).
 
 Some parameters are identical across all methods:
 

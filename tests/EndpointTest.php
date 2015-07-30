@@ -16,8 +16,13 @@ class EndpointTest extends BaseTest
 	{
 		parent::setUp();
 
-        $connection = new Unsplash\Connection($this->provider, $this->accessToken);
-		Unsplash\HttpClient::$connection = $connection;
+        Unsplash\HttpClient::init([
+			'clientId' => 'mock_client_id',
+            'clientSecret' => 'mock_secret',
+            'redirectUri' => 'none'
+		], [
+			'access_token' => getenv('ACCESS_TOKEN')
+		]);
 	}
 
 	public function testRequest()
