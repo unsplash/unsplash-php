@@ -27,7 +27,7 @@ class Provider extends AbstractProvider
 	 */
 	public function urlAuthorize()
 	{
-		return 'http://unsplash.com/oauth/authorize';
+		return 'https://unsplash.com/oauth/authorize';
 	}
 
 	/**
@@ -37,7 +37,7 @@ class Provider extends AbstractProvider
 	 */
 	public function urlAccessToken()
 	{
-		return 'http://unsplash.com/oauth/token';
+		return 'https://unsplash.com/oauth/token';
 	}
 
 	/**
@@ -47,7 +47,7 @@ class Provider extends AbstractProvider
 	 */
 	public function urlUserDetails(AccessToken $token)
 	{
-		return "http://api.unsplash.com/me?access_token={$token}";
+		return "https://api.unsplash.com/me?access_token={$token}";
 	}
 
 	/**
