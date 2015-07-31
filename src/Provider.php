@@ -21,6 +21,12 @@ class Provider extends AbstractProvider
 	public $scopes = ['public'];
 
 	/**
+	 * Define the scopes separator for the url
+	 * @var string
+	 */
+	public $scopeSeparator = ' ';
+
+	/**
 	 * Define the authorize URL
 	 * 
 	 * @return string
