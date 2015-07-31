@@ -47,7 +47,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
         $uri = parse_url($url);
         parse_str($uri['query'], $query);
 
-        $this->assertEquals(implode(',', $scopes), $query['scope']);
+        $this->assertEquals(implode(' ', $scopes), $query['scope']);
     }
 
     public function testUrlAuthorize()
