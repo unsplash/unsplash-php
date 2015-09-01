@@ -11,8 +11,8 @@ class Connection
 	public $token;
 
 	/**
-	 * @param Provider OAuth2 provider object to interact with the Unsplash API
-	 * @param League\OAuth2\Client\Token\AccessToken|null Token information if one already exists for the user
+	 * @param Provider $provider OAuth2 provider object to interact with the Unsplash API
+	 * @param \League\OAuth2\Client\Token\AccessToken|null $token Token information if one already exists for the user
 	 */
 	public function __construct(Provider $provider, AccessToken $token = null)
 	{
@@ -23,7 +23,7 @@ class Connection
 	/**
 	 * Retrieve the URL that generates the authorization code
 	 *
-	 * @param  array $scope Scopes to include in the authorization URL
+	 * @param  array $scopes Scopes to include in the authorization URL
 	 * @return string
 	 */
 	public function getConnectionUrl($scopes = [])
@@ -39,7 +39,7 @@ class Connection
 	 * Generate a new access token object from an authorization code
 	 * 
 	 * @param  string $code Authorization code provided by the Unsplash OAuth2 service
-	 * @return League\OAuth2\Client\Token\AccessToken
+	 * @return \League\OAuth2\Client\Token\AccessToken
 	 */
 	public function generateToken($code)
 	{
@@ -63,7 +63,7 @@ class Connection
 	/**
 	 * Refresh an expired token and generate a new AccessToken object.
 	 * 
-	 * @return League\OAuth2\Client\Token\AccessToken
+	 * @return \League\OAuth2\Client\Token\AccessToken|null
 	 */
 	public function refreshToken()
 	{
@@ -87,7 +87,7 @@ class Connection
 	 * Check if a token is linked to the connection object and use the client ID if there is not.
 	 * The method will also refresh the access token if it has expired.
 	 * 
-	 * @return String
+	 * @return string
 	 */
 	public function getAuthorizationToken()
 	{

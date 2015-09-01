@@ -21,8 +21,11 @@ class ArrayObject extends \ArrayObject
 	const LINK = 'Link';
 	const TOTAL = 'X-Total';
 	const PER_PAGE = 'X-Per-Page';
- 
 
+	/**
+	 * @param array|object $input
+	 * @param array $headers
+	 */
 	public function __construct($input, $headers)
 	{
 		$this->headers = $headers;

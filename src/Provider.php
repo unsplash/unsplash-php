@@ -48,7 +48,8 @@ class Provider extends AbstractProvider
 
 	/**
 	 * Define the current user details url
-	 * 
+	 *
+	 * @param AccessToken $token
 	 * @return string
 	 */
 	public function urlUserDetails(AccessToken $token)
@@ -57,9 +58,9 @@ class Provider extends AbstractProvider
 	}
 
 	/**
-	 * @param  GuzzleHttp\Psr7\Response $response HTTP response
+	 * @param  \GuzzleHttp\Psr7\Response $response HTTP response
 	 * @param  AccessToken $token Access token information for the current user
-	 * @return stdClass
+	 * @return User
 	 */
 	public function userDetails($response, AccessToken $token)
 	{
@@ -76,7 +77,7 @@ class Provider extends AbstractProvider
 	}
 
 	/**
-	 * @param  GuzzleHttp\Psr7\Response $response HTTP response
+	 * @param  \GuzzleHttp\Psr7\Response $response HTTP response
 	 * @param  AccessToken $token Access token information for the current user
 	 * @return string
 	 */

@@ -47,6 +47,7 @@ class Category extends Endpoint
 	 * 
 	 * @param  integer $page Page from which the photos need to be retrieve
 	 * @param  integer $per_page Number of element in a page
+	 * @return ArrayObject of Photo objects.
 	 *
 	 * @api
 	 * 
