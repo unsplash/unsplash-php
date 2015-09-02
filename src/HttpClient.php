@@ -22,7 +22,7 @@ class HttpClient
 	 * Need to be set on the class before running anything else
 	 *
 	 * @example Crew\Unsplash\HttpClient::$connection = new Crew\Unsplash\Connection();
-	 * @var Crew\Unsplash\Connection
+	 * @var Connection
 	 */
 	public static $connection;
 
@@ -47,9 +47,9 @@ class HttpClient
 	 * 		['refresh_token']	string 	Refresh Token necessary when the access token is expired
 	 * 		['expires_in']		int 	Define in when the access token will expire
 	 * 
-	 * @param  Array $credentials see above
-	 * @param  Array| \League\OAuth2\Client\Token\accessToken $accessToken 	see above
-	 * @return Void
+	 * @param  array $credentials see above
+	 * @param  array| \League\OAuth2\Client\Token\accessToken $accessToken 	see above
+	 * @return void
 	 */
 	public static function init($credentials = [], $accessToken = [])
 	{
@@ -99,8 +99,8 @@ class HttpClient
 	 * Send an http request through the http client.
 	 * 
 	 * @param  string $method http method sent
-	 * @param  array $argument Array containing the URI to send the request and the parameters of the request
-	 * @return GuzzleHttp\Psr7\Response
+	 * @param  array $arguments Array containing the URI to send the request and the parameters of the request
+	 * @return \GuzzleHttp\Psr7\Response
 	 */
 	public function send($method, $arguments)
 	{
@@ -121,7 +121,7 @@ class HttpClient
 	 * Some middleware are also configured to manage the authorization header and request URI
 	 * 
 	 * @param string $authorization Authorization code to pass in the header
-	 * @return GuzzleHttp\HandlerStack
+	 * @return \GuzzleHttp\HandlerStack
 	 */
 	private function setHandler($authorization)
 	{

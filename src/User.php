@@ -56,10 +56,10 @@ class User extends Endpoint
 	/**
 	 * Update specific parameters on the logged-in user
 	 * 
-	 * @param  Array $parameters Array containing the parameters to update
+	 * @param  array $parameters Array containing the parameters to update
 	 * @return void
 	 */
-	public function update(Array $parameters)
+	public function update(array $parameters)
 	{
 		$user = json_decode(self::put("me", ['json' => $parameters])->getBody(), true);
 

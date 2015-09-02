@@ -2,24 +2,27 @@
 
 namespace Crew\Unsplash;
 
+/**
+ * Class Endpoint
+ *
+ * Magic static method wrappers for HttpClient::send()
+ * @method static \GuzzleHttp\Psr7\Response get(string $uri, mixed $arguments = null,...)
+ * @method static \GuzzleHttp\Psr7\Response post(string $uri, mixed $arguments = null,...)
+ * @method static \GuzzleHttp\Psr7\Response put(string $uri, mixed $arguments = null,...)
+ * @see \Crew\Unsplash\HttpClient::send()
+ */
 class Endpoint
 {
-	/**
-	 * All parameters that an endpoint can have
-	 * @var array
-	 */
+	/** @var array All parameters that an endpoint can have */
 	private $parameters;
 
-	/**
-	 * List of accepted http actions
-	 * @var array
-	 */
+	/** @var array List of accepted http actions */
 	private static $acceptedHttpMethod = ['get', 'post', 'put'];
 
 	/**
 	 * Construct a new endpoint object and set the parameters from an array
 	 * 
-	 * @param array
+	 * @param array $parameters
 	 */
 	public function __construct($parameters = [])
 	{
@@ -30,10 +33,10 @@ class Endpoint
 	/**
 	 * Merge old parameters with the new one
 	 * 
-	 * @param  Array $parameter The parameters to update on the object
+	 * @param  array $parameters The parameters to update on the object
 	 * @return void
 	 */
-	public function update(Array $parameters)
+	public function update(array $parameters)
 	{
 		$this->parameters = array_merge($this->parameters, (array)$parameters);
 	}
@@ -56,11 +59,11 @@ class Endpoint
 	 * @param  string $method HTTP action to trigger
 	 * @param  array $arguments Array containing all the parameters pass to the magic method
 	 * 
-	 * @throws Crew\Unsplash\Exception if the HTTP request failed
+	 * @throws \Crew\Unsplash\Exception if the HTTP request failed
 	 *
 	 * @see Crew\Unsplash\HttpClient::send()
 	 * 
-	 * @return string
+	 * @return \GuzzleHttp\Psr7\Response
 	 */
 	public static function __callStatic($method, $arguments)
 	{
@@ -89,7 +92,7 @@ class Endpoint
 	/**
 	 * Retrieve the response status code and determine if the request was successful.
 	 * 
-	 * @param  GuzzleHttp\Psr7\Response $response of the HTTP request
+	 * @param  \GuzzleHttp\Psr7\Response $response of the HTTP request
 	 * @return boolean
 	 */
 	private static function isGoodRequest($response)
@@ -98,10 +101,10 @@ class Endpoint
 	}
 
 	/**
-	 * Retrieve the error message in the body
+	 * Retrieve the error messages in the body
 	 * 
-	 * @param  GuzzleHttp\Psr7\Response $response of the HTTP request
-	 * @return string
+	 * @param  \GuzzleHttp\Psr7\Response $response of the HTTP request
+	 * @return array Array of error messages
 	 */
 	private static function getErrorMessage($response)
 	{
