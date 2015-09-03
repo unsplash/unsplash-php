@@ -15,7 +15,7 @@ class ArrayObjectTest extends BaseTest
 
 	public function testConstructorAcceptHeaders()
 	{
-		$headers = ['X-Per-Page' => '10', 'X-Total' => '100'];
+		$headers = ['X-Per-Page' => ['10'], 'X-Total' => ['100']];
 		$arrayObject = new Unsplash\ArrayObject([], $headers);
 
 		$this->assertInstanceOf('ArrayObject', $arrayObject);
@@ -23,7 +23,7 @@ class ArrayObjectTest extends BaseTest
 
 	public function testTotalPage()
 	{
-		$headers = ['X-Per-Page' => '10', 'X-Total' => '100'];
+		$headers = ['X-Per-Page' => ['10'], 'X-Total' => ['100']];
 		$arrayObject = new Unsplash\ArrayObject([], $headers);
 
 		$this->assertEquals(10, $arrayObject->totalPages());

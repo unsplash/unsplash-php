@@ -43,7 +43,17 @@ class ArrayObject extends \ArrayObject
 	 */
 	public function totalPages()
 	{
-		return ceil($this->headers[self::TOTAL]/$this->headers[self::PER_PAGE]);
+		$total = 0;
+		if (!empty($this->headers[self::TOTAL]) && is_array($this->headers[self::TOTAL])) {
+			$total = (int) $this->headers[self::TOTAL][0];
+		}
+
+		$perPage = 10;
+		if (!empty($this->headers[self::PER_PAGE]) && is_array($this->headers[self::PER_PAGE])) {
+			$perPage = (int) $this->headers[self::PER_PAGE][0];
+		}
+
+		return (int) ceil($total / $perPage);
 	}
 
 	/**
