@@ -4,6 +4,9 @@
 
 A PHP client for the [Unsplash API][official documentation].
 
+- [Official documentation](https://unsplash.com/documentation)
+- [Changelog](https://github.com/CrewLabs/Unsplash-PHP/blob/master/CHANGELOG.md)
+
 ## Installation
 
 `Unsplash-PHP` uses [Composer](https://getcomposer.org/). To use it, require the library
@@ -149,6 +152,3 @@ $user->update([$key => value]);
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/CrewLabs/Unsplash-PHP. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org/) code of conduct.
-
-
-[official documentation]: https://unsplash.com/documentation
