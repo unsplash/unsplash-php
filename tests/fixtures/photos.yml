@@ -140,4 +140,38 @@
         },
         "body": "{\"username\":\"andy_brunner\",\"first_name\":\"Andy\",\"last_name\":\"Brunner\",\"portfolio_url\":\"http:\/\/abdata.ch\",\"links\":{\"self\":\"https:\/\/api.unsplash.com:80\/users\/andy_brunner\",\"html\":\"http:\/\/lvh.me:3000\/andy_brunner\",\"photos\":\"https:\/\/api.unsplash.com:80\/users\/andy_brunner\/photos\"}}"
     }
+}{
+    "request": {
+        "method": "GET",
+        "url": "https:\/\/api.unsplash.com\/photos\/random",
+        "headers": {
+            "Host": "api.unsplash.com",
+            "Accept-Encoding": null,
+            "User-Agent": "GuzzleHttp\/6.0.2 curl\/7.38.0 PHP\/5.6.11",
+            "Authorization": "Bearer 582c5d7ebe28bd707751a43c8e22dc5c0a4ba0a60dbe69d520677f47b7cfcc1b",
+            "Accept": null
+        }
+    },
+    "response": {
+        "status": {
+            "http_version": "1.1",
+            "code": "200",
+            "message": "OK"
+        },
+        "headers": {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Request-Method": "*",
+            "Cache-Control": "max-age=7200, public",
+            "Content-Type": "application\/json",
+            "Content-Length": "951",
+            "ETag": "W\/\"336d977eac276bc7361795817834c5a6\"",
+            "X-Request-Id": "5499b2bd-0399-4a2d-b868-ba53ef15ca8f",
+            "X-RateLimit-Limit": "5000",
+            "X-RateLimit-Remaining": "4997",
+            "X-Runtime": "0.090526",
+            "Connection": "keep-alive",
+            "Server": "thin"
+        },
+        "body": "{\"id\":\"ZUaqqMxtxYk\",\"width\":4608,\"height\":3072,\"color\":\"#5E7285\",\"urls\":{\"regular\":\"https:\/\/unsplash.imgix.net\/photo-1428681756973-d318f055795a?q=75\\u0026fm=jpg\\u0026w=1080\\u0026fit=max\\u0026s=1e42060181854ebad501daf0b25865ee\",\"small\":\"https:\/\/unsplash.imgix.net\/photo-1428681756973-d318f055795a?q=75\\u0026fm=jpg\\u0026w=400\\u0026fit=max\\u0026s=41bfa165f9e35bbaad529ea9a0029a3e\",\"thumb\":\"https:\/\/unsplash.imgix.net\/photo-1428681756973-d318f055795a?q=75\\u0026fm=jpg\\u0026w=200\\u0026fit=max\\u0026s=b223d24e28ba1ced6731e98d46cd5f83\"},\"links\":{\"self\":\"https:\/\/api.unsplash.com:80\/photos\/ZUaqqMxtxYk\",\"html\":\"http:\/\/lvh.me:3000\/photos\/ZUaqqMxtxYk\",\"download\":\"http:\/\/lvh.me:3000\/photos\/ZUaqqMxtxYk\/download\"},\"user\":{\"id\":\"RWFu3buoUS0\",\"username\":\"andy_brunner\",\"name\":\"Andy Brunner\",\"links\":{\"self\":\"https:\/\/api.unsplash.com:80\/users\/andy_brunner\",\"html\":\"http:\/\/lvh.me:3000\/andy_brunner\",\"photos\":\"https:\/\/api.unsplash.com:80\/users\/andy_brunner\/photos\"}}}"
+    }
 }]

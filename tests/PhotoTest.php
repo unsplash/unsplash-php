@@ -65,13 +65,25 @@ class PhotoTest extends BaseTest
 		$this->markTestIncomplete(
           'Due to an issue with VCR, we do not run this test.'
         );
-		
+
 		VCR::insertCassette('photos.yml');
-		
+
 		$photo = Unsplash\Photo::create(__dir__.'/images/land-test.txt');
-		
+
 		VCR::eject();
 
 		$this->assertInstanceOf('Photo', $photo);
-	} 
+	}
+
+	public function testRandomPhoto()
+	{
+		VCR::insertCassette('photos.yml');
+
+		$photo = Unsplash\Photo::random();
+
+		VCR::eject();
+
+		$this->assertEquals('ZUaqqMxtxYk', $photo->id);
+	}
+
 }

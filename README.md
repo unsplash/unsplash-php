@@ -131,6 +131,11 @@ $photo = Crew\Unsplash\Photo::find(string $id);
 $photo->photographer();
 ```
 
+```php
+Crew\Unsplash\Photo::random(string|array $category, boolean $featured, string $username, string $query, integer $w, integer $h);
+// NB: All parameters are optional filters.
+```
+
 #### User
 
 Retrieve user information:

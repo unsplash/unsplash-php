@@ -83,4 +83,35 @@ class Photo extends Endpoint
 
 		return $this->photographer;
 	}
+
+	/**
+	 * Retrieve a single random photo, given optional filters.
+	 *
+	 * @param  string|array $category Retrieve photos matching the category ID or all IDs provided.
+	 * @param  boolean $featured Limit selection to featured photos.
+	 * @param  string $username Limit selection to a single user.
+	 * @param  string $query Limit selection to photos matching a search term..
+	 * @param  integer $w Image width in pixels.
+	 * @param  integer $h Image height in pixels.
+	 * @return Photo
+	 */
+	public static function random($category = null, $featured = null, $username = '', $query = '', $w = null, $h = null)
+	{
+		if (is_array($category)) {
+			$category = implode(',', $category);
+		}
+
+		$params = [
+			'category' => $category,
+			'featured' => $featured ? 'true' : null,
+			'username' => (! empty($username)) ? $username : null,
+			'query' => (! empty($query)) ? $query : null,
+			'w' => $w,
+			'h' => $h,
+		];
+
+		$photo = json_decode(self::get("photos/random", ['query' => $params])->getBody(), true);
+
+		return new self($photo);
+	}
 }
