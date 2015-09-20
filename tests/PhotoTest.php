@@ -86,4 +86,16 @@ class PhotoTest extends BaseTest
 		$this->assertEquals('ZUaqqMxtxYk', $photo->id);
 	}
 
+	public function testRandomPhotoWithFilters()
+	{
+		VCR::insertCassette('photos.yml');
+
+		$photo = Unsplash\Photo::random([2,3], true, 'andy_brunner', 'ice', 100, 100);
+
+		VCR::eject();
+
+		$this->assertEquals('ZUaqqMxtxYk', $photo->id);
+		$this->assertEquals('https://unsplash.imgix.net/photo-1428681756973-d318f055795a?q=75&fm=jpg&w=100&h=100&fit=max&s=b223d24e28ba1ced6731e98d46cd5f83', $photo->urls['custom']);
+	}
+
 }
