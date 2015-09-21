@@ -132,9 +132,20 @@ $photo->photographer();
 ```
 
 ```php
-Crew\Unsplash\Photo::random(string|array $category, boolean $featured, string $username, string $query, integer $w, integer $h);
-// NB: All parameters are optional filters.
+Crew\Unsplash\Photo::random();
+
+// Or apply some optional filters by passing a key value array of filters
+$filters = [
+    'category' => [3, 6],         // string|array Retrieve photos matching the category ID/IDs.
+    'featured' => true,           // boolean Limit selection to featured photos.
+    'username' => 'andy_brunner', // string Limit selection to a single user.
+    'query'    => 'coffee',       // string Limit selection to photos matching a search term..
+    'w'        => 100,            // integer Image width in pixels.
+    'h'        => 100,            // integer Image height in pixels.
+];
+Crew\Unsplash\Photo::random($filters);
 ```
+For more information regarding filtering, [refer to the Offical documentation](https://unsplash.com/documentation#get-a-random-photo).
 
 #### User
 

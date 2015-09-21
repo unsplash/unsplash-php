@@ -87,30 +87,18 @@ class Photo extends Endpoint
 	/**
 	 * Retrieve a single random photo, given optional filters.
 	 *
-	 * @param  string|array $category Retrieve photos matching the category ID or all IDs provided.
-	 * @param  boolean $featured Limit selection to featured photos.
-	 * @param  string $username Limit selection to a single user.
-	 * @param  string $query Limit selection to photos matching a search term..
-	 * @param  integer $w Image width in pixels.
-	 * @param  integer $h Image height in pixels.
+	 * @param $filters array Apply optional filters.
 	 * @return Photo
 	 */
-	public static function random($category = null, $featured = null, $username = '', $query = '', $w = null, $h = null)
+	public static function random($filters = [])
 	{
-		if (is_array($category)) {
-			$category = implode(',', $category);
+		if (isset($filters['category']) && is_array($filters['category'])) {
+			$filters['category'] = implode(',', $filters['category']);
 		}
 
-		$params = [
-			'category' => $category,
-			'featured' => $featured ? 'true' : null,
-			'username' => (! empty($username)) ? $username : null,
-			'query' => (! empty($query)) ? $query : null,
-			'w' => $w,
-			'h' => $h,
-		];
+		$filters['featured'] = (isset($filters['featured']) && $filters['featured']) ? 'true' : null;
 
-		$photo = json_decode(self::get("photos/random", ['query' => $params])->getBody(), true);
+		$photo = json_decode(self::get("photos/random", ['query' => $filters])->getBody(), true);
 
 		return new self($photo);
 	}

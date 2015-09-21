@@ -90,7 +90,16 @@ class PhotoTest extends BaseTest
 	{
 		VCR::insertCassette('photos.yml');
 
-		$photo = Unsplash\Photo::random([2,3], true, 'andy_brunner', 'ice', 100, 100);
+		$filters = [
+			'category' => [2,3],
+			'featured' => true,
+			'username' => 'andy_brunner',
+			'query'    => 'ice',
+			'w'        => 100,
+			'h'        => 100
+		];
+
+		$photo = Unsplash\Photo::random($filters);
 
 		VCR::eject();
 
