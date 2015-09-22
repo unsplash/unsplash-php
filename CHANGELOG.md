@@ -1,3 +1,7 @@
+## 1.0.3 - 2015-09-2
+### Added
+- New endpoint to retrieve a random photo (thanks @DannyWeeks #18)
+
 ## 1.0.2 - 2015-09-03
 - Improve phpDoc block (thanks @freezy-sk #15)
 ### Fixed
