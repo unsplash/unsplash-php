@@ -65,13 +65,46 @@ class PhotoTest extends BaseTest
 		$this->markTestIncomplete(
           'Due to an issue with VCR, we do not run this test.'
         );
-		
+
 		VCR::insertCassette('photos.yml');
-		
+
 		$photo = Unsplash\Photo::create(__dir__.'/images/land-test.txt');
-		
+
 		VCR::eject();
 
 		$this->assertInstanceOf('Photo', $photo);
-	} 
+	}
+
+	public function testRandomPhoto()
+	{
+		VCR::insertCassette('photos.yml');
+
+		$photo = Unsplash\Photo::random();
+
+		VCR::eject();
+
+		$this->assertEquals('ZUaqqMxtxYk', $photo->id);
+	}
+
+	public function testRandomPhotoWithFilters()
+	{
+		VCR::insertCassette('photos.yml');
+
+		$filters = [
+			'category' => [2,3],
+			'featured' => true,
+			'username' => 'andy_brunner',
+			'query'    => 'ice',
+			'w'        => 100,
+			'h'        => 100
+		];
+
+		$photo = Unsplash\Photo::random($filters);
+
+		VCR::eject();
+
+		$this->assertEquals('ZUaqqMxtxYk', $photo->id);
+		$this->assertEquals('https://unsplash.imgix.net/photo-1428681756973-d318f055795a?q=75&fm=jpg&w=100&h=100&fit=max&s=b223d24e28ba1ced6731e98d46cd5f83', $photo->urls['custom']);
+	}
+
 }

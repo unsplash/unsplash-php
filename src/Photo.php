@@ -83,4 +83,23 @@ class Photo extends Endpoint
 
 		return $this->photographer;
 	}
+
+	/**
+	 * Retrieve a single random photo, given optional filters.
+	 *
+	 * @param $filters array Apply optional filters.
+	 * @return Photo
+	 */
+	public static function random($filters = [])
+	{
+		if (isset($filters['category']) && is_array($filters['category'])) {
+			$filters['category'] = implode(',', $filters['category']);
+		}
+
+		$filters['featured'] = (isset($filters['featured']) && $filters['featured']) ? 'true' : null;
+
+		$photo = json_decode(self::get("photos/random", ['query' => $filters])->getBody(), true);
+
+		return new self($photo);
+	}
 }
