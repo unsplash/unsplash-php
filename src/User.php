@@ -43,7 +43,7 @@ class User extends Endpoint
 	}
 
 	/**
-	 * Retrieve all the photo liked be a specific user on a given page.
+	 * Retrieve all the photos liked by a specific user on a given page.
 	 * Returns an ArrayObject that contains Photo object
 	 * 
 	 * @param  integer $page Page from which the photos are to be retrieved
