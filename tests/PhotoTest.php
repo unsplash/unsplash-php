@@ -107,4 +107,29 @@ class PhotoTest extends BaseTest
 		$this->assertEquals('https://unsplash.imgix.net/photo-1428681756973-d318f055795a?q=75&fm=jpg&w=100&h=100&fit=max&s=b223d24e28ba1ced6731e98d46cd5f83', $photo->urls['custom']);
 	}
 
+	public function testLikePhoto()
+	{
+		VCR::insertCassette('photos.yml');
+
+		$photo = Unsplash\Photo::find('Fma1wE_zIf8');
+		$like = $photo->like();
+
+		VCR::eject();
+
+		$this->assertTrue($like);
+	}
+
+	public function testUnlikePhoto()
+	{
+		VCR::insertCassette('photos.yml');
+
+		$photo = Unsplash\Photo::find('j0g8taxHZa0');
+		$like = $photo->like();
+
+		$unlike = $photo->unlike();
+
+		VCR::eject();
+
+		$this->assertTrue($unlike);
+	}
 }
