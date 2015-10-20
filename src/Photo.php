@@ -118,7 +118,7 @@ class Photo extends Endpoint
 	/**
 	 * Unlike the photo for the current user
 	 * 
-	 * @return [type] [description]
+	 * @return boolean
 	 */
 	public function unlike()
 	{
