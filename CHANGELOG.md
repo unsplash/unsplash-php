@@ -1,4 +1,9 @@
-## 1.0.3 - 2015-09-2
+## 1.0.4 - 2015-10-20
+### Added
+- New endpoint to retrieve photos a user liked
+- New endpoints to like and unlike photos on the behalf of the current user
+
+## 1.0.3 - 2015-09-22
 ### Added
 - New endpoint to retrieve a random photo (thanks @DannyWeeks #18)
 
