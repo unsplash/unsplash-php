@@ -94,4 +94,16 @@ class UserTest extends BaseTest
 
 		$this->assertEquals($newInstagramUsername, $user->instagram_username);
 	}
+
+	public function testFindUserLikedPhoto()
+	{
+		VCR::insertCassette('users.yml');
+
+		$user = Unsplash\User::find('dechuck');
+		$likes = $user->likes();
+		
+		VCR::eject();
+
+		$this->assertNotEmpty($likes);
+	}
 }

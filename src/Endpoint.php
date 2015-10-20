@@ -17,7 +17,7 @@ class Endpoint
 	private $parameters;
 
 	/** @var array List of accepted http actions */
-	private static $acceptedHttpMethod = ['get', 'post', 'put'];
+	private static $acceptedHttpMethod = ['get', 'post', 'put', 'delete'];
 
 	/**
 	 * Construct a new endpoint object and set the parameters from an array

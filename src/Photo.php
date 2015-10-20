@@ -102,4 +102,28 @@ class Photo extends Endpoint
 
 		return new self($photo);
 	}
+
+	/**
+	 * Like the photo for the current user
+	 * 
+	 * @return boolean
+	 */
+	public function like()
+	{
+		$like = self::post("photos/{$this->id}/like");
+
+		return true;
+	}
+
+	/**
+	 * Unlike the photo for the current user
+	 * 
+	 * @return boolean
+	 */
+	public function unlike()
+	{
+		$unlike = self::delete("photos/{$this->id}/like");
+
+		return true;
+	}
 }
