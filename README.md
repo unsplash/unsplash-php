@@ -2,7 +2,7 @@
 
 [ ![Codeship Status for CrewLabs/Unsplash-PHP](https://codeship.com/projects/60048560-0bba-0133-b04d-265ef25499ca/status?branch=master)](https://codeship.com/projects/90915)
 
-A PHP client for the [Unsplash API][official documentation].
+A PHP client for the [Unsplash API](https://unsplash.com/documentation).
 
 - [Official documentation](https://unsplash.com/documentation)
 - [Changelog](https://github.com/CrewLabs/Unsplash-PHP/blob/master/CHANGELOG.md)
@@ -19,9 +19,9 @@ composer require crewlabs/unsplash
 
 ### Configuration
 
-Before using, configure the client with your application ID and secret. If you don't have an application ID and secret, follow the steps from the [Unsplash API](official documentation) to register your application.
+Before using, configure the client with your application ID and secret. If you don't have an application ID and secret, follow the steps from the [Unsplash API](https://unsplash.com/documentation#creating-a-developer-account) to register your application.
 
-Note that if you're just using actions that require the [`public` permission scope](#permission-scopes], only the `applicationId` is required.
+Note that if you're just using actions that require the [public permission scope](#permission-scopes), only the `applicationId` is required.
 
 ```php
 Crew\Unsplash\HttpClient::init([
@@ -33,13 +33,14 @@ Crew\Unsplash\HttpClient::init([
 
 ### Permission Scopes
 
-The current permission scopes defined by the [Unsplash API](official documentation) are:
+The current permission scopes defined by the [Unsplash API](https://unsplash.com/documentation#authorization) are:
 
 - `public` (Access a user's public data)
 - `read_user` (Access a user's private data)
 - `write_user` (Edit and create user data)
 - `read_photos` (Access private information from a user's photos)
 - `write_photos` (Post and edit photos for a user)
+- `write_likes` (Like a photo for a user)
 
 If you're only using the `public` permissions scope (i.e. nothing requiring a specific logged-in user), you're ready to go!
 
@@ -61,7 +62,7 @@ With the token you can now access any additional non-public actions available fo
 
 ### API methods
 
-For more information about the the responses for each call, refer to the [official documentation](official-documentation).
+For more information about the the responses for each call, refer to the [official documentation](https://unsplash.com/documentation).
 
 Some parameters are identical across all methods:
 
@@ -145,7 +146,14 @@ $filters = [
 ];
 Crew\Unsplash\Photo::random($filters);
 ```
+
 For more information regarding filtering, [refer to the Offical documentation](https://unsplash.com/documentation#get-a-random-photo).
+
+```php
+$photo = Crew\Unsplash\Photo::find(string $id);
+$photo->like();
+$photo->unlike();
+```
 
 #### User
 
