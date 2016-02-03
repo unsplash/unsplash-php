@@ -4,6 +4,11 @@ namespace Crew\Unsplash\Tests;
 
 use Mockery as m;
 use Crew\Unsplash;
+use GuzzleHttp\Client;
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Psr7\Request;
 
 class ProviderTest extends \PHPUnit_Framework_TestCase
 {
@@ -36,15 +41,15 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('scope', $query);
         $this->assertArrayHasKey('response_type', $query);
         $this->assertArrayHasKey('approval_prompt', $query);
-        $this->assertNotNull(self::$unsplashProvider->state);
+        $this->assertNotNull(self::$unsplashProvider->getState());
     }
 
     public function testAuthorizationUrlWithScopes()
     {
         $scopes = ['public', 'read_user'];
-        self::$unsplashProvider->setScopes($scopes);
-        $url = self::$unsplashProvider->getAuthorizationUrl();
+        $url = self::$unsplashProvider->getAuthorizationUrl(['scope' => $scopes]);
         $uri = parse_url($url);
+
         parse_str($uri['query'], $query);
 
         $this->assertEquals(implode(' ', $scopes), $query['scope']);
@@ -52,7 +57,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
 
     public function testUrlAuthorize()
     {
-        $url = self::$unsplashProvider->urlAuthorize();
+        $url = self::$unsplashProvider->getBaseAuthorizationUrl();
         $uri = parse_url($url);
 
         $this->assertEquals('/oauth/authorize', $uri['path']);
@@ -60,7 +65,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
 
     public function testUrlAccessToken()
     {
-        $url = self::$unsplashProvider->urlAccessToken();
+        $url = self::$unsplashProvider->getBaseAccessTokenUrl([]);
         $uri = parse_url($url);
 
         $this->assertEquals('/oauth/token', $uri['path']);
@@ -68,52 +73,32 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
 
     public function testGetAccessToken()
     {
-        $response = m::mock('Guzzle\Http\Message\Response');
-        $response->shouldReceive('getBody')->times(1)->andReturn('{"access_token": "mock_access_token", "expires": 3600, "refresh_token": "mock_refresh_token", "uid": 1}');
+        $handler = new MockHandler([
+          new Response(200, [], '{"access_token": "mock_access_token","token_type": "Bearer","expires_in": "mock_expires","refresh_token": "mock_refresh_token","scope": "scope1 scope2"}'),
+        ]);
 
-        $client = m::mock('Guzzle\Service\Client');
-        $client->shouldReceive('setBaseUrl')->times(1);
-        $client->shouldReceive('post->send')->times(1)->andReturn($response);
-        self::$unsplashProvider->setHttpClient($client);
+        self::$unsplashProvider->setHttpClient(new Client(['handler' => $handler]));
 
         $token = self::$unsplashProvider->getAccessToken('authorization_code', ['code' => 'mock_authorization_code']);
 
-        $this->assertEquals('mock_access_token', $token->accessToken);
-        $this->assertLessThanOrEqual(time() + 3600, $token->expires);
-        $this->assertGreaterThanOrEqual(time(), $token->expires);
-        $this->assertEquals('mock_refresh_token', $token->refreshToken);
-        $this->assertEquals('1', $token->uid);
-    }
-
-    public function testDefaultScopes()
-    {
-        $this->assertEquals(['public', 'read_user'], self::$unsplashProvider->getScopes());
-    }
-
-    public function testAuthorizationHeader()
-    {
-        $this->assertEquals('Bearer', self::$unsplashProvider->authorizationHeader);
+        $this->assertEquals('mock_access_token', $token->getToken());
+        $this->assertLessThanOrEqual(time() + 3600, $token->getExpires());
+        $this->assertGreaterThanOrEqual(time(), $token->getExpires());
+        $this->assertEquals('mock_refresh_token', $token->getRefreshToken());
     }
 
     public function testUserData()
     {
-        $postResponse = m::mock('Guzzle\Http\Message\Response');
-        $postResponse->shouldReceive('getBody')->times(1)->andReturn('{"access_token": "mock_access_token","token_type": "Bearer","expires_in": "mock_expires","refresh_token": "mock_refresh_token","scope": "scope1 scope2"}');
+        $handler = new MockHandler([
+          new Response(200, [], '{"access_token": "mock_access_token","token_type": "Bearer","expires_in": "mock_expires","refresh_token": "mock_refresh_token","scope": "scope1 scope2"}'),
+          new Response(202, [], '{"first_name": "mock_first_name","last_name": "mock_last_name", "picture": "mock_image_url","id": "mock_id"}'),
+        ]);
 
-        $getResponse = m::mock('Guzzle\Http\Message\Response');
-        $getResponse->shouldReceive('getBody')->times(3)->andReturn('{"first_name": "mock_first_name","last_name": "mock_last_name", "picture": "mock_image_url","promo_code": "teypo","uuid": "mock_id"}');
-
-        $client = m::mock('Guzzle\Service\Client');
-        $client->shouldReceive('setBaseUrl')->times(4);
-        $client->shouldReceive('setDefaultOption')->times(3);
-        $client->shouldReceive('post->send')->times(1)->andReturn($postResponse);
-        $client->shouldReceive('get->send')->times(3)->andReturn($getResponse);
-        self::$unsplashProvider->setHttpClient($client);
+        self::$unsplashProvider->setHttpClient(new Client(['handler' => $handler]));
 
         $token = self::$unsplashProvider->getAccessToken('authorization_code', ['code' => 'mock_authorization_code']);
-        $user = self::$unsplashProvider->getUserDetails($token);
+        $user = self::$unsplashProvider->getResourceOwner($token);
 
-        $this->assertEquals('mock_id', self::$unsplashProvider->getUserUid($token));
-        $this->assertNull(self::$unsplashProvider->getUserScreenName($token));
+        $this->assertEquals('mock_id', $user->id);
     }
 }
