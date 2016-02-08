@@ -10,6 +10,8 @@ class Connection
   private $provider;
   private $token;
 
+  const STATE = 'oauth2state';
+
   /**
    * @param Provider $provider OAuth2 provider object to interact with the Unsplash API
    * @param \League\OAuth2\Client\Token\AccessToken|null $token Token information if one already exists for the user
@@ -28,7 +30,21 @@ class Connection
    */
   public function getConnectionUrl($scopes = [])
   {
-    return $this->provider->getAuthorizationUrl(['scope' => $scopes]);
+    $connectionUrl = $this->provider->getAuthorizationUrl(['scope' => $scopes]);
+    $_SESSION[self::STATE] = $this->provider->getState();
+
+    return $connectionUrl;
+  }
+
+  /**
+   * Validate if the state is valid. Compare it with the one
+   * in the session variable
+   * @param  string  $state
+   * @return boolean        
+   */
+  public function isStateValid($state)
+  {
+    return $state == $_SESSION[self::STATE];
   }
 
   /**

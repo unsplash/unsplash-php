@@ -17,6 +17,12 @@ class ConnectionTest extends BaseTest
     // to it
     $provider = clone $this->provider;
 
+    $provider->shouldReceive('getAuthorizationUrl')->times(1)->andReturn(
+      '{getenv(SITE_URI)}/oauth/authorize?client_id=mock_client_id&client_secret=mock_secret&redirect_uri=none'
+    );
+
+    $provider->shouldReceive('getState')->times(1)->andReturn('teststate');
+
     $provider->shouldReceive('getAccessToken')->times(1)->andReturn(
       new AccessToken([
         'access_token' => 'mock_access_token_1',
@@ -42,6 +48,27 @@ class ConnectionTest extends BaseTest
     ]));
 
     $this->assertEquals('Bearer mock_access_token', $this->connection->getAuthorizationToken());
+  }
+
+  public function testSetStateInSession()
+  {
+    $this->connection->getConnectionUrl();
+
+    $this->assertNotEmpty($_SESSION[Unsplash\Connection::STATE]);
+  }
+
+  public function testValidState()
+  {
+    $this->connection->getConnectionUrl();
+
+    $this->assertTrue($this->connection->isStateValid('teststate'));
+  }
+
+  public function testInvalidState()
+  {
+    $this->connection->getConnectionUrl();
+
+    $this->assertFalse($this->connection->isStateValid('testbadstate'));
   }
 
   public function testGenerateTokenWithGoodCode()
