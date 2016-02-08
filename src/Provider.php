@@ -9,6 +9,9 @@ use Psr\Http\Message\ResponseInterface;
 
 class Provider extends AbstractProvider
 {
+  const BASE_OAUTH_URL = 'https://unsplash.com/oauth';
+  const BASE_API = 'https://api.unsplash.com';
+
   /**
    * Define the authorize URL
    *
@@ -16,7 +19,7 @@ class Provider extends AbstractProvider
    */
   public function getBaseAuthorizationUrl()
   {
-    return 'https://unsplash.com/oauth/authorize';
+    return self::BASE_OAUTH_URL . '/authorize';
   }
 
   /**
@@ -26,7 +29,7 @@ class Provider extends AbstractProvider
    */
   public function getBaseAccessTokenUrl(array $params)
   {
-    return 'https://unsplash.com/oauth/token';
+    return self::BASE_OAUTH_URL . '/token';
   }
 
   /**
@@ -37,12 +40,12 @@ class Provider extends AbstractProvider
    */
   public function getResourceOwnerDetailsUrl(AccessToken $token)
   {
-    return "https://api.unsplash.com/me?access_token={$token}";
+    return self::BASE_API . '/me?access_token=' . $token;
   }
 
   public function getDefaultScopes()
   {
-    return ['public', 'read_user'];
+    return ['public'];
   }
 
   public function getClientId()

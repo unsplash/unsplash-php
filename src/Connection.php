@@ -28,11 +28,7 @@ class Connection
    */
   public function getConnectionUrl($scopes = [])
   {
-    if (! empty($scopes)) {
-      $this->provider->setScopes($scopes);
-    }
-
-    return $this->provider->getAuthorizationUrl();
+    return $this->provider->getAuthorizationUrl(['scope' => $scopes]);
   }
 
   /**
