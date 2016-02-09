@@ -12,45 +12,47 @@ use \VCR\VCR;
 
 class EndpointTest extends BaseTest
 {
-	public function setUp()
-	{
-		parent::setUp();
+  public function setUp()
+  {
+    parent::setUp();
 
         Unsplash\HttpClient::init([
-			'clientId' => 'mock_client_id',
+      'clientId' => 'mock_client_id',
             'clientSecret' => 'mock_secret',
             'redirectUri' => 'none'
-		], [
-			'access_token' => getenv('ACCESS_TOKEN')
-		]);
-	}
+    ], [
+      'access_token' => getenv('ACCESS_TOKEN'),
+      'refresh_token' => 'mock_refresh_token_1',
+      'expires_in' => time() + 3600
+    ]);
+  }
 
-	public function testRequest()
-	{
-		VCR::insertCassette('endpoint.yml');
-		
-		$res = Unsplash\Endpoint::__callStatic('get', ['categories/2', []]);
-		
-		VCR::eject();
-		
-		$body = json_decode($res->getBody());
+  public function testRequest()
+  {
+    VCR::insertCassette('endpoint.yml');
 
-		$this->assertEquals(2, $body->id);
-	}
+    $res = Unsplash\Endpoint::__callStatic('get', ['categories/2', []]);
 
-	public function testRequestWithBadMethod()
-	{
-		$res = Unsplash\Endpoint::__callStatic('back', ['categories/2', []]);
+    VCR::eject();
 
-		$this->assertNull($res);
-	}
+    $body = json_decode($res->getBody());
 
-	public function testParametersUpdate()
-	{
-		$endpoint = new Unsplash\Endpoint(['test' => 'mock', 'test_1' => 'mock_1']);
-		$endpoint->update(['test' => 'mock_test']);
+    $this->assertEquals(2, $body->id);
+  }
 
-		$this->assertEquals('mock_test', $endpoint->test);
-		$this->assertEquals('mock_1', $endpoint->test_1);
-	}
+  public function testRequestWithBadMethod()
+  {
+    $res = Unsplash\Endpoint::__callStatic('back', ['categories/2', []]);
+
+    $this->assertNull($res);
+  }
+
+  public function testParametersUpdate()
+  {
+    $endpoint = new Unsplash\Endpoint(['test' => 'mock', 'test_1' => 'mock_1']);
+    $endpoint->update(['test' => 'mock_test']);
+
+    $this->assertEquals('mock_test', $endpoint->test);
+    $this->assertEquals('mock_1', $endpoint->test_1);
+  }
 }
