@@ -29,6 +29,38 @@ class ArrayObjectTest extends BaseTest
 		$this->assertEquals(10, $arrayObject->totalPages());
 	}
 
+	public function testTotalObjectInCollection()
+	{
+		$headers = ['X-Total' => ['100']];
+		$arrayObject = new Unsplash\ArrayObject([], $headers);
+
+		$this->assertEquals(100, $arrayObject->totalObjects());
+	}
+
+	public function testTotalObjectInCollectionWhenNoHeader()
+	{
+		$headers = [];
+		$arrayObject = new Unsplash\ArrayObject([], $headers);
+
+		$this->assertEquals(0, $arrayObject->totalObjects());
+	}
+
+	public function testObjectsPerPage()
+	{
+		$headers = ['X-Per-Page' => ['20']];
+		$arrayObject = new Unsplash\ArrayObject([], $headers);
+
+		$this->assertEquals(20, $arrayObject->objectsPerPage());
+	}
+
+	public function testObjectsPerPageWhenNoHeader()
+	{
+		$headers = [];
+		$arrayObject = new Unsplash\ArrayObject([], $headers);
+
+		$this->assertEquals(10, $arrayObject->objectsPerPage());
+	}
+
 	public function testNextPage()
 	{
 		$headers = ['Link' => ['<http://api.staging.unsplash.com/photos?page=266>; rel="last", <http://api.staging.unsplash.com/photos?page=2>; rel="next"']];
