@@ -43,18 +43,40 @@ class ArrayObject extends \ArrayObject
 	 */
 	public function totalPages()
 	{
-		$total = 0;
-		if (!empty($this->headers[self::TOTAL]) && is_array($this->headers[self::TOTAL])) {
-			$total = (int) $this->headers[self::TOTAL][0];
-		}
-
-		$perPage = 10;
-		if (!empty($this->headers[self::PER_PAGE]) && is_array($this->headers[self::PER_PAGE])) {
-			$perPage = (int) $this->headers[self::PER_PAGE][0];
-		}
+		$total = $this->totalObjects();
+		$perPage = $this->objectsPerPage();
 
 		return (int) ceil($total / $perPage);
 	}
+
+	/**
+	 * Total of object in the collections
+	 * Value come from X-Total header's value
+	 * @return int Number of Objects
+	 */
+  public function totalObjects()
+  {
+    $total = 0;
+    if (!empty($this->headers[self::TOTAL]) && is_array($this->headers[self::TOTAL])) {
+      $total = (int) $this->headers[self::TOTAL][0];
+    }
+
+    return $total;
+  }
+
+  /**
+   * Number of element per page
+   * @return int element per page
+   */
+  public function objectsPerPage()
+  {
+    $perPage = 10;
+    if (!empty($this->headers[self::PER_PAGE]) && is_array($this->headers[self::PER_PAGE])) {
+      $perPage = (int) $this->headers[self::PER_PAGE][0];
+    }
+
+    return $perPage;
+  }
 
 	/**
 	 * Current page number based on the Link header
