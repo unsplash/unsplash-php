@@ -1,3 +1,18 @@
+## 1.1.2 - 2016-02-23
+### Added
+- New badge in README to keep track of dependencies
+
+### Updated
+- New version of OAuth2-Client package (thanks @zembrowski #26)
+
+## 1.1.1 - 2016-02-22
+### Added
+- New method to retrieve the number of element in collection
+
+## 1.1.0 - 2016-02-09
+### Updated
+- New major version of OAuth2-Client package (thanks @zembrowski #23)
+
 ## 1.0.4 - 2015-10-20
 ### Added
 - New endpoint to retrieve photos a user liked
