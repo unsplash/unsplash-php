@@ -1,6 +1,7 @@
 # PHP Unsplash Wrapper
 
 [ ![Codeship Status for CrewLabs/Unsplash-PHP](https://codeship.com/projects/60048560-0bba-0133-b04d-265ef25499ca/status?branch=master)](https://codeship.com/projects/90915)
+[![Dependency Status](https://www.versioneye.com/php/crewlabs:unsplash/badge?style=flat)](https://www.versioneye.com/php/crewlabs:unsplash)
 
 A PHP client for the [Unsplash API](https://unsplash.com/documentation).
 
