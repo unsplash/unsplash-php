@@ -86,6 +86,6 @@ class User extends Endpoint
 	{
 		$user = json_decode(self::put("me", ['json' => $parameters])->getBody(), true);
 
-		parent::update($user);
+		parent::update($parameters);
 	}
 }
