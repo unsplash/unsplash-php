@@ -1,6 +1,6 @@
 # PHP Unsplash Wrapper
 
-[ ![Codeship Status for CrewLabs/Unsplash-PHP](https://codeship.com/projects/60048560-0bba-0133-b04d-265ef25499ca/status?branch=master)](https://codeship.com/projects/90915)
+[![Codeship Status for CrewLabs/Unsplash-PHP](https://codeship.com/projects/60048560-0bba-0133-b04d-265ef25499ca/status?branch=master)](https://codeship.com/projects/90915)
 [![Dependency Status](https://www.versioneye.com/php/crewlabs:unsplash/badge?style=flat)](https://www.versioneye.com/php/crewlabs:unsplash)
 
 A PHP client for the [Unsplash API](https://unsplash.com/documentation).
@@ -81,13 +81,13 @@ Some parameters are identical across all methods:
 
 
 #### Crew\Unsplash\Category::all()
-Retrieve the list of categories
+Retrieve the list of categories.
 
 **Arguments**
 
   Argument     | Type | Opt/Required
 ---------------|------|--------------
-`$per_page`    | int  | Opt *(Default: 10 / Maximim: 30)*
+`$per_page`    | int  | Opt *(Default: 10 / Maximum: 30)*
 `$page`        | int  | Opt *(Default: 1)*
 
 **Example**
@@ -99,7 +99,7 @@ Crew\Unsplash\Category::all($page, $per_page);
 ===
 
 #### Crew\Unsplash\Category::find($id)
-Retrieve a specific category
+Retrieve a specific category.
 
 **Arguments**
 
@@ -124,7 +124,7 @@ Retrieve photos from a specific category.
 
   Argument     | Type | Opt/Required
 ---------------|------|--------------
-`$per_page`    | int  | Opt *(Default: 10 / Maximim: 30)*
+`$per_page`    | int  | Opt *(Default: 10 / Maximum: 30)*
 `$page`        | int  | Opt *(Default: 1)*
 
 **Example**
@@ -139,14 +139,13 @@ $photos = $category->photos($page, $per_page)
 ### Curated Batch
 
 #### Crew\Unsplash\CuratedBatch::all($page, $per_page)
-
-Retrieve the list of curated batches
+Retrieve the list of curated batches.
 
 **Arguments**
 
   Argument     | Type | Opt/Required
 ---------------|------|--------------
-`$per_page`    | int  | Opt *(Default: 10 / Maximim: 30)*
+`$per_page`    | int  | Opt *(Default: 10 / Maximum: 30)*
 `$page`        | int  | Opt *(Default: 1)*
 
 **Example**
@@ -159,7 +158,7 @@ Crew\Unsplash\CuratedBatch::all($page, $per_page);
 ===
 
 #### Crew\Unsplash\CuratedBatch::find($id)
-Retrieve a specific curated batch
+Retrieve a specific curated batch.
 
 **Arguments**
 
@@ -184,7 +183,7 @@ Retrieve photos from a curated batch.
 
   Argument     | Type | Opt/Required
 ---------------|------|--------------
-`$per_page`    | int  | Opt *(Default: 10 / Maximim: 30)*
+`$per_page`    | int  | Opt *(Default: 10 / Maximum: 30)*
 `$page`        | int  | Opt *(Default: 1)*
 
 **Example**
@@ -199,13 +198,13 @@ $photos = $batch->photos($page, $per_page);
 ### Photo
 
 #### Crew\Unsplash\Photo::all($page, $per_page)
-Retrieve a list of photos
+Retrieve a list of photos.
 
 **Arguments**
 
   Argument     | Type | Opt/Required
 ---------------|------|--------------
-`$per_page`    | int  | Opt *(Default: 10 / Maximim: 30)*
+`$per_page`    | int  | Opt *(Default: 10 / Maximum: 30)*
 `$page`        | int  | Opt *(Default: 1)*
 
 **Example**
@@ -217,8 +216,7 @@ Crew\Unsplash\Photo::all($page, $per_page);
 ===
 
 #### Crew\Unsplash\Photo::search($keyword, $category_id, $page, $per_page);
-
-Retrieve photos from a search by keyword and category
+Retrieve photos from a search by keyword or category.
 
 **Arguments**
 
@@ -226,7 +224,7 @@ Retrieve photos from a search by keyword and category
 ---------------|------|--------------
 `$keyword`     | string | Opt
 `$category_id` | string | Opt
-`$per_page`    | int    | Opt *(Default: 10 / Maximim: 30)*
+`$per_page`    | int    | Opt *(Default: 10 / Maximum: 30)*
 `$page`        | int    | Opt *(Default: 1)*
 
 **Example**
@@ -238,7 +236,7 @@ Crew\Unsplash\Photo::search(string $search, integer $category_id, $page, $per_pa
 ===
 
 #### Crew\Unsplash\Photo::find($id)
-Retrieve a specific photo
+Retrieve a specific photo.
 
 **Arguments**
 
@@ -255,7 +253,7 @@ Crew\Unsplash\Photo::find($id);
 ===
 
 #### Crew\Unsplash\Photo::create($file_path)
-Post a photo on the user behalf.
+Post a photo on the user's behalf.
 
 *Note:* You need the `write_photos` permission scope
 
@@ -274,7 +272,7 @@ Crew\Unsplash\Photo::create( $file_path);
 ===
 
 #### Crew\Unsplash\Photo::photographer()
-Retrieve the photo's photographer
+Retrieve the photo's photographer.
 
 *Note:* You need to instantiate a photo object first
 
@@ -295,8 +293,7 @@ $photo->photographer();
 #### Crew\Unsplash\Photo::random([category => $value, featured => $value, username => $value, query => $value, w => $value, h => $value])
 Retrieve a random photo from specified filters. For more information regarding filtering, [refer to the Offical documentation](https://unsplash.com/documentation#get-a-random-photo).
 
-
-*Note:* An array need to be passed as a parameters.
+*Note:* An array needs to be passed as a parameter.
 
 **Arguments**
 
@@ -331,7 +328,7 @@ Crew\Unsplash\Photo::random($filters);
 ===
 
 #### Crew\Unsplash\Photo::like()
-Like a photo on the user behalf
+Like a photo on the user's behalf.
 
 *Note:* You need to instantiate a photo object first
 
@@ -352,7 +349,7 @@ $photo->like();
 ===
 
 #### Crew\Unsplash\Photo::unlike()
-Unlike a photo on the user behalf
+Unlike a photo on the user's behalf.
 
 *Note:* You need to instantiate a photo object first
 
@@ -375,7 +372,7 @@ $photo->unlike();
 ### User
 
 #### Crew\Unsplash\User::find($username)
-Retrieve a user information
+Retrieve a user's information.
 
 **Arguments**
 
@@ -392,7 +389,7 @@ Crew\Unsplash\User::find($username)
 ===
 
 #### Crew\Unsplash\User::current()
-Retrieve the user's private information
+Retrieve the user's private information.
 
 *Note:* You need the *read_user* permission scope
 
@@ -409,7 +406,7 @@ $user = Crew\Unsplash\User::current();
 ===
 
 #### Crew\Unsplash\User::photos($page, $per_page)
-Retrieve user's photos
+Retrieve user's photos.
 
 *Note:* You need to instantiate a user object first
 
@@ -417,7 +414,7 @@ Retrieve user's photos
 
   Argument     | Type | Opt/Required
 ---------------|------|--------------
-`$per_page`    | int  | Opt *(Default: 10 / Maximim: 30)*
+`$per_page`    | int  | Opt *(Default: 10 / Maximum: 30)*
 `$page`        | int  | Opt *(Default: 1)*
 
 **Example**
@@ -430,7 +427,7 @@ $user->photos($page, $per_page);
 ===
 
 #### Crew\Unsplash\User::update([$key => value])
-Update current user's fields. Multiple fields can be pass in the array.
+Update current user's fields. Multiple fields can be passed in the array.
 
 *Note:* You need to instantiate a user object first
 
