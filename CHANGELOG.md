@@ -1,3 +1,7 @@
+## 1.2.0 - 2016-04-05
+#### Added
+- New enpoints for collection
+
 ## 1.1.2 - 2016-02-23
 ### Added
 - New badge in README to keep track of dependencies

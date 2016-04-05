@@ -136,7 +136,7 @@ $photos = $category->photos($page, $per_page)
 
 ===
 
-### Curated Batch
+### Curated Batch (Deprecated)
 
 #### Crew\Unsplash\CuratedBatch::all($page, $per_page)
 Retrieve the list of curated batches.
@@ -194,6 +194,228 @@ $photos = $batch->photos($page, $per_page);
 ```
 
 ===
+
+### Curated Collection
+
+#### Crew\Unsplash\CuratedCollection::all($page, $per_page)
+Retrieve the list of curated collections.
+
+**Arguments**
+
+  Argument     | Type | Opt/Required
+---------------|------|--------------
+`$per_page`    | int  | Opt *(Default: 10 / Maximum: 30)*
+`$page`        | int  | Opt *(Default: 1)*
+
+**Example**
+
+
+```php
+Crew\Unsplash\CuratedCollection::all($page, $per_page);
+```
+
+===
+
+#### Crew\Unsplash\CuratedCollection::find($id)
+Retrieve a specific curated collection.
+
+**Arguments**
+
+  Argument     | Type | Opt/Required
+---------------|------|--------------
+`$id`          | int  | Required
+
+**Example**
+
+```php
+Crew\Unsplash\CuratedCollection::find(integer $id);
+```
+
+===
+
+#### Crew\Unsplash\CuratedCollection::photos($page, $per_page)
+Retrieve photos from a curated collection.
+
+*Note:* You need to instantiate a curated collection object first.
+
+**Arguments**
+
+  Argument     | Type | Opt/Required
+---------------|------|--------------
+`$per_page`    | int  | Opt *(Default: 10 / Maximum: 30)*
+`$page`        | int  | Opt *(Default: 1)*
+
+**Example**
+
+```php
+$collection = Crew\Unsplash\CuratedCollection::find(integer $id);
+$photos = $collection->photos($page, $per_page);
+```
+
+===
+
+### Collection
+
+#### Crew\Unsplash\Collection::all($page, $per_page)
+Retrieve the list of collections.
+
+**Arguments**
+
+  Argument     | Type | Opt/Required
+---------------|------|--------------
+`$per_page`    | int  | Opt *(Default: 10 / Maximum: 30)*
+`$page`        | int  | Opt *(Default: 1)*
+
+**Example**
+
+
+```php
+Crew\Unsplash\Collection::all($page, $per_page);
+```
+
+===
+
+#### Crew\Unsplash\Collection::find($id)
+Retrieve a specific collection.
+
+**Arguments**
+
+  Argument     | Type | Opt/Required
+---------------|------|--------------
+`$id`          | int  | Required
+
+**Example**
+
+```php
+Crew\Unsplash\Collection::find(integer $id);
+```
+
+===
+
+#### Crew\Unsplash\Collection::photos($page, $per_page)
+Retrieve photos from a collection.
+
+*Note:* You need to instantiate a collection object first.
+
+**Arguments**
+
+  Argument     | Type | Opt/Required
+---------------|------|--------------
+`$per_page`    | int  | Opt *(Default: 10 / Maximum: 30)*
+`$page`        | int  | Opt *(Default: 1)*
+
+**Example**
+
+```php
+$collection = Crew\Unsplash\Collection::find(integer $id);
+$photos = $collection->photos($page, $per_page);
+```
+
+===
+
+#### Crew\Unsplash\Collection::create($title, $description, $private)
+Create a collection on the user's behalf.
+
+*Note:* You need the `write_collections` permission scope
+
+**Arguments**
+
+  Argument     | Type    | Opt/Required
+---------------|---------|--------------
+`$title`       | string  | Required
+`$description` | string  | Opt *(Default: '')*
+`$private`     | boolean | Opt *(Default: false)*
+
+**Example**
+
+```php
+$collection = Crew\Unsplash\Collection::create($title);
+```
+
+===
+
+#### Crew\Unsplash\Collection::update($parameters)
+Update a collection on the user's behalf.
+
+*Note:* You need to instantiate a collection object first
+
+*Note:* You need the `write_collections` permission scope
+
+**Arguments**
+
+  Argument     | Type    | Opt/Required | Note 
+---------------|---------|----------------------
+`$parameters`  | array   | Required     | The following keys can be set in the array : `title`, `description`, `private`
+
+**Example**
+
+```php
+$collection = Crew\Unsplash\Collection::find(int $id);
+$collection->update(['private' => true])
+```
+
+===
+
+#### Crew\Unsplash\Collection::destroy()
+Delete a collection on the user's behalf.
+
+*Note:* You need to instantiate a collection object first
+
+*Note:* You need the `write_collections` permission scope
+
+**Example**
+
+```php
+$collection = Crew\Unsplash\Collection::find(int $id);
+$collection->destroy()
+```
+
+===
+
+#### Crew\Unsplash\Collection::add($photo_id)
+Add a photo in the collection on the user's behalf.
+
+*Note:* You need to instantiate a collection object first
+
+*Note:* You need the `write_collections` permission scope
+
+**Arguments**
+
+  Argument     | Type    | Opt/Required |
+---------------|---------|---------------
+`$photo_id`    | integer | Required     |
+
+**Example**
+
+```php
+$collection = Crew\Unsplash\Collection::find(int $id);
+$collection->add(int $photo_id)
+```
+
+===
+
+#### Crew\Unsplash\Collection::remove($photo_id)
+Remove a photo from the collection on the user's behalf.
+
+*Note:* You need to instantiate a collection object first
+
+*Note:* You need the `write_collections` permission scope
+
+**Arguments**
+
+  Argument     | Type    | Opt/Required |
+---------------|---------|---------------
+`$photo_id`    | integer | Required     |
+
+**Example**
+
+```php
+$collection = Crew\Unsplash\Collection::find(int $id);
+$collection->remove(int $photo_id)
+```
+
+===
+
 
 ### Photo
 
