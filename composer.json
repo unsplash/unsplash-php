@@ -20,7 +20,8 @@
     "php-vcr/php-vcr": "dev-master",
     "php-vcr/phpunit-testlistener-vcr": "*",
     "vlucas/phpdotenv": "dev-master",
-    "mockery/mockery": "~0.9.0"
+    "mockery/mockery": "~0.9.0",
+    "satooshi/php-coveralls": "dev-master"
   },
   "autoload": {
     "psr-4": {
