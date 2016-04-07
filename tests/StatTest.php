@@ -7,28 +7,28 @@ use \VCR\VCR;
 
 class StatTest extends BaseTest
 {
-	public function setUp()
-	{
-		parent::setUp();
+    public function setUp()
+    {
+        parent::setUp();
 
-		$connection = new Unsplash\Connection($this->provider, $this->accessToken);
-		Unsplash\HttpClient::$connection = $connection;
+        $connection = new Unsplash\Connection($this->provider, $this->accessToken);
+        Unsplash\HttpClient::$connection = $connection;
 
-    $this->total = [
-      "photo_downloads" => 189,
-      "batch_downloads" => 31
-    ];
-	}
+        $this->total = [
+            "photo_downloads" => 189,
+            "batch_downloads" => 31
+        ];
+    }
 
-  public function testFindTotalStats()
-  {
-    VCR::insertCassette('stats.yml');
+    public function testFindTotalStats()
+    {
+        VCR::insertCassette('stats.yml');
 
-		$totalStats = Unsplash\Stat::total();
+        $totalStats = Unsplash\Stat::total();
 
-		VCR::eject();
+        VCR::eject();
 
-		$this->assertEquals($this->total['photo_downloads'], $totalStats->photo_downloads);
-    $this->assertEquals($this->total['batch_downloads'], $totalStats->batch_downloads);
-  }
+        $this->assertEquals($this->total['photo_downloads'], $totalStats->photo_downloads);
+        $this->assertEquals($this->total['batch_downloads'], $totalStats->batch_downloads);
+    }
 }

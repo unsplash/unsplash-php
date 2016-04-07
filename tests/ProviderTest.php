@@ -17,9 +17,9 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
     public static function setUpBeforeClass()
     {
         self::$unsplashProvider = new Unsplash\Provider([
-            'clientId' => 'mock_client_id',
-            'clientSecret' => 'mock_secret',
-            'redirectUri' => 'none',
+                'clientId' => 'mock_client_id',
+                'clientSecret' => 'mock_secret',
+                'redirectUri' => 'none',
         ]);
     }
 
@@ -74,7 +74,7 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
     public function testGetAccessToken()
     {
         $handler = new MockHandler([
-          new Response(200, [], '{"access_token": "mock_access_token","token_type": "Bearer","expires_in": "mock_expires","refresh_token": "mock_refresh_token","scope": "scope1 scope2"}'),
+            new Response(200, [], '{"access_token": "mock_access_token","token_type": "Bearer","expires_in": "mock_expires","refresh_token": "mock_refresh_token","scope": "scope1 scope2"}'),
         ]);
 
         self::$unsplashProvider->setHttpClient(new Client(['handler' => $handler]));
@@ -90,8 +90,8 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
     public function testUserData()
     {
         $handler = new MockHandler([
-          new Response(200, [], '{"access_token": "mock_access_token","token_type": "Bearer","expires_in": "mock_expires","refresh_token": "mock_refresh_token","scope": "scope1 scope2"}'),
-          new Response(202, [], '{"first_name": "mock_first_name","last_name": "mock_last_name", "picture": "mock_image_url","id": "mock_id"}'),
+            new Response(200, [], '{"access_token": "mock_access_token","token_type": "Bearer","expires_in": "mock_expires","refresh_token": "mock_refresh_token","scope": "scope1 scope2"}'),
+            new Response(202, [], '{"first_name": "mock_first_name","last_name": "mock_last_name", "picture": "mock_image_url","id": "mock_id"}'),
         ]);
 
         self::$unsplashProvider->setHttpClient(new Client(['handler' => $handler]));
