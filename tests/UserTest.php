@@ -47,7 +47,7 @@ class UserTest extends BaseTest
 
         VCR::eject();
 
-        // $this->assertEquals(200, $this->user->getStatusCode());
+        $this->assertNotEmpty($user->uploads_remaining);
     }
 
     /**
@@ -80,19 +80,14 @@ class UserTest extends BaseTest
 
     public function testUpdateUser()
     {
-        $this->markTestIncomplete(
-                    'Due to an issue with VCR, we do not run this test.'
-                );
-        
-        $newInstagramUsername = 'dechuck'.time();
-
         VCR::insertCassette('users.yml');
+
         $user = Unsplash\User::find('dechuck');
-        $user->update(['instagram_username'=>$newInstagramUsername]);
+        $user->update(['instagram_username' => 'dechuck123']);
 
         VCR::eject();
 
-        $this->assertEquals($newInstagramUsername, $user->instagram_username);
+        $this->assertEquals('dechuck123', $user->instagram_username);
     }
 
     public function testFindUserLikedPhoto()
