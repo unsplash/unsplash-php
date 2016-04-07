@@ -6,8 +6,6 @@ use Crew\Unsplash;
 
 class ArrayObjectTest extends BaseTest
 {
-    // private $arrayObject;
-
     public function setUp()
     {
         parent::setUp();

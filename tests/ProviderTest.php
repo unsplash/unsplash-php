@@ -101,4 +101,21 @@ class ProviderTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('mock_id', $user->id);
     }
+
+    /**
+     * @expectedException Crew\Unsplash\Exception
+     * @expectedExceptionMessage ["Not accessible: Endpoint not accessible"]
+     */
+    public function testErrorOnGetAccessToken()
+    {
+        $handler = new MockHandler([
+            new Response(400, [], json_encode([
+                'error' => 'Not accessible', 
+                'error_description' => 'Endpoint not accessible'
+            ])),
+        ]);
+
+        self::$unsplashProvider->setHttpClient(new Client(['handler' => $handler]));
+        self::$unsplashProvider->getAccessToken('authorization_code', ['code' => 'mock_authorization_code']);
+    }
 }
