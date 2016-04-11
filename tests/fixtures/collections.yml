@@ -3,7 +3,7 @@
         "method": "GET",
         "url": "https:\/\/api.unsplash.com\/collections?page=1&per_page=10",
         "headers": {
-            "Host": "api.lvh.me:3000",
+            "Host": "api.unsplash.com",
             "Accept-Encoding": null,
             "User-Agent": "GuzzleHttp\/6.1.1 curl\/7.38.0 PHP\/5.6.16",
             "Authorization": "Bearer 582c5d7ebe28bd707751a43c8e22dc5c0a4ba0a60dbe69d520677f47b7cfcc1b",
@@ -23,7 +23,7 @@
             "Access-Control-Expose-Headers": "Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining",
             "X-Per-Page": "10",
             "X-Total": "3546",
-            "Link": "<https:\/\/api.lvh.me:3000\/collections?page=355>; rel=\"last\", <https:\/\/api.lvh.me:3000\/collections?page=2>; rel=\"next\"",
+            "Link": "<https:\/\/api.unsplash.com\/collections?page=355>; rel=\"last\", <https:\/\/api.unsplash.com\/collections?page=2>; rel=\"next\"",
             "Cache-Control": "must-revalidate, private, max-age=0",
             "Content-Type": "application\/json",
             "ETag": "W\/\"0d31fdbeed7aecfe6ec553e577026cde\"",
@@ -42,7 +42,7 @@
         "method": "GET",
         "url": "https:\/\/api.unsplash.com\/collections\/201",
         "headers": {
-            "Host": "api.lvh.me:3000",
+            "Host": "api.unsplash.com",
             "Accept-Encoding": null,
             "User-Agent": "GuzzleHttp\/6.1.1 curl\/7.38.0 PHP\/5.6.16",
             "Authorization": "Bearer 582c5d7ebe28bd707751a43c8e22dc5c0a4ba0a60dbe69d520677f47b7cfcc1b",
@@ -78,7 +78,7 @@
         "method": "GET",
         "url": "https:\/\/api.unsplash.com\/collections\/201\/photos?page=1&per_page=10",
         "headers": {
-            "Host": "api.lvh.me:3000",
+            "Host": "api.unsplash.com",
             "Accept-Encoding": null,
             "User-Agent": "GuzzleHttp\/6.1.1 curl\/7.38.0 PHP\/5.6.16",
             "Authorization": "Bearer 582c5d7ebe28bd707751a43c8e22dc5c0a4ba0a60dbe69d520677f47b7cfcc1b",
@@ -117,7 +117,7 @@
         "method": "POST",
         "url": "https:\/\/api.unsplash.com\/collections?title=test%20collection&description=basic%20description&private=1",
         "headers": {
-            "Host": "api.lvh.me:3000",
+            "Host": "api.unsplash.com",
             "Content-Length": "0",
             "Accept-Encoding": null,
             "User-Agent": "GuzzleHttp\/6.1.1 curl\/7.38.0 PHP\/5.6.16",
@@ -153,7 +153,7 @@
         "method": "PUT",
         "url": "https:\/\/api.unsplash.com\/collections\/147664?description=updated%20basic%20description",
         "headers": {
-            "Host": "api.lvh.me:3000",
+            "Host": "api.unsplash.com",
             "Content-Length": "0",
             "Accept-Encoding": null,
             "User-Agent": "GuzzleHttp\/6.1.1 curl\/7.38.0 PHP\/5.6.16",
@@ -190,7 +190,7 @@
         "method": "DELETE",
         "url": "https:\/\/api.unsplash.com\/collections\/147664",
         "headers": {
-            "Host": "api.lvh.me:3000",
+            "Host": "api.unsplash.com",
             "Accept-Encoding": null,
             "User-Agent": "GuzzleHttp\/6.1.1 curl\/7.38.0 PHP\/5.6.16",
             "Authorization": "Bearer 582c5d7ebe28bd707751a43c8e22dc5c0a4ba0a60dbe69d520677f47b7cfcc1b",
@@ -221,7 +221,7 @@
         "method": "POST",
         "url": "https:\/\/api.unsplash.com\/collections?title=test%20collection%20add%20photo&description=basic%20description&private=1",
         "headers": {
-            "Host": "api.lvh.me:3000",
+            "Host": "api.unsplash.com",
             "Content-Length": "0",
             "Accept-Encoding": null,
             "User-Agent": "GuzzleHttp\/6.1.1 curl\/7.38.0 PHP\/5.6.16",
@@ -257,7 +257,7 @@
         "method": "POST",
         "url": "https:\/\/api.unsplash.com\/collections\/147665\/add?photo_id=iDZt9nmvOWk",
         "headers": {
-            "Host": "api.lvh.me:3000",
+            "Host": "api.unsplash.com",
             "Content-Length": "0",
             "Accept-Encoding": null,
             "User-Agent": "GuzzleHttp\/6.1.1 curl\/7.38.0 PHP\/5.6.16",
@@ -293,7 +293,7 @@
         "method": "GET",
         "url": "https:\/\/api.unsplash.com\/collections\/147665\/photos?page=1&per_page=10",
         "headers": {
-            "Host": "api.lvh.me:3000",
+            "Host": "api.unsplash.com",
             "Accept-Encoding": null,
             "User-Agent": "GuzzleHttp\/6.1.1 curl\/7.38.0 PHP\/5.6.16",
             "Authorization": "Bearer 582c5d7ebe28bd707751a43c8e22dc5c0a4ba0a60dbe69d520677f47b7cfcc1b",
@@ -331,7 +331,7 @@
         "method": "POST",
         "url": "https:\/\/api.unsplash.com\/collections?title=test%20collection%20remove%20photo&description=basic%20description&private=1",
         "headers": {
-            "Host": "api.lvh.me:3000",
+            "Host": "api.unsplash.com",
             "Content-Length": "0",
             "Accept-Encoding": null,
             "User-Agent": "GuzzleHttp\/6.1.1 curl\/7.38.0 PHP\/5.6.16",
@@ -367,7 +367,7 @@
         "method": "POST",
         "url": "https:\/\/api.unsplash.com\/collections\/147666\/add?photo_id=iDZt9nmvOWk",
         "headers": {
-            "Host": "api.lvh.me:3000",
+            "Host": "api.unsplash.com",
             "Content-Length": "0",
             "Accept-Encoding": null,
             "User-Agent": "GuzzleHttp\/6.1.1 curl\/7.38.0 PHP\/5.6.16",
@@ -403,7 +403,7 @@
         "method": "DELETE",
         "url": "https:\/\/api.unsplash.com\/collections\/147666\/remove?photo_id=iDZt9nmvOWk",
         "headers": {
-            "Host": "api.lvh.me:3000",
+            "Host": "api.unsplash.com",
             "Accept-Encoding": null,
             "User-Agent": "GuzzleHttp\/6.1.1 curl\/7.38.0 PHP\/5.6.16",
             "Authorization": "Bearer 582c5d7ebe28bd707751a43c8e22dc5c0a4ba0a60dbe69d520677f47b7cfcc1b",
@@ -434,7 +434,7 @@
         "method": "GET",
         "url": "https:\/\/api.unsplash.com\/collections\/147666\/photos?page=1&per_page=10",
         "headers": {
-            "Host": "api.lvh.me:3000",
+            "Host": "api.unsplash.com",
             "Accept-Encoding": null,
             "User-Agent": "GuzzleHttp\/6.1.1 curl\/7.38.0 PHP\/5.6.16",
             "Authorization": "Bearer 582c5d7ebe28bd707751a43c8e22dc5c0a4ba0a60dbe69d520677f47b7cfcc1b",

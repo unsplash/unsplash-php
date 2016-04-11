@@ -68,6 +68,15 @@ class HttpClientTest extends BaseTest
         $this->assertEquals('Bearer ' . getenv('ACCESS_TOKEN'), Unsplash\HttpClient::$connection->getAuthorizationToken());
     }
 
+    public function testInitConnectionWithWrongTypeOfToken()
+    {
+        Unsplash\HttpClient::init([
+            'applicationId' => 'mock_application_id',
+        ], 'access_token');
+
+        $this->assertEquals('Client-ID mock_application_id', Unsplash\HttpClient::$connection->getAuthorizationToken());
+    }
+
 
     public function testRequestSendThroughClient()
     {

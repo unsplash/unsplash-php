@@ -72,12 +72,19 @@ class Photo extends Endpoint
      */
     public static function create($filePath)
     {
+        if (!file_exists($filePath)) {
+            throw new Exception(["{$filePath} has not been found"]);
+        }
+
         $file = fopen($filePath, 'r');
 
         $photo = json_decode(
             self::post(
                 "photos", 
-                ['multipart' => [['name' => 'photo', 'contents' => $file]]]
+                [
+                    'multipart' => [['name' => 'photo', 'contents' => $file]],
+                    'headers' => ['Content-Length' => filesize($filePath)]
+                ]
             )->getBody(),
             true
         );

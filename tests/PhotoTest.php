@@ -3,6 +3,8 @@
 namespace Crew\Unsplash\Tests;
 
 use \Crew\Unsplash as Unsplash;
+use GuzzleHttp\Tests\Server;
+use GuzzleHttp\Psr7\Response;
 use \VCR\VCR;
 
 class PhotoTest extends BaseTest
@@ -62,17 +64,22 @@ class PhotoTest extends BaseTest
 
     public function testPostPhotos()
     {
-        $this->markTestIncomplete(
-                    'Due to an issue with VCR, we do not run this test.'
-                );
-
         VCR::insertCassette('photos.yml');
 
-        $photo = Unsplash\Photo::create(__dir__.'/images/land-test.txt');
+        $photo = Unsplash\Photo::create(__dir__.'/images/test.jpg');
 
         VCR::eject();
 
-        $this->assertInstanceOf('Photo', $photo);
+        $this->assertInstanceOf('Crew\Unsplash\Photo', $photo);
+        $this->assertNotNull($photo->id);
+    }
+
+    /**
+     * @expectedException Crew\Unsplash\Exception
+     */
+    public function testPostBadPathPhoto()
+    {
+        $photo = Unsplash\Photo::create(__dir__.'/images/bad.jpg');
     }
 
     public function testRandomPhoto()
@@ -94,9 +101,9 @@ class PhotoTest extends BaseTest
             'category' => [2,3],
             'featured' => true,
             'username' => 'andy_brunner',
-            'query'        => 'ice',
-            'w'                => 100,
-            'h'                => 100
+            'query'    => 'ice',
+            'w'        => 100,
+            'h'        => 100
         ];
 
         $photo = Unsplash\Photo::random($filters);
