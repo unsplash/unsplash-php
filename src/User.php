@@ -6,6 +6,7 @@ class User extends Endpoint
 {
     private $photos;
     private $likes;
+    private $collections;
 
     /**
      * Retrieve a User object from the username specified
@@ -42,6 +43,36 @@ class User extends Endpoint
         return new ArrayObject(
             $this->photos["{$page}-{$per_page}"]['body'],
             $this->photos["{$page}-{$per_page}"]['headers']
+        );
+    }
+
+    /**
+     * Retrieve all the collections for a specific user on a given page.
+     * Returns an ArrayObject that contains Collection objects.
+     *
+     * Include private collection if it's the user bearer token
+     * 
+     * @param    integer $page Page from which the collections are to be retrieved
+     * @param    integer $per_page Number of elements on a page
+     * @return   ArrayObject of Collections
+     */
+    public function collections($page = 1, $per_page = 10)
+    {
+        if (! isset($this->collections["{$page}-{$per_page}"])) {
+            $collections = self::get(
+                "users/{$this->username}/collections",
+                ['query' => ['page' => $page, 'per_page' => $per_page]]
+            );
+        
+            $this->collections["{$page}-{$per_page}"] = [
+                'body' => self::getArray($collections->getBody(), __NAMESPACE__.'\\Collection'),
+                'headers' => $collections->getHeaders()
+            ];
+        }
+
+        return new ArrayObject(
+            $this->collections["{$page}-{$per_page}"]['body'],
+            $this->collections["{$page}-{$per_page}"]['headers']
         );
     }
 
