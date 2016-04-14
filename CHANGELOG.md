@@ -1,3 +1,7 @@
+## 2.0.0 - 2016-04-14
+#### Added
+- New enpoints for user's collection
+
 ## 1.2.0 - 2016-04-05
 #### Added
 - New enpoints for collection
