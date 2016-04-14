@@ -649,6 +649,30 @@ $user->photos($page, $per_page);
 
 ===
 
+
+#### Crew\Unsplash\User::collections($page, $per_page)
+Retrieve user's collections.
+
+*Note:* You need to instantiate a user object first
+*Note:* You need the *read_collections* permission scope to retrieve user's private collections
+
+**Arguments**
+
+  Argument     | Type | Opt/Required
+---------------|------|--------------
+`$per_page`    | int  | Opt *(Default: 10 / Maximum: 30)*
+`$page`        | int  | Opt *(Default: 1)*
+
+**Example**
+
+```php
+$user = Crew\Unsplash\User::find($username);
+$user->collections($page, $per_page);
+```
+
+===
+
+
 #### Crew\Unsplash\User::update([$key => value])
 Update current user's fields. Multiple fields can be passed in the array.
 

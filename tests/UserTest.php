@@ -78,6 +78,30 @@ class UserTest extends BaseTest
         $this->assertEquals(10, $photos->count());
     }
 
+    public function testFindUserCollections()
+    {
+        VCR::insertCassette('users.yml');
+
+        $user = Unsplash\User::find('unsplash');
+        $collections = $user->collections();
+
+        VCR::eject();
+
+        $this->assertEquals('Explore Iceland', $collections[0]->title);
+    }
+
+    public function testfindUserPrivateCollection()
+    {
+        VCR::insertCassette('users.yml');
+
+        $user = Unsplash\User::current();
+        $collections = $user->collections();
+
+        VCR::eject();
+
+        $this->assertEquals('Land', $collections[1]->title);
+    }
+
     public function testUpdateUser()
     {
         VCR::insertCassette('users.yml');
