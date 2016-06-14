@@ -420,7 +420,7 @@ $collection->remove(int $photo_id)
 
 ### Photo
 
-#### Crew\Unsplash\Photo::all($page, $per_page)
+#### Crew\Unsplash\Photo::all($page, $per_page, $order_by)
 Retrieve a list of photos.
 
 **Arguments**
@@ -429,11 +429,12 @@ Retrieve a list of photos.
 ---------------|------|--------------
 `$per_page`    | int  | Opt *(Default: 10 / Maximum: 30)*
 `$page`        | int  | Opt *(Default: 1)*
+`$order_by`    | string  | Opt *(Default: latest)*
 
 **Example**
 
 ```php
-Crew\Unsplash\Photo::all($page, $per_page);
+Crew\Unsplash\Photo::all($page, $per_page, $order_by);
 ```
 
 ===
@@ -628,7 +629,7 @@ $user = Crew\Unsplash\User::current();
 
 ===
 
-#### Crew\Unsplash\User::photos($page, $per_page)
+#### Crew\Unsplash\User::photos($page, $per_page, $order_by)
 Retrieve user's photos.
 
 *Note:* You need to instantiate a user object first
@@ -639,12 +640,13 @@ Retrieve user's photos.
 ---------------|------|--------------
 `$per_page`    | int  | Opt *(Default: 10 / Maximum: 30)*
 `$page`        | int  | Opt *(Default: 1)*
+`$order_by`    | string  | Opt *(Default: latest)*
 
 **Example**
 
 ```php
 $user = Crew\Unsplash\User::find($username);
-$user->photos($page, $per_page);
+$user->photos($page, $per_page, $order_by);
 ```
 
 ===
