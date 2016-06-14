@@ -25,11 +25,12 @@ class Photo extends Endpoint
      * 
      * @param  integer $page Page from which the photos need to be retrieve
      * @param  integer $per_page Number of element in a page
+     * @param  string  $order_by How to sort the photos
      * @return ArrayObject of Photos
      */
-    public static function all($page = 1, $per_page = 10)
+    public static function all($page = 1, $per_page = 10, $order_by = 'latest')
     {
-        $photos = self::get("photos", ['query' => ['page' => $page, 'per_page' => $per_page]]);
+        $photos = self::get("photos", ['query' => ['page' => $page, 'per_page' => $per_page, 'order_by' => $order_by]]);
 
         $photosArray = self::getArray($photos->getBody(), get_called_class());
 
