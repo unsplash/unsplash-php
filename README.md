@@ -1,6 +1,6 @@
 # PHP Unsplash Wrapper
 
-[![Codeship Status for CrewLabs/Unsplash-PHP](https://codeship.com/projects/60048560-0bba-0133-b04d-265ef25499ca/status?branch=master)](https://codeship.com/projects/90915)
+[![Build Status](https://travis-ci.org/unsplash/unsplash-php.svg?branch=master)](https://travis-ci.org/unsplash/unsplash-php)
 [![Dependency Status](https://www.versioneye.com/php/crewlabs:unsplash/badge?style=flat)](https://www.versioneye.com/php/crewlabs:unsplash)
 [![Coverage Status](https://coveralls.io/repos/github/unsplash/unsplash-php/badge.svg?branch=coverage)](https://coveralls.io/github/unsplash/unsplash-php?branch=master)
 
