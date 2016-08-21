@@ -39,6 +39,18 @@ class PhotoTest extends BaseTest
         $this->assertEquals(10, $photos->count());
     }
 
+
+    public function testFindCurataedPhotos()
+    {
+        VCR::insertCassette('photos.yml');
+
+        $photos = Unsplash\Photo::curated();
+
+        VCR::eject();
+
+        $this->assertEquals(10, $photos->count());
+    }
+
     public function testSearchPhotos()
     {
         VCR::insertCassette('photos.yml');
