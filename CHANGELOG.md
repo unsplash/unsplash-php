@@ -1,3 +1,12 @@
+## 2.2.0 - 2016-08-21
+### Added
+- Curated photos endpoint (thanks @janhenckens #40)
+
+## 2.1.0 - 2016-08-02
+### Updated
+- OAuth2-Client package
+- Migrate CI to travis
+
 ## 2.0.0 - 2016-04-14
 #### Added
 - New enpoints for user's collection

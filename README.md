@@ -436,7 +436,27 @@ Retrieve a list of photos.
 Crew\Unsplash\Photo::all($page, $per_page);
 ```
 
+
 ===
+
+#### Crew\Unsplash\Photo::curated($page, $per_page)
+Retrieve a list of curated photos.
+
+**Arguments**
+
+  Argument     | Type | Opt/Required
+---------------|------|--------------
+`$per_page`    | int  | Opt *(Default: 10 / Maximum: 30)*
+`$page`        | int  | Opt *(Default: 1)*
+
+**Example**
+
+```php
+Crew\Unsplash\Photo::curated($page, $per_page);
+```
+
+===
+
 
 #### Crew\Unsplash\Photo::search($keyword, $category_id, $page, $per_page);
 Retrieve photos from a search by keyword or category.
