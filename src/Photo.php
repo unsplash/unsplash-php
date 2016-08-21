@@ -36,6 +36,24 @@ class Photo extends Endpoint
         return new ArrayObject($photosArray, $photos->getHeaders());
     }
 
+
+    /**
+     * Retrieve a single page from the list of the curated photos (front-page’s photos).
+     * Returns an ArrayObject that contains Photo objects.
+     *
+     * @param  integer $page Page from which the photos need to be retrieve
+     * @param  integer $per_page Number of element in a page
+     * @return ArrayObject of Photos
+     */
+    public static function curated($page = 1, $per_page = 10)
+    {
+        $photos = self::get("photos/curated", ['query' => ['page' => $page, 'per_page' => $per_page]]);
+
+        $photosArray = self::getArray($photos->getBody(), get_called_class());
+
+        return new ArrayObject($photosArray, $photos->getHeaders());
+    }
+
     /**
      * Retrieve all the photos on a specific page depending on search results
      * Returns ArrayObject that contain Photo object.
