@@ -64,13 +64,14 @@ class Photo extends Endpoint
      * @param  integer $per_page Number of elements on a page
      * @return ArrayObject of Photos
      */
-    public static function search($search, $category = null, $page = 1, $per_page = 10)
+    public static function search($search, $category = null, $orientation = null, $page = 1, $per_page = 10)
     {
         $photos = self::get(
             "photos/search", [
                 'query' => [
                     'query' => $search,
                     'category' => $category,
+                    'orientation' => $orientation,
                     'page' => $page,
                     'per_page' => $per_page
                 ]
