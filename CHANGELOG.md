@@ -1,3 +1,7 @@
+## 2.2.1 - 2016-09-04
+### Fix
+- The parameters order was breaking code using older version of the package
+
 ## 2.2.0 - 2016-08-21
 ### Added
 - Curated photos endpoint (thanks @janhenckens #40)
