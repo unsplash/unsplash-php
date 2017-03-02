@@ -11,7 +11,7 @@ class Stat extends Endpoint
     */
     public static function total()
     {
-        $stat = json_decode(self::get("stats/total")->getBody(), true);
+        $stat = json_decode(self::get("/stats/total")->getBody(), true);
 
         return new self($stat);
     }

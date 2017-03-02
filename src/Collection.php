@@ -15,7 +15,7 @@ class Collection extends Endpoint
     public static function all($page = 1, $per_page = 10)
     {
         $collections = self::get(
-            "collections",
+            "/collections",
             ['query' => ['page' => $page, 'per_page' => $per_page]]
         );
 
@@ -32,7 +32,7 @@ class Collection extends Endpoint
      */
     public static function find($id)
     {
-        $collection = json_decode(self::get("collections/{$id}")->getBody(), true);
+        $collection = json_decode(self::get("/collections/{$id}")->getBody(), true);
 
         return new self($collection);
     }
@@ -47,7 +47,7 @@ class Collection extends Endpoint
     {
         if (! isset($this->photos["{$page}-{$per_page}"])) {
             $photos = self::get(
-                "collections/{$this->id}/photos",
+                "/collections/{$this->id}/photos",
                 ['query' => ['page' => $page, 'per_page' => $per_page]]
             );
 
@@ -70,7 +70,7 @@ class Collection extends Endpoint
      */
     public function destroy()
     {
-        self::delete("collections/{$this->id}");
+        self::delete("/collections/{$this->id}");
     }
 
     /**
@@ -82,7 +82,7 @@ class Collection extends Endpoint
     {
         $photo_and_collection = json_decode(
             self::post(
-                "collections/{$this->id}/add", 
+                "/collections/{$this->id}/add",
                 ['query' => ['photo_id' => $photo_id]]
             )->getBody(),
             true
@@ -100,7 +100,7 @@ class Collection extends Endpoint
     public function remove($photo_id)
     {
         self::delete(
-            "collections/{$this->id}/remove",
+            "/collections/{$this->id}/remove",
             ['query' => ['photo_id' => $photo_id]]
         );
         
@@ -121,7 +121,7 @@ class Collection extends Endpoint
     {
         $collection = json_decode(
             self::post(
-                "collections", [
+                "/collections", [
                     'query' => [
                         'title' => $title,
                         'description' => $description,
@@ -145,7 +145,7 @@ class Collection extends Endpoint
     {
         $collection = json_decode(
             self::put(
-                "collections/{$this->id}",
+                "/collections/{$this->id}",
                 ['query' => $parameters]
             )->getBody(),
             true

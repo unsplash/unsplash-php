@@ -15,7 +15,7 @@ class CuratedBatch extends Endpoint
      */
     public static function find($id)
     {
-        $curatedBatch = json_decode(self::get("curated_batches/{$id}")->getBody(), true);
+        $curatedBatch = json_decode(self::get("/curated_batches/{$id}")->getBody(), true);
         
         return new self($curatedBatch);
     }
@@ -48,7 +48,7 @@ class CuratedBatch extends Endpoint
     public function photos()
     {
         if (! isset($this->photos)) {
-            $photos = self::get("curated_batches/{$this->id}/photos");
+            $photos = self::get("/curated_batches/{$this->id}/photos");
 
             $this->photos = [
                 'body' => self::getArray($photos->getBody(), __NAMESPACE__.'\\Photo'),

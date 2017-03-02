@@ -14,7 +14,7 @@ class Category extends Endpoint
      */
     public static function find($id)
     {
-        $category = json_decode(self::get("categories/{$id}")->getBody(), true);
+        $category = json_decode(self::get("/categories/{$id}")->getBody(), true);
         
         return new self($category);
     }
@@ -32,7 +32,7 @@ class Category extends Endpoint
     public static function all($page = 1, $per_page = 10)
     {
         $categories = self::get(
-            "categories", 
+            "/categories",
             ['query' => ['page' => $page, 'per_page' => $per_page]]
         );
 
@@ -56,7 +56,7 @@ class Category extends Endpoint
     {
         if (! isset($this->photos["{$page}-{$per_page}"])) {
             $photos = self::get(
-                "categories/{$this->id}/photos",
+                "/categories/{$this->id}/photos",
                 ['query' => ['page' => $page, 'per_page' => $per_page]]
             );
         
