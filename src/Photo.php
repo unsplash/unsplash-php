@@ -14,7 +14,7 @@ class Photo extends Endpoint
      */
     public static function find($id)
     {
-        $photo = json_decode(self::get("photos/{$id}")->getBody(), true);
+        $photo = json_decode(self::get("/photos/{$id}")->getBody(), true);
         
         return new self($photo);
     }
@@ -29,7 +29,7 @@ class Photo extends Endpoint
      */
     public static function all($page = 1, $per_page = 10)
     {
-        $photos = self::get("photos", ['query' => ['page' => $page, 'per_page' => $per_page]]);
+        $photos = self::get("/photos", ['query' => ['page' => $page, 'per_page' => $per_page]]);
 
         $photosArray = self::getArray($photos->getBody(), get_called_class());
 
@@ -47,7 +47,7 @@ class Photo extends Endpoint
      */
     public static function curated($page = 1, $per_page = 10)
     {
-        $photos = self::get("photos/curated", ['query' => ['page' => $page, 'per_page' => $per_page]]);
+        $photos = self::get("/photos/curated", ['query' => ['page' => $page, 'per_page' => $per_page]]);
 
         $photosArray = self::getArray($photos->getBody(), get_called_class());
 
@@ -67,7 +67,7 @@ class Photo extends Endpoint
     public static function search($search, $category = null, $page = 1, $per_page = 10, $orientation = null)
     {
         $photos = self::get(
-            "photos/search", [
+            "/photos/search", [
                 'query' => [
                     'query' => $search,
                     'category' => $category,
@@ -151,7 +151,7 @@ class Photo extends Endpoint
      */
     public function like()
     {
-        $like = self::post("photos/{$this->id}/like");
+        $like = self::post("/photos/{$this->id}/like");
 
         return true;
     }

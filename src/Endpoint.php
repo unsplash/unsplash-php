@@ -82,6 +82,26 @@ class Endpoint
         }
     }
 
+    /**
+     * @param string $responseBody
+     * @param array  $headers
+     * @param string $className
+     *
+     * @return PageResult
+     */
+    protected static function getPageResult($responseBody, array $headers = [], $className = '')
+    {
+        $data = json_decode($responseBody, true);
+        $result = new PageResult($data['results'], $data['total'], $data['total_pages'], $headers, $className);
+
+        return $result;
+    }
+
+    /**
+     * @param string $responseBody
+     * @param $object
+     * @return array
+     */
     protected static function getArray($responseBody, $object)
     {
         return array_map(function ($array) use($object) {

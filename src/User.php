@@ -16,7 +16,7 @@ class User extends Endpoint
      */
     public static function find($username)
     {
-        $user = json_decode(self::get("users/{$username}")->getBody(), true);
+        $user = json_decode(self::get("/users/{$username}")->getBody(), true);
         
         return new self($user);
     }
@@ -32,7 +32,7 @@ class User extends Endpoint
     public function photos($page = 1, $per_page = 10)
     {
         if (! isset($this->photos["{$page}-{$per_page}"])) {
-            $photos = self::get("users/{$this->username}/photos", ['query' => ['page' => $page, 'per_page' => $per_page]]);
+            $photos = self::get("/users/{$this->username}/photos", ['query' => ['page' => $page, 'per_page' => $per_page]]);
         
             $this->photos["{$page}-{$per_page}"] = [
                 'body' => self::getArray($photos->getBody(), __NAMESPACE__.'\\Photo'),
@@ -60,7 +60,7 @@ class User extends Endpoint
     {
         if (! isset($this->collections["{$page}-{$per_page}"])) {
             $collections = self::get(
-                "users/{$this->username}/collections",
+                "/users/{$this->username}/collections",
                 ['query' => ['page' => $page, 'per_page' => $per_page]]
             );
         
@@ -87,7 +87,7 @@ class User extends Endpoint
     public function likes($page = 1, $per_page = 10)
     {
         if (! isset($this->likes["{$page}-{$per_page}"])) {
-            $likes = self::get("users/{$this->username}/likes", ['query' => ['page' => $page, 'per_page' => $per_page]]);
+            $likes = self::get("/users/{$this->username}/likes", ['query' => ['page' => $page, 'per_page' => $per_page]]);
         
             $this->likes["{$page}-{$per_page}"] = [
                 'body' => self::getArray($likes->getBody(), __NAMESPACE__.'\\Photo'),
@@ -108,7 +108,7 @@ class User extends Endpoint
      */
     public static function current()
     {
-        $user = json_decode(self::get("me")->getBody(), true);
+        $user = json_decode(self::get("/me")->getBody(), true);
         
         return new self($user);
     }
@@ -121,7 +121,7 @@ class User extends Endpoint
      */
     public function update(array $parameters)
     {
-        $user = json_decode(self::put("me", ['query' => $parameters])->getBody(), true);
+        $user = json_decode(self::put("/me", ['query' => $parameters])->getBody(), true);
 
         parent::update($parameters);
     }

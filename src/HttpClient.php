@@ -106,6 +106,9 @@ class HttpClient
     {
         $uri = $arguments[0];
         $params = isset($arguments[1]) ? $arguments[1] : [];
+        if (substr($uri, 0, 1) !== '/') {
+            $uri = '/' . $uri;
+        }
 
         $response = $this->httpClient->send(
             new Request($method, new Uri($uri)),

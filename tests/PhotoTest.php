@@ -40,7 +40,7 @@ class PhotoTest extends BaseTest
     }
 
 
-    public function testFindCurataedPhotos()
+    public function testFindCuratedPhotos()
     {
         VCR::insertCassette('photos.yml');
 
