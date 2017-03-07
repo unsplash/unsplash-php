@@ -11,7 +11,7 @@ class Search extends Endpoint
      * @param  string  $search   Search terms.
      * @param  integer $page     Page from which the photos need to be retrieve
      * @param  integer $per_page Number of element in a page
-     * @return ArrayObject of PageResult
+     * @return PageResult
      */
     public static function photos($search, $page = 1, $per_page = 10)
     {
@@ -25,9 +25,7 @@ class Search extends Endpoint
             ]
         );
 
-        $photosPageResult = self::getPageResult($photos->getBody());
-
-        return new ArrayObject($photosPageResult, $photos->getHeaders());
+        return self::getPageResult($photos->getBody(), $photos->getHeaders(), Photo::class);
     }
 
     /**
@@ -37,11 +35,11 @@ class Search extends Endpoint
      * @param  string  $search   Search terms.
      * @param  integer $page     Page from which the photos need to be retrieve
      * @param  integer $per_page Number of element in a page
-     * @return ArrayObject of PageResult
+     * @return PageResult
      */
     public static function collections($search, $page = 1, $per_page = 10)
     {
-        $photos = self::get(
+        $collections = self::get(
             "/search/collections", [
                 'query' => [
                     'query' => $search,
@@ -51,9 +49,7 @@ class Search extends Endpoint
             ]
         );
 
-        $photosPageResult = self::getPageResult($photos->getBody());
-
-        return new ArrayObject($photosPageResult, $photos->getHeaders());
+        return self::getPageResult($collections->getBody(), $collections->getHeaders(), Collection::class);
     }
 
     /**
@@ -63,11 +59,11 @@ class Search extends Endpoint
      * @param  string  $search   Search terms.
      * @param  integer $page     Page from which the photos need to be retrieve
      * @param  integer $per_page Number of element in a page
-     * @return ArrayObject of PageResult
+     * @return PageResult
      */
     public static function users($search, $page = 1, $per_page = 10)
     {
-        $photos = self::get(
+        $users = self::get(
             "/search/users", [
                 'query' => [
                     'query' => $search,
@@ -77,8 +73,6 @@ class Search extends Endpoint
             ]
         );
 
-        $photosPageResult = self::getPageResult($photos->getBody());
-
-        return new ArrayObject($photosPageResult, $photos->getHeaders());
+        return self::getPageResult($users->getBody(), $users->getHeaders(), User::class);
     }
 }

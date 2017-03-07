@@ -5,6 +5,11 @@ namespace Crew\Unsplash;
 class PageResult implements \ArrayAccess
 {
     /**
+     * @var string
+     */
+    private $resultClassName = '';
+
+    /**
      * @var int
      */
     private $total = 0;
@@ -16,7 +21,38 @@ class PageResult implements \ArrayAccess
     /**
      * @var array
      */
-    private $results = [];
+    private $results;
+
+    /**
+     * @var array
+     */
+    private $headers;
+
+    /**
+     * PageResult constructor.
+     *
+     * @param array  $results
+     * @param int    $total
+     * @param int    $totalPages
+     * @param array  $headers
+     * @param string $className
+     */
+    public function __construct(array $results, $total, $totalPages, array $headers = [], $className = '')
+    {
+        $this->results = $results;
+        $this->total = $total;
+        $this->totalPages = $totalPages;
+        $this->headers = $headers;
+        $this->resultClassName = $className;
+    }
+
+    /**
+     * @return string
+     */
+    public function getResultClassName(): string
+    {
+        return $this->resultClassName;
+    }
 
     /**
      * @return int
@@ -24,14 +60,6 @@ class PageResult implements \ArrayAccess
     public function getTotal()
     {
         return $this->total;
-    }
-
-    /**
-     * @param int $total
-     */
-    public function setTotal($total)
-    {
-        $this->total = $total;
     }
 
     /**
@@ -43,11 +71,11 @@ class PageResult implements \ArrayAccess
     }
 
     /**
-     * @param int $totalPages
+     * @return array
      */
-    public function setTotalPages($totalPages)
+    public function getHeaders(): array
     {
-        $this->totalPages = $totalPages;
+        return $this->headers;
     }
 
     /**
@@ -55,15 +83,26 @@ class PageResult implements \ArrayAccess
      */
     public function getResults()
     {
-        return $this->results;
+       return $this->results;
     }
 
     /**
-     * @param array $results
+     * @return ArrayObject
+     * @throws \Exception
      */
-    public function setResults(array $results)
+    public function getArrayObject()
     {
-        $this->results = $results;
+        $className = $this->getResultClassName();
+
+        if (!$className) {
+            throw new \Exception("ResultClassName not set");
+        }
+
+        $results = array_map(function (array $record) use ($className) {
+            return new $className($record);
+        }, $this->results);
+
+        return new ArrayObject($results, $this->getHeaders());
     }
 
     /**

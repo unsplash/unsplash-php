@@ -84,16 +84,15 @@ class Endpoint
 
     /**
      * @param string $responseBody
+     * @param array  $headers
+     * @param string $className
+     *
      * @return PageResult
      */
-    protected static function getPageResult($responseBody)
+    protected static function getPageResult($responseBody, array $headers = [], $className = '')
     {
         $data = json_decode($responseBody, true);
-        $result = new PageResult();
-
-        $result->setTotal($data['total']);
-        $result->setTotalPages($data['total_pages']);
-        $result->setResults($data['results']);
+        $result = new PageResult($data['results'], $data['total'], $data['total_pages'], $headers, $className);
 
         return $result;
     }
