@@ -49,7 +49,7 @@ class PageResult implements \ArrayAccess
     /**
      * @return string
      */
-    public function getResultClassName(): string
+    public function getResultClassName()
     {
         return $this->resultClassName;
     }
@@ -73,7 +73,7 @@ class PageResult implements \ArrayAccess
     /**
      * @return array
      */
-    public function getHeaders(): array
+    public function getHeaders()
     {
         return $this->headers;
     }
