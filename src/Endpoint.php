@@ -13,6 +13,8 @@ namespace Crew\Unsplash;
  */
 class Endpoint
 {
+    const RATE_LIMIT_ERROR_MESSAGE = "Rate Limit Exceeded";
+
     /** @var array All parameters that an endpoint can have */
     private $parameters;
 
@@ -21,7 +23,7 @@ class Endpoint
 
     /**
      * Construct a new endpoint object and set the parameters from an array
-     * 
+     *
      * @param array $parameters
      */
     public function __construct($parameters = [])
@@ -32,7 +34,7 @@ class Endpoint
 
     /**
      * Merge old parameters with the new one
-     * 
+     *
      * @param  array $parameters The parameters to update on the object
      * @return void
      */
@@ -43,7 +45,7 @@ class Endpoint
 
     /**
      * Magic method to retrieve a specific parameter in the parameters array
-     * 
+     *
      * @param  string $key
      * @return mixed
      */
@@ -55,14 +57,14 @@ class Endpoint
     /**
      * Check if the HTTP method is accepted and send a HTTP request to it.
      * Retrieve error from the request and throw a new error
-     * 
+     *
      * @param  string $method HTTP action to trigger
      * @param  array $arguments Array containing all the parameters pass to the magic method
-     * 
+     *
      * @throws \Crew\Unsplash\Exception if the HTTP request failed
      *
      * @see Crew\Unsplash\HttpClient::send()
-     * 
+     *
      * @return \GuzzleHttp\Psr7\Response
      */
     public static function __callStatic($method, $arguments)
@@ -111,7 +113,7 @@ class Endpoint
 
     /**
      * Retrieve the response status code and determine if the request was successful.
-     * 
+     *
      * @param  \GuzzleHttp\Psr7\Response $response of the HTTP request
      * @return boolean
      */
@@ -122,18 +124,23 @@ class Endpoint
 
     /**
      * Retrieve the error messages in the body
-     * 
+     *
      * @param  \GuzzleHttp\Psr7\Response $response of the HTTP request
      * @return array Array of error messages
      */
     private static function getErrorMessage($response)
     {
-        $message = json_decode($response->getBody(), true);
+        $body = $response->getBody();
+
+        $message = json_decode($body, true);
         $errors = [];
 
         if (is_array($message) && isset($message['errors'])) {
             $errors = $message['errors'];
         }
+
+        if ($body == self::RATE_LIMIT_ERROR_MESSAGE)
+            $errors = [self::RATE_LIMIT_ERROR_MESSAGE];
 
         return $errors;
     }
