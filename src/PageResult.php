@@ -37,7 +37,7 @@ class PageResult implements \ArrayAccess
      * @param array  $headers
      * @param string $className
      */
-    public function __construct(array $results, $total, $totalPages, array $headers = [], $className = '')
+    public function __construct(array $results, $total, $totalPages, array $headers = [], $className)
     {
         $this->results = $results;
         $this->total = $total;
@@ -93,10 +93,6 @@ class PageResult implements \ArrayAccess
     public function getArrayObject()
     {
         $className = $this->getResultClassName();
-
-        if (!$className) {
-            throw new \Exception("ResultClassName not set");
-        }
 
         $results = array_map(function (array $record) use ($className) {
             return new $className($record);
