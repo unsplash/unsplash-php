@@ -178,7 +178,7 @@ class Photo extends Endpoint
     public function statistics($resolution = 'days', $quantity = 30)
     {
         $statistics = self::get("photos/{$this->id}/statistics", ['query' => ['resolution' => $resolution, 'quantity' => $quantity]]);
-        $statisticsArray = self::getArray($statistics->getBody(), get_called_class());
+        $statisticsArray = self::getArray($statistics->getBody(), Stat::class);
         return new ArrayObject($statisticsArray, $statistics->getHeaders());
     }
 
