@@ -27,22 +27,23 @@ class User extends Endpoint
      * 
      * @param    integer $page Page from which the photos are to be retrieved
      * @param    integer $per_page Number of elements on a page
+     * @param string $order_by Order in which to retrieve photos
      * @return ArrayObject of Photos
      */
-    public function photos($page = 1, $per_page = 10)
+    public function photos($page = 1, $per_page = 10, $order_by = 'latest')
     {
-        if (! isset($this->photos["{$page}-{$per_page}"])) {
-            $photos = self::get("/users/{$this->username}/photos", ['query' => ['page' => $page, 'per_page' => $per_page]]);
+        if (! isset($this->photos["{$page}-{$per_page}-{$order_by}"])) {
+            $photos = self::get("/users/{$this->username}/photos", ['query' => ['page' => $page, 'per_page' => $per_page, 'order_by' => $order_by]]);
         
-            $this->photos["{$page}-{$per_page}"] = [
+            $this->photos["{$page}-{$per_page}-{$order_by}"] = [
                 'body' => self::getArray($photos->getBody(), __NAMESPACE__.'\\Photo'),
                 'headers' => $photos->getHeaders()
             ];
         }
 
         return new ArrayObject(
-            $this->photos["{$page}-{$per_page}"]['body'],
-            $this->photos["{$page}-{$per_page}"]['headers']
+            $this->photos["{$page}-{$per_page}-{$order_by}"]['body'],
+            $this->photos["{$page}-{$per_page}-{$order_by}"]['headers']
         );
     }
 

@@ -78,6 +78,18 @@ class UserTest extends BaseTest
         $this->assertEquals(10, $photos->count());
     }
 
+    public function testFindUserPhotosByOrder()
+    {
+        VCR::insertCassette('users.yml');
+
+        $user = Unsplash\User::find('lukechesser');
+        $photos = $user->photos(1, 5, 'oldest');
+
+        VCR::eject();
+
+        $this->assertEquals(5, $photos->count());
+    }
+
     public function testFindUserCollections()
     {
         VCR::insertCassette('users.yml');
