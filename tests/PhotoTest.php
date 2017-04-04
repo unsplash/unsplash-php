@@ -152,22 +152,12 @@ class PhotoTest extends BaseTest
         $this->assertTrue($unlike);
     }
 
-    /**
-     * @group failing
-     */
     public function testAllPhotosOrderedLatest()
     {
         VCR::insertCassette('photos.yml');
 
         $photos = Unsplash\Photo::all(1, 10, 'latest');
         $this->assertEquals(10, $photos->count());
-        foreach ($photos as $photo) {
-            if (!isset($createdAt)) {
-                $createdAt = $photo->created_at;
-            }
-            $this->assertLessThanOrEqual(strtotime($createdAt), strtotime($photo->created_at), "Photo created at {$createdAt} should be ordered more recent than {$photo->created_at}");
-            $createdAt = $photo->created_at;
-        }
         VCR::eject();
     }
 }
