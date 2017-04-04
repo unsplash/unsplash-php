@@ -151,4 +151,17 @@ class PhotoTest extends BaseTest
 
         $this->assertTrue($unlike);
     }
+
+    public function testStatisticsForPhoto()
+    {
+        VCR::insertCassette('photos.yml');
+        $photo = Unsplash\Photo::find('ZUaqqMxtxYk');
+        $response = $photo->statistics();
+        $this->assertInstanceOf('ArrayObject', $response);
+        $this->assertArrayHasKey('id', $response);
+        $this->assertArrayHasKey('downloads', $response);
+        $this->assertArrayHasKey('views', $response);
+        $this->assertArrayHasKey('likes', $response);
+        VCR::eject();
+    }
 }

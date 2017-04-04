@@ -167,4 +167,18 @@ class Photo extends Endpoint
 
         return true;
     }
+
+    /**
+     * Retrieve statistics for a photo
+     *
+     * @param string $resolution
+     * @param int $quantity
+     * @return ArrayObject
+     */
+    public function statistics($resolution = 'days', $quantity = 30)
+    {
+        $statistics = self::get("photos/{$this->id}/statistics", ['query' => ['resolution' => $resolution, 'quantity' => $quantity]]);
+        $statisticsArray = self::getArray($statistics->getBody(), get_called_class());
+        return new ArrayObject($statisticsArray, $statistics->getHeaders());
+    }
 }
