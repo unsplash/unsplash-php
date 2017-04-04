@@ -28,7 +28,7 @@ class Collection extends Endpoint
      * Retrieve a specific collection
      *
      * @param  int $id Id of the collection
-     * @return CuratedBatch
+     * @return Collection
      */
     public static function find($id)
     {
@@ -163,6 +163,17 @@ class Collection extends Endpoint
     public static function featured($page = 1, $per_page = 10)
     {
         $collections = self::get("/collections/featured", ['query' => ['page' => $page, 'per_page' => $per_page]]);
+        $collectionsArray = self::getArray($collections->getBody(), get_called_class());
+        return new ArrayObject($collectionsArray, $collections->getHeaders());
+    }
+
+    /**
+     * Get related collections to current collection
+     * @return ArrayObject
+     */
+    public function related()
+    {
+        $collections = self::get("/collections/{$this->id}/related");
         $collectionsArray = self::getArray($collections->getBody(), get_called_class());
         return new ArrayObject($collectionsArray, $collections->getHeaders());
     }
