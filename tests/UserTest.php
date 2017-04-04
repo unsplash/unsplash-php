@@ -70,7 +70,7 @@ class UserTest extends BaseTest
     {
         VCR::insertCassette('users.yml');
 
-        $user = Unsplash\User::find('lukechesser');
+        $user = Unsplash\User::find('anniespratt');
         $photos = $user->photos();
 
         VCR::eject();
