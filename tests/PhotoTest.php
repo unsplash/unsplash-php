@@ -40,11 +40,14 @@ class PhotoTest extends BaseTest
     }
 
 
+    /**
+     * @group hugh
+     */
     public function testFindCuratedPhotos()
     {
         VCR::insertCassette('photos.yml');
 
-        $photos = Unsplash\Photo::curated();
+        $photos = Unsplash\Photo::curated(1, 10, 'popular');
 
         VCR::eject();
 
