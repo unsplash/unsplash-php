@@ -130,8 +130,9 @@ class UserTest extends BaseTest
     {
         VCR::insertCassette('users.yml');
 
-        $user = Unsplash\User::find('dechuck');
+        $user = Unsplash\User::find('unsplash', 10, 'oldest');
         $likes = $user->likes();
+        $this->assertCount(10, $likes);
         
         VCR::eject();
 

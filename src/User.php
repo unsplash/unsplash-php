@@ -83,22 +83,23 @@ class User extends Endpoint
      * 
      * @param    integer $page Page from which the photos are to be retrieved
      * @param    integer $per_page Number of elements on a page
+     * @param string $order_by Order in which to retrieve photos
      * @return ArrayObject of Photos
      */
-    public function likes($page = 1, $per_page = 10)
+    public function likes($page = 1, $per_page = 10, $order_by = 'latest')
     {
-        if (! isset($this->likes["{$page}-{$per_page}"])) {
-            $likes = self::get("/users/{$this->username}/likes", ['query' => ['page' => $page, 'per_page' => $per_page]]);
+        if (! isset($this->likes["{$page}-{$per_page}-{$order_by}"])) {
+            $likes = self::get("/users/{$this->username}/likes", ['query' => ['page' => $page, 'per_page' => $per_page, 'order_by' => $order_by]]);
         
-            $this->likes["{$page}-{$per_page}"] = [
+            $this->likes["{$page}-{$per_page}-{$order_by}"] = [
                 'body' => self::getArray($likes->getBody(), __NAMESPACE__.'\\Photo'),
                 'headers' => $likes->getHeaders()
             ];
         }
 
         return new ArrayObject(
-            $this->likes["{$page}-{$per_page}"]['body'],
-            $this->likes["{$page}-{$per_page}"]['headers']
+            $this->likes["{$page}-{$per_page}-{$order_by}"]['body'],
+            $this->likes["{$page}-{$per_page}-{$order_by}"]['headers']
         );
     }
 
