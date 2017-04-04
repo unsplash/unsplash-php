@@ -164,4 +164,14 @@ class PhotoTest extends BaseTest
         $this->assertArrayHasKey('likes', $response);
         VCR::eject();
     }
+
+    public function testDownloadLinkForPhoto()
+    {
+        VCR::insertCassette('photos.yml');
+        $photo = Unsplash\Photo::find('ZUaqqMxtxYk');
+        $link = $photo->download();
+        $this->assertInternalType('string', $link);
+        $this->assertNotFalse(filter_var($link, FILTER_VALIDATE_URL));
+        VCR::eject();
+    }
 }

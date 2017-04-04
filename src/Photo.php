@@ -181,4 +181,15 @@ class Photo extends Endpoint
         $statisticsArray = self::getArray($statistics->getBody(), get_called_class());
         return new ArrayObject($statisticsArray, $statistics->getHeaders());
     }
+
+    /**
+     * Returns download link for a photo
+     * @return string - url to download
+     */
+    public function download()
+    {
+        $link = self::get("/photos/{$this->id}/download");
+        $linkClass = \GuzzleHttp\json_decode($link->getBody());
+        return $linkClass->url;
+    }
 }

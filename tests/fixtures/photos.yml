@@ -561,4 +561,51 @@
         },
         "body": "{\"id\":\"ZUaqqMxtxYk\",\"downloads\":{\"total\":200,\"historical\":{\"change\":2,\"resolution\":\"days\",\"quantity\":30,\"values\":[{\"date\":\"2017-03-05\",\"value\":0},{\"date\":\"2017-03-06\",\"value\":0},{\"date\":\"2017-03-07\",\"value\":0},{\"date\":\"2017-03-08\",\"value\":0},{\"date\":\"2017-03-09\",\"value\":0},{\"date\":\"2017-03-10\",\"value\":0},{\"date\":\"2017-03-11\",\"value\":0},{\"date\":\"2017-03-12\",\"value\":0},{\"date\":\"2017-03-13\",\"value\":0},{\"date\":\"2017-03-14\",\"value\":1},{\"date\":\"2017-03-15\",\"value\":0},{\"date\":\"2017-03-16\",\"value\":0},{\"date\":\"2017-03-17\",\"value\":0},{\"date\":\"2017-03-18\",\"value\":0},{\"date\":\"2017-03-19\",\"value\":0},{\"date\":\"2017-03-20\",\"value\":0},{\"date\":\"2017-03-21\",\"value\":0},{\"date\":\"2017-03-22\",\"value\":1},{\"date\":\"2017-03-23\",\"value\":0},{\"date\":\"2017-03-24\",\"value\":0},{\"date\":\"2017-03-25\",\"value\":0},{\"date\":\"2017-03-26\",\"value\":0},{\"date\":\"2017-03-27\",\"value\":0},{\"date\":\"2017-03-28\",\"value\":0},{\"date\":\"2017-03-29\",\"value\":0},{\"date\":\"2017-03-30\",\"value\":0},{\"date\":\"2017-03-31\",\"value\":0},{\"date\":\"2017-04-01\",\"value\":0},{\"date\":\"2017-04-02\",\"value\":0},{\"date\":\"2017-04-03\",\"value\":0}]}},\"views\":{\"total\":1593,\"historical\":{\"change\":43,\"resolution\":\"days\",\"quantity\":30,\"values\":[{\"date\":\"2017-03-05\",\"value\":1},{\"date\":\"2017-03-06\",\"value\":0},{\"date\":\"2017-03-07\",\"value\":0},{\"date\":\"2017-03-08\",\"value\":4},{\"date\":\"2017-03-09\",\"value\":1},{\"date\":\"2017-03-10\",\"value\":2},{\"date\":\"2017-03-11\",\"value\":1},{\"date\":\"2017-03-12\",\"value\":1},{\"date\":\"2017-03-13\",\"value\":1},{\"date\":\"2017-03-14\",\"value\":2},{\"date\":\"2017-03-15\",\"value\":1},{\"date\":\"2017-03-16\",\"value\":4},{\"date\":\"2017-03-17\",\"value\":4},{\"date\":\"2017-03-18\",\"value\":1},{\"date\":\"2017-03-19\",\"value\":1},{\"date\":\"2017-03-20\",\"value\":0},{\"date\":\"2017-03-21\",\"value\":7},{\"date\":\"2017-03-22\",\"value\":5},{\"date\":\"2017-03-23\",\"value\":0},{\"date\":\"2017-03-24\",\"value\":2},{\"date\":\"2017-03-25\",\"value\":1},{\"date\":\"2017-03-26\",\"value\":0},{\"date\":\"2017-03-27\",\"value\":0},{\"date\":\"2017-03-28\",\"value\":2},{\"date\":\"2017-03-29\",\"value\":1},{\"date\":\"2017-03-30\",\"value\":0},{\"date\":\"2017-03-31\",\"value\":1},{\"date\":\"2017-04-01\",\"value\":0},{\"date\":\"2017-04-02\",\"value\":0},{\"date\":\"2017-04-03\",\"value\":0}]}},\"likes\":{\"total\":2,\"historical\":{\"change\":0,\"resolution\":\"days\",\"quantity\":30,\"values\":[{\"date\":\"2017-03-05\",\"value\":0},{\"date\":\"2017-03-06\",\"value\":0},{\"date\":\"2017-03-07\",\"value\":0},{\"date\":\"2017-03-08\",\"value\":0},{\"date\":\"2017-03-09\",\"value\":0},{\"date\":\"2017-03-10\",\"value\":0},{\"date\":\"2017-03-11\",\"value\":0},{\"date\":\"2017-03-12\",\"value\":0},{\"date\":\"2017-03-13\",\"value\":0},{\"date\":\"2017-03-14\",\"value\":0},{\"date\":\"2017-03-15\",\"value\":0},{\"date\":\"2017-03-16\",\"value\":0},{\"date\":\"2017-03-17\",\"value\":0},{\"date\":\"2017-03-18\",\"value\":0},{\"date\":\"2017-03-19\",\"value\":0},{\"date\":\"2017-03-20\",\"value\":0},{\"date\":\"2017-03-21\",\"value\":0},{\"date\":\"2017-03-22\",\"value\":0},{\"date\":\"2017-03-23\",\"value\":0},{\"date\":\"2017-03-24\",\"value\":0},{\"date\":\"2017-03-25\",\"value\":0},{\"date\":\"2017-03-26\",\"value\":0},{\"date\":\"2017-03-27\",\"value\":0},{\"date\":\"2017-03-28\",\"value\":0},{\"date\":\"2017-03-29\",\"value\":0},{\"date\":\"2017-03-30\",\"value\":0},{\"date\":\"2017-03-31\",\"value\":0},{\"date\":\"2017-04-01\",\"value\":0},{\"date\":\"2017-04-02\",\"value\":0},{\"date\":\"2017-04-03\",\"value\":0}]}}}"
     }
+},{
+    "request": {
+        "method": "GET",
+        "url": "https:\/\/api.unsplash.com\/photos\/ZUaqqMxtxYk\/download",
+        "headers": {
+            "Host": "api.unsplash.com",
+            "Accept-Encoding": null,
+            "User-Agent": "GuzzleHttp\/6.2.1 curl\/7.43.0 PHP\/7.0.6",
+            "Authorization": "Bearer 582c5d7ebe28bd707751a43c8e22dc5c0a4ba0a60dbe69d520677f47b7cfcc1b",
+            "Accept": null
+        }
+    },
+    "response": {
+        "status": {
+            "http_version": "1.1",
+            "code": "200",
+            "message": "OK"
+        },
+        "headers": {
+            "Server": "Cowboy",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Request-Method": "*",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Expose-Headers": "Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining",
+            "Warning": "Stats endpoint is deprecated. Use Statistics instead. See",
+            "Cache-Control": "no-cache, no-store, must-revalidate",
+            "Content-Type": "application\/json",
+            "X-Ratelimit-Limit": "100",
+            "X-Ratelimit-Remaining": "99",
+            "X-Request-Id": "76588634-f914-4c66-b23e-e5c623c48bf0",
+            "X-Runtime": "0.046391",
+            "Strict-Transport-Security": "max-age=31536000",
+            "Via": "1.1 vegur, 1.1 varnish, 1.1 varnish",
+            "Fastly-Debug-Digest": "29fecfaec13d662e66f7586f092435caa159f6b1d661fc4ced20991aa79dc615",
+            "Content-Length": "158",
+            "Accept-Ranges": "bytes",
+            "Date": "Tue, 04 Apr 2017 09:03:42 GMT",
+            "Age": "0",
+            "Connection": "keep-alive",
+            "X-Served-By": "cache-iad2121-IAD, cache-lcy1127-LCY",
+            "X-Cache": "MISS, MISS",
+            "X-Cache-Hits": "0, 0",
+            "X-Timer": "S1491296621.915823,VS0,VE134",
+            "Vary": "Origin"
+        },
+        "body": "{\"url\":\"https:\/\/images.unsplash.com\/photo-1428681756973-d318f055795a?ixlib=rb-0.3.5&q=100&fm=jpg&crop=entropy&cs=tinysrgb&s=e230c028c61254cd27c8fff8c1594a72\"}"
+    }
 }]
