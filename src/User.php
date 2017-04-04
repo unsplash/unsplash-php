@@ -125,4 +125,15 @@ class User extends Endpoint
 
         parent::update($parameters);
     }
+
+    /**
+     * Return url for user's portfolio page
+     * @param $username
+     * @return string
+     */
+    public static function portfolio($username)
+    {
+        $user = json_decode(self::get("/users/{$username}/portfolio")->getBody(), true);
+        return $user['url'];
+    }
 }
