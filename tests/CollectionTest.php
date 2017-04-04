@@ -124,4 +124,12 @@ class CollectionTest extends BaseTest
 
         $this->assertEquals(0, $photos->count());
     }
+
+    public function testGetFeaturedCollections()
+    {
+        VCR::insertCassette('collections.yml');
+        $collection = Unsplash\Collection::featured();
+        $this->assertCount(10, $collection->count());
+        VCR::eject();
+    }
 }
