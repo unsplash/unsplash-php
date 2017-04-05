@@ -174,4 +174,13 @@ class PhotoTest extends BaseTest
         $this->assertNotFalse(filter_var($link, FILTER_VALIDATE_URL));
         VCR::eject();
     }
+
+    public function testUpdatePhoto()
+    {
+        VCR::insertCassette('photos.yml');
+        $photo = Unsplash\Photo::find('GQcfdBoVB_g');
+        $photo->update(['exif' => ['focal_length' => 10]]);
+        $this->assertEquals(10, $photo->exif['focal_length']);
+        VCR::eject();
+    }
 }

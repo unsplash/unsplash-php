@@ -192,4 +192,15 @@ class Photo extends Endpoint
         $linkClass = \GuzzleHttp\json_decode($link->getBody());
         return $linkClass->url;
     }
+
+    /**
+     * Update an existing photo
+     * @param array $parameters
+     * @return Photo
+     */
+    public function update(array $parameters = [])
+    {
+        json_decode(self::put("/photos/{$this->id}", ['query' => $parameters])->getBody(), true);
+        parent::update($parameters);
+    }
 }
