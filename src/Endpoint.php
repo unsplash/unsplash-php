@@ -2,23 +2,28 @@
 
 namespace Crew\Unsplash;
 
+use GuzzleHttp\Psr7\Response;
+
 /**
  * Class Endpoint
  *
- * Magic static method wrappers for HttpClient::send()
- * @method static \GuzzleHttp\Psr7\Response get(string $uri, mixed $arguments = null,...)
- * @method static \GuzzleHttp\Psr7\Response post(string $uri, mixed $arguments = null,...)
- * @method static \GuzzleHttp\Psr7\Response put(string $uri, mixed $arguments = null,...)
+ * @method Response get(string $uri, array $arguments = null)
+ * @method Response post(string $uri, array $arguments = null)
+ * @method Response put(string $uri, array $arguments = null)
  * @see \Crew\Unsplash\HttpClient::send()
  */
 class Endpoint
 {
     const RATE_LIMIT_ERROR_MESSAGE = "Rate Limit Exceeded";
 
-    /** @var array All parameters that an endpoint can have */
+    /**
+     * @var array - All parameters that an endpoint can have
+     */
     private $parameters;
 
-    /** @var array List of accepted http actions */
+    /**
+     * @var array - List of accepted http actions
+     */
     private static $acceptedHttpMethod = ['get', 'post', 'put', 'delete'];
 
     /**
@@ -63,7 +68,7 @@ class Endpoint
      *
      * @throws \Crew\Unsplash\Exception if the HTTP request failed
      *
-     * @see Crew\Unsplash\HttpClient::send()
+     * @see \Crew\Unsplash\HttpClient::send()
      *
      * @return \GuzzleHttp\Psr7\Response
      */
