@@ -21,7 +21,7 @@ abstract class BaseTest extends \PHPUnit_Framework_TestCase
             $dotenv->load();
         }
 
-        $this->provider = m::mock('Crew\Unsplash\Provider', [
+        $this->provider = m::mock('Unsplash\OAuth2\Client\Provider\Unsplash', [
             'clientId' => 'mock_client_id',
             'clientSecret' => 'mock_secret',
             'redirectUri' => 'none'

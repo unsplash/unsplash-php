@@ -4,6 +4,7 @@ namespace Crew\Unsplash;
 
 use \League\OAuth2\Client\Grant\RefreshToken;
 use League\OAuth2\Client\Token\AccessToken;
+use Unsplash\OAuth2\Client\Provider\Unsplash;
 
 class Connection
 {
@@ -13,10 +14,10 @@ class Connection
     const STATE = 'oauth2state';
 
     /**
-     * @param Provider $provider OAuth2 provider object to interact with the Unsplash API
+     * @param Unsplash $provider OAuth2 provider object to interact with the Unsplash API
      * @param \League\OAuth2\Client\Token\AccessToken|null $token Token information if one already exists for the user
      */
-    public function __construct(Provider $provider, AccessToken $token = null)
+    public function __construct(Unsplash $provider, AccessToken $token = null)
     {
         $this->provider = $provider;
         $this->token = $token;
@@ -117,5 +118,10 @@ class Connection
         }
 
         return $authorizationToken;
+    }
+
+    public function getResourceOwner()
+    {
+        return $this->provider->getResourceOwner($this->token);
     }
 }

@@ -8,6 +8,7 @@ use GuzzleHttp\Handler\CurlHandler;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Uri;
 use \League\OAuth2\Client\Token\AccessToken;
+use Unsplash\OAuth2\Client\Provider\Unsplash;
 
 use GuzzleHttp\Psr7\Request;
 
@@ -66,12 +67,13 @@ class HttpClient
      * If only the `applicationId` is set, non-public scoped permissions
      * won't work since access tokens can't be created without the secret and callback url
      * 
-     * @param    array $credentials     see HttpClient::init documentation
-     * @return Provider                    Provider object used for the authentification
+     * @param array $credentials
+     * @return Unsplash Provider object used for the authentification
+     * @see HttpClient::init documentation
      */
     private static function initProvider($credentials = [])
     {
-        return new Provider([
+        return new Unsplash([
             'clientId' => isset($credentials['applicationId']) ? $credentials['applicationId'] : null,
             'clientSecret' => isset($credentials['secret']) ? $credentials['secret'] : null,
             'redirectUri' => isset($credentials['callbackUrl']) ? $credentials['callbackUrl'] : null
