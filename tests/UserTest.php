@@ -70,12 +70,24 @@ class UserTest extends BaseTest
     {
         VCR::insertCassette('users.yml');
 
-        $user = Unsplash\User::find('lukechesser');
+        $user = Unsplash\User::find('anniespratt');
         $photos = $user->photos();
 
         VCR::eject();
 
         $this->assertEquals(10, $photos->count());
+    }
+
+    public function testFindUserPhotosByOrder()
+    {
+        VCR::insertCassette('users.yml');
+
+        $user = Unsplash\User::find('lukechesser');
+        $photos = $user->photos(1, 5, 'oldest');
+
+        VCR::eject();
+
+        $this->assertEquals(5, $photos->count());
     }
 
     public function testFindUserCollections()
@@ -118,8 +130,9 @@ class UserTest extends BaseTest
     {
         VCR::insertCassette('users.yml');
 
-        $user = Unsplash\User::find('dechuck');
+        $user = Unsplash\User::find('unsplash', 10, 'oldest');
         $likes = $user->likes();
+        $this->assertCount(10, $likes);
         
         VCR::eject();
 

@@ -40,11 +40,14 @@ class PhotoTest extends BaseTest
     }
 
 
+    /**
+     * @group hugh
+     */
     public function testFindCuratedPhotos()
     {
         VCR::insertCassette('photos.yml');
 
-        $photos = Unsplash\Photo::curated();
+        $photos = Unsplash\Photo::curated(1, 10, 'popular');
 
         VCR::eject();
 
@@ -150,5 +153,14 @@ class PhotoTest extends BaseTest
         VCR::eject();
 
         $this->assertTrue($unlike);
+    }
+
+    public function testAllPhotosOrderedLatest()
+    {
+        VCR::insertCassette('photos.yml');
+
+        $photos = Unsplash\Photo::all(1, 10, 'latest');
+        $this->assertEquals(10, $photos->count());
+        VCR::eject();
     }
 }
