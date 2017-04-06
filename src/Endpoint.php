@@ -29,6 +29,7 @@ class Endpoint
     public function __construct($parameters = [])
     {
         // Cast array in case it's a stdClass
+        $parameters = $this->addUtmSource($parameters);
         $this->parameters = (array)$parameters;
     }
 
@@ -143,5 +144,42 @@ class Endpoint
             $errors = [self::RATE_LIMIT_ERROR_MESSAGE];
 
         return $errors;
+    }
+
+    /**
+     * Append utm_* values
+     * @param array $parameters
+     * @return array
+     */
+    private function addUtmSource(array $parameters)
+    {
+        if (empty($parameters['links'])) {
+            return $parameters;
+        }
+
+        $queryString = http_build_query([
+            'utm_source' => HttpClient::$utmSource,
+            'utm_medium' => 'referral',
+            'utm_campaign' => 'api-credit'
+        ]);
+
+        array_walk_recursive($parameters, function (&$link) use ($queryString) {
+
+            $parsedUrl = parse_url($link);
+
+            if (!filter_var($link, FILTER_VALIDATE_URL) || $parsedUrl['host'] !== 'unsplash.com') {
+                return;
+            }
+
+            $queryPrefix = '?';
+            if(isset($parsedUrl['query'])) {
+                $queryPrefix = '&';
+            }
+
+            $link = $link . $queryPrefix . $queryString;
+            return $link;
+        });
+
+        return $parameters;
     }
 }

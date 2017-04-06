@@ -40,6 +40,7 @@ class HttpClientTest extends BaseTest
     {
         Unsplash\HttpClient::init([
             'applicationId' => 'mock_application_id',
+            'utmSource' => 'test'
         ]);
 
         $this->assertInstanceOf('Crew\Unsplash\Connection', Unsplash\HttpClient::$connection);
@@ -50,6 +51,7 @@ class HttpClientTest extends BaseTest
     {
         Unsplash\HttpClient::init([
             'applicationId' => 'mock_application_id',
+            'utmSource' => 'test'
         ], [
             'access_token'    => 'mock_access_token',
             'refresh_token' => 'mock_refresh_token_1',
@@ -59,10 +61,26 @@ class HttpClientTest extends BaseTest
         $this->assertEquals('Bearer mock_access_token', Unsplash\HttpClient::$connection->getAuthorizationToken());
     }
 
+    /**
+     * @expectedException \PHPUnit_Framework_Error_Notice
+     */
+    public function testInitWithoutUtmSourceRaisesNotice()
+    {
+        $this->setExpectedExceptionFromAnnotation();
+        Unsplash\HttpClient::init([
+            'applicationId' => 'mock_application_id',
+        ], [
+            'access_token'    => 'mock_access_token',
+            'refresh_token' => 'mock_refresh_token_1',
+            'expires_in' => time() + 3600
+        ]);
+    }
+
     public function testInitConnectionWithAccessTokenObject()
     {
         Unsplash\HttpClient::init([
             'applicationId' => 'mock_application_id',
+            'utmSource' => 'test'
         ], $this->accessToken);
 
         $this->assertEquals('Bearer ' . getenv('ACCESS_TOKEN'), Unsplash\HttpClient::$connection->getAuthorizationToken());
@@ -72,6 +90,7 @@ class HttpClientTest extends BaseTest
     {
         Unsplash\HttpClient::init([
             'applicationId' => 'mock_application_id',
+            'utmSource' => 'test'
         ], 'access_token');
 
         $this->assertEquals('Client-ID mock_application_id', Unsplash\HttpClient::$connection->getAuthorizationToken());

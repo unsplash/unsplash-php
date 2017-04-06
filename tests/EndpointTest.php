@@ -20,7 +20,8 @@ class EndpointTest extends BaseTest
             [
                 'clientId' => 'mock_client_id',
                 'clientSecret' => 'mock_secret',
-                'redirectUri' => 'none'
+                'redirectUri' => 'none',
+                'utmSource' => 'test'
             ],
             [
                 'access_token' => getenv('ACCESS_TOKEN'),
