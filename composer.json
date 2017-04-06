@@ -13,7 +13,7 @@
     "php": ">=5.5.0",
     "guzzlehttp/guzzle": "~6.2.1",
     "league/oauth2-client": "~1.4.1",
-    "hughbertd/oauth2-unsplash": "dev-master"
+    "hughbertd/oauth2-unsplash": "1.0.2"
 
   },
   "require-dev": {

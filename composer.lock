@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f8014b9c1bb3e97709d68e8a3e1e41f1",
-    "content-hash": "0813b1be222fcfa658f8850c96bb90d8",
+    "hash": "45b809f29beda0c7b3778e5567b2f482",
+    "content-hash": "d305a6a101d051b131291378d3b9bb9f",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -187,16 +187,16 @@
         },
         {
             "name": "hughbertd/oauth2-unsplash",
-            "version": "dev-master",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/HughbertD/oauth2-unsplash.git",
-                "reference": "fc7f90f071bf9dde0f9856ebc2b13240257d7a1e"
+                "reference": "ebd5102f665d9e8c889d836ff71df92dc8750ef8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/HughbertD/oauth2-unsplash/zipball/fc7f90f071bf9dde0f9856ebc2b13240257d7a1e",
-                "reference": "fc7f90f071bf9dde0f9856ebc2b13240257d7a1e",
+                "url": "https://api.github.com/repos/HughbertD/oauth2-unsplash/zipball/ebd5102f665d9e8c889d836ff71df92dc8750ef8",
+                "reference": "ebd5102f665d9e8c889d836ff71df92dc8750ef8",
                 "shasum": ""
             },
             "require": {
@@ -235,7 +235,7 @@
                 "oauth2",
                 "single sign on"
             ],
-            "time": "2017-04-05 14:16:16"
+            "time": "2017-04-05 15:54:38"
         },
         {
             "name": "ircmaxell/random-lib",
@@ -2564,7 +2564,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "hughbertd/oauth2-unsplash": 20,
         "php-vcr/php-vcr": 20,
         "vlucas/phpdotenv": 20,
         "satooshi/php-coveralls": 20
