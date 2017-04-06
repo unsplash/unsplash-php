@@ -467,4 +467,187 @@
         },
         "body": "[]"
     }
+},{
+    "request": {
+        "method": "GET",
+        "url": "https:\/\/api.unsplash.com\/collections\/\/photos?page=1&per_page=10",
+        "headers": {
+            "Host": "api.unsplash.com",
+            "Accept-Encoding": null,
+            "User-Agent": "GuzzleHttp\/6.2.1 curl\/7.43.0 PHP\/7.0.6",
+            "Authorization": "Bearer 582c5d7ebe28bd707751a43c8e22dc5c0a4ba0a60dbe69d520677f47b7cfcc1b",
+            "Accept": null
+        }
+    },
+    "response": {
+        "status": {
+            "http_version": "1.1",
+            "code": "404",
+            "message": "Not Found"
+        },
+        "headers": {
+            "Server": "Cowboy",
+            "Content-Type": "application\/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Request-Method": "*",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Expose-Headers": "Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining",
+            "Cache-Control": "no-cache",
+            "X-Ratelimit-Limit": "100",
+            "X-Ratelimit-Remaining": "97",
+            "X-Request-Id": "fd87a0ab-02f2-4504-89d1-51eac12c02a0",
+            "X-Runtime": "0.019589",
+            "Strict-Transport-Security": "max-age=31536000",
+            "Via": "1.1 vegur, 1.1 varnish, 1.1 varnish",
+            "Fastly-Debug-Digest": "78cb1a7f5ba87974063e4cfe9b099ba947b405898d8d87b23f0756deaa5b5649",
+            "Content-Length": "56",
+            "Accept-Ranges": "bytes",
+            "Date": "Thu, 06 Apr 2017 08:02:44 GMT",
+            "Age": "0",
+            "Connection": "keep-alive",
+            "X-Served-By": "cache-iad2147-IAD, cache-lcy1126-LCY",
+            "X-Cache": "MISS, MISS",
+            "X-Cache-Hits": "0, 0",
+            "X-Timer": "S1491465764.400393,VS0,VE126",
+            "Vary": "Origin"
+        },
+        "body": "{\"errors\":[\"Couldn't find Collection with 'id'=photos\"]}"
+    }
+},{
+    "request": {
+        "method": "PUT",
+        "url": "https:\/\/api.unsplash.com\/collections\/?description=updated%20basic%20description",
+        "headers": {
+            "Host": "api.unsplash.com",
+            "Content-Length": "0",
+            "Accept-Encoding": null,
+            "User-Agent": "GuzzleHttp\/6.2.1 curl\/7.43.0 PHP\/7.0.6",
+            "Authorization": "Bearer 582c5d7ebe28bd707751a43c8e22dc5c0a4ba0a60dbe69d520677f47b7cfcc1b",
+            "Accept": null
+        }
+    },
+    "response": {
+        "status": {
+            "http_version": "1.1",
+            "code": "403",
+            "message": "Forbidden"
+        },
+        "headers": {
+            "Server": "Cowboy",
+            "Content-Type": "application\/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Request-Method": "*",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Expose-Headers": "Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining",
+            "Cache-Control": "no-cache",
+            "X-Ratelimit-Limit": "100",
+            "X-Ratelimit-Remaining": "96",
+            "X-Request-Id": "4e70f817-9a6f-473e-b593-062e2622ceab",
+            "X-Runtime": "0.019358",
+            "Strict-Transport-Security": "max-age=31536000",
+            "Via": "1.1 vegur, 1.1 varnish, 1.1 varnish",
+            "Accept-Ranges": "bytes, bytes",
+            "Fastly-Debug-Digest": "e93f3bb35512dcd49357e00452addf107f690f860f40cdb28e232dd136bebaf6",
+            "Content-Length": "47",
+            "Date": "Thu, 06 Apr 2017 08:02:49 GMT",
+            "Connection": "keep-alive",
+            "X-Served-By": "cache-iad2140-IAD, cache-lcy1139-LCY",
+            "X-Cache": "MISS, MISS",
+            "X-Cache-Hits": "0, 0",
+            "X-Timer": "S1491465769.005413,VS0,VE118",
+            "Vary": "Origin"
+        },
+        "body": "{\"errors\":[\"OAuth error: missing permissions\"]}"
+    }
+},{
+    "request": {
+        "method": "DELETE",
+        "url": "https:\/\/api.unsplash.com\/collections\/",
+        "headers": {
+            "Host": "api.unsplash.com",
+            "Accept-Encoding": null,
+            "User-Agent": "GuzzleHttp\/6.2.1 curl\/7.43.0 PHP\/7.0.6",
+            "Authorization": "Bearer 582c5d7ebe28bd707751a43c8e22dc5c0a4ba0a60dbe69d520677f47b7cfcc1b",
+            "Accept": null
+        }
+    },
+    "response": {
+        "status": {
+            "http_version": "1.1",
+            "code": "403",
+            "message": "Forbidden"
+        },
+        "headers": {
+            "Server": "Cowboy",
+            "Content-Type": "application\/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Request-Method": "*",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Expose-Headers": "Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining",
+            "Cache-Control": "no-cache",
+            "X-Ratelimit-Limit": "100",
+            "X-Ratelimit-Remaining": "95",
+            "X-Request-Id": "8188f48b-3d5d-45b9-b0d1-3cb4859d67c7",
+            "X-Runtime": "0.023745",
+            "Strict-Transport-Security": "max-age=31536000",
+            "Via": "1.1 vegur, 1.1 varnish, 1.1 varnish",
+            "Accept-Ranges": "bytes, bytes",
+            "Fastly-Debug-Digest": "fa62c001cd47006f3f803289d9ca366a3fb0259d1f9b83921ccf4fc92c9968b1",
+            "Content-Length": "47",
+            "Date": "Thu, 06 Apr 2017 08:02:53 GMT",
+            "Connection": "keep-alive",
+            "X-Served-By": "cache-iad2133-IAD, cache-lhr6348-LHR",
+            "X-Cache": "MISS, MISS",
+            "X-Cache-Hits": "0, 0",
+            "X-Timer": "S1491465773.729359,VS0,VE109",
+            "Vary": "Origin"
+        },
+        "body": "{\"errors\":[\"OAuth error: missing permissions\"]}"
+    }
+},{
+    "request": {
+        "method": "POST",
+        "url": "https:\/\/api.unsplash.com\/collections\/\/add?photo_id=iDZt9nmvOWk",
+        "headers": {
+            "Host": "api.unsplash.com",
+            "Content-Length": "0",
+            "Accept-Encoding": null,
+            "User-Agent": "GuzzleHttp\/6.2.1 curl\/7.43.0 PHP\/7.0.6",
+            "Authorization": "Bearer 582c5d7ebe28bd707751a43c8e22dc5c0a4ba0a60dbe69d520677f47b7cfcc1b",
+            "Accept": null
+        }
+    },
+    "response": {
+        "status": {
+            "http_version": "1.1",
+            "code": "403",
+            "message": "Forbidden"
+        },
+        "headers": {
+            "Server": "Cowboy",
+            "Content-Type": "application\/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Request-Method": "*",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Expose-Headers": "Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining",
+            "Cache-Control": "no-cache",
+            "X-Ratelimit-Limit": "100",
+            "X-Ratelimit-Remaining": "94",
+            "X-Request-Id": "2a619615-728d-4c65-94bb-96419f8cac83",
+            "X-Runtime": "0.020088",
+            "Strict-Transport-Security": "max-age=31536000",
+            "Via": "1.1 vegur, 1.1 varnish, 1.1 varnish",
+            "Accept-Ranges": "bytes, bytes",
+            "Fastly-Debug-Digest": "597acabd6c270176a17df8f8a8c5c5791340d88354bfa2b2408c43af1d187340",
+            "Content-Length": "47",
+            "Date": "Thu, 06 Apr 2017 08:02:58 GMT",
+            "Connection": "keep-alive",
+            "X-Served-By": "cache-iad2147-IAD, cache-lcy1123-LCY",
+            "X-Cache": "MISS, MISS",
+            "X-Cache-Hits": "0, 0",
+            "X-Timer": "S1491465779.552312,VS0,VE116",
+            "Vary": "Origin"
+        },
+        "body": "{\"errors\":[\"OAuth error: missing permissions\"]}"
+    }
 }]
