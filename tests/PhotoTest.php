@@ -44,7 +44,7 @@ class PhotoTest extends BaseTest
     {
         VCR::insertCassette('photos.yml');
 
-        $photos = Unsplash\Photo::curated();
+        $photos = Unsplash\Photo::curated(1, 10, 'popular');
 
         VCR::eject();
 
@@ -181,6 +181,15 @@ class PhotoTest extends BaseTest
         $photo = Unsplash\Photo::find('GQcfdBoVB_g');
         $photo->update(['exif' => ['focal_length' => 10]]);
         $this->assertEquals(10, $photo->exif['focal_length']);
+        VCR::eject();
+    }
+
+    public function testAllPhotosOrderedLatest()
+    {
+        VCR::insertCassette('photos.yml');
+
+        $photos = Unsplash\Photo::all(1, 10, 'latest');
+        $this->assertEquals(10, $photos->count());
         VCR::eject();
     }
 }
