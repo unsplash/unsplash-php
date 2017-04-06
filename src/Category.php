@@ -5,6 +5,7 @@ namespace Crew\Unsplash;
 /**
  * Class Category
  * @package Crew\Unsplash
+ * @property int $id
  * @deprecated
  * @see \Crew\Unsplash\Collection
  */
@@ -14,11 +15,6 @@ class Category extends Endpoint
      * @var array
      */
     private $photos = [];
-
-    /**
-     * @var int
-     */
-    private $id;
 
     /**
      * Retrieve the a Category object from the id specified
@@ -31,7 +27,7 @@ class Category extends Endpoint
     public static function find($id)
     {
         $category = json_decode(self::get("/categories/{$id}")->getBody(), true);
-        
+
         return new self($category);
     }
 
@@ -74,7 +70,7 @@ class Category extends Endpoint
                 "/categories/{$this->id}/photos",
                 ['query' => ['page' => $page, 'per_page' => $per_page]]
             );
-        
+
             $this->photos["{$page}-{$per_page}"] = [
                 'body' => self::getArray($photos->getBody(), __NAMESPACE__.'\\Photo'),
                 'headers' => $photos->getHeaders()
