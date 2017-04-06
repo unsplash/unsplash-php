@@ -11,10 +11,7 @@ namespace Crew\Unsplash;
  */
 class Category extends Endpoint
 {
-    /**
-     * @var array
-     */
-    private $photos = [];
+    private $photos;
 
     /**
      * Retrieve the a Category object from the id specified

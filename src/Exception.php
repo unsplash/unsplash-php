@@ -2,6 +2,10 @@
 
 namespace Crew\Unsplash;
 
+/**
+ * Class Exception
+ * @package Crew\Unsplash
+ */
 class Exception extends \Exception
 {
     /**

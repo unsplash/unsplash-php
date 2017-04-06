@@ -18,40 +18,34 @@ class UserTest extends BaseTest
     public function testFindUser()
     {
         VCR::insertCassette('users.yml');
-
         $user = Unsplash\User::find('dechuck');
-
         VCR::eject();
 
         $this->assertEquals('dechuck', $user->username);
     }
 
     /**
-     * @expectedException Crew\Unsplash\Exception
+     * @expectedException \Crew\Unsplash\Exception
      * @expectedExceptionCode 404
      */
     public function testFindUnknownUser()
     {
         VCR::insertCassette('users.yml');
-
-        $user = Unsplash\User::find('badbadnotgooduser');
-
+        Unsplash\User::find('badbadnotgooduser');
         VCR::eject();
     }
 
     public function testFindCurrentUser()
     {
         VCR::insertCassette('users.yml');
-
         $user = Unsplash\User::current();
-
         VCR::eject();
 
         $this->assertNotEmpty($user->uploads_remaining);
     }
 
     /**
-     * @expectedException Crew\Unsplash\Exception
+     * @expectedException \Crew\Unsplash\Exception
      * @expectedExceptionCode 401
      */
     public function testFindCurrentUserOnUnconnectedUser()
@@ -60,19 +54,15 @@ class UserTest extends BaseTest
         Unsplash\HttpClient::$connection = $connection;
 
         VCR::insertCassette('users.yml');
-
-        $user = Unsplash\User::current();
-
+        Unsplash\User::current();
         VCR::eject();
     }
 
     public function testFindUserPhotos()
     {
         VCR::insertCassette('users.yml');
-
         $user = Unsplash\User::find('anniespratt');
         $photos = $user->photos();
-
         VCR::eject();
 
         $this->assertEquals(10, $photos->count());
@@ -81,10 +71,8 @@ class UserTest extends BaseTest
     public function testFindUserPhotosByOrder()
     {
         VCR::insertCassette('users.yml');
-
         $user = Unsplash\User::find('lukechesser');
         $photos = $user->photos(1, 5, 'oldest');
-
         VCR::eject();
 
         $this->assertEquals(5, $photos->count());
@@ -93,22 +81,18 @@ class UserTest extends BaseTest
     public function testFindUserCollections()
     {
         VCR::insertCassette('users.yml');
-
         $user = Unsplash\User::find('unsplash');
         $collections = $user->collections();
-
         VCR::eject();
 
         $this->assertEquals('Explore Iceland', $collections[0]->title);
     }
 
-    public function testfindUserPrivateCollection()
+    public function testFindUserPrivateCollection()
     {
         VCR::insertCassette('users.yml');
-
         $user = Unsplash\User::current();
         $collections = $user->collections();
-
         VCR::eject();
 
         $this->assertEquals('Land', $collections[1]->title);
@@ -117,10 +101,8 @@ class UserTest extends BaseTest
     public function testUpdateUser()
     {
         VCR::insertCassette('users.yml');
-
         $user = Unsplash\User::find('dechuck');
         $user->update(['instagram_username' => 'dechuck123']);
-
         VCR::eject();
 
         $this->assertEquals('dechuck123', $user->instagram_username);
@@ -129,11 +111,9 @@ class UserTest extends BaseTest
     public function testFindUserLikedPhoto()
     {
         VCR::insertCassette('users.yml');
-
         $user = Unsplash\User::find('unsplash', 10, 'oldest');
         $likes = $user->likes();
         $this->assertCount(10, $likes);
-        
         VCR::eject();
 
         $this->assertNotEmpty($likes);

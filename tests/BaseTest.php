@@ -4,12 +4,21 @@ namespace Crew\Unsplash\Tests;
 
 use Mockery as m;
 use \VCR\VCR;
+use \VCR\Request;
 use Dotenv\Dotenv;
 use \League\OAuth2\Client\Token\AccessToken;
 
+/**
+ * Class BaseTest
+ * @package Crew\Unsplash\Tests
+ */
 abstract class BaseTest extends \PHPUnit_Framework_TestCase
 {
-    protected $provider = null;
+    /**
+     * @var m\MockInterface
+     */
+    protected $provider;
+
     protected $accessToken;
 
     public function setUp()
@@ -35,35 +44,35 @@ abstract class BaseTest extends \PHPUnit_Framework_TestCase
         ]);
 
         VCR::configure()->setStorage('json')
-                        ->addRequestMatcher(
-                            'validate_authorization',
-                            function (\VCR\Request $first, \VCR\Request $second) {
-                                if ($first->getHeaders()['Authorization'] == $second->getHeaders()['Authorization']) {
-                                    return true;
-                                } else {
-                                    return false;
-                                }
-                            }
-                        )
-                        ->enableRequestMatchers(array('method', 'url', 'host', 'query_string', 'post_fields', 'validate_authorization'));
+            ->addRequestMatcher(
+                'validate_authorization',
+                function (Request $first, Request $second) {
+                    if ($first->getHeaders()['Authorization'] == $second->getHeaders()['Authorization']) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            )
+            ->enableRequestMatchers(['method', 'url', 'host', 'query_string', 'post_fields', 'validate_authorization']);
         VCR::turnOn();
     }
 
     /**
      * getPrivateMethod
      *
-     * @author    Joe Sexton <joe@webtipblog.com>
-     * @param     string $className
-     * @param     string $methodName
-     * @return    ReflectionMethod
+     * @author Joe Sexton <joe@webtipblog.com>
+     * @param object $object
+     * @param string $methodName
+     * @param array $params
+     * @return \ReflectionMethod
     */
-    public function executePrivateMethod($object, $methodName, $params = []) {
+    public function executePrivateMethod($object, $methodName, $params = [])
+    {
         $className = get_class($object);
-
-        $reflector = new \ReflectionClass( $className );
-        $method = $reflector->getMethod( $methodName );
-        $method->setAccessible( true );
-
+        $reflector = new \ReflectionClass($className);
+        $method = $reflector->getMethod($methodName);
+        $method->setAccessible(true);
         return $method->invokeArgs($object, $params);
     }
 }

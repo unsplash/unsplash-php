@@ -5,12 +5,15 @@ namespace Crew\Unsplash\Tests;
 use \Crew\Unsplash as Unsplash;
 use \VCR\VCR;
 
+/**
+ * Class CollectionTest
+ * @package Crew\Unsplash\Tests
+ */
 class CollectionTest extends BaseTest
 {
     public function setUp()
     {
         parent::setUp();
-
         $connection = new Unsplash\Connection($this->provider, $this->accessToken);
         Unsplash\HttpClient::$connection = $connection;
     }
@@ -78,13 +81,11 @@ class CollectionTest extends BaseTest
         VCR::insertCassette('collections.yml');
 
         $collection = Unsplash\Collection::create('test collection', 'basic description', true);
-        $destroy = $collection->destroy();
+        $collection->destroy();
 
         VCR::eject();
     }
 
-    // Test invalid delete collection
-    // 
     public function testAddPhotoToCollection()
     {
         VCR::insertCassette('collections.yml');
@@ -95,8 +96,7 @@ class CollectionTest extends BaseTest
             true
         );
         
-        $photo = $collection->add('iDZt9nmvOWk');
-
+        $collection->add('iDZt9nmvOWk');
         $photos = $collection->photos();
 
         VCR::eject();
@@ -114,10 +114,8 @@ class CollectionTest extends BaseTest
             true
         );
         
-        $photo = $collection->add('iDZt9nmvOWk');
-
+        $collection->add('iDZt9nmvOWk');
         $collection->remove('iDZt9nmvOWk');
-
         $photos = $collection->photos();
 
         VCR::eject();

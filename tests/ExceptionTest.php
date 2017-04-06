@@ -4,13 +4,12 @@ namespace Crew\Unsplash\Tests;
 
 use Crew\Unsplash;
 
+/**
+ * Class ExceptionTest
+ * @package Crew\Unsplash\Tests
+ */
 class ExceptionTest extends BaseTest
 {
-    public function setUp()
-    {
-        parent::setUp();
-    }
-
     public function testConstructionWithArray()
     {
         $errors = ['The error 1', 'The error 2'];

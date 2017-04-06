@@ -6,10 +6,21 @@ use \League\OAuth2\Client\Grant\RefreshToken;
 use League\OAuth2\Client\Token\AccessToken;
 use Unsplash\OAuth2\Client\Provider\Unsplash;
 
+/**
+ * Class Connection
+ * @package Crew\Unsplash
+ */
 class Connection
 {
+    /**
+     * @var Unsplash
+     */
     private $provider;
-    private $token;
+
+    /**
+     * @var AccessToken|null
+     */
+    private $token = null;
 
     const STATE = 'oauth2state';
 
@@ -41,7 +52,7 @@ class Connection
      * Validate if the state is valid. Compare it with the one
      * in the session variable
      * @param  string  $state
-     * @return boolean                
+     * @return boolean
      */
     public function isStateValid($state)
     {
@@ -81,7 +92,6 @@ class Connection
     public function refreshToken()
     {
         if (is_null($this->token) || is_null($this->token->getRefreshToken())) {
-            // @todo return an error
             return null;
         }
 

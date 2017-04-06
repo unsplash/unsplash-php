@@ -5,9 +5,16 @@ namespace Crew\Unsplash\Tests;
 use \Crew\Unsplash as Unsplash;
 use \League\OAuth2\Client\Token\AccessToken;
 
+/**
+ * Class ConnectionTest
+ * @package Crew\Unsplash\Tests
+ */
 class ConnectionTest extends BaseTest
 {
-    private $conneciton = null;
+    /**
+     * @var Unsplash\Connection
+     */
+    protected $connection;
 
     public function setUp()
     {
@@ -89,7 +96,8 @@ class ConnectionTest extends BaseTest
                 'access_token' => 'mock_access_token',
                 'refresh_token' => 'mock_refresh_token',
                 'expires_in' => time() + 3600
-        ]));
+            ])
+        );
 
         $token = $this->connection->refreshToken();
 
