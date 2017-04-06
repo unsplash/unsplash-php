@@ -25,11 +25,14 @@ Before using, configure the client with your application ID and secret. If you d
 
 Note that if you're just using actions that require the [public permission scope](#permission-scopes), only the `applicationId` is required.
 
+Note that if utmSource is omitted from $credentials a notice will be raised 
+
 ```php
 Crew\Unsplash\HttpClient::init([
 	'applicationId'	=> 'YOUR APPLICATION ID',
 	'secret'		=> 'YOUR APPLICATION SECRET',
-	'callbackUrl'	=> 'https://your-application.com/oauth/callback'
+	'callbackUrl'	=> 'https://your-application.com/oauth/callback',
+	'utmSource' => 'NAME OF YOUR APPLICATION'
 ]);
 ```
 ### Authorization workflow
