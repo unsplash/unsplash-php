@@ -2,15 +2,31 @@
 
 namespace Crew\Unsplash;
 
+/**
+ * Class Category
+ * @package Crew\Unsplash
+ * @deprecated
+ * @see \Crew\Unsplash\Collection
+ */
 class Category extends Endpoint
 {
+    /**
+     * @var array
+     */
     private $photos = [];
+
+    /**
+     * @var int
+     */
+    private $id;
 
     /**
      * Retrieve the a Category object from the id specified
      *
-     * @param  integer $id Id of the category to find
+     * @param integer $id Id of the category to find
      * @return Category
+     * @deprecated
+     * @see Collection::find()
      */
     public static function find($id)
     {
@@ -22,12 +38,12 @@ class Category extends Endpoint
     /**
      * Retrieve all the categories on a specific page.
      * Returns an ArrayObject that contains Category objects.
-     * 
-     * @param  integer $page Page from which the categories need to be retrieved
-     * @param  integer $per_page Number of elements on a page
-     * @return ArrayObject of Category objects.
      *
-     * @api
+     * @param integer $page Page from which the categories need to be retrieved
+     * @param integer $per_page Number of elements on a page
+     * @return ArrayObject of Category objects.
+     * @deprecated
+     * @see Collection::all()
      */
     public static function all($page = 1, $per_page = 10)
     {
@@ -44,13 +60,12 @@ class Category extends Endpoint
     /**
      * Retrieve all the photos for a specific category on a specific page.
      * Returns an ArrayObject that contains Photo objects.
-     * 
-     * @param  integer $page Page from which the photos need to be retrieve
-     * @param  integer $per_page Number of element in a page
-     * @return ArrayObject of Photo objects.
      *
-     * @api
-     * 
+     * @param integer $page Page from which the photos need to be retrieve
+     * @param integer $per_page Number of element in a page
+     * @return ArrayObject of Photo objects.
+     * @deprecated
+     * @see Collection::photos()
      */
     public function photos($page = 1, $per_page = 10)
     {
