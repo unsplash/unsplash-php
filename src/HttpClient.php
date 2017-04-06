@@ -17,7 +17,7 @@ class HttpClient
     private $host = 'api.unsplash.com';
     private $scheme = 'https';
 
-    public static $utmSource = '';
+    public static $utmSource = 'api_app';
 
     /**
      * Crew\Unsplash\Connection object link to the HttpClient
@@ -64,9 +64,10 @@ class HttpClient
         if (!isset($credentials['utmSource']) || empty($credentials['utmSource'])) {
             $terms = "https://community.unsplash.com/developersblog/unsplash-api-terms-explained#block-yui_3_17_2_1_1490972762425_202608";
             trigger_error("utmSource is required as part of API Terms: {$terms}");
-            $credentials['utmSource'] = '';
+        } else {
+            self::$utmSource = $credentials['utmSource'];
         }
-        self::$utmSource = $credentials['utmSource'];
+
         self::$connection = new Connection(self::initProvider($credentials), $token);
     }
 
