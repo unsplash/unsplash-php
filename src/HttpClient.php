@@ -43,6 +43,7 @@ class HttpClient
      *         ['applicationId']     string     Application id. This value is needed accross all requests
      *         ['secret']            string    Application secret. Application secret is needed for OAuth authentification
      *         ['callbackUrl']     string    Callback url. After OAuth authentification, the user will be redirected to this url.
+     *         ['utmSource'] string Name of your application. This is required, a notice will be raised if missing
      *
      * $accessToken             array     Access Token information
      *         ['access_token']    string     Access Token identifier
