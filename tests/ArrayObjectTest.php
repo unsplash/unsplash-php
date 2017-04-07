@@ -4,6 +4,10 @@ namespace Crew\Unsplash\Tests;
 
 use Crew\Unsplash;
 
+/**
+ * Class ArrayObjectTest
+ * @package Crew\Unsplash\Tests
+ */
 class ArrayObjectTest extends BaseTest
 {
     public function setUp()
@@ -61,7 +65,10 @@ class ArrayObjectTest extends BaseTest
 
     public function testNextPage()
     {
-        $headers = ['Link' => ['<http://api.staging.unsplash.com/photos?page=266>; rel="last", <http://api.staging.unsplash.com/photos?page=2>; rel="next"']];
+        $headers = ['Link' => [
+            '<http://api.staging.unsplash.com/photos?page=266>; rel="last", 
+            <http://api.staging.unsplash.com/photos?page=2>; rel="next"'
+        ]];
 
         $arrayObject = new Unsplash\ArrayObject([], $headers);
         $pages = ['first' => null, 'next' => 2, 'prev' => null, 'last' => 266];
@@ -90,7 +97,7 @@ class ArrayObjectTest extends BaseTest
     }
 
     public function testCurrentPageWhenMiddlePage()
-    {    
+    {
         $headers = ['Link' => ['<http://api.staging.unsplash.com/photos?page=1>; rel="first",
         <http://api.staging.unsplash.com/photos?page=264>; rel="prev",
         <http://api.staging.unsplash.com/photos?page=266>; rel="last",

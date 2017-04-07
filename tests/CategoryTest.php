@@ -5,6 +5,10 @@ namespace Crew\Unsplash\Tests;
 use \Crew\Unsplash as Unsplash;
 use \VCR\VCR;
 
+/**
+ * Class CategoryTest
+ * @package Crew\Unsplash\Tests
+ */
 class CategoryTest extends BaseTest
 {
     public function setUp()
@@ -35,24 +39,20 @@ class CategoryTest extends BaseTest
     }
 
     /**
-     * @expectedException Crew\Unsplash\Exception
+     * @expectedException \Crew\Unsplash\Exception
      * @expectedExceptionCode 404
      */
     public function testErrorOnNoCategory()
     {
         VCR::insertCassette('categories.yml');
-
-        $category = Unsplash\Category::find(1);
-
+        Unsplash\Category::find(1);
         VCR::eject();
     }
 
     public function testFindAllCategory()
     {
         VCR::insertCassette('categories.yml');
-
         $categories = Unsplash\Category::all();
-
         VCR::eject();
 
         $this->assertEquals(6, $categories->count());

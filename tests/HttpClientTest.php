@@ -6,6 +6,10 @@ use \Crew\Unsplash as Unsplash;
 use \League\OAuth2\Client\Token\AccessToken;
 use \VCR\VCR;
 
+/**
+ * Class HttpClientTest
+ * @package Crew\Unsplash\Tests
+ */
 class HttpClientTest extends BaseTest
 {
     public $connection;
@@ -83,7 +87,10 @@ class HttpClientTest extends BaseTest
             'utmSource' => 'test'
         ], $this->accessToken);
 
-        $this->assertEquals('Bearer ' . getenv('ACCESS_TOKEN'), Unsplash\HttpClient::$connection->getAuthorizationToken());
+        $this->assertEquals(
+            'Bearer ' . getenv('ACCESS_TOKEN'),
+            Unsplash\HttpClient::$connection->getAuthorizationToken()
+        );
     }
 
     public function testInitConnectionWithWrongTypeOfToken()
@@ -102,10 +109,8 @@ class HttpClientTest extends BaseTest
         Unsplash\HttpClient::$connection = $this->connection;
 
         VCR::insertCassette('categories.yml');
-
         $response = (new Unsplash\HttpClient())->send("get", ['categories/2']);
         $body = json_decode($response->getBody(), true);
-
         VCR::eject();
 
         $this->assertEquals(2, $body['id']);
@@ -114,10 +119,8 @@ class HttpClientTest extends BaseTest
     public function testConnectionFromHttpClient()
     {
         Unsplash\HttpClient::$connection = $this->connection;
-
-        $token = Unsplash\HttpClient::$connection->generateToken('mock_code');
+        Unsplash\HttpClient::$connection->generateToken('mock_code');
 
         $this->assertEquals('Bearer mock_access_token_1', Unsplash\HttpClient::$connection->getAuthorizationToken());
     }
-
 }

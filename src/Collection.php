@@ -2,9 +2,15 @@
 
 namespace Crew\Unsplash;
 
+/**
+ * Class Collection
+ * @package Crew\Unsplash
+ * @property int $id
+ */
 class Collection extends Endpoint
 {
-    private $photos = [];
+    private $photos;
+
     /**
      * Retrieve all collections for a given page
      *

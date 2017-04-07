@@ -2,16 +2,31 @@
 
 namespace Crew\Unsplash;
 
+/**
+ * Class ArrayObject
+ * @package Crew\Unsplash
+ */
 class ArrayObject extends \ArrayObject
 {
+    /**
+     * @var array
+     */
     private $headers;
-    private $pages; 
-    private $basePages = array(
+
+    /**
+     * @var array
+     */
+    private $pages = [];
+
+    /**
+     * @var array
+     */
+    private $basePages = [
         self::LAST => null,
         self::PREV => null,
         self::NEXT => null,
         self::FIRST => null
-    );
+    ];
 
     const LAST = 'last';
     const PREV = 'prev';
@@ -19,7 +34,9 @@ class ArrayObject extends \ArrayObject
     const FIRST = 'first';
 
     const LINK = 'Link';
+
     const TOTAL = 'X-Total';
+
     const PER_PAGE = 'X-Per-Page';
 
     /**

@@ -8,16 +8,37 @@ use GuzzleHttp\Handler\CurlHandler;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Uri;
 use \League\OAuth2\Client\Token\AccessToken;
+use Unsplash\OAuth2\Client\Provider\Unsplash;
 
 use GuzzleHttp\Psr7\Request;
 
+/**
+ * Class HttpClient
+ * @package Crew\Unsplash
+ */
 class HttpClient
 {
+    /**
+     * @var Client
+     */
     private $httpClient;
+
+    /**
+     * @var string
+     */
     private $host = 'api.unsplash.com';
+
+    /**
+     * @var string
+     */
     private $scheme = 'https';
 
     public static $utmSource = 'api_app';
+
+    /**
+     * @var null
+     */
+    private $authorization = null;
 
     /**
      * Crew\Unsplash\Connection object link to the HttpClient
@@ -39,17 +60,17 @@ class HttpClient
     /**
      * Initialize the $connection object that is used for all requests to the API
      *
-     * $credentials             array     Credentials needed for the API request
-     *         ['applicationId']     string     Application id. This value is needed accross all requests
-     *         ['secret']            string    Application secret. Application secret is needed for OAuth authentification
-     *         ['callbackUrl']     string    Callback url. After OAuth authentification, the user will be redirected to this url.
-     *         ['utmSource'] string Name of your application. This is required, a notice will be raised if missing
+     * $credentials array Credentials needed for the API request
+     * ['applicationId'] string Application id. This value is needed across all requests
+     * ['secret'] string Application secret. Application secret is needed for OAuth authentication
+     * ['callbackUrl'] string Callback url. After OAuth authentication, the user will be redirected to this url.
+     * ['utmSource'] string Name of your application. This is required, a notice will be raised if missing
      *
-     * $accessToken             array     Access Token information
-     *         ['access_token']    string     Access Token identifier
-     *         ['refresh_token']    string     Refresh Token necessary when the access token is expired
-     *         ['expires_in']        int     Define in when the access token will expire
-     * 
+     * $accessToken array Access Token information
+     * ['access_token'] string Access Token identifier
+     * ['refresh_token'] string Refresh Token necessary when the access token is expired
+     * ['expires_in'] int Define in when the access token will expire
+     *
      * @param  array $credentials see above
      * @param  array| \League\OAuth2\Client\Token\accessToken $accessToken     see above
      * @return void
@@ -75,13 +96,14 @@ class HttpClient
      * Create an unsplash provider from the credentials provided by the user.
      * If only the `applicationId` is set, non-public scoped permissions
      * won't work since access tokens can't be created without the secret and callback url
-     * 
-     * @param    array $credentials     see HttpClient::init documentation
-     * @return Provider                    Provider object used for the authentification
+     *
+     * @param array $credentials
+     * @return Unsplash Provider object used for the authentication
+     * @see HttpClient::init documentation
      */
     private static function initProvider($credentials = [])
     {
-        return new Provider([
+        return new Unsplash([
             'clientId' => isset($credentials['applicationId']) ? $credentials['applicationId'] : null,
             'clientSecret' => isset($credentials['secret']) ? $credentials['secret'] : null,
             'redirectUri' => isset($credentials['callbackUrl']) ? $credentials['callbackUrl'] : null
@@ -89,8 +111,8 @@ class HttpClient
     }
 
     /**
-     * Create an Access Token the provider can use for authentification
-     * 
+     * Create an Access Token the provider can use for authentication
+     *
      * @param   mixed $accessToken     see HttpClient::init documentation
      * @return \League\OAuth2\Client\Token\AccessToken | null
      */
@@ -107,7 +129,7 @@ class HttpClient
 
     /**
      * Send an http request through the http client.
-     * 
+     *
      * @param  string $method http method sent
      * @param  array $arguments Array containing the URI to send the request and the parameters of the request
      * @return \GuzzleHttp\Psr7\Response
@@ -132,7 +154,7 @@ class HttpClient
      * Generate a new handler that will manage the HTTP requests.
      *
      * Some middleware are also configured to manage the authorization header and request URI
-     * 
+     *
      * @param string $authorization Authorization code to pass in the header
      * @return \GuzzleHttp\HandlerStack
      */
@@ -157,5 +179,4 @@ class HttpClient
 
         return $stack;
     }
-
 }

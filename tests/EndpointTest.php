@@ -3,13 +3,12 @@
 namespace Crew\Unsplash\Tests;
 
 use Crew\Unsplash;
-use Mockery as m;
-// use GuzzleHttp\Client;
-// use GuzzleHttp\Handler\MockHandler;
-// use GuzzleHttp\HandlerStack;
-// use GuzzleHttp\Psr7\Response;
 use \VCR\VCR;
 
+/**
+ * Class EndpointTest
+ * @package Crew\Unsplash\Tests
+ */
 class EndpointTest extends BaseTest
 {
     public function setUp()
@@ -34,11 +33,8 @@ class EndpointTest extends BaseTest
     public function testRequest()
     {
         VCR::insertCassette('endpoint.yml');
-
         $res = Unsplash\Endpoint::__callStatic('get', ['categories/2', []]);
-
         VCR::eject();
-
         $body = json_decode($res->getBody());
 
         $this->assertEquals(2, $body->id);
@@ -47,7 +43,6 @@ class EndpointTest extends BaseTest
     public function testRequestWithBadMethod()
     {
         $res = Unsplash\Endpoint::__callStatic('back', ['categories/2', []]);
-
         $this->assertNull($res);
     }
 
@@ -61,15 +56,13 @@ class EndpointTest extends BaseTest
     }
 
     /**
-     * @expectedException Crew\Unsplash\Exception
+     * @expectedException \Crew\Unsplash\Exception
      * @expectedExceptionCode 403
      */
     public function testRateLimitError()
     {
         VCR::insertCassette('endpoint.yml');
-
-        $res = Unsplash\Endpoint::__callStatic('get', ['categories/3', []]);
-
+        Unsplash\Endpoint::__callStatic('get', ['categories/3', []]);
         VCR::eject();
     }
 }
