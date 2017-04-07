@@ -16,6 +16,7 @@ class PhotoTest extends BaseTest
         parent::setUp();
         $connection = new Unsplash\Connection($this->provider, $this->accessToken);
         Unsplash\HttpClient::$connection = $connection;
+        Unsplash\HttpClient::$utmSource = 'test';
     }
 
     public function testFindPhoto()
@@ -34,6 +35,11 @@ class PhotoTest extends BaseTest
         VCR::eject();
 
         $this->assertEquals(10, $photos->count());
+        $expectedQueryString = 'utm_source=test&utm_medium=referral&utm_campaign=api-credit';
+        $this->assertContains($expectedQueryString, $photos[0]->links['html']);
+        $this->assertContains($expectedQueryString, $photos[0]->links['download']);
+        $this->assertNotContains($expectedQueryString, $photos[0]->links['self']);
+        $this->assertContains($expectedQueryString, $photos[0]->user['links']['html']);
     }
 
     public function testFindCuratedPhotos()

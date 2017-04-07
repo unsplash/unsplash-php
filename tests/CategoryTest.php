@@ -16,6 +16,14 @@ class CategoryTest extends BaseTest
         parent::setUp();
 
         $connection = new Unsplash\Connection($this->provider, $this->accessToken);
+        Unsplash\HttpClient::init([
+            'applicationId' => 'mock_application_id',
+            'utmSource' => 'test'
+        ], [
+            'access_token'    => 'mock_access_token',
+            'refresh_token' => 'mock_refresh_token_1',
+            'expires_in' => time() + 3600
+        ]);
         Unsplash\HttpClient::$connection = $connection;
     }
 
