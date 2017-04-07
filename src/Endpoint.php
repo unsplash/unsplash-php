@@ -37,8 +37,7 @@ class Endpoint
     public function __construct($parameters = [])
     {
         // Cast array in case it's a stdClass
-        $parameters = $this->addUtmSource($parameters);
-        $this->parameters = (array)$parameters;
+        $this->parameters = $this->addUtmSource((array) $parameters);
     }
 
     /**
@@ -179,7 +178,7 @@ class Endpoint
             }
 
             $queryPrefix = '?';
-            if(isset($parsedUrl['query'])) {
+            if (isset($parsedUrl['query'])) {
                 $queryPrefix = '&';
             }
 
