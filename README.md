@@ -25,15 +25,22 @@ Before using, configure the client with your application ID and secret. If you d
 
 Note that if you're just using actions that require the [public permission scope](#permission-scopes), only the `applicationId` is required.
 
+Note that if utmSource is omitted from $credentials a notice will be raised 
+
 ```php
 Crew\Unsplash\HttpClient::init([
 	'applicationId'	=> 'YOUR APPLICATION ID',
 	'secret'		=> 'YOUR APPLICATION SECRET',
-	'callbackUrl'	=> 'https://your-application.com/oauth/callback'
+	'callbackUrl'	=> 'https://your-application.com/oauth/callback',
+	'utmSource' => 'NAME OF YOUR APPLICATION'
 ]);
 ```
 ### Authorization workflow
-To access actions that are non-public (i.e. uploading a photo to a specific account), you'll need a user's permission to access their data. Direct them to an authorization URL (configuring any scopes before generating the authorization URL):
+To access actions that are non-public (i.e. uploading a photo to a specific account), you'll need a user's permission to access their data. 
+
+An example of this flow can be found in /examples/oauth-flow.php
+
+Direct them to an authorization URL (configuring any scopes before generating the authorization URL):
 
 ```php
 $scopes = ['public', 'write_user']

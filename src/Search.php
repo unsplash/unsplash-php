@@ -2,6 +2,10 @@
 
 namespace Crew\Unsplash;
 
+/**
+ * Class Search
+ * @package Crew\Unsplash
+ */
 class Search extends Endpoint
 {
     /**
@@ -16,8 +20,8 @@ class Search extends Endpoint
     public static function photos($search, $page = 1, $per_page = 10)
     {
         $photos = self::get(
-            "/search/photos", [
-                'query' => [
+            "/search/photos",
+            [ 'query' => [
                     'query' => $search,
                     'page' => $page,
                     'per_page' => $per_page
@@ -40,8 +44,8 @@ class Search extends Endpoint
     public static function collections($search, $page = 1, $per_page = 10)
     {
         $collections = self::get(
-            "/search/collections", [
-                'query' => [
+            "/search/collections",
+            ['query' => [
                     'query' => $search,
                     'page' => $page,
                     'per_page' => $per_page
@@ -64,8 +68,8 @@ class Search extends Endpoint
     public static function users($search, $page = 1, $per_page = 10)
     {
         $users = self::get(
-            "/search/users", [
-                'query' => [
+            "/search/users",
+            ['query' => [
                     'query' => $search,
                     'page' => $page,
                     'per_page' => $per_page

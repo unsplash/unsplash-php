@@ -608,4 +608,187 @@
         },
         "body": "[{\"id\":145008,\"title\":\"Beyond the Map\",\"description\":null,\"published_at\":\"2016-02-29T10:04:30-05:00\",\"updated_at\":\"2016-11-25T02:05:40-05:00\",\"curated\":false,\"featured\":true,\"total_photos\":60,\"private\":false,\"share_key\":\"984017f5975b563ab5a4219f2e481512\",\"cover_photo\":{\"id\":\"cssvEZacHvQ\",\"created_at\":\"2015-05-31T11:42:52-04:00\",\"updated_at\":\"2017-04-03T21:25:07-04:00\",\"width\":4000,\"height\":6000,\"color\":\"#55613E\",\"likes\":123,\"liked_by_user\":false,\"user\":{\"id\":\"8xWqhQl506k\",\"updated_at\":\"2017-04-04T03:39:08-04:00\",\"username\":\"blakeverdoorn\",\"name\":\"Blake Richard Verdoorn\",\"first_name\":\"Blake Richard\",\"last_name\":\"Verdoorn\",\"portfolio_url\":\"http:\/\/blakeverdoorn.com\",\"bio\":\"Get out there.\",\"location\":\"Dallas, TX\",\"total_likes\":2,\"total_photos\":101,\"total_collections\":0,\"profile_image\":{\"small\":\"https:\/\/images.unsplash.com\/profile-1471894155967-749fe500172d?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=32&w=32&s=8e7160e67e7e8e380645f5980cd475e2\",\"medium\":\"https:\/\/images.unsplash.com\/profile-1471894155967-749fe500172d?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=64&w=64&s=05eb74f195348808ba5cbb633f267e35\",\"large\":\"https:\/\/images.unsplash.com\/profile-1471894155967-749fe500172d?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=128&w=128&s=23bf8b69bd4afc56f060206c4a07ab3e\"},\"links\":{\"self\":\"https:\/\/api.unsplash.com\/users\/blakeverdoorn\",\"html\":\"http:\/\/unsplash.com\/@blakeverdoorn\",\"photos\":\"https:\/\/api.unsplash.com\/users\/blakeverdoorn\/photos\",\"likes\":\"https:\/\/api.unsplash.com\/users\/blakeverdoorn\/likes\",\"portfolio\":\"https:\/\/api.unsplash.com\/users\/blakeverdoorn\/portfolio\",\"following\":\"https:\/\/api.unsplash.com\/users\/blakeverdoorn\/following\",\"followers\":\"https:\/\/api.unsplash.com\/users\/blakeverdoorn\/followers\"}},\"urls\":{\"raw\":\"https:\/\/images.unsplash.com\/photo-1433086966358-54859d0ed716\",\"full\":\"https:\/\/images.unsplash.com\/photo-1433086966358-54859d0ed716?ixlib=rb-0.3.5&q=100&fm=jpg&crop=entropy&cs=tinysrgb&s=ed8c60643f4bbcd1b60b37bd100ce7b0\",\"regular\":\"https:\/\/images.unsplash.com\/photo-1433086966358-54859d0ed716?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&s=c9a2e655846ebd074935383be74f9a3e\",\"small\":\"https:\/\/images.unsplash.com\/photo-1433086966358-54859d0ed716?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&s=2c5b6f9e3bc878fcce444f34b34f8d81\",\"thumb\":\"https:\/\/images.unsplash.com\/photo-1433086966358-54859d0ed716?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=c3fddf2c535702d5cda4292268c49349\"},\"categories\":[{\"id\":4,\"title\":\"Nature\",\"photo_count\":54184,\"links\":{\"self\":\"https:\/\/api.unsplash.com\/categories\/4\",\"photos\":\"https:\/\/api.unsplash.com\/categories\/4\/photos\"}}],\"links\":{\"self\":\"https:\/\/api.unsplash.com\/photos\/cssvEZacHvQ\",\"html\":\"http:\/\/unsplash.com\/photos\/cssvEZacHvQ\",\"download\":\"http:\/\/unsplash.com\/photos\/cssvEZacHvQ\/download\",\"download_location\":\"https:\/\/api.unsplash.com\/photos\/cssvEZacHvQ\/download\"}},\"user\":{\"id\":\"PlTQOdXHUr8\",\"updated_at\":\"2016-04-07T14:19:42-04:00\",\"username\":\"bbliss318\",\"name\":\"Cody Bliss\",\"first_name\":\"Cody\",\"last_name\":\"Bliss\",\"portfolio_url\":null,\"bio\":\"\",\"location\":null,\"total_likes\":0,\"total_photos\":0,\"total_collections\":1,\"profile_image\":{\"small\":\"https:\/\/images.unsplash.com\/placeholder-avatars\/extra-large.jpg?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=32&w=32&s=0ad68f44c4725d5a3fda019bab9d3edc\",\"medium\":\"https:\/\/images.unsplash.com\/placeholder-avatars\/extra-large.jpg?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=64&w=64&s=356bd4b76a3d4eb97d63f45b818dd358\",\"large\":\"https:\/\/images.unsplash.com\/placeholder-avatars\/extra-large.jpg?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=128&w=128&s=ee8bbf5fb8d6e43aaaa238feae2fe90d\"},\"links\":{\"self\":\"https:\/\/api.unsplash.com\/users\/bbliss318\",\"html\":\"http:\/\/unsplash.com\/@bbliss318\",\"photos\":\"https:\/\/api.unsplash.com\/users\/bbliss318\/photos\",\"likes\":\"https:\/\/api.unsplash.com\/users\/bbliss318\/likes\",\"portfolio\":\"https:\/\/api.unsplash.com\/users\/bbliss318\/portfolio\",\"following\":\"https:\/\/api.unsplash.com\/users\/bbliss318\/following\",\"followers\":\"https:\/\/api.unsplash.com\/users\/bbliss318\/followers\"}},\"links\":{\"self\":\"https:\/\/api.unsplash.com\/collections\/145008\",\"html\":\"http:\/\/unsplash.com\/collections\/145008\/beyond-the-map\",\"photos\":\"https:\/\/api.unsplash.com\/collections\/145008\/photos\",\"related\":\"https:\/\/api.unsplash.com\/collections\/145008\/related\"}},{\"id\":894,\"title\":\"Earth & Planets\",\"description\":\"Earth, and other planets, outer-space.\",\"published_at\":\"2016-02-15T22:18:12-05:00\",\"updated_at\":\"2017-03-28T11:13:58-04:00\",\"curated\":false,\"featured\":true,\"total_photos\":131,\"private\":false,\"share_key\":\"f22fb40d1cea44ee0d7658dd1089c640\",\"cover_photo\":{\"id\":\"WKT3TE5AQu0\",\"created_at\":\"2016-05-03T23:09:23-04:00\",\"updated_at\":\"2017-04-02T11:28:21-04:00\",\"width\":9200,\"height\":5600,\"color\":\"#C2C8BC\",\"likes\":639,\"liked_by_user\":false,\"user\":{\"id\":\"XpI7t2xRxfM\",\"updated_at\":\"2017-04-04T05:19:59-04:00\",\"username\":\"nasa\",\"name\":\"NASA\",\"first_name\":\"NASA\",\"last_name\":null,\"portfolio_url\":\"http:\/\/www.nasa.gov\/\",\"bio\":\"To reach for new heights and reveal the unknown so that what we do and learn will benefit all humankind.\",\"location\":null,\"total_likes\":0,\"total_photos\":34,\"total_collections\":1,\"profile_image\":{\"small\":\"https:\/\/images.unsplash.com\/profile-1446819291540-625b8478e701?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=32&w=32&s=908fb5bbbe76d51722c00f161f882c5b\",\"medium\":\"https:\/\/images.unsplash.com\/profile-1446819291540-625b8478e701?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=64&w=64&s=ff01470557040dda8a0b9380ce82b847\",\"large\":\"https:\/\/images.unsplash.com\/profile-1446819291540-625b8478e701?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=128&w=128&s=25af51bac43c5e8faf52555f0e87366e\"},\"links\":{\"self\":\"https:\/\/api.unsplash.com\/users\/nasa\",\"html\":\"http:\/\/unsplash.com\/@nasa\",\"photos\":\"https:\/\/api.unsplash.com\/users\/nasa\/photos\",\"likes\":\"https:\/\/api.unsplash.com\/users\/nasa\/likes\",\"portfolio\":\"https:\/\/api.unsplash.com\/users\/nasa\/portfolio\",\"following\":\"https:\/\/api.unsplash.com\/users\/nasa\/following\",\"followers\":\"https:\/\/api.unsplash.com\/users\/nasa\/followers\"}},\"urls\":{\"raw\":\"https:\/\/images.unsplash.com\/photo-1462331321792-cc44368b8894\",\"full\":\"https:\/\/images.unsplash.com\/photo-1462331321792-cc44368b8894?ixlib=rb-0.3.5&q=100&fm=jpg&crop=entropy&cs=tinysrgb&s=da4b0ca7aa526618a456b078479f22c6\",\"regular\":\"https:\/\/images.unsplash.com\/photo-1462331321792-cc44368b8894?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&s=f8ef438238a6b9187044bb517b29efde\",\"small\":\"https:\/\/images.unsplash.com\/photo-1462331321792-cc44368b8894?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&s=97ada55c44bb1341f8d9842de0ebf8b1\",\"thumb\":\"https:\/\/images.unsplash.com\/photo-1462331321792-cc44368b8894?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=3629042d30c6777b66596aad5330964a\"},\"categories\":[{\"id\":4,\"title\":\"Nature\",\"photo_count\":54184,\"links\":{\"self\":\"https:\/\/api.unsplash.com\/categories\/4\",\"photos\":\"https:\/\/api.unsplash.com\/categories\/4\/photos\"}}],\"links\":{\"self\":\"https:\/\/api.unsplash.com\/photos\/WKT3TE5AQu0\",\"html\":\"http:\/\/unsplash.com\/photos\/WKT3TE5AQu0\",\"download\":\"http:\/\/unsplash.com\/photos\/WKT3TE5AQu0\/download\",\"download_location\":\"https:\/\/api.unsplash.com\/photos\/WKT3TE5AQu0\/download\"}},\"user\":{\"id\":\"0trUGxz-ZaM\",\"updated_at\":\"2016-09-10T22:20:02-04:00\",\"username\":\"beauty_tn\",\"name\":\"Nicole Gladding O'Neal\",\"first_name\":\"Nicole\",\"last_name\":\"Gladding O'Neal\",\"portfolio_url\":null,\"bio\":\"\",\"location\":null,\"total_likes\":3,\"total_photos\":0,\"total_collections\":22,\"profile_image\":{\"small\":\"https:\/\/images.unsplash.com\/profile-fb-1455591625-3ab15b754e24.jpg?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=32&w=32&s=b842711cc0d019d7ec7ad9203ab944a0\",\"medium\":\"https:\/\/images.unsplash.com\/profile-fb-1455591625-3ab15b754e24.jpg?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=64&w=64&s=24e047f05360fe7e7ad386b72df15a3a\",\"large\":\"https:\/\/images.unsplash.com\/profile-fb-1455591625-3ab15b754e24.jpg?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=128&w=128&s=0037b86a754de809d86f93f66aafde31\"},\"links\":{\"self\":\"https:\/\/api.unsplash.com\/users\/beauty_tn\",\"html\":\"http:\/\/unsplash.com\/@beauty_tn\",\"photos\":\"https:\/\/api.unsplash.com\/users\/beauty_tn\/photos\",\"likes\":\"https:\/\/api.unsplash.com\/users\/beauty_tn\/likes\",\"portfolio\":\"https:\/\/api.unsplash.com\/users\/beauty_tn\/portfolio\",\"following\":\"https:\/\/api.unsplash.com\/users\/beauty_tn\/following\",\"followers\":\"https:\/\/api.unsplash.com\/users\/beauty_tn\/followers\"}},\"links\":{\"self\":\"https:\/\/api.unsplash.com\/collections\/894\",\"html\":\"http:\/\/unsplash.com\/collections\/894\/earth-planets\",\"photos\":\"https:\/\/api.unsplash.com\/collections\/894\/photos\",\"related\":\"https:\/\/api.unsplash.com\/collections\/894\/related\"}},{\"id\":138266,\"title\":\"Scenic\",\"description\":null,\"published_at\":\"2016-02-25T11:36:36-05:00\",\"updated_at\":\"2016-12-18T01:53:38-05:00\",\"curated\":false,\"featured\":true,\"total_photos\":121,\"private\":false,\"share_key\":\"f8181ca8cad729affd2739d2a775c6bb\",\"cover_photo\":{\"id\":\"9EwxGJdTJNo\",\"created_at\":\"2014-11-05T17:28:10-05:00\",\"updated_at\":\"2017-03-31T14:43:18-04:00\",\"width\":4608,\"height\":3456,\"color\":\"#776E56\",\"likes\":413,\"liked_by_user\":false,\"user\":{\"id\":\"Ul0QVz12Goo\",\"updated_at\":\"2017-04-04T04:17:36-04:00\",\"username\":\"ugmonk\",\"name\":\"Jeff Sheldon\",\"first_name\":\"Jeff\",\"last_name\":\"Sheldon\",\"portfolio_url\":\"http:\/\/ugmonk.com\/\",\"bio\":\"Founder and designer of Ugmonk\",\"location\":null,\"total_likes\":0,\"total_photos\":23,\"total_collections\":2,\"profile_image\":{\"small\":\"https:\/\/images.unsplash.com\/profile-1441298803695-accd94000cac?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=32&w=32&s=7cfe3b93750cb0c93e2f7caec08b5a41\",\"medium\":\"https:\/\/images.unsplash.com\/profile-1441298803695-accd94000cac?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=64&w=64&s=5a9dc749c43ce5bd60870b129a40902f\",\"large\":\"https:\/\/images.unsplash.com\/profile-1441298803695-accd94000cac?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=128&w=128&s=32085a077889586df88bfbe406692202\"},\"links\":{\"self\":\"https:\/\/api.unsplash.com\/users\/ugmonk\",\"html\":\"http:\/\/unsplash.com\/@ugmonk\",\"photos\":\"https:\/\/api.unsplash.com\/users\/ugmonk\/photos\",\"likes\":\"https:\/\/api.unsplash.com\/users\/ugmonk\/likes\",\"portfolio\":\"https:\/\/api.unsplash.com\/users\/ugmonk\/portfolio\",\"following\":\"https:\/\/api.unsplash.com\/users\/ugmonk\/following\",\"followers\":\"https:\/\/api.unsplash.com\/users\/ugmonk\/followers\"}},\"urls\":{\"raw\":\"https:\/\/images.unsplash.com\/photo-1415226481302-c40f24f4d45e\",\"full\":\"https:\/\/images.unsplash.com\/photo-1415226481302-c40f24f4d45e?ixlib=rb-0.3.5&q=100&fm=jpg&crop=entropy&cs=tinysrgb&s=ee03e92a768b5922d4bca2dcda497f5d\",\"regular\":\"https:\/\/images.unsplash.com\/photo-1415226481302-c40f24f4d45e?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&s=353ad39686da50793bd3fbbe9b640b89\",\"small\":\"https:\/\/images.unsplash.com\/photo-1415226481302-c40f24f4d45e?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&s=1637a148250484156d429ae983e7a98e\",\"thumb\":\"https:\/\/images.unsplash.com\/photo-1415226481302-c40f24f4d45e?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=59e3e3fc12b6fe53af2aeed92c0ad537\"},\"categories\":[{\"id\":4,\"title\":\"Nature\",\"photo_count\":54184,\"links\":{\"self\":\"https:\/\/api.unsplash.com\/categories\/4\",\"photos\":\"https:\/\/api.unsplash.com\/categories\/4\/photos\"}}],\"links\":{\"self\":\"https:\/\/api.unsplash.com\/photos\/9EwxGJdTJNo\",\"html\":\"http:\/\/unsplash.com\/photos\/9EwxGJdTJNo\",\"download\":\"http:\/\/unsplash.com\/photos\/9EwxGJdTJNo\/download\",\"download_location\":\"https:\/\/api.unsplash.com\/photos\/9EwxGJdTJNo\/download\"}},\"user\":{\"id\":\"P0bVtdiDJVM\",\"updated_at\":\"2016-02-25T15:55:48-05:00\",\"username\":\"robcarl\",\"name\":\"Robert Milos\",\"first_name\":\"Robert\",\"last_name\":\"Milos\",\"portfolio_url\":null,\"bio\":\"\",\"location\":null,\"total_likes\":0,\"total_photos\":0,\"total_collections\":9,\"profile_image\":{\"small\":\"https:\/\/images.unsplash.com\/placeholder-avatars\/extra-large.jpg?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=32&w=32&s=0ad68f44c4725d5a3fda019bab9d3edc\",\"medium\":\"https:\/\/images.unsplash.com\/placeholder-avatars\/extra-large.jpg?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=64&w=64&s=356bd4b76a3d4eb97d63f45b818dd358\",\"large\":\"https:\/\/images.unsplash.com\/placeholder-avatars\/extra-large.jpg?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&fit=crop&h=128&w=128&s=ee8bbf5fb8d6e43aaaa238feae2fe90d\"},\"links\":{\"self\":\"https:\/\/api.unsplash.com\/users\/robcarl\",\"html\":\"http:\/\/unsplash.com\/@robcarl\",\"photos\":\"https:\/\/api.unsplash.com\/users\/robcarl\/photos\",\"likes\":\"https:\/\/api.unsplash.com\/users\/robcarl\/likes\",\"portfolio\":\"https:\/\/api.unsplash.com\/users\/robcarl\/portfolio\",\"following\":\"https:\/\/api.unsplash.com\/users\/robcarl\/following\",\"followers\":\"https:\/\/api.unsplash.com\/users\/robcarl\/followers\"}},\"links\":{\"self\":\"https:\/\/api.unsplash.com\/collections\/138266\",\"html\":\"http:\/\/unsplash.com\/collections\/138266\/scenic\",\"photos\":\"https:\/\/api.unsplash.com\/collections\/138266\/photos\",\"related\":\"https:\/\/api.unsplash.com\/collections\/138266\/related\"}}]"
     }
+},{
+    "request": {
+        "method": "GET",
+        "url": "https:\/\/api.unsplash.com\/collections\/\/photos?page=1&per_page=10",
+        "headers": {
+            "Host": "api.unsplash.com",
+            "Accept-Encoding": null,
+            "User-Agent": "GuzzleHttp\/6.2.1 curl\/7.43.0 PHP\/7.0.6",
+            "Authorization": "Bearer 582c5d7ebe28bd707751a43c8e22dc5c0a4ba0a60dbe69d520677f47b7cfcc1b",
+            "Accept": null
+        }
+    },
+    "response": {
+        "status": {
+            "http_version": "1.1",
+            "code": "404",
+            "message": "Not Found"
+        },
+        "headers": {
+            "Server": "Cowboy",
+            "Content-Type": "application\/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Request-Method": "*",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Expose-Headers": "Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining",
+            "Cache-Control": "no-cache",
+            "X-Ratelimit-Limit": "100",
+            "X-Ratelimit-Remaining": "97",
+            "X-Request-Id": "fd87a0ab-02f2-4504-89d1-51eac12c02a0",
+            "X-Runtime": "0.019589",
+            "Strict-Transport-Security": "max-age=31536000",
+            "Via": "1.1 vegur, 1.1 varnish, 1.1 varnish",
+            "Fastly-Debug-Digest": "78cb1a7f5ba87974063e4cfe9b099ba947b405898d8d87b23f0756deaa5b5649",
+            "Content-Length": "56",
+            "Accept-Ranges": "bytes",
+            "Date": "Thu, 06 Apr 2017 08:02:44 GMT",
+            "Age": "0",
+            "Connection": "keep-alive",
+            "X-Served-By": "cache-iad2147-IAD, cache-lcy1126-LCY",
+            "X-Cache": "MISS, MISS",
+            "X-Cache-Hits": "0, 0",
+            "X-Timer": "S1491465764.400393,VS0,VE126",
+            "Vary": "Origin"
+        },
+        "body": "{\"errors\":[\"Couldn't find Collection with 'id'=photos\"]}"
+    }
+},{
+    "request": {
+        "method": "PUT",
+        "url": "https:\/\/api.unsplash.com\/collections\/?description=updated%20basic%20description",
+        "headers": {
+            "Host": "api.unsplash.com",
+            "Content-Length": "0",
+            "Accept-Encoding": null,
+            "User-Agent": "GuzzleHttp\/6.2.1 curl\/7.43.0 PHP\/7.0.6",
+            "Authorization": "Bearer 582c5d7ebe28bd707751a43c8e22dc5c0a4ba0a60dbe69d520677f47b7cfcc1b",
+            "Accept": null
+        }
+    },
+    "response": {
+        "status": {
+            "http_version": "1.1",
+            "code": "403",
+            "message": "Forbidden"
+        },
+        "headers": {
+            "Server": "Cowboy",
+            "Content-Type": "application\/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Request-Method": "*",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Expose-Headers": "Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining",
+            "Cache-Control": "no-cache",
+            "X-Ratelimit-Limit": "100",
+            "X-Ratelimit-Remaining": "96",
+            "X-Request-Id": "4e70f817-9a6f-473e-b593-062e2622ceab",
+            "X-Runtime": "0.019358",
+            "Strict-Transport-Security": "max-age=31536000",
+            "Via": "1.1 vegur, 1.1 varnish, 1.1 varnish",
+            "Accept-Ranges": "bytes, bytes",
+            "Fastly-Debug-Digest": "e93f3bb35512dcd49357e00452addf107f690f860f40cdb28e232dd136bebaf6",
+            "Content-Length": "47",
+            "Date": "Thu, 06 Apr 2017 08:02:49 GMT",
+            "Connection": "keep-alive",
+            "X-Served-By": "cache-iad2140-IAD, cache-lcy1139-LCY",
+            "X-Cache": "MISS, MISS",
+            "X-Cache-Hits": "0, 0",
+            "X-Timer": "S1491465769.005413,VS0,VE118",
+            "Vary": "Origin"
+        },
+        "body": "{\"errors\":[\"OAuth error: missing permissions\"]}"
+    }
+},{
+    "request": {
+        "method": "DELETE",
+        "url": "https:\/\/api.unsplash.com\/collections\/",
+        "headers": {
+            "Host": "api.unsplash.com",
+            "Accept-Encoding": null,
+            "User-Agent": "GuzzleHttp\/6.2.1 curl\/7.43.0 PHP\/7.0.6",
+            "Authorization": "Bearer 582c5d7ebe28bd707751a43c8e22dc5c0a4ba0a60dbe69d520677f47b7cfcc1b",
+            "Accept": null
+        }
+    },
+    "response": {
+        "status": {
+            "http_version": "1.1",
+            "code": "403",
+            "message": "Forbidden"
+        },
+        "headers": {
+            "Server": "Cowboy",
+            "Content-Type": "application\/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Request-Method": "*",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Expose-Headers": "Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining",
+            "Cache-Control": "no-cache",
+            "X-Ratelimit-Limit": "100",
+            "X-Ratelimit-Remaining": "95",
+            "X-Request-Id": "8188f48b-3d5d-45b9-b0d1-3cb4859d67c7",
+            "X-Runtime": "0.023745",
+            "Strict-Transport-Security": "max-age=31536000",
+            "Via": "1.1 vegur, 1.1 varnish, 1.1 varnish",
+            "Accept-Ranges": "bytes, bytes",
+            "Fastly-Debug-Digest": "fa62c001cd47006f3f803289d9ca366a3fb0259d1f9b83921ccf4fc92c9968b1",
+            "Content-Length": "47",
+            "Date": "Thu, 06 Apr 2017 08:02:53 GMT",
+            "Connection": "keep-alive",
+            "X-Served-By": "cache-iad2133-IAD, cache-lhr6348-LHR",
+            "X-Cache": "MISS, MISS",
+            "X-Cache-Hits": "0, 0",
+            "X-Timer": "S1491465773.729359,VS0,VE109",
+            "Vary": "Origin"
+        },
+        "body": "{\"errors\":[\"OAuth error: missing permissions\"]}"
+    }
+},{
+    "request": {
+        "method": "POST",
+        "url": "https:\/\/api.unsplash.com\/collections\/\/add?photo_id=iDZt9nmvOWk",
+        "headers": {
+            "Host": "api.unsplash.com",
+            "Content-Length": "0",
+            "Accept-Encoding": null,
+            "User-Agent": "GuzzleHttp\/6.2.1 curl\/7.43.0 PHP\/7.0.6",
+            "Authorization": "Bearer 582c5d7ebe28bd707751a43c8e22dc5c0a4ba0a60dbe69d520677f47b7cfcc1b",
+            "Accept": null
+        }
+    },
+    "response": {
+        "status": {
+            "http_version": "1.1",
+            "code": "403",
+            "message": "Forbidden"
+        },
+        "headers": {
+            "Server": "Cowboy",
+            "Content-Type": "application\/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Request-Method": "*",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Expose-Headers": "Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining",
+            "Cache-Control": "no-cache",
+            "X-Ratelimit-Limit": "100",
+            "X-Ratelimit-Remaining": "94",
+            "X-Request-Id": "2a619615-728d-4c65-94bb-96419f8cac83",
+            "X-Runtime": "0.020088",
+            "Strict-Transport-Security": "max-age=31536000",
+            "Via": "1.1 vegur, 1.1 varnish, 1.1 varnish",
+            "Accept-Ranges": "bytes, bytes",
+            "Fastly-Debug-Digest": "597acabd6c270176a17df8f8a8c5c5791340d88354bfa2b2408c43af1d187340",
+            "Content-Length": "47",
+            "Date": "Thu, 06 Apr 2017 08:02:58 GMT",
+            "Connection": "keep-alive",
+            "X-Served-By": "cache-iad2147-IAD, cache-lcy1123-LCY",
+            "X-Cache": "MISS, MISS",
+            "X-Cache-Hits": "0, 0",
+            "X-Timer": "S1491465779.552312,VS0,VE116",
+            "Vary": "Origin"
+        },
+        "body": "{\"errors\":[\"OAuth error: missing permissions\"]}"
+    }
 }]

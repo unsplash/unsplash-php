@@ -4,19 +4,31 @@ namespace Crew\Unsplash;
 
 use \League\OAuth2\Client\Grant\RefreshToken;
 use League\OAuth2\Client\Token\AccessToken;
+use Unsplash\OAuth2\Client\Provider\Unsplash;
 
+/**
+ * Class Connection
+ * @package Crew\Unsplash
+ */
 class Connection
 {
+    /**
+     * @var Unsplash
+     */
     private $provider;
-    private $token;
+
+    /**
+     * @var AccessToken|null
+     */
+    private $token = null;
 
     const STATE = 'oauth2state';
 
     /**
-     * @param Provider $provider OAuth2 provider object to interact with the Unsplash API
+     * @param Unsplash $provider OAuth2 provider object to interact with the Unsplash API
      * @param \League\OAuth2\Client\Token\AccessToken|null $token Token information if one already exists for the user
      */
-    public function __construct(Provider $provider, AccessToken $token = null)
+    public function __construct(Unsplash $provider, AccessToken $token = null)
     {
         $this->provider = $provider;
         $this->token = $token;
@@ -40,7 +52,7 @@ class Connection
      * Validate if the state is valid. Compare it with the one
      * in the session variable
      * @param  string  $state
-     * @return boolean                
+     * @return boolean
      */
     public function isStateValid($state)
     {
@@ -80,7 +92,6 @@ class Connection
     public function refreshToken()
     {
         if (is_null($this->token) || is_null($this->token->getRefreshToken())) {
-            // @todo return an error
             return null;
         }
 
@@ -117,5 +128,10 @@ class Connection
         }
 
         return $authorizationToken;
+    }
+
+    public function getResourceOwner()
+    {
+        return $this->provider->getResourceOwner($this->token);
     }
 }
