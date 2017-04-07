@@ -17,6 +17,8 @@ class HttpClient
     private $host = 'api.unsplash.com';
     private $scheme = 'https';
 
+    public static $utmSource = 'api_app';
+
     /**
      * Crew\Unsplash\Connection object link to the HttpClient
      * Need to be set on the class before running anything else
@@ -41,6 +43,7 @@ class HttpClient
      *         ['applicationId']     string     Application id. This value is needed accross all requests
      *         ['secret']            string    Application secret. Application secret is needed for OAuth authentification
      *         ['callbackUrl']     string    Callback url. After OAuth authentification, the user will be redirected to this url.
+     *         ['utmSource'] string Name of your application. This is required, a notice will be raised if missing
      *
      * $accessToken             array     Access Token information
      *         ['access_token']    string     Access Token identifier
@@ -56,6 +59,13 @@ class HttpClient
         $token = null;
         if (! empty($accessToken)) {
             $token = self::initAccessToken($accessToken);
+        }
+
+        if (!isset($credentials['utmSource']) || empty($credentials['utmSource'])) {
+            $terms = "https://community.unsplash.com/developersblog/unsplash-api-terms-explained#block-yui_3_17_2_1_1490972762425_202608";
+            trigger_error("utmSource is required as part of API Terms: {$terms}");
+        } else {
+            self::$utmSource = $credentials['utmSource'];
         }
 
         self::$connection = new Connection(self::initProvider($credentials), $token);
