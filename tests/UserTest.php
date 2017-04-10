@@ -118,4 +118,23 @@ class UserTest extends BaseTest
 
         $this->assertNotEmpty($likes);
     }
+
+    public function testGetUserPortfolio()
+    {
+        VCR::insertCassette('users.yml');
+        $userPortfolioLink = Unsplash\User::portfolio('hughbertd');
+        $this->assertEquals('http://hughbertd.github.io', $userPortfolioLink);
+        VCR::eject();
+    }
+
+    public function testUserStatistics()
+    {
+        VCR::insertCassette('users.yml');
+        $user = Unsplash\User::find('hughbertd');
+        $statistics = $user->statistics();
+        $this->assertArrayHasKey('downloads', $statistics);
+        $this->assertArrayHasKey('views', $statistics);
+        $this->assertArrayHasKey('likes', $statistics);
+        VCR::eject();
+    }
 }

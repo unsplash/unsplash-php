@@ -181,4 +181,40 @@ class Photo extends Endpoint
         self::delete("photos/{$this->id}/like");
         return true;
     }
+
+    /**
+     * Retrieve statistics for a photo
+     *
+     * @param string $resolution
+     * @param int $quantity
+     * @return ArrayObject
+     */
+    public function statistics($resolution = 'days', $quantity = 30)
+    {
+        $statistics = self::get("photos/{$this->id}/statistics", ['query' => ['resolution' => $resolution, 'quantity' => $quantity]]);
+        $statisticsArray = self::getArray($statistics->getBody(), Stat::class);
+        return new ArrayObject($statisticsArray, $statistics->getHeaders());
+    }
+
+    /**
+     * Returns download link for a photo
+     * @return string - url to download
+     */
+    public function download()
+    {
+        $link = self::get("/photos/{$this->id}/download");
+        $linkClass = \GuzzleHttp\json_decode($link->getBody());
+        return $linkClass->url;
+    }
+
+    /**
+     * Update an existing photo
+     * @param array $parameters
+     * @return Photo
+     */
+    public function update(array $parameters = [])
+    {
+        json_decode(self::put("/photos/{$this->id}", ['query' => $parameters])->getBody(), true);
+        parent::update($parameters);
+    }
 }

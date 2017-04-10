@@ -137,4 +137,28 @@ class User extends Endpoint
         json_decode(self::put("/me", ['query' => $parameters])->getBody(), true);
         parent::update($parameters);
     }
+
+    /**
+     * Return url for user's portfolio page
+     * @param $username
+     * @return string
+     */
+    public static function portfolio($username)
+    {
+        $user = json_decode(self::get("/users/{$username}/portfolio")->getBody(), true);
+        return $user['url'];
+    }
+
+    /**
+     * Return statistics for user
+     * @param string $resolution
+     * @param int $quantity
+     * @return ArrayObject
+     */
+    public function statistics($resolution = 'days', $quantity = 30)
+    {
+        $statistics = self::get("users/{$this->username}/statistics", ['query' => ['resolution' => $resolution, 'quantity' => $quantity]]);
+        $statisticsArray = self::getArray($statistics->getBody(), Stat::class);
+        return new ArrayObject($statisticsArray, $statistics->getHeaders());
+    }
 }

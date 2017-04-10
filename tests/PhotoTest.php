@@ -139,6 +139,38 @@ class PhotoTest extends BaseTest
         $this->assertTrue($unlike);
     }
 
+    public function testStatisticsForPhoto()
+    {
+        VCR::insertCassette('photos.yml');
+        $photo = Unsplash\Photo::find('ZUaqqMxtxYk');
+        $response = $photo->statistics();
+        $this->assertInstanceOf('ArrayObject', $response);
+        $this->assertArrayHasKey('id', $response);
+        $this->assertArrayHasKey('downloads', $response);
+        $this->assertArrayHasKey('views', $response);
+        $this->assertArrayHasKey('likes', $response);
+        VCR::eject();
+    }
+
+    public function testDownloadLinkForPhoto()
+    {
+        VCR::insertCassette('photos.yml');
+        $photo = Unsplash\Photo::find('ZUaqqMxtxYk');
+        $link = $photo->download();
+        $this->assertInternalType('string', $link);
+        $this->assertNotFalse(filter_var($link, FILTER_VALIDATE_URL));
+        VCR::eject();
+    }
+
+    public function testUpdatePhoto()
+    {
+        VCR::insertCassette('photos.yml');
+        $photo = Unsplash\Photo::find('GQcfdBoVB_g');
+        $photo->update(['exif' => ['focal_length' => 10]]);
+        $this->assertEquals(10, $photo->exif['focal_length']);
+        VCR::eject();
+    }
+
     public function testAllPhotosOrderedLatest()
     {
         VCR::insertCassette('photos.yml');
