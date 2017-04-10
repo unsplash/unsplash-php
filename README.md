@@ -25,15 +25,22 @@ Before using, configure the client with your application ID and secret. If you d
 
 Note that if you're just using actions that require the [public permission scope](#permission-scopes), only the `applicationId` is required.
 
+Note that if utmSource is omitted from $credentials a notice will be raised 
+
 ```php
 Crew\Unsplash\HttpClient::init([
 	'applicationId'	=> 'YOUR APPLICATION ID',
 	'secret'		=> 'YOUR APPLICATION SECRET',
-	'callbackUrl'	=> 'https://your-application.com/oauth/callback'
+	'callbackUrl'	=> 'https://your-application.com/oauth/callback',
+	'utmSource' => 'NAME OF YOUR APPLICATION'
 ]);
 ```
 ### Authorization workflow
-To access actions that are non-public (i.e. uploading a photo to a specific account), you'll need a user's permission to access their data. Direct them to an authorization URL (configuring any scopes before generating the authorization URL):
+To access actions that are non-public (i.e. uploading a photo to a specific account), you'll need a user's permission to access their data. 
+
+An example of this flow can be found in /examples/oauth-flow.php
+
+Direct them to an authorization URL (configuring any scopes before generating the authorization URL):
 
 ```php
 $scopes = ['public', 'write_user']
@@ -78,7 +85,7 @@ Some parameters are identical across all methods:
 
 ===
 
-### Category
+### Category (Deprecated)
 
 
 #### Crew\Unsplash\Category::all()
@@ -276,6 +283,46 @@ Crew\Unsplash\Collection::all($page, $per_page);
 
 ===
 
+#### Crew\Unsplash\Collection::featured($page, $per_page)
+Retrieve list of featured collections.
+
+**Arguments**
+
+  Argument     | Type | Opt/Required
+---------------|------|--------------
+`$per_page`    | int  | Opt *(Default: 10 / Maximum: 30)*
+`$page`        | int  | Opt *(Default: 1)*
+
+**Example**
+
+
+```php
+Crew\Unsplash\Collection::featured($page, $per_page);
+```
+
+===
+
+#### Crew\Unsplash\Collection::related($page, $per_page)
+Retrieve list of featured collections.
+
+*Note* You must instantiate a collection first
+
+**Arguments**
+
+  Argument     | Type | Opt/Required
+---------------|------|--------------
+
+
+**Example**
+
+
+```php
+$collection = Crew\Unsplash\Collection::find($id);
+$collection->related();
+```
+
+===
+
 #### Crew\Unsplash\Collection::find($id)
 Retrieve a specific collection.
 
@@ -420,7 +467,7 @@ $collection->remove(int $photo_id)
 
 ### Photo
 
-#### Crew\Unsplash\Photo::all($page, $per_page)
+#### Crew\Unsplash\Photo::all($page, $per_page, $order_by)
 Retrieve a list of photos.
 
 **Arguments**
@@ -429,17 +476,18 @@ Retrieve a list of photos.
 ---------------|------|--------------
 `$per_page`    | int  | Opt *(Default: 10 / Maximum: 30)*
 `$page`        | int  | Opt *(Default: 1)*
+`$order_by` | string | Opt *(Default: latest / Available: oldest, popular)*
 
 **Example**
 
 ```php
-Crew\Unsplash\Photo::all($page, $per_page);
+Crew\Unsplash\Photo::all($page, $per_page, $order_by);
 ```
 
 
 ===
 
-#### Crew\Unsplash\Photo::curated($page, $per_page)
+#### Crew\Unsplash\Photo::curated($page, $per_page, $order_by)
 Retrieve a list of curated photos.
 
 **Arguments**
@@ -448,17 +496,19 @@ Retrieve a list of curated photos.
 ---------------|------|--------------
 `$per_page`    | int  | Opt *(Default: 10 / Maximum: 30)*
 `$page`        | int  | Opt *(Default: 1)*
+`$order_by` | string | Opt *(Default: latest / Available: oldest, popular)*
 
 **Example**
 
 ```php
-Crew\Unsplash\Photo::curated($page, $per_page);
+Crew\Unsplash\Photo::curated($page, $per_page, $order_by);
 ```
 
 ===
 
 
 #### Crew\Unsplash\Photo::search($keyword, $category_id, $page, $per_page);
+#### (Deprecated: Use Search::photos())
 Retrieve photos from a search by keyword or category.
 
 **Arguments**
@@ -510,6 +560,27 @@ Post a photo on the user's behalf.
 
 ```php
 Crew\Unsplash\Photo::create( $file_path);
+```
+
+===
+
+#### Crew\Unsplash\Photo::update($parameters = [])
+Post a photo on the user's behalf.
+
+*Note:* You need the `write_photos` permission scope
+You need to instantiate the Photo object first
+
+**Arguments**
+
+  Argument     | Type   | Opt/Required
+---------------|--------|--------------
+`$parameters`   | array | Required
+
+**Example**
+
+```php
+$photo = Crew\Unsplash\Photo::find(string $id)
+$photo->update(array $parameters);
 ```
 
 ===
@@ -612,6 +683,54 @@ $photo->unlike();
 
 ===
 
+#### Crew\Unsplash\Photo::statistics(string $resolution, int $quantity)
+Retrieve total number of downloads, views and likes of a single photo, as well as the historical breakdown of these stats in a specific timeframe (default is 30 days).
+
+*Note:* You must instantiate a Photo object first
+
+**Arguments**
+
+
+  Argument     | Type | Opt/Required
+---------------|------|--------------
+resolution | string | Opt *(Accepts only days currently)*
+quantity | int | Opt *(Defaults to 30, can be between 1 and 30)*
+
+
+**Example**
+
+
+```php
+
+
+$photo = Crew\Unsplash\Photo::find($id);
+$photo->statistics('days', 7);
+```
+
+===
+
+#### Crew\Unsplash\Photo::download()
+Retrieve a download link for a photo
+
+*Note:* You must instantiate a Photo object first
+
+**Arguments**
+
+
+  Argument     | Type | Opt/Required
+---------------|------|--------------
+
+
+**Example**
+
+
+```php
+$photo = Crew\Unsplash\Photo::find($id);
+$photo->download();
+```
+
+===
+
 ### User
 
 #### Crew\Unsplash\User::find($username)
@@ -627,6 +746,23 @@ Retrieve a user's information.
 
 ```php
 Crew\Unsplash\User::find($username)
+```
+
+===
+
+#### Crew\Unsplash\User::portfolio($username)
+Retrieve a link to the user's portfolio page.
+
+**Arguments**
+
+  Argument     | Type   | Opt/Required
+---------------|--------|--------------
+`$username`    | string | Required
+
+**Example**
+
+```php
+Crew\Unsplash\User::portfolio($username)
 ```
 
 ===
@@ -648,7 +784,7 @@ $user = Crew\Unsplash\User::current();
 
 ===
 
-#### Crew\Unsplash\User::photos($page, $per_page)
+#### Crew\Unsplash\User::photos($page, $per_page, $order_by)
 Retrieve user's photos.
 
 *Note:* You need to instantiate a user object first
@@ -659,6 +795,7 @@ Retrieve user's photos.
 ---------------|------|--------------
 `$per_page`    | int  | Opt *(Default: 10 / Maximum: 30)*
 `$page`        | int  | Opt *(Default: 1)*
+`$order_by` | string | Opt *(Default: latest / Available: oldest, popular)*
 
 **Example**
 
@@ -692,6 +829,29 @@ $user->collections($page, $per_page);
 
 ===
 
+#### Crew\Unsplash\User::likes($page, $per_page, $order_by)
+Retrieve user's collections.
+
+*Note:* You need to instantiate a user object first
+
+**Arguments**
+
+  Argument     | Type | Opt/Required
+---------------|------|--------------
+`$per_page`    | int  | Opt *(Default: 10 / Maximum: 30)*
+`$page`        | int  | Opt *(Default: 1)*
+`$order_by` | string | Opt *(Default: latest / Available: oldest, popular)*
+
+
+**Example**
+
+```php
+$user = Crew\Unsplash\User::find($username);
+$user->likes($page, $per_page, $order_by);
+```
+
+===
+
 
 #### Crew\Unsplash\User::update([$key => value])
 Update current user's fields. Multiple fields can be passed in the array.
@@ -711,6 +871,30 @@ Update current user's fields. Multiple fields can be passed in the array.
 $user = Crew\Unsplash\User::current();
 $user->update(['first_name' => 'Elliot', 'last_name' => 'Alderson']);
 ```
+
+#### Crew\Unsplash\User::statistics(string $resolution, int $quantity)
+Retrieve total number of downloads, views and likes for a user, as well as the historical breakdown of these stats in a specific timeframe (default is 30 days).
+
+*Note:* You must instantiate the User object first
+
+**Arguments**
+
+
+  Argument     | Type | Opt/Required
+---------------|------|--------------
+resolution | string | Opt *(Accepts only days currently)*
+quantity | int | Opt *(Defaults to 30, can be between 1 and 30)*
+
+
+**Example**
+
+
+```php
+$user = Crew\Unsplash\User::find($id);
+$user->statistics('days', 7);
+```
+
+===
 
 ## Contributing
 

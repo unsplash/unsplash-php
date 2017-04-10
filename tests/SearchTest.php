@@ -3,9 +3,12 @@
 namespace Crew\Unsplash\Tests;
 
 use \Crew\Unsplash as Unsplash;
-use Symfony\Component\VarDumper\VarDumper;
 use \VCR\VCR;
 
+/**
+ * Class SearchTest
+ * @package Crew\Unsplash\Tests
+ */
 class SearchTest extends BaseTest
 {
     public function setUp()
@@ -19,13 +22,10 @@ class SearchTest extends BaseTest
     public function testSearchPhotos()
     {
         VCR::insertCassette('search.yml');
-
         $photos = Unsplash\Search::photos("paris");
-
         VCR::eject();
 
         $photosArrayObject = $photos->getArrayObject();
-
 
         $this->assertInstanceOf(Unsplash\Photo::class, current($photosArrayObject));
         $this->assertEquals(10, $photosArrayObject->count());
@@ -37,9 +37,7 @@ class SearchTest extends BaseTest
     public function testSearchCollections()
     {
         VCR::insertCassette('search.yml');
-
         $collections = Unsplash\Search::collections("paris");
-
         VCR::eject();
 
         $collectionsArrayObject = $collections->getArrayObject();
@@ -54,9 +52,7 @@ class SearchTest extends BaseTest
     public function testSearchUsers()
     {
         VCR::insertCassette('search.yml');
-
         $users = Unsplash\Search::users("dechuck");
-
         VCR::eject();
 
         $usersArrayObject = $users->getArrayObject();

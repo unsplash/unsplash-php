@@ -5,8 +5,17 @@ namespace Crew\Unsplash\Tests;
 use \Crew\Unsplash as Unsplash;
 use \VCR\VCR;
 
+/**
+ * Class StatTest
+ * @package Crew\Unsplash\Tests
+ */
 class StatTest extends BaseTest
 {
+    /**
+     * @var array
+     */
+    protected $total = [];
+
     public function setUp()
     {
         parent::setUp();

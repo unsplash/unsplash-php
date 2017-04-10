@@ -2,6 +2,10 @@
 
 namespace Crew\Unsplash;
 
+/**
+ * Class Stat
+ * @package Crew\Unsplash
+ */
 class Stat extends Endpoint
 {
     /**

@@ -2,23 +2,31 @@
 
 namespace Crew\Unsplash;
 
+use GuzzleHttp\Psr7\Response;
+
 /**
  * Class Endpoint
+ * @package Crew\Unsplash
  *
- * Magic static method wrappers for HttpClient::send()
- * @method static \GuzzleHttp\Psr7\Response get(string $uri, mixed $arguments = null,...)
- * @method static \GuzzleHttp\Psr7\Response post(string $uri, mixed $arguments = null,...)
- * @method static \GuzzleHttp\Psr7\Response put(string $uri, mixed $arguments = null,...)
+ * @method Response|null get(string $uri, array $arguments = null)
+ * @method Response|null post(string $uri, array $arguments = null)
+ * @method Response|null put(string $uri, array $arguments = null)
+ * @method Response|null delete(string $uri, array $arguments = null)
+
  * @see \Crew\Unsplash\HttpClient::send()
  */
 class Endpoint
 {
     const RATE_LIMIT_ERROR_MESSAGE = "Rate Limit Exceeded";
 
-    /** @var array All parameters that an endpoint can have */
+    /**
+     * @var array - All parameters that an endpoint can have
+     */
     private $parameters;
 
-    /** @var array List of accepted http actions */
+    /**
+     * @var array - List of accepted http actions
+     */
     private static $acceptedHttpMethod = ['get', 'post', 'put', 'delete'];
 
     /**
@@ -29,7 +37,7 @@ class Endpoint
     public function __construct($parameters = [])
     {
         // Cast array in case it's a stdClass
-        $this->parameters = (array)$parameters;
+        $this->parameters = $this->addUtmSource((array) $parameters);
     }
 
     /**
@@ -60,28 +68,26 @@ class Endpoint
      *
      * @param  string $method HTTP action to trigger
      * @param  array $arguments Array containing all the parameters pass to the magic method
-     *
      * @throws \Crew\Unsplash\Exception if the HTTP request failed
-     *
-     * @see Crew\Unsplash\HttpClient::send()
-     *
-     * @return \GuzzleHttp\Psr7\Response
+     * @see \Crew\Unsplash\HttpClient::send()
+     * @return Response|null
      */
     public static function __callStatic($method, $arguments)
     {
-        //    Validate if the $method is part of the accepted http method array
-        if (in_array($method, self::$acceptedHttpMethod)) {
-            $httpClient = new HttpClient();
-
-            $response = $httpClient->send($method, $arguments);
-
-            //    Validate if the request failed
-            if (! self::isGoodRequest($response)) {
-                throw new Exception(self::getErrorMessage($response), $response->getStatusCode());
-            }
-
-            return $response;
+        // Validate if the $method is part of the accepted http method array
+        if (!in_array($method, self::$acceptedHttpMethod)) {
+            return null;
         }
+
+        $httpClient = new HttpClient();
+        $response = $httpClient->send($method, $arguments);
+
+        // Validate if the request failed
+        if (! self::isGoodRequest($response)) {
+            throw new Exception(self::getErrorMessage($response), $response->getStatusCode());
+        }
+
+        return $response;
     }
 
     /**
@@ -91,7 +97,7 @@ class Endpoint
      *
      * @return PageResult
      */
-    protected static function getPageResult($responseBody, array $headers = [], $className)
+    protected static function getPageResult($responseBody, array $headers, $className)
     {
         $data = json_decode($responseBody, true);
         $result = new PageResult($data['results'], $data['total'], $data['total_pages'], $headers, $className);
@@ -106,7 +112,7 @@ class Endpoint
      */
     protected static function getArray($responseBody, $object)
     {
-        return array_map(function ($array) use($object) {
+        return array_map(function ($array) use ($object) {
             return new $object($array);
         }, json_decode($responseBody, true));
     }
@@ -139,9 +145,47 @@ class Endpoint
             $errors = $message['errors'];
         }
 
-        if ($body == self::RATE_LIMIT_ERROR_MESSAGE)
+        if ($body == self::RATE_LIMIT_ERROR_MESSAGE) {
             $errors = [self::RATE_LIMIT_ERROR_MESSAGE];
+        }
 
         return $errors;
+    }
+
+    /**
+     * Append utm_* values
+     * @param array $parameters
+     * @return array
+     */
+    private function addUtmSource(array $parameters)
+    {
+        if (empty($parameters['links'])) {
+            return $parameters;
+        }
+
+        $queryString = http_build_query([
+            'utm_source' => HttpClient::$utmSource,
+            'utm_medium' => 'referral',
+            'utm_campaign' => 'api-credit'
+        ]);
+
+        array_walk_recursive($parameters, function (&$link) use ($queryString) {
+
+            $parsedUrl = parse_url($link);
+
+            if (!filter_var($link, FILTER_VALIDATE_URL) || $parsedUrl['host'] !== 'unsplash.com') {
+                return;
+            }
+
+            $queryPrefix = '?';
+            if (isset($parsedUrl['query'])) {
+                $queryPrefix = '&';
+            }
+
+            $link = $link . $queryPrefix . $queryString;
+            return $link;
+        });
+
+        return $parameters;
     }
 }

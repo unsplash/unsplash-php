@@ -2,6 +2,12 @@
 
 namespace Crew\Unsplash;
 
+/**
+ * Class Photo
+ * @package Crew\Unsplash
+ * @property int $id
+ * @property array $user
+ */
 class Photo extends Endpoint
 {
     private $photographer;
@@ -22,14 +28,17 @@ class Photo extends Endpoint
     /**
      * Retrieve all the photos on a specific page.
      * Returns an ArrayObject that contains Photo objects.
-     * 
+     *
      * @param  integer $page Page from which the photos need to be retrieve
      * @param  integer $per_page Number of element in a page
+     * @param string $order_by Order in which to retrieve photos
      * @return ArrayObject of Photos
      */
-    public static function all($page = 1, $per_page = 10)
+    public static function all($page = 1, $per_page = 10, $order_by = 'latest')
     {
-        $photos = self::get("/photos", ['query' => ['page' => $page, 'per_page' => $per_page]]);
+        $photos = self::get("/photos", [
+            'query' => ['page' => $page, 'per_page' => $per_page, 'order_by' => $order_by]
+        ]);
 
         $photosArray = self::getArray($photos->getBody(), get_called_class());
 
@@ -43,11 +52,14 @@ class Photo extends Endpoint
      *
      * @param  integer $page Page from which the photos need to be retrieve
      * @param  integer $per_page Number of element in a page
+     * @param string $order_by Order in which to retrieve photos
      * @return ArrayObject of Photos
      */
-    public static function curated($page = 1, $per_page = 10)
+    public static function curated($page = 1, $per_page = 10, $order_by = 'latest')
     {
-        $photos = self::get("/photos/curated", ['query' => ['page' => $page, 'per_page' => $per_page]]);
+        $photos = self::get("/photos/curated", [
+            'query' => ['page' => $page, 'per_page' => $per_page, 'order_by' => $order_by]
+        ]);
 
         $photosArray = self::getArray($photos->getBody(), get_called_class());
 
@@ -58,22 +70,25 @@ class Photo extends Endpoint
      * Retrieve all the photos on a specific page depending on search results
      * Returns ArrayObject that contain Photo object.
      *
-     * @param  string    $search Retrieve photos matching the search term.
-     * @param  integer $category Retrieve photos matching the category ID
-     * @param  integer $page Page from which the photos need to be retrieved
-     * @param  integer $per_page Number of elements on a page
+     * @param string $search Retrieve photos matching the search term.
+     * @param integer $category Retrieve photos matching the category ID
+     * @param integer $page Page from which the photos need to be retrieved
+     * @param integer $per_page Number of elements on a page
+     * @param string|null $orientation Orientation to search for
+     * @deprecated
+     * @see Search::photos()
      * @return ArrayObject of Photos
      */
     public static function search($search, $category = null, $page = 1, $per_page = 10, $orientation = null)
     {
         $photos = self::get(
-            "/photos/search", [
-                'query' => [
-                    'query' => $search,
-                    'category' => $category,
-                    'orientation' => $orientation,
-                    'page' => $page,
-                    'per_page' => $per_page
+            "/photos/search",
+            ['query' => [
+                'query' => $search,
+                'category' => $category,
+                'orientation' => $orientation,
+                'page' => $page,
+                'per_page' => $per_page
                 ]
             ]
         );
@@ -85,8 +100,9 @@ class Photo extends Endpoint
 
     /**
      * Create a new photo. The user needs to connect their account and authorize the write_photo permission scope.
-     * 
+     *
      * @param  string $filePath Path of the file to upload
+     * @throws Exception - if filePath does not exist
      * @return Photo
      */
     public static function create($filePath)
@@ -99,7 +115,7 @@ class Photo extends Endpoint
 
         $photo = json_decode(
             self::post(
-                "photos", 
+                "photos",
                 [
                     'multipart' => [['name' => 'photo', 'contents' => $file]],
                     'headers' => ['Content-Length' => filesize($filePath)]
@@ -112,8 +128,8 @@ class Photo extends Endpoint
     }
 
     /**
-     * Retrieve the user that uploaded the photo. 
-     * 
+     * Retrieve the user that uploaded the photo
+     *
      * @return User
      */
     public function photographer()
@@ -146,25 +162,59 @@ class Photo extends Endpoint
 
     /**
      * Like the photo for the current user
-     * 
+     *
      * @return boolean
      */
     public function like()
     {
-        $like = self::post("/photos/{$this->id}/like");
-
+        self::post("/photos/{$this->id}/like");
         return true;
     }
 
     /**
      * Unlike the photo for the current user
-     * 
+     *
      * @return boolean
      */
     public function unlike()
     {
-        $unlike = self::delete("photos/{$this->id}/like");
-
+        self::delete("photos/{$this->id}/like");
         return true;
+    }
+
+    /**
+     * Retrieve statistics for a photo
+     *
+     * @param string $resolution
+     * @param int $quantity
+     * @return ArrayObject
+     */
+    public function statistics($resolution = 'days', $quantity = 30)
+    {
+        $statistics = self::get("photos/{$this->id}/statistics", ['query' => ['resolution' => $resolution, 'quantity' => $quantity]]);
+        $statisticsArray = self::getArray($statistics->getBody(), Stat::class);
+        return new ArrayObject($statisticsArray, $statistics->getHeaders());
+    }
+
+    /**
+     * Returns download link for a photo
+     * @return string - url to download
+     */
+    public function download()
+    {
+        $link = self::get("/photos/{$this->id}/download");
+        $linkClass = \GuzzleHttp\json_decode($link->getBody());
+        return $linkClass->url;
+    }
+
+    /**
+     * Update an existing photo
+     * @param array $parameters
+     * @return Photo
+     */
+    public function update(array $parameters = [])
+    {
+        json_decode(self::put("/photos/{$this->id}", ['query' => $parameters])->getBody(), true);
+        parent::update($parameters);
     }
 }
