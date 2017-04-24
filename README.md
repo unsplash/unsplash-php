@@ -85,6 +85,71 @@ Some parameters are identical across all methods:
 
 ----
 
+### Search
+
+#### Crew\Unsplash\Search::photos($search, $page, $per_page)
+
+Retrieve a single page of photo results depending on search results.
+
+**Arguments**
+
+  Argument     | Type   | Opt/Required
+---------------|--------|--------------
+`$search`      | string | Required
+`$per_page`    | int    | Opt *(Default: 10 / Maximum: 30)*
+`$page`        | int    | Opt *(Default: 1)*
+
+**Example**
+
+
+```php
+Crew\Unsplash\Search::photos($search, $page, $per_page);
+```
+
+----
+
+#### Crew\Unsplash\Search::collections($search, $page, $per_page)
+
+Retrieve a single page of collection results depending on search results.
+
+**Arguments**
+
+  Argument     | Type   | Opt/Required
+---------------|--------|--------------
+`$search`      | string | Required
+`$per_page`    | int    | Opt *(Default: 10 / Maximum: 30)*
+`$page`        | int    | Opt *(Default: 1)*
+
+**Example**
+
+
+```php
+Crew\Unsplash\Search::collections($search, $page, $per_page);
+```
+
+----
+
+#### Crew\Unsplash\Search::users($search, $page, $per_page)
+
+Retrieve a single page of user results depending on search results.
+
+**Arguments**
+
+  Argument     | Type   | Opt/Required
+---------------|--------|--------------
+`$search`      | string | Required
+`$per_page`    | int    | Opt *(Default: 10 / Maximum: 30)*
+`$page`        | int    | Opt *(Default: 1)*
+
+**Example**
+
+
+```php
+Crew\Unsplash\Search::users($search, $page, $per_page);
+```
+
+----
+
 ### Curated Collection
 
 #### Crew\Unsplash\CuratedCollection::all($page, $per_page)
