@@ -68,7 +68,7 @@ The current permission scopes defined by the [Unsplash API](https://unsplash.com
 - `write_photos` (Post and edit photos for a user)
 - `write_likes` (Like a photo for a user)
 
-====
+----
 
 ### API methods
 
@@ -83,7 +83,7 @@ Some parameters are identical across all methods:
 
 *Note: The methods that return multiple objects return an `ArrayObject`, which acts like a normal stdClass.*
 
-====
+----
 
 ### Curated Collection
 
@@ -104,7 +104,7 @@ Retrieve the list of curated collections.
 Crew\Unsplash\CuratedCollection::all($page, $per_page);
 ```
 
-====
+----
 
 #### Crew\Unsplash\CuratedCollection::find($id)
 Retrieve a specific curated collection.
@@ -121,7 +121,7 @@ Retrieve a specific curated collection.
 Crew\Unsplash\CuratedCollection::find(integer $id);
 ```
 
-====
+----
 
 #### Crew\Unsplash\CuratedCollection::photos($page, $per_page)
 Retrieve photos from a curated collection.
@@ -142,7 +142,7 @@ $collection = Crew\Unsplash\CuratedCollection::find(integer $id);
 $photos = $collection->photos($page, $per_page);
 ```
 
-====
+----
 
 ### Collection
 
@@ -163,7 +163,7 @@ Retrieve the list of collections.
 Crew\Unsplash\Collection::all($page, $per_page);
 ```
 
-====
+----
 
 #### Crew\Unsplash\Collection::featured($page, $per_page)
 Retrieve list of featured collections.
@@ -182,7 +182,7 @@ Retrieve list of featured collections.
 Crew\Unsplash\Collection::featured($page, $per_page);
 ```
 
-====
+----
 
 #### Crew\Unsplash\Collection::related($page, $per_page)
 Retrieve list of featured collections.
@@ -203,7 +203,7 @@ $collection = Crew\Unsplash\Collection::find($id);
 $collection->related();
 ```
 
-====
+----
 
 #### Crew\Unsplash\Collection::find($id)
 Retrieve a specific collection.
@@ -220,7 +220,7 @@ Retrieve a specific collection.
 Crew\Unsplash\Collection::find(integer $id);
 ```
 
-====
+----
 
 #### Crew\Unsplash\Collection::photos($page, $per_page)
 Retrieve photos from a collection.
@@ -241,7 +241,7 @@ $collection = Crew\Unsplash\Collection::find(integer $id);
 $photos = $collection->photos($page, $per_page);
 ```
 
-====
+----
 
 #### Crew\Unsplash\Collection::create($title, $description, $private)
 Create a collection on the user's behalf.
@@ -262,7 +262,7 @@ Create a collection on the user's behalf.
 $collection = Crew\Unsplash\Collection::create($title);
 ```
 
-====
+----
 
 #### Crew\Unsplash\Collection::update($parameters)
 Update a collection on the user's behalf.
@@ -284,7 +284,7 @@ $collection = Crew\Unsplash\Collection::find(int $id);
 $collection->update(['private' => true])
 ```
 
-====
+----
 
 #### Crew\Unsplash\Collection::destroy()
 Delete a collection on the user's behalf.
@@ -300,7 +300,7 @@ $collection = Crew\Unsplash\Collection::find(int $id);
 $collection->destroy()
 ```
 
-====
+----
 
 #### Crew\Unsplash\Collection::add($photo_id)
 Add a photo in the collection on the user's behalf.
@@ -322,7 +322,7 @@ $collection = Crew\Unsplash\Collection::find(int $id);
 $collection->add(int $photo_id)
 ```
 
-====
+----
 
 #### Crew\Unsplash\Collection::remove($photo_id)
 Remove a photo from the collection on the user's behalf.
@@ -344,7 +344,7 @@ $collection = Crew\Unsplash\Collection::find(int $id);
 $collection->remove(int $photo_id)
 ```
 
-====
+----
 
 
 ### Photo
@@ -367,7 +367,7 @@ Crew\Unsplash\Photo::all($page, $per_page, $order_by);
 ```
 
 
-====
+----
 
 #### Crew\Unsplash\Photo::curated($page, $per_page, $order_by)
 Retrieve a list of curated photos.
@@ -386,7 +386,7 @@ Retrieve a list of curated photos.
 Crew\Unsplash\Photo::curated($page, $per_page, $order_by);
 ```
 
-====
+----
 
 #### Crew\Unsplash\Photo::find($id)
 Retrieve a specific photo.
@@ -403,7 +403,7 @@ Retrieve a specific photo.
 Crew\Unsplash\Photo::find($id);
 ```
 
-====
+----
 
 #### Crew\Unsplash\Photo::create($file_path)
 Post a photo on the user's behalf.
@@ -422,7 +422,7 @@ Post a photo on the user's behalf.
 Crew\Unsplash\Photo::create( $file_path);
 ```
 
-====
+----
 
 #### Crew\Unsplash\Photo::update($parameters = [])
 Post a photo on the user's behalf.
@@ -443,7 +443,7 @@ $photo = Crew\Unsplash\Photo::find(string $id)
 $photo->update(array $parameters);
 ```
 
-====
+----
 
 #### Crew\Unsplash\Photo::photographer()
 Retrieve the photo's photographer.
@@ -462,7 +462,7 @@ $photo = Crew\Unsplash\Photo::find(string $id);
 $photo->photographer();
 ```
 
-====
+----
 
 #### Crew\Unsplash\Photo::random([category => $value, featured => $value, username => $value, query => $value, w => $value, h => $value])
 Retrieve a random photo from specified filters. For more information regarding filtering, [refer to the Offical documentation](https://unsplash.com/documentation#get-a-random-photo).
@@ -499,7 +499,7 @@ $filters = [
 Crew\Unsplash\Photo::random($filters);
 ```
 
-====
+----
 
 #### Crew\Unsplash\Photo::like()
 Like a photo on the user's behalf.
@@ -520,7 +520,7 @@ $photo = Crew\Unsplash\Photo::find(string $id);
 $photo->like();
 ```
 
-====
+----
 
 #### Crew\Unsplash\Photo::unlike()
 Unlike a photo on the user's behalf.
@@ -541,7 +541,7 @@ $photo = Crew\Unsplash\Photo::find(string $id);
 $photo->unlike();
 ```
 
-====
+----
 
 #### Crew\Unsplash\Photo::statistics(string $resolution, int $quantity)
 Retrieve total number of downloads, views and likes of a single photo, as well as the historical breakdown of these stats in a specific timeframe (default is 30 days).
@@ -567,7 +567,7 @@ $photo = Crew\Unsplash\Photo::find($id);
 $photo->statistics('days', 7);
 ```
 
-====
+----
 
 #### Crew\Unsplash\Photo::download()
 Retrieve a download link for a photo
@@ -589,7 +589,7 @@ $photo = Crew\Unsplash\Photo::find($id);
 $photo->download();
 ```
 
-====
+----
 
 ### User
 
@@ -608,7 +608,7 @@ Retrieve a user's information.
 Crew\Unsplash\User::find($username)
 ```
 
-====
+----
 
 #### Crew\Unsplash\User::portfolio($username)
 Retrieve a link to the user's portfolio page.
@@ -625,7 +625,7 @@ Retrieve a link to the user's portfolio page.
 Crew\Unsplash\User::portfolio($username)
 ```
 
-====
+----
 
 #### Crew\Unsplash\User::current()
 Retrieve the user's private information.
@@ -642,7 +642,7 @@ Retrieve the user's private information.
 $user = Crew\Unsplash\User::current();
 ```
 
-====
+----
 
 #### Crew\Unsplash\User::photos($page, $per_page, $order_by)
 Retrieve user's photos.
@@ -664,7 +664,7 @@ $user = Crew\Unsplash\User::find($username);
 $user->photos($page, $per_page);
 ```
 
-====
+----
 
 
 #### Crew\Unsplash\User::collections($page, $per_page)
@@ -687,7 +687,7 @@ $user = Crew\Unsplash\User::find($username);
 $user->collections($page, $per_page);
 ```
 
-====
+----
 
 #### Crew\Unsplash\User::likes($page, $per_page, $order_by)
 Retrieve user's collections.
@@ -710,7 +710,7 @@ $user = Crew\Unsplash\User::find($username);
 $user->likes($page, $per_page, $order_by);
 ```
 
-====
+----
 
 
 #### Crew\Unsplash\User::update([$key => value])
@@ -754,7 +754,7 @@ $user = Crew\Unsplash\User::find($id);
 $user->statistics('days', 7);
 ```
 
-====
+----
 
 ## Contributing
 
