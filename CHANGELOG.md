@@ -1,4 +1,4 @@
-## 2.2.2 - 2017-10-04
+## 2.3.3 - 2017-10-04
 ### Updated
 - Update dependecy version on oauth2-unsplash
 
