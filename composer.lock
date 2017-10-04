@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3439a63f49bfff10ab9935f575bfa00a",
-    "content-hash": "e9333b2b94eb8c996c6a24a03d36f2ad",
+    "hash": "71cc95782f645e9b1f2973e63483f78f",
+    "content-hash": "eae5ea7a60d25865ffa9f3de407f8645",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -190,20 +190,20 @@
         },
         {
             "name": "hughbertd/oauth2-unsplash",
-            "version": "1.0.2",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/HughbertD/oauth2-unsplash.git",
-                "reference": "ebd5102f665d9e8c889d836ff71df92dc8750ef8"
+                "reference": "75bf7b0cde14c531af6e81ec6972b4fc0f65f4ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/HughbertD/oauth2-unsplash/zipball/ebd5102f665d9e8c889d836ff71df92dc8750ef8",
-                "reference": "ebd5102f665d9e8c889d836ff71df92dc8750ef8",
+                "url": "https://api.github.com/repos/HughbertD/oauth2-unsplash/zipball/75bf7b0cde14c531af6e81ec6972b4fc0f65f4ee",
+                "reference": "75bf7b0cde14c531af6e81ec6972b4fc0f65f4ee",
                 "shasum": ""
             },
             "require": {
-                "league/oauth2-client": "^1.0",
+                "league/oauth2-client": ">=1.0",
                 "php": ">=5.6.0"
             },
             "require-dev": {
@@ -238,7 +238,7 @@
                 "oauth2",
                 "single sign on"
             ],
-            "time": "2017-04-05 15:54:38"
+            "time": "2017-10-04 08:52:53"
         },
         {
             "name": "ircmaxell/random-lib",
@@ -2588,6 +2588,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "hughbertd/oauth2-unsplash": 20,
         "php-vcr/php-vcr": 20,
         "vlucas/phpdotenv": 20,
         "satooshi/php-coveralls": 20
