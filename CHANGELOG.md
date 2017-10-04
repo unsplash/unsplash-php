@@ -1,3 +1,7 @@
+## 2.2.2 - 2017-10-04
+### Updated
+- Update dependecy version on oauth2-unsplash
+
 ## 2.2.1 - 2016-09-04
 ### Fix
 - The parameters order was breaking code using older version of the package
