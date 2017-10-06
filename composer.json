@@ -16,7 +16,7 @@
   "require": {
     "php": ">=5.6.0",
     "guzzlehttp/guzzle": "6.3.0",
-    "league/oauth2-client": "1.4.2",
+    "league/oauth2-client": ">=1.4.2",
     "hughbertd/oauth2-unsplash": "dev-master"
 
   },
