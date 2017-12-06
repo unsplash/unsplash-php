@@ -9,6 +9,8 @@ A PHP client for the [Unsplash API](https://unsplash.com/documentation).
 - [Official documentation](https://unsplash.com/documentation)
 - [Changelog](https://github.com/CrewLabs/Unsplash-PHP/blob/master/CHANGELOG.md)
 
+Every application must abide by the [API Guidelines](https://medium.com/unsplash/unsplash-api-guidelines-28e0216e6daa).
+
 ## Installation
 
 `Unsplash-PHP` uses [Composer](https://getcomposer.org/). To use it, require the library
@@ -529,7 +531,7 @@ $photo->photographer();
 
 ----
 
-#### Crew\Unsplash\Photo::random([category => $value, featured => $value, username => $value, query => $value, w => $value, h => $value])
+#### Crew\Unsplash\Photo::random([featured => $value, username => $value, query => $value, w => $value, h => $value])
 Retrieve a random photo from specified filters. For more information regarding filtering, [refer to the Offical documentation](https://unsplash.com/documentation#get-a-random-photo).
 
 *Note:* An array needs to be passed as a parameter.
@@ -539,7 +541,6 @@ Retrieve a random photo from specified filters. For more information regarding f
 
   Argument     | Type | Opt/Required
 ---------------|------|--------------
-category | array | Opt *(Retrieve photos matching the category ID/IDs)*
 featured | boolean | Opt *(Limit selection to featured photos)*
 username | string | Opt *(Limit selection to a single user)*
 query | string | Opt *(Limit selection to photos matching a search term)*
@@ -554,7 +555,6 @@ h | int | Opt *(Image height in pixels)*
 
 // Or apply some optional filters by passing a key value array of filters
 $filters = [
-    'category' => [3, 6],
     'featured' => true,
     'username' => 'andy_brunner',
     'query'    => 'coffee',
@@ -635,7 +635,7 @@ $photo->statistics('days', 7);
 ----
 
 #### Crew\Unsplash\Photo::download()
-Retrieve a download link for a photo
+Trigger a download for a photo. This is needed to follow the ['trigger a download' API Guideline](https://medium.com/unsplash/unsplash-api-guidelines-triggering-a-download-c39b24e99e02).
 
 *Note:* You must instantiate a Photo object first
 
