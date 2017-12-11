@@ -9,6 +9,13 @@ A PHP client for the [Unsplash API](https://unsplash.com/documentation).
 - [Official documentation](https://unsplash.com/documentation)
 - [Changelog](https://github.com/CrewLabs/Unsplash-PHP/blob/master/CHANGELOG.md)
 
+Quick links to methods you're likely to care about:
+
+- [Get a list of new photos](#photo-all) 🎉
+- [Get a random photo](#photo-random) 🎑
+- [Trigger a photo download](#photo-download) 📡
+- [Search for a photo by keyword](#search-photos) 🕵️‍♂️
+
 **Note:** Every application must abide by the [API Guidelines](https://medium.com/unsplash/unsplash-api-guidelines-28e0216e6daa). Specifically, remember to [hotlink images](https://medium.com/unsplash/unsplash-api-guidelines-hotlinking-images-6c6b51030d2a) and [trigger a download when appropriate](https://medium.com/unsplash/unsplash-api-guidelines-triggering-a-download-c39b24e99e02).
 
 ## Installation
@@ -88,6 +95,8 @@ Some parameters are identical across all methods:
 ----
 
 ### Search
+
+<div id="search-photos" />
 
 #### Crew\Unsplash\Search::photos($search, $page, $per_page)
 
@@ -416,6 +425,8 @@ $collection->remove(int $photo_id)
 
 ### Photo
 
+<div id="photo-all" />
+
 #### Crew\Unsplash\Photo::all($page, $per_page, $order_by)
 Retrieve a list of photos.
 
@@ -531,6 +542,8 @@ $photo->photographer();
 
 ----
 
+<div id="photo-random" />
+
 #### Crew\Unsplash\Photo::random([featured => $value, username => $value, query => $value, w => $value, h => $value])
 Retrieve a random photo from specified filters. For more information regarding filtering, [refer to the Offical documentation](https://unsplash.com/documentation#get-a-random-photo).
 
@@ -634,6 +647,8 @@ $photo->statistics('days', 7);
 
 ----
 
+<div id="photo-download" />
+
 #### Crew\Unsplash\Photo::download()
 Trigger a download for a photo. This is needed to follow the ['trigger a download' API Guideline](https://medium.com/unsplash/unsplash-api-guidelines-triggering-a-download-c39b24e99e02).
 
@@ -650,7 +665,7 @@ Trigger a download for a photo. This is needed to follow the ['trigger a downloa
 
 
 ```php
-$photo = Crew\Unsplash\Photo::find($id);
+$photo = Crew\Unsplash\Photo::find();
 $photo->download();
 ```
 
