@@ -205,7 +205,7 @@ class Photo extends Endpoint
     {
         $download_path = parse_url($this->links['download_location'], PHP_URL_PATH);
         $download_query = parse_url($this->links['download_location'], PHP_URL_QUERY);
-        $link = self::get($download_path + "?" + $download_query);
+        $link = self::get($download_path . "?" . $download_query);
         $linkClass = \GuzzleHttp\json_decode($link->getBody());
         return $linkClass->url;
     }
