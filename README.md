@@ -9,7 +9,7 @@ A PHP client for the [Unsplash API](https://unsplash.com/documentation).
 - [Official documentation](https://unsplash.com/documentation)
 - [Changelog](https://github.com/CrewLabs/Unsplash-PHP/blob/master/CHANGELOG.md)
 
-Every application must abide by the [API Guidelines](https://medium.com/unsplash/unsplash-api-guidelines-28e0216e6daa).
+**Note:** Every application must abide by the [API Guidelines](https://medium.com/unsplash/unsplash-api-guidelines-28e0216e6daa). Specifically, remember to [hotlink images](https://medium.com/unsplash/unsplash-api-guidelines-hotlinking-images-6c6b51030d2a) and [trigger a download when appropriate](https://medium.com/unsplash/unsplash-api-guidelines-triggering-a-download-c39b24e99e02).
 
 ## Installation
 
@@ -27,7 +27,7 @@ Before using, configure the client with your application ID and secret. If you d
 
 Note that if you're just using actions that require the [public permission scope](#permission-scopes), only the `applicationId` is required.
 
-Note that if utmSource is omitted from $credentials a notice will be raised 
+Note that if utmSource is omitted from $credentials a notice will be raised
 
 ```php
 Crew\Unsplash\HttpClient::init([
@@ -38,7 +38,7 @@ Crew\Unsplash\HttpClient::init([
 ]);
 ```
 ### Authorization workflow
-To access actions that are non-public (i.e. uploading a photo to a specific account), you'll need a user's permission to access their data. 
+To access actions that are non-public (i.e. uploading a photo to a specific account), you'll need a user's permission to access their data.
 
 An example of this flow can be found in /examples/oauth-flow.php
 
@@ -340,7 +340,7 @@ Update a collection on the user's behalf.
 
 **Arguments**
 
-  Argument     | Type    | Opt/Required | Note 
+  Argument     | Type    | Opt/Required | Note
 ---------------|---------|----------------------
 `$parameters`  | array   | Required     | The following keys can be set in the array : `title`, `description`, `private`
 
