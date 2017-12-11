@@ -11,7 +11,7 @@ namespace Crew\Unsplash;
 class Photo extends Endpoint
 {
     private $photographer;
-    
+
     /**
      * Retrieve the a photo object from the ID specified
      *
@@ -21,7 +21,7 @@ class Photo extends Endpoint
     public static function find($id)
     {
         $photo = json_decode(self::get("/photos/{$id}")->getBody(), true);
-        
+
         return new self($photo);
     }
 
@@ -197,12 +197,15 @@ class Photo extends Endpoint
     }
 
     /**
-     * Returns download link for a photo
-     * @return string - url to download
+     * Triggers a download for a photo
+     * Required under API Guidelines
+     * @return string - full-res photo URL for downloading
      */
     public function download()
     {
-        $link = self::get("/photos/{$this->id}/download");
+        $download_path = parse_url($this->links['download_location'], PHP_URL_PATH);
+        $download_query = parse_url($this->links['download_location'], PHP_URL_QUERY);
+        $link = self::get($download_path + "?" + $download_query);
         $linkClass = \GuzzleHttp\json_decode($link->getBody());
         return $linkClass->url;
     }
