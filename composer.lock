@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bfe74cab2d5032cd73eafc923e059273",
-    "content-hash": "69024cc4343868334505320371629e14",
+    "hash": "2b08ff776a21101326a4edfa0791d829",
+    "content-hash": "c0477e15020f53daf58f97628ade57a9",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -190,16 +190,16 @@
         },
         {
             "name": "hughbertd/oauth2-unsplash",
-            "version": "dev-master",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/HughbertD/oauth2-unsplash.git",
-                "reference": "75bf7b0cde14c531af6e81ec6972b4fc0f65f4ee"
+                "reference": "f451f4a49dca4027f6edaa850d2fccdfa8721bfe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/HughbertD/oauth2-unsplash/zipball/75bf7b0cde14c531af6e81ec6972b4fc0f65f4ee",
-                "reference": "75bf7b0cde14c531af6e81ec6972b4fc0f65f4ee",
+                "url": "https://api.github.com/repos/HughbertD/oauth2-unsplash/zipball/f451f4a49dca4027f6edaa850d2fccdfa8721bfe",
+                "reference": "f451f4a49dca4027f6edaa850d2fccdfa8721bfe",
                 "shasum": ""
             },
             "require": {
@@ -238,7 +238,7 @@
                 "oauth2",
                 "single sign on"
             ],
-            "time": "2017-10-04 08:52:53"
+            "time": "2017-12-14 13:08:42"
         },
         {
             "name": "league/oauth2-client",
@@ -1505,12 +1505,12 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/satooshi/php-coveralls.git",
+                "url": "https://github.com/php-coveralls/php-coveralls.git",
                 "reference": "d7285decc88dff59c5ff02c4b1052ab424ba7fa5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/satooshi/php-coveralls/zipball/d7285decc88dff59c5ff02c4b1052ab424ba7fa5",
+                "url": "https://api.github.com/repos/php-coveralls/php-coveralls/zipball/d7285decc88dff59c5ff02c4b1052ab424ba7fa5",
                 "reference": "d7285decc88dff59c5ff02c4b1052ab424ba7fa5",
                 "shasum": ""
             },
@@ -2640,7 +2640,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "hughbertd/oauth2-unsplash": 20,
         "php-vcr/php-vcr": 20,
         "vlucas/phpdotenv": 20,
         "satooshi/php-coveralls": 20
