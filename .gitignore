@@ -2,4 +2,3 @@ vendor/*
 tests/.env
 report/*
 build
-composer.lock
