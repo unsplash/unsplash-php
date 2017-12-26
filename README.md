@@ -52,7 +52,7 @@ An example of this flow can be found in /examples/oauth-flow.php
 Direct them to an authorization URL (configuring any scopes before generating the authorization URL):
 
 ```php
-$scopes = ['public', 'write_user']
+$scopes = ['public', 'write_user'];
 Crew\Unsplash\HttpClient::$connection->getConnectionUrl($scopes);
 ```
 
