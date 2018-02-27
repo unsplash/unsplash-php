@@ -1,9 +1,17 @@
 {
-  "name": "crewlabs/unsplash",
-  "description": "Wrapper to access information from Unsplash API more easily",
+  "name": "unsplash/unsplash",
+  "description": "Wrapper to access the Unsplash API and photo library",
   "minimum-stability": "stable",
-  "license": "CC0",
+  "license": "MIT",
   "authors": [
+    {
+      "name": "Aaron Klaassen",
+      "email": "aaron@unsplash.com"
+    },
+    {
+      "name": "Luke Chesser",
+      "email": "luke@unsplash.com"
+    },
     {
       "name": "Charles Lalonde",
       "email": "charles@pickcrew.com"
