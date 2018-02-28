@@ -1,3 +1,22 @@
+## 2.4.2 - 2018-02-28
+### Added
+- Added support for `orientation` and `collections` filters to photo search.
+
+## 2.4.1 - 2017-12-18
+### Updated
+- Update dependecy version (>= 1.0.3) on oauth2-unsplash
+
+## 2.4.0 - 2017-12-11
+### Removed
+- Remove deprecated `category` parameters
+
+### Updated
+- Support for tracking photo downloads as per updated API guidelines
+
+## 2.3.4 - 2017-10-06
+### Updated
+- Update dependecy version on oauth2-client (>= 1.4.2)
+
 ## 2.3.3 - 2017-10-04
 ### Updated
 - Update dependecy version on oauth2-unsplash
