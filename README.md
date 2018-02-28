@@ -98,7 +98,7 @@ Some parameters are identical across all methods:
 
 <div id="search-photos" />
 
-#### Crew\Unsplash\Search::photos($search, $page, $per_page)
+#### Crew\Unsplash\Search::photos($search, $page, $per_page, $orientation, $collections)
 
 Retrieve a single page of photo results depending on search results.
 
@@ -107,14 +107,21 @@ Retrieve a single page of photo results depending on search results.
   Argument     | Type   | Opt/Required
 ---------------|--------|--------------
 `$search`      | string | Required
-`$per_page`    | int    | Opt *(Default: 10 / Maximum: 30)*
 `$page`        | int    | Opt *(Default: 1)*
+`$per_page`    | int    | Opt *(Default: 10 / Maximum: 30)*
+`$orientation` | string | Opt *(Default: null / Available: "landscape", "portrait", "squarish")*
+`$collections` | string | Opt *(Default: null / If multiple, comma-separated)*
 
 **Example**
 
 
 ```php
-Crew\Unsplash\Search::photos($search, $page, $per_page);
+$search = 'forest';
+$page = 3;
+$per_page = 15;
+$orientation = 'landscape';
+
+Crew\Unsplash\Search::photos($search, $page, $per_page, $orientation);
 ```
 
 ----
