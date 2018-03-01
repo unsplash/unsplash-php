@@ -1,13 +1,12 @@
 # PHP Unsplash Wrapper
 
 [![Build Status](https://travis-ci.org/unsplash/unsplash-php.svg?branch=master)](https://travis-ci.org/unsplash/unsplash-php)
-[![Dependency Status](https://www.versioneye.com/php/crewlabs:unsplash/badge?style=flat)](https://www.versioneye.com/php/crewlabs:unsplash)
 [![Coverage Status](https://coveralls.io/repos/github/unsplash/unsplash-php/badge.svg?branch=coverage)](https://coveralls.io/github/unsplash/unsplash-php?branch=master)
 
 A PHP client for the [Unsplash API](https://unsplash.com/documentation).
 
 - [Official documentation](https://unsplash.com/documentation)
-- [Changelog](https://github.com/CrewLabs/Unsplash-PHP/blob/master/CHANGELOG.md)
+- [Changelog](https://github.com/unsplash/unsplash-pHP/blob/master/CHANGELOG.md)
 
 Quick links to methods you're likely to care about:
 
@@ -20,10 +19,10 @@ Quick links to methods you're likely to care about:
 
 ## Installation
 
-`Unsplash-PHP` uses [Composer](https://getcomposer.org/). To use it, require the library
+`unsplash-php` uses [Composer](https://getcomposer.org/). To use it, require the library
 
 ```
-composer require crewlabs/unsplash
+composer require unsplash/unsplash
 ```
 
 ## Usage
@@ -845,4 +844,4 @@ $user->statistics('days', 7);
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/CrewLabs/Unsplash-PHP. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org/) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/unsplash/unsplash-php. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org/) code of conduct.
