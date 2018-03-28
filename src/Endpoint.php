@@ -63,6 +63,17 @@ class Endpoint
     }
 
     /**
+     * Magic method to inform if specific parameter is available
+     *
+     * @param  string $key
+     * @return boolean
+     */
+    public function __isset($key)
+    {
+        return isset($this->parameters[$key]);
+    }
+
+    /**
      * Check if the HTTP method is accepted and send a HTTP request to it.
      * Retrieve error from the request and throw a new error
      *
