@@ -1,3 +1,8 @@
+## 2.4.3 - 2018-03-30
+### Added
+- Relax dependency for guzzle to include 6.3.x (https://github.com/unsplash/unsplash-php/pull/88)
+- Add `__isset` method to `Endpoint` (https://github.com/unsplash/unsplash-php/pull/89)
+
 ## 2.4.2 - 2018-02-28
 ### Added
 - Added support for `orientation` and `collections` filters to photo search.
