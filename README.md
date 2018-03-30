@@ -1,7 +1,6 @@
 # PHP Unsplash Wrapper
 
 [![Build Status](https://travis-ci.org/unsplash/unsplash-php.svg?branch=master)](https://travis-ci.org/unsplash/unsplash-php)
-[![Coverage Status](https://coveralls.io/repos/github/unsplash/unsplash-php/badge.svg?branch=coverage)](https://coveralls.io/github/unsplash/unsplash-php?branch=master)
 
 A PHP client for the [Unsplash API](https://unsplash.com/documentation).
 
