@@ -11,6 +11,17 @@ namespace Crew\Unsplash;
 class Photo extends Endpoint
 {
     private $photographer;
+    private $parameters;
+
+    public function __construct(array $parameters = [])
+    {
+        parent::__construct($parameters);
+        $this->parameters = $parameters;
+    }
+
+    public function getParameters() {
+        return $this->parameters;
+    }
 
     /**
      * Retrieve the a photo object from the ID specified
@@ -32,17 +43,28 @@ class Photo extends Endpoint
      * @param  integer $page Page from which the photos need to be retrieve
      * @param  integer $per_page Number of element in a page
      * @param string $order_by Order in which to retrieve photos
-     * @return ArrayObject of Photos
+     * @param bool $returnArrayObject Does function should return photos as ArrayObject (backward compatibility)
+     * @return ArrayObject|PageResult of Photos
      */
-    public static function all($page = 1, $per_page = 10, $order_by = 'latest')
+    public static function all($page = 1, $per_page = 10, $order_by = 'latest', $returnArrayObject = true)
     {
         $photos = self::get("/photos", [
             'query' => ['page' => $page, 'per_page' => $per_page, 'order_by' => $order_by]
         ]);
 
-        $photosArray = self::getArray($photos->getBody(), get_called_class());
+        $photosArray = self::getArray($photos->getBody(), Photo::class);
+        $arrayObjects = new ArrayObject($photosArray, $photos->getHeaders());
+        if($returnArrayObject) {
+            return $arrayObjects;
+        }
+        $pageResults['results'] = [];
+        foreach($photosArray as $photo){
+            $pageResults['results'][] = $photo->getParameters();
+        }
+        $pageResults['total_pages'] = $arrayObjects->totalPages();
+        $pageResults['total'] = $arrayObjects->count();
 
-        return new ArrayObject($photosArray, $photos->getHeaders());
+        return self::getPageResult(json_encode($pageResults), $photos->getHeaders(), Photo::class);
     }
 
 
@@ -53,17 +75,28 @@ class Photo extends Endpoint
      * @param  integer $page Page from which the photos need to be retrieve
      * @param  integer $per_page Number of element in a page
      * @param string $order_by Order in which to retrieve photos
-     * @return ArrayObject of Photos
+     * @param bool $returnArrayObject Does function should return photos as ArrayObject (backward compatibility)
+     * @return ArrayObject|PageResult of Photos
      */
-    public static function curated($page = 1, $per_page = 10, $order_by = 'latest')
+    public static function curated($page = 1, $per_page = 10, $order_by = 'latest', $returnArrayObject = true)
     {
         $photos = self::get("/photos/curated", [
             'query' => ['page' => $page, 'per_page' => $per_page, 'order_by' => $order_by]
         ]);
 
         $photosArray = self::getArray($photos->getBody(), get_called_class());
+        $arrayObjects = new ArrayObject($photosArray, $photos->getHeaders());
+        if($returnArrayObject) {
+            return $arrayObjects;
+        }
+        $pageResults['results'] = [];
+        foreach($photosArray as $photo){
+            $pageResults['results'][] = $photo->getParameters();
+        }
+        $pageResults['total_pages'] = $arrayObjects->totalPages();
+        $pageResults['total'] = $arrayObjects->count();
 
-        return new ArrayObject($photosArray, $photos->getHeaders());
+        return self::getPageResult(json_encode($pageResults), $photos->getHeaders(), Photo::class);
     }
 
     /**
@@ -89,7 +122,7 @@ class Photo extends Endpoint
                 'orientation' => $orientation,
                 'page' => $page,
                 'per_page' => $per_page
-                ]
+            ]
             ]
         );
 
