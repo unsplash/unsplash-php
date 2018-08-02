@@ -10,6 +10,17 @@ namespace Crew\Unsplash;
 class CuratedCollection extends Endpoint
 {
     private $photos;
+    private $parameters;
+
+    public function __construct(array $parameters = [])
+    {
+        parent::__construct($parameters);
+        $this->parameters = $parameters;
+    }
+
+    public function getParameters() {
+        return $this->parameters;
+    }
 
     /**
      * Retrieve a specific curated batch
@@ -20,7 +31,7 @@ class CuratedCollection extends Endpoint
     public static function find($id)
     {
         $curatedBatch = json_decode(self::get("/collections/curated/{$id}")->getBody(), true);
-        
+
         return new self($curatedBatch);
     }
 
@@ -29,9 +40,10 @@ class CuratedCollection extends Endpoint
      *
      * @param  integer $page Page from which the curated batches need to be retrieved
      * @param  integer $per_page Number of elements on a page
-     * @return ArrayObject of CuratedBatch
+     * @param bool $returnArrayObject Does function should return collections as ArrayObject (backward compatibility)
+     * @return ArrayObject|PageResult of CuratedBatch
      */
-    public static function all($page = 1, $per_page = 10)
+    public static function all($page = 1, $per_page = 10, $returnArrayObject = true)
     {
         $curatedBatches = self::get(
             "/collections/curated",
@@ -39,17 +51,28 @@ class CuratedCollection extends Endpoint
         );
 
         $curatedBatchesArray = self::getArray($curatedBatches->getBody(), get_called_class());
+        $arrayObjects = new ArrayObject($curatedBatchesArray, $curatedBatches->getHeaders());
+        if($returnArrayObject) {
+            return $arrayObjects;
+        }
+        $pageResults['results'] = [];
+        foreach($curatedBatchesArray as $collection){
+            $pageResults['results'][] = $collection->getParameters();
+        }
+        $pageResults['total_pages'] = $arrayObjects->totalPages();
+        $pageResults['total'] = $arrayObjects->count();
 
-        return new ArrayObject($curatedBatchesArray, $curatedBatches->getHeaders());
+        return self::getPageResult(json_encode($pageResults), $curatedBatches->getHeaders(), CuratedCollection::class);
     }
 
     /**
      * Retrieve all the photos for a specific curated batch
      * Returns an ArrayObject that contains Photo objects.
      *
-     * @return ArrayObject of Photo
+     * @param bool $returnArrayObject Does function should return collections as ArrayObject (backward compatibility)
+     * @return ArrayObject|PageResult of Photo
      */
-    public function photos()
+    public function photos($returnArrayObject = true)
     {
         if (! isset($this->photos)) {
             $photos = self::get("/collections/curated/{$this->id}/photos");
@@ -60,6 +83,21 @@ class CuratedCollection extends Endpoint
             ];
         }
 
-        return new ArrayObject($this->photos['body'], $this->photos['headers']);
+        $arrayObjects = new ArrayObject($this->photos['body'], $this->photos['headers']);
+        if($returnArrayObject) {
+            return $arrayObjects;
+        }
+
+        $pageResults['results'] = [];
+        foreach($arrayObjects as $photo){
+            if(is_array($photo)) {
+                $photo = new Photo($photo);
+            }
+            $pageResults['results'][] = $photo->getParameters();
+        }
+        $pageResults['total_pages'] = $arrayObjects->totalPages();
+        $pageResults['total'] = $arrayObjects->count();
+
+        return self::getPageResult(json_encode($pageResults), $photos->getHeaders(), Photo::class);
     }
 }

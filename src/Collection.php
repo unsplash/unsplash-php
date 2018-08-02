@@ -10,15 +10,27 @@ namespace Crew\Unsplash;
 class Collection extends Endpoint
 {
     private $photos;
+    private $parameters;
+
+    public function __construct(array $parameters = [])
+    {
+        parent::__construct($parameters);
+        $this->parameters = $parameters;
+    }
+
+    public function getParameters() {
+        return $this->parameters;
+    }
 
     /**
      * Retrieve all collections for a given page
      *
      * @param  integer $page     Page from which the collections need to be retrieved
      * @param  integer $per_page Number of elements on a page
-     * @return ArrayObject of Collections
+     * @param bool $returnArrayObject Does function should return collections as ArrayObject (backward compatibility)
+     * @return ArrayObject|PageResult of Collections
      */
-    public static function all($page = 1, $per_page = 10)
+    public static function all($page = 1, $per_page = 10, $returnArrayObject = true)
     {
         $collections = self::get(
             "/collections",
@@ -26,8 +38,18 @@ class Collection extends Endpoint
         );
 
         $collectionsArray = self::getArray($collections->getBody(), get_called_class());
+        $arrayObjects = new ArrayObject($collectionsArray, $collections->getHeaders());
+        if($returnArrayObject) {
+            return $arrayObjects;
+        }
+        $pageResults['results'] = [];
+        foreach($collectionsArray as $collection){
+            $pageResults['results'][] = $collection->getParameters();
+        }
+        $pageResults['total_pages'] = $arrayObjects->totalPages();
+        $pageResults['total'] = $arrayObjects->count();
 
-        return new ArrayObject($collectionsArray, $collections->getHeaders());
+        return self::getPageResult(json_encode($pageResults), $collections->getHeaders(), Collection::class);
     }
 
     /**
@@ -47,9 +69,12 @@ class Collection extends Endpoint
      * Retrieve all the photos for a specific collection
      * Returns an ArrayObject that contains Photo objects.
      *
+     * @param  integer $page     Page from which the collections need to be retrieved
+     * @param  integer $per_page Number of elements on a page
+     * @param bool $returnArrayObject Does function should return photos as ArrayObject (backward compatibility)
      * @return ArrayObject of Photo
      */
-    public function photos($page = 1, $per_page = 10)
+    public function photos($page = 1, $per_page = 10, $returnArrayObject = true)
     {
         if (! isset($this->photos["{$page}-{$per_page}"])) {
             $photos = self::get(
@@ -62,11 +87,27 @@ class Collection extends Endpoint
                 'headers' => $photos->getHeaders()
             ];
         }
-
-        return new ArrayObject(
+        $arrayObjects = new ArrayObject(
             $this->photos["{$page}-{$per_page}"]['body'],
             $this->photos["{$page}-{$per_page}"]['headers']
         );
+        if($returnArrayObject) {
+            return $arrayObjects;
+        }
+
+        $pageResults['results'] = [];
+        foreach($this->photos["{$page}-{$per_page}"] as $photos2){
+            foreach($photos2 as $photo) {
+                if(is_array($photo)){
+                    $photo = new Photo($photo);
+                }
+                $pageResults['results'][] = $photo->getParameters();
+            }
+        }
+        $pageResults['total_pages'] = $arrayObjects->totalPages();
+        $pageResults['total'] = $arrayObjects->count();
+
+        return self::getPageResult(json_encode($pageResults), $photos->getHeaders(), Photo::class);
     }
 
 
@@ -109,7 +150,7 @@ class Collection extends Endpoint
             "/collections/{$this->id}/remove",
             ['query' => ['photo_id' => $photo_id]]
         );
-        
+
         # Reset
         $this->photos = [];
     }
@@ -164,23 +205,47 @@ class Collection extends Endpoint
      * Get a page of  featured collections
      * @param int $page - page to retrieve
      * @param int $per_page - num per page
-     * @return ArrayObject
+     * @param bool $returnArrayObject Does function should return collections as ArrayObject (backward compatibility)
+     * @return ArrayObject|PageResult
      */
-    public static function featured($page = 1, $per_page = 10)
+    public static function featured($page = 1, $per_page = 10, $returnArrayObject = true)
     {
         $collections = self::get("/collections/featured", ['query' => ['page' => $page, 'per_page' => $per_page]]);
         $collectionsArray = self::getArray($collections->getBody(), get_called_class());
-        return new ArrayObject($collectionsArray, $collections->getHeaders());
+        $arrayObjects = new ArrayObject($collectionsArray, $collections->getHeaders());
+        if($returnArrayObject) {
+            return $arrayObjects;
+        }
+        $pageResults['results'] = [];
+        foreach($collectionsArray as $collection){
+            $pageResults['results'][] = $collection->getParameters();
+        }
+        $pageResults['total_pages'] = $arrayObjects->totalPages();
+        $pageResults['total'] = $arrayObjects->count();
+
+        return self::getPageResult(json_encode($pageResults), $collections->getHeaders(), Collection::class);
     }
 
     /**
      * Get related collections to current collection
-     * @return ArrayObject
+     * @param bool $returnArrayObject Does function should return collections as ArrayObject (backward compatibility)
+     * @return ArrayObject|PageResult
      */
-    public function related()
+    public function related($returnArrayObject = true)
     {
         $collections = self::get("/collections/{$this->id}/related");
         $collectionsArray = self::getArray($collections->getBody(), get_called_class());
-        return new ArrayObject($collectionsArray, $collections->getHeaders());
+        $arrayObjects = new ArrayObject($collectionsArray, $collections->getHeaders());
+        if($returnArrayObject) {
+            return $arrayObjects;
+        }
+        $pageResults['results'] = [];
+        foreach($collectionsArray as $collection){
+            $pageResults['results'][] = $collection->getParameters();
+        }
+        $pageResults['total_pages'] = $arrayObjects->totalPages();
+        $pageResults['total'] = $arrayObjects->count();
+
+        return self::getPageResult(json_encode($pageResults), $collections->getHeaders(), Collection::class);
     }
 }
