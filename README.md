@@ -83,12 +83,17 @@ For more information about the the responses for each call, refer to the [offici
 
 Some parameters are identical across all methods:
 
-  param     | Description
-------------|-----------------------------------------------------
-`$per_page` | Defines the number of objects per page. *Default 10*
-`$page`     | Defines the offset page. *Default 1*
+  param              | Description
+---------------------|-----------------------------------------------------
+`$per_page`          | Defines the number of objects per page. *Default 10*
+`$page`              | Defines the offset page. *Default 1*
+`$returnArrayObject` | Defines if method should return ArrayObject. *Default true*
 
 *Note: The methods that return multiple objects return an `ArrayObject`, which acts like a normal stdClass.*
+
+*If `$returnArrayObject` is set to `false` they return `PageResult` which contains array of results, total number of elements, page and total number of pages.*
+ 
+*There are three exceptions: `Search::collections`, `Search::photos` and `Search::users` always returns `PageResult`.*
 
 ----
 
@@ -173,16 +178,23 @@ Retrieve the list of curated collections.
 
 **Arguments**
 
-  Argument     | Type | Opt/Required
----------------|------|--------------
-`$per_page`    | int  | Opt *(Default: 10 / Maximum: 30)*
-`$page`        | int  | Opt *(Default: 1)*
+  Argument           | Type | Opt/Required
+---------------------|------|--------------
+`$per_page`          | int  | Opt *(Default: 10 / Maximum: 30)*
+`$page`              | int  | Opt *(Default: 1)*
+`$returnArrayObject` | bool | Opt *(Default: true)*
 
 **Example**
 
 
 ```php
 Crew\Unsplash\CuratedCollection::all($page, $per_page);
+```
+
+**Example for returning PageResult instead of ArrayObject**
+
+```php
+Crew\Unsplash\CuratedCollection::all($page, $per_page, false);
 ```
 
 ----
@@ -211,16 +223,24 @@ Retrieve photos from a curated collection.
 
 **Arguments**
 
-  Argument     | Type | Opt/Required
----------------|------|--------------
-`$per_page`    | int  | Opt *(Default: 10 / Maximum: 30)*
-`$page`        | int  | Opt *(Default: 1)*
+  Argument           | Type | Opt/Required
+---------------------|------|--------------
+`$per_page`          | int  | Opt *(Default: 10 / Maximum: 30)*
+`$page`              | int  | Opt *(Default: 1)*
+`$returnArrayObject` | bool | Opt *(Default: true)*
 
 **Example**
 
 ```php
 $collection = Crew\Unsplash\CuratedCollection::find(integer $id);
 $photos = $collection->photos($page, $per_page);
+```
+
+**Example for returning PageResult instead of ArrayObject**
+
+```php
+$collection = Crew\Unsplash\CuratedCollection::find(integer $id);
+$photos = $collection->photos($page, $per_page, false);
 ```
 
 ----
@@ -232,16 +252,23 @@ Retrieve the list of collections.
 
 **Arguments**
 
-  Argument     | Type | Opt/Required
----------------|------|--------------
-`$per_page`    | int  | Opt *(Default: 10 / Maximum: 30)*
-`$page`        | int  | Opt *(Default: 1)*
+  Argument           | Type | Opt/Required
+---------------------|------|--------------
+`$per_page`          | int  | Opt *(Default: 10 / Maximum: 30)*
+`$page`              | int  | Opt *(Default: 1)*
+`$returnArrayObject` | bool | Opt *(Default: true)*
 
 **Example**
 
 
 ```php
 Crew\Unsplash\Collection::all($page, $per_page);
+```
+
+**Example for returning PageResult instead of ArrayObject**
+
+```php
+Crew\Unsplash\Collection::all($page, $per_page, false);
 ```
 
 ----
@@ -251,16 +278,23 @@ Retrieve list of featured collections.
 
 **Arguments**
 
-  Argument     | Type | Opt/Required
----------------|------|--------------
-`$per_page`    | int  | Opt *(Default: 10 / Maximum: 30)*
-`$page`        | int  | Opt *(Default: 1)*
+  Argument           | Type | Opt/Required
+---------------------|------|--------------
+`$per_page`          | int  | Opt *(Default: 10 / Maximum: 30)*
+`$page`              | int  | Opt *(Default: 1)*
+`$returnArrayObject` | bool | Opt *(Default: true)*
 
 **Example**
 
 
 ```php
 Crew\Unsplash\Collection::featured($page, $per_page);
+```
+
+**Example for returning PageResult instead of ArrayObject**
+
+```php
+Crew\Unsplash\Collection::featured($page, $per_page, false);
 ```
 
 ----
@@ -272,9 +306,9 @@ Retrieve list of featured collections.
 
 **Arguments**
 
-  Argument     | Type | Opt/Required
----------------|------|--------------
-
+  Argument           | Type | Opt/Required
+---------------------|------|--------------
+`$returnArrayObject` | bool | Opt *(Default: true)*
 
 **Example**
 
@@ -282,6 +316,13 @@ Retrieve list of featured collections.
 ```php
 $collection = Crew\Unsplash\Collection::find($id);
 $collection->related();
+```
+
+**Example for returning PageResult instead of ArrayObject**
+
+```php
+$collection = Crew\Unsplash\Collection::find($id);
+$collection->related(false);
 ```
 
 ----
@@ -310,16 +351,24 @@ Retrieve photos from a collection.
 
 **Arguments**
 
-  Argument     | Type | Opt/Required
----------------|------|--------------
-`$per_page`    | int  | Opt *(Default: 10 / Maximum: 30)*
-`$page`        | int  | Opt *(Default: 1)*
+  Argument           | Type | Opt/Required
+---------------------|------|--------------
+`$per_page`          | int  | Opt *(Default: 10 / Maximum: 30)*
+`$page`              | int  | Opt *(Default: 1)*
+`$returnArrayObject` | bool | Opt *(Default: true)*
 
 **Example**
 
 ```php
 $collection = Crew\Unsplash\Collection::find(integer $id);
 $photos = $collection->photos($page, $per_page);
+```
+
+**Example for returning PageResult instead of ArrayObject**
+
+```php
+$collection = Crew\Unsplash\Collection::find(integer $id);
+$photos = $collection->photos($page, $per_page, false);
 ```
 
 ----
@@ -437,16 +486,23 @@ Retrieve a list of photos.
 
 **Arguments**
 
-  Argument     | Type | Opt/Required
----------------|------|--------------
-`$per_page`    | int  | Opt *(Default: 10 / Maximum: 30)*
-`$page`        | int  | Opt *(Default: 1)*
-`$order_by` | string | Opt *(Default: latest / Available: oldest, popular)*
+  Argument           | Type   | Opt/Required
+---------------------|--------|--------------
+`$per_page`          | int    | Opt *(Default: 10 / Maximum: 30)*
+`$page`              | int    | Opt *(Default: 1)*
+`$order_by`          | string | Opt *(Default: latest / Available: oldest, popular)*
+`$returnArrayObject` | bool   | Opt *(Default: true)*
 
 **Example**
 
 ```php
 Crew\Unsplash\Photo::all($page, $per_page, $order_by);
+```
+
+**Example for returning PageResult instead of ArrayObject**
+
+```php
+Crew\Unsplash\Photo::all($page, $per_page, $order_by, false);
 ```
 
 
@@ -457,16 +513,23 @@ Retrieve a list of curated photos.
 
 **Arguments**
 
-  Argument     | Type | Opt/Required
----------------|------|--------------
-`$per_page`    | int  | Opt *(Default: 10 / Maximum: 30)*
-`$page`        | int  | Opt *(Default: 1)*
-`$order_by` | string | Opt *(Default: latest / Available: oldest, popular)*
+  Argument           | Type   | Opt/Required
+---------------------|--------|--------------
+`$per_page`          | int    | Opt *(Default: 10 / Maximum: 30)*
+`$page`              | int    | Opt *(Default: 1)*
+`$order_by`          | string | Opt *(Default: latest / Available: oldest, popular)*
+`$returnArrayObject` | bool   | Opt *(Default: true)*
 
 **Example**
 
 ```php
 Crew\Unsplash\Photo::curated($page, $per_page, $order_by);
+```
+
+**Example for returning PageResult instead of ArrayObject**
+
+```php
+Crew\Unsplash\Photo::curated($page, $per_page, $order_by, false);
 ```
 
 ----
