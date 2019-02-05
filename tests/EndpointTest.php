@@ -70,9 +70,9 @@ class EndpointTest extends BaseTest
     {
         VCR::insertCassette('endpoint.yml');
         $res = Unsplash\Endpoint::__callStatic('get', ['categories/2', []]);
-		VCR::eject();
-		$headers = $res->getHeaders();
+        VCR::eject();
+        $headers = $res->getHeaders();
 
-		$this->assertEquals('4984', $headers['X-RateLimit-Remaining'][0]);
+        $this->assertEquals('4984', $headers['X-RateLimit-Remaining'][0]);
     }
 }
