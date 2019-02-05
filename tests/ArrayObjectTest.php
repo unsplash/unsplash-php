@@ -106,5 +106,13 @@ class ArrayObjectTest extends BaseTest
         $arrayObject = new Unsplash\ArrayObject([], $headers);
 
         $this->assertEquals(265, $arrayObject->currentPage());
+	}
+	
+    public function testRateLimitRemaining()
+    {
+        $headers = ['X-Ratelimit-Remaining' => ['10']];
+        $arrayObject = new Unsplash\ArrayObject([], $headers);
+
+        $this->assertEquals(10, $arrayObject->rateLimitRemaining());
     }
 }

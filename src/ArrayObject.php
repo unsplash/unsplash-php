@@ -38,6 +38,8 @@ class ArrayObject extends \ArrayObject
     const TOTAL = 'X-Total';
 
     const PER_PAGE = 'X-Per-Page';
+    
+    const RATE_LIMIT_REMAINING = 'X-Ratelimit-Remaining';
 
     /**
      * @param array|object $input
@@ -145,5 +147,14 @@ class ArrayObject extends \ArrayObject
         $this->pagesProcessed = true;
 
         return $this->pages;
+    }
+
+    /**
+     * Return the rate limit remaining
+     * @return int
+     */
+    public function rateLimitRemaining()
+    {
+        return intval($this->headers[self::RATE_LIMIT_REMAINING][0]);
     }
 }
