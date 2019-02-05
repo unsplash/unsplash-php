@@ -14,7 +14,7 @@ Quick links to methods you're likely to care about:
 - [Trigger a photo download](#photo-download) 📡
 - [Search for a photo by keyword](#search-photos) 🕵️‍♂️
 
-**Note:** Every application must abide by the [API Guidelines](https://medium.com/unsplash/unsplash-api-guidelines-28e0216e6daa). Specifically, remember to [hotlink images](https://medium.com/unsplash/unsplash-api-guidelines-hotlinking-images-6c6b51030d2a) and [trigger a download when appropriate](https://medium.com/unsplash/unsplash-api-guidelines-triggering-a-download-c39b24e99e02).
+**Note:** Every application must abide by the [API Guidelines](https://help.unsplash.com/api-guidelines/unsplash-api-guidelines). Specifically, remember to [hotlink images](https://help.unsplash.com/api-guidelines/more-on-each-guideline/guideline-hotlinking-images) and [trigger a download when appropriate](https://help.unsplash.com/api-guidelines/more-on-each-guideline/guideline-triggering-a-download).
 
 ## Installation
 
@@ -655,7 +655,7 @@ $photo->statistics('days', 7);
 <div id="photo-download" />
 
 #### Crew\Unsplash\Photo::download()
-Trigger a download for a photo. This is needed to follow the ['trigger a download' API Guideline](https://medium.com/unsplash/unsplash-api-guidelines-triggering-a-download-c39b24e99e02).
+Trigger a download for a photo. This is needed to follow the ['trigger a download' API Guideline](https://help.unsplash.com/api-guidelines/more-on-each-guideline/guideline-triggering-a-download).
 
 *Note:* You must instantiate a Photo object first
 

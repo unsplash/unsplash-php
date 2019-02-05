@@ -1,3 +1,7 @@
+## 2.4.4 - 2019-02-5
+### Added
+- `rateLimitRemaining` method added to `Unsplash\ArrayObject` class to fetch the remaining rate limit (thanks @KevinBatdorf)
+
 ## 2.4.3 - 2018-03-30
 ### Added
 - Relax dependency for guzzle to include 6.3.x (https://github.com/unsplash/unsplash-php/pull/88)
