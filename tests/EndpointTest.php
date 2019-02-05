@@ -65,4 +65,14 @@ class EndpointTest extends BaseTest
         Unsplash\Endpoint::__callStatic('get', ['categories/3', []]);
         VCR::eject();
     }
+
+    public function testRateLimitResponseExists()
+    {
+        VCR::insertCassette('endpoint.yml');
+        $res = Unsplash\Endpoint::__callStatic('get', ['categories/2', []]);
+		VCR::eject();
+		$headers = $res->getHeaders();
+
+		$this->assertEquals('4984', $headers['X-RateLimit-Remaining'][0]);
+    }
 }
