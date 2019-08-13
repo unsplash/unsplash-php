@@ -158,15 +158,14 @@ class ArrayObject extends \ArrayObject
         return intval($this->headers[self::RATE_LIMIT_REMAINING][0]);
     }
 
-	/**
-	 * Return array with all available Endpoint resources.
-	 *
-	 * @return array
-	 */
+    /**
+     * Return array with all available Endpoint resources.
+     * @return array
+     */
 	public function toArray()
-	{
-		return array_map(function(Endpoint $endpoint) {
-			return $endpoint->toArray();
-		}, $this->getArrayCopy());
-	}
+    {
+        return array_map(function(Endpoint $endpoint) {
+            return $endpoint->toArray();
+        }, $this->getArrayCopy());
+    }
 }

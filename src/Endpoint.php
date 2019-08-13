@@ -200,12 +200,12 @@ class Endpoint
         return $parameters;
     }
 
-	/**
-	 * Return all parameters.
-	 * @return array
-	 */
-	public function toArray()
-	{
-		return $this->parameters;
-	}
+    /**
+     * Return all parameters.
+     * @return array
+     */
+    public function toArray()
+    {
+        return $this->parameters;
+    }
 }
