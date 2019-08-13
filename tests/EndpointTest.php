@@ -17,15 +17,15 @@ class EndpointTest extends BaseTest
 
         Unsplash\HttpClient::init(
             [
-                'clientId'     => 'mock_client_id',
+                'clientId' => 'mock_client_id',
                 'clientSecret' => 'mock_secret',
-                'redirectUri'  => 'none',
-                'utmSource'    => 'test'
+                'redirectUri' => 'none',
+                'utmSource' => 'test'
             ],
             [
-                'access_token'  => getenv('ACCESS_TOKEN'),
+                'access_token' => getenv('ACCESS_TOKEN'),
                 'refresh_token' => 'mock_refresh_token_1',
-                'expires_in'    => time() + 3600
+                'expires_in' => time() + 3600
             ]
         );
     }
