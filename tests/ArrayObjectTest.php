@@ -115,4 +115,21 @@ class ArrayObjectTest extends BaseTest
 
         $this->assertEquals(10, $arrayObject->rateLimitRemaining());
     }
+
+	public function testCanMakeArray()
+	{
+		$headers = [];
+		$arrayObject = new Unsplash\ArrayObject([new Unsplash\Endpoint(['test' => 'mock', 'test_1' => 'mock_1']), new Unsplash\Endpoint(['test_2' => 'mock_2', 'test_3' => 'mock_3'])], $headers);
+
+		$this->assertEquals($arrayObject->toArray(), [
+			[
+				'test' => 'mock',
+				'test_1' => 'mock_1',
+			],
+			[
+				'test_2' => 'mock_2',
+				'test_3' => 'mock_3'
+			]
+		]);
+	}
 }
