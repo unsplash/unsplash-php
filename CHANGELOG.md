@@ -1,3 +1,7 @@
+## 2.5.0 - 2019-08-14
+### Added
+- `toArray` method added to `ArrayObject` and `Endpoint`. https://github.com/unsplash/unsplash-php/pull/102/
+
 ## 2.4.4 - 2019-02-5
 ### Added
 - `rateLimitRemaining` method added to `Unsplash\ArrayObject` class to fetch the remaining rate limit (thanks @KevinBatdorf)
