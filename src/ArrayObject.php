@@ -162,7 +162,7 @@ class ArrayObject extends \ArrayObject
      * Return array with all available Endpoint resources.
      * @return array
      */
-	public function toArray()
+    public function toArray()
     {
         return array_map(function(Endpoint $endpoint) {
             return $endpoint->toArray();
