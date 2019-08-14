@@ -3,7 +3,7 @@
 namespace Crew\Unsplash\Tests;
 
 use Crew\Unsplash;
-use \VCR\VCR;
+use VCR\VCR;
 
 /**
  * Class EndpointTest
@@ -74,5 +74,12 @@ class EndpointTest extends BaseTest
         $headers = $res->getHeaders();
 
         $this->assertEquals('4984', $headers['X-RateLimit-Remaining'][0]);
+    }
+
+    public function testCanMakeArray()
+    {
+        $endpoint = new Unsplash\Endpoint(['test' => 'mock', 'test_1' => 'mock_1']);
+
+        $this->assertEquals($endpoint->toArray(), ['test' => 'mock', 'test_1' => 'mock_1']);
     }
 }
