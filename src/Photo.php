@@ -67,35 +67,6 @@ class Photo extends Endpoint
     }
 
     /**
-     * Create a new photo. The user needs to connect their account and authorize the write_photo permission scope.
-     *
-     * @param  string $filePath Path of the file to upload
-     * @throws Exception - if filePath does not exist
-     * @return Photo
-     */
-    public static function create($filePath)
-    {
-        if (!file_exists($filePath)) {
-            throw new Exception(["{$filePath} has not been found"]);
-        }
-
-        $file = fopen($filePath, 'r');
-
-        $photo = json_decode(
-            self::post(
-                "photos",
-                [
-                    'multipart' => [['name' => 'photo', 'contents' => $file]],
-                    'headers' => ['Content-Length' => filesize($filePath)]
-                ]
-            )->getBody(),
-            true
-        );
-
-        return new self($photo);
-    }
-
-    /**
      * Retrieve the user that uploaded the photo
      *
      * @return User

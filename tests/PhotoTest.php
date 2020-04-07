@@ -61,24 +61,6 @@ class PhotoTest extends BaseTest
         $this->assertEquals($photo->user['username'], $photographer->username);
     }
 
-    public function testPostPhotos()
-    {
-        VCR::insertCassette('photos.yml');
-        $photo = Unsplash\Photo::create(__dir__.'/images/test.jpg');
-        VCR::eject();
-
-        $this->assertInstanceOf('Crew\Unsplash\Photo', $photo);
-        $this->assertNotNull($photo->id);
-    }
-
-    /**
-     * @expectedException \Crew\Unsplash\Exception
-     */
-    public function testPostBadPathPhoto()
-    {
-        Unsplash\Photo::create(__dir__.'/images/bad.jpg');
-    }
-
     public function testRandomPhoto()
     {
         VCR::insertCassette('photos.yml');
