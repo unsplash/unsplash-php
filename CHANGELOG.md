@@ -1,3 +1,7 @@
+## 2.5.1 - 2020-04-07
+### Added
+- Added `Accept-Encoding: gzip` to requests.
+
 ## 2.5.0 - 2019-08-14
 ### Added
 - `toArray` method added to `ArrayObject` and `Endpoint`. https://github.com/unsplash/unsplash-php/pull/102/
