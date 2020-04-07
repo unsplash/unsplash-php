@@ -108,7 +108,7 @@ class HttpClientTest extends BaseTest
     {
         Unsplash\HttpClient::$connection = $this->connection;
 
-        VCR::insertCassette('collections.yml');
+        VCR::insertCassette('collections.json');
         $response = (new Unsplash\HttpClient())->send("get", ['collections/300']);
         $body = json_decode($response->getBody(), true);
         VCR::eject();

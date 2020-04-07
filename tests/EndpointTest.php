@@ -32,7 +32,7 @@ class EndpointTest extends BaseTest
 
     public function testRequest()
     {
-        VCR::insertCassette('endpoint.yml');
+        VCR::insertCassette('endpoint.json');
         $res = Unsplash\Endpoint::__callStatic('get', ['collections/300', []]);
         VCR::eject();
         $body = json_decode($res->getBody());
@@ -61,14 +61,14 @@ class EndpointTest extends BaseTest
      */
     public function testRateLimitError()
     {
-        VCR::insertCassette('endpoint.yml');
+        VCR::insertCassette('endpoint.json');
         Unsplash\Endpoint::__callStatic('get', ['collections/301', []]);
         VCR::eject();
     }
 
     public function testRateLimitResponseExists()
     {
-        VCR::insertCassette('endpoint.yml');
+        VCR::insertCassette('endpoint.json');
         $res = Unsplash\Endpoint::__callStatic('get', ['collections/300', []]);
         VCR::eject();
         $headers = $res->getHeaders();

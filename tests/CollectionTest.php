@@ -20,7 +20,7 @@ class CollectionTest extends BaseTest
 
     public function testFindAllCollections()
     {
-        VCR::insertCassette('collections.yml');
+        VCR::insertCassette('collections.json');
 
         $collections = Unsplash\Collection::all();
 
@@ -31,7 +31,7 @@ class CollectionTest extends BaseTest
 
     public function testFindCollection()
     {
-        VCR::insertCassette('collections.yml');
+        VCR::insertCassette('collections.json');
 
         $collection = Unsplash\Collection::find(201);
 
@@ -42,7 +42,7 @@ class CollectionTest extends BaseTest
 
     public function testFindPhotosCollections()
     {
-        VCR::insertCassette('collections.yml');
+        VCR::insertCassette('collections.json');
 
         $collection = Unsplash\Collection::find(201);
         $photos = $collection->photos();
@@ -54,7 +54,7 @@ class CollectionTest extends BaseTest
 
     public function testCreateCollection()
     {
-        VCR::insertCassette('collections.yml');
+        VCR::insertCassette('collections.json');
 
         $collection = Unsplash\Collection::create('test collection', 'basic description', true);
 
@@ -66,7 +66,7 @@ class CollectionTest extends BaseTest
 
     public function testUpdateCollection()
     {
-        VCR::insertCassette('collections.yml');
+        VCR::insertCassette('collections.json');
 
         $collection = Unsplash\Collection::create('test collection', 'basic description', true);
         $collection->update(['description' => 'updated basic description']);
@@ -78,7 +78,7 @@ class CollectionTest extends BaseTest
 
     public function testDestroyCollection()
     {
-        VCR::insertCassette('collections.yml');
+        VCR::insertCassette('collections.json');
 
         $collection = Unsplash\Collection::create('test collection', 'basic description', true);
         $collection->destroy();
@@ -88,7 +88,7 @@ class CollectionTest extends BaseTest
 
     public function testRemovePhotoFromCollection()
     {
-        VCR::insertCassette('collections.yml');
+        VCR::insertCassette('collections.json');
 
         $collection = Unsplash\Collection::create(
             'test collection remove photo',
@@ -107,7 +107,7 @@ class CollectionTest extends BaseTest
 
     public function testGetFeaturedCollections()
     {
-        VCR::insertCassette('collections.yml');
+        VCR::insertCassette('collections.json');
         $collection = Unsplash\Collection::featured();
         $this->assertCount(10, $collection);
         VCR::eject();
@@ -115,7 +115,7 @@ class CollectionTest extends BaseTest
 
     public function testGetRelatedCollections()
     {
-        VCR::insertCassette('collections.yml');
+        VCR::insertCassette('collections.json');
         $collection = Unsplash\Collection::find(201);
         $relatedCollections = $collection->related();
         $this->assertCount(3, $relatedCollections);

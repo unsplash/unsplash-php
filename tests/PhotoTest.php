@@ -21,7 +21,7 @@ class PhotoTest extends BaseTest
 
     public function testFindPhoto()
     {
-        VCR::insertCassette('photos.yml');
+        VCR::insertCassette('photos.json');
         $photo = Unsplash\Photo::find('ZUaqqMxtxYk');
         VCR::eject();
 
@@ -30,7 +30,7 @@ class PhotoTest extends BaseTest
 
     public function testFindAllPhotos()
     {
-        VCR::insertCassette('photos.yml');
+        VCR::insertCassette('photos.json');
         $photos = Unsplash\Photo::all();
         VCR::eject();
 
@@ -39,7 +39,7 @@ class PhotoTest extends BaseTest
 
     public function testPhotographer()
     {
-        VCR::insertCassette('photos.yml');
+        VCR::insertCassette('photos.json');
         $photo = Unsplash\Photo::find('ZUaqqMxtxYk');
         $photographer = $photo->photographer();
         VCR::eject();
@@ -49,7 +49,7 @@ class PhotoTest extends BaseTest
 
     public function testRandomPhoto()
     {
-        VCR::insertCassette('photos.yml');
+        VCR::insertCassette('photos.json');
         $photo = Unsplash\Photo::random();
         VCR::eject();
 
@@ -58,7 +58,7 @@ class PhotoTest extends BaseTest
 
     public function testRandomPhotoWithFilters()
     {
-        VCR::insertCassette('photos.yml');
+        VCR::insertCassette('photos.json');
         $filters = [
             'featured' => true,
             'username' => 'andy_brunner',
@@ -78,7 +78,7 @@ class PhotoTest extends BaseTest
 
     public function testLikePhoto()
     {
-        VCR::insertCassette('photos.yml');
+        VCR::insertCassette('photos.json');
         $photo = Unsplash\Photo::find('_yT_vva8zSc');
         $like = $photo->like();
         VCR::eject();
@@ -88,7 +88,7 @@ class PhotoTest extends BaseTest
 
     public function testUnlikePhoto()
     {
-        VCR::insertCassette('photos.yml');
+        VCR::insertCassette('photos.json');
         $photo = Unsplash\Photo::find('_yT_vva8zSc');
         $photo->like();
         $unlike = $photo->unlike();
@@ -99,7 +99,7 @@ class PhotoTest extends BaseTest
 
     public function testStatisticsForPhoto()
     {
-        VCR::insertCassette('photos.yml');
+        VCR::insertCassette('photos.json');
         $photo = Unsplash\Photo::find('ZUaqqMxtxYk');
         $response = $photo->statistics();
         $this->assertInstanceOf('ArrayObject', $response);
@@ -112,7 +112,7 @@ class PhotoTest extends BaseTest
 
     public function testDownloadLinkForPhoto()
     {
-        VCR::insertCassette('photos.yml');
+        VCR::insertCassette('photos.json');
         $photo = Unsplash\Photo::find('ZUaqqMxtxYk');
         $link = $photo->download();
         $this->assertInternalType('string', $link);
@@ -122,7 +122,7 @@ class PhotoTest extends BaseTest
 
     public function testUpdatePhoto()
     {
-        VCR::insertCassette('photos.yml');
+        VCR::insertCassette('photos.json');
         $photo = Unsplash\Photo::find('GQcfdBoVB_g');
         $photo->update(['exif' => ['focal_length' => 10]]);
         $this->assertEquals(10, $photo->exif['focal_length']);
@@ -131,7 +131,7 @@ class PhotoTest extends BaseTest
 
     public function testAllPhotosOrderedLatest()
     {
-        VCR::insertCassette('photos.yml');
+        VCR::insertCassette('photos.json');
         $photos = Unsplash\Photo::all(1, 10, 'latest');
         VCR::eject();
 

@@ -30,7 +30,7 @@ class StatTest extends BaseTest
 
     public function testFindTotalStats()
     {
-        VCR::insertCassette('stats.yml');
+        VCR::insertCassette('stats.json');
 
         $totalStats = Unsplash\Stat::total();
 

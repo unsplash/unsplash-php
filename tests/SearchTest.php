@@ -21,7 +21,7 @@ class SearchTest extends BaseTest
 
     public function testSearchPhotos()
     {
-        VCR::insertCassette('search.yml');
+        VCR::insertCassette('search.json');
         $photos = Unsplash\Search::photos("paris");
         VCR::eject();
 
@@ -36,7 +36,7 @@ class SearchTest extends BaseTest
 
     public function testSearchCollections()
     {
-        VCR::insertCassette('search.yml');
+        VCR::insertCassette('search.json');
         $collections = Unsplash\Search::collections("paris");
         VCR::eject();
 
@@ -51,7 +51,7 @@ class SearchTest extends BaseTest
 
     public function testSearchUsers()
     {
-        VCR::insertCassette('search.yml');
+        VCR::insertCassette('search.json');
         $users = Unsplash\Search::users("dechuck");
         VCR::eject();
 
@@ -66,7 +66,7 @@ class SearchTest extends BaseTest
 
     public function testSearchOffset()
     {
-        VCR::insertCassette('search.yml');
+        VCR::insertCassette('search.json');
         $users = Unsplash\Search::users("dechuck", 1, 1);
         $this->assertTrue(isset($users[0]));
         $this->assertFalse(isset($users[1]));

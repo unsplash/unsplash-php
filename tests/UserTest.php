@@ -17,7 +17,7 @@ class UserTest extends BaseTest
 
     public function testFindUser()
     {
-        VCR::insertCassette('users.yml');
+        VCR::insertCassette('users.json');
         $user = Unsplash\User::find('dechuck');
         VCR::eject();
 
@@ -30,14 +30,14 @@ class UserTest extends BaseTest
      */
     public function testFindUnknownUser()
     {
-        VCR::insertCassette('users.yml');
+        VCR::insertCassette('users.json');
         Unsplash\User::find('badbadnotgooduser');
         VCR::eject();
     }
 
     public function testFindCurrentUser()
     {
-        VCR::insertCassette('users.yml');
+        VCR::insertCassette('users.json');
         $user = Unsplash\User::current();
         VCR::eject();
 
@@ -53,14 +53,14 @@ class UserTest extends BaseTest
         $connection = new Unsplash\Connection($this->provider);
         Unsplash\HttpClient::$connection = $connection;
 
-        VCR::insertCassette('users.yml');
+        VCR::insertCassette('users.json');
         Unsplash\User::current();
         VCR::eject();
     }
 
     public function testFindUserPhotos()
     {
-        VCR::insertCassette('users.yml');
+        VCR::insertCassette('users.json');
         $user = Unsplash\User::find('anniespratt');
         $photos = $user->photos();
         VCR::eject();
@@ -70,7 +70,7 @@ class UserTest extends BaseTest
 
     public function testFindUserPhotosByOrder()
     {
-        VCR::insertCassette('users.yml');
+        VCR::insertCassette('users.json');
         $user = Unsplash\User::find('lukechesser');
         $photos = $user->photos(1, 5, 'oldest');
         VCR::eject();
@@ -80,7 +80,7 @@ class UserTest extends BaseTest
 
     public function testFindUserCollections()
     {
-        VCR::insertCassette('users.yml');
+        VCR::insertCassette('users.json');
         $user = Unsplash\User::find('unsplash');
         $collections = $user->collections();
         VCR::eject();
@@ -90,7 +90,7 @@ class UserTest extends BaseTest
 
     public function testFindUserPrivateCollection()
     {
-        VCR::insertCassette('users.yml');
+        VCR::insertCassette('users.json');
         $user = Unsplash\User::current();
         $collections = $user->collections();
         VCR::eject();
@@ -100,7 +100,7 @@ class UserTest extends BaseTest
 
     public function testUpdateUser()
     {
-        VCR::insertCassette('users.yml');
+        VCR::insertCassette('users.json');
         $user = Unsplash\User::find('dechuck');
         $user->update(['instagram_username' => 'dechuck123']);
         VCR::eject();
@@ -110,7 +110,7 @@ class UserTest extends BaseTest
 
     public function testFindUserLikedPhoto()
     {
-        VCR::insertCassette('users.yml');
+        VCR::insertCassette('users.json');
         $user = Unsplash\User::find('unsplash', 10, 'oldest');
         $likes = $user->likes();
         $this->assertCount(10, $likes);
@@ -121,7 +121,7 @@ class UserTest extends BaseTest
 
     public function testGetUserPortfolio()
     {
-        VCR::insertCassette('users.yml');
+        VCR::insertCassette('users.json');
         $userPortfolioLink = Unsplash\User::portfolio('hughbertd');
         $this->assertEquals('http://hughbertd.github.io', $userPortfolioLink);
         VCR::eject();
@@ -129,7 +129,7 @@ class UserTest extends BaseTest
 
     public function testUserStatistics()
     {
-        VCR::insertCassette('users.yml');
+        VCR::insertCassette('users.json');
         $user = Unsplash\User::find('hughbertd');
         $statistics = $user->statistics();
         $this->assertArrayHasKey('downloads', $statistics);
