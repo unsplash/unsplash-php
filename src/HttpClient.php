@@ -142,8 +142,12 @@ class HttpClient
             $uri = '/' . $uri;
         }
 
+        $headers = [
+            "Accept-Encoding" => "gzip"
+        ];
+
         $response = $this->httpClient->send(
-            new Request($method, new Uri($uri)),
+            new Request($method, new Uri($uri), $headers),
             $params
         );
 
@@ -169,7 +173,7 @@ class HttpClient
         $stack->push(Middleware::mapRequest(function (Request $request) {
                 return $request->withHeader('Authorization', $this->authorization);
         }), 'set_authorization_header');
-        
+
         // Set the request ui
         $stack->push(Middleware::mapRequest(function (Request $request) {
             $uri = $request->getUri()->withHost($this->host)->withScheme($this->scheme);
