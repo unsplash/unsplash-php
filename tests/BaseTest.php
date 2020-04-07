@@ -23,8 +23,10 @@ abstract class BaseTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $dotenv = new Dotenv(__DIR__);
-        $dotenv->load();
+        if (file_exists(__DIR__ . '/.env')) {
+            $dotenv = new Dotenv(__DIR__);
+            $dotenv->load();
+        }
 
         $this->provider = m::mock('Unsplash\OAuth2\Client\Provider\Unsplash', [
             'clientId' => 'mock_client_id',
