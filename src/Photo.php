@@ -67,38 +67,6 @@ class Photo extends Endpoint
     }
 
     /**
-     * Retrieve all the photos on a specific page depending on search results
-     * Returns ArrayObject that contain Photo object.
-     *
-     * @param string $search Retrieve photos matching the search term.
-     * @param integer $category Retrieve photos matching the category ID
-     * @param integer $page Page from which the photos need to be retrieved
-     * @param integer $per_page Number of elements on a page
-     * @param string|null $orientation Orientation to search for
-     * @deprecated
-     * @see Search::photos()
-     * @return ArrayObject of Photos
-     */
-    public static function search($search, $category = null, $page = 1, $per_page = 10, $orientation = null)
-    {
-        $photos = self::get(
-            "/photos/search",
-            ['query' => [
-                'query' => $search,
-                'category' => $category,
-                'orientation' => $orientation,
-                'page' => $page,
-                'per_page' => $per_page
-                ]
-            ]
-        );
-
-        $photosArray = self::getArray($photos->getBody(), get_called_class());
-
-        return new ArrayObject($photosArray, $photos->getHeaders());
-    }
-
-    /**
      * Create a new photo. The user needs to connect their account and authorize the write_photo permission scope.
      *
      * @param  string $filePath Path of the file to upload
