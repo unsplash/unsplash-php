@@ -86,24 +86,6 @@ class CollectionTest extends BaseTest
         VCR::eject();
     }
 
-    public function testAddPhotoToCollection()
-    {
-        VCR::insertCassette('collections.yml');
-
-        $collection = Unsplash\Collection::create(
-            'test collection add photo',
-            'basic description',
-            true
-        );
-        
-        $collection->add('iDZt9nmvOWk');
-        $photos = $collection->photos();
-
-        VCR::eject();
-
-        $this->assertEquals('iDZt9nmvOWk', $photos[0]->id);
-    }
-
     public function testRemovePhotoFromCollection()
     {
         VCR::insertCassette('collections.yml');
@@ -113,7 +95,7 @@ class CollectionTest extends BaseTest
             'basic description',
             true
         );
-        
+
         $collection->add('iDZt9nmvOWk');
         $collection->remove('iDZt9nmvOWk');
         $photos = $collection->photos();

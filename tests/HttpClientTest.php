@@ -108,12 +108,12 @@ class HttpClientTest extends BaseTest
     {
         Unsplash\HttpClient::$connection = $this->connection;
 
-        VCR::insertCassette('categories.yml');
-        $response = (new Unsplash\HttpClient())->send("get", ['categories/2']);
+        VCR::insertCassette('collections.yml');
+        $response = (new Unsplash\HttpClient())->send("get", ['collections/300']);
         $body = json_decode($response->getBody(), true);
         VCR::eject();
 
-        $this->assertEquals(2, $body['id']);
+        $this->assertEquals(300, $body['id']);
     }
 
     public function testConnectionFromHttpClient()

@@ -35,11 +35,6 @@ class PhotoTest extends BaseTest
         VCR::eject();
 
         $this->assertEquals(10, $photos->count());
-        $expectedQueryString = 'utm_source=test&utm_medium=referral&utm_campaign=api-credit';
-        $this->assertContains($expectedQueryString, $photos[0]->links['html']);
-        $this->assertContains($expectedQueryString, $photos[0]->links['download']);
-        $this->assertNotContains($expectedQueryString, $photos[0]->links['self']);
-        $this->assertContains($expectedQueryString, $photos[0]->user['links']['html']);
     }
 
     public function testPhotographer()
@@ -58,14 +53,13 @@ class PhotoTest extends BaseTest
         $photo = Unsplash\Photo::random();
         VCR::eject();
 
-        $this->assertEquals('ZUaqqMxtxYk', $photo->id);
+        $this->assertEquals('P7Lh0usGcuk', $photo->id);
     }
 
     public function testRandomPhotoWithFilters()
     {
         VCR::insertCassette('photos.yml');
         $filters = [
-            'category' => [2,3],
             'featured' => true,
             'username' => 'andy_brunner',
             'query'    => 'ice',
@@ -75,9 +69,9 @@ class PhotoTest extends BaseTest
         $photo = Unsplash\Photo::random($filters);
         VCR::eject();
 
-        $this->assertEquals('ZUaqqMxtxYk', $photo->id);
+        $this->assertEquals('_-BxCUIRjuE', $photo->id);
         $this->assertEquals(
-            'https://unsplash.imgix.net/photo-1428681756973-d318f055795a?q=75&fm=jpg&w=100&h=100&fit=max&s=b223d24e28ba1ced6731e98d46cd5f83',
+            'https://images.unsplash.com/photo-1478253218275-d88ba5a9b6c7?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=100&h=100&fit=crop&ixid=eyJhcHBfaWQiOjEyMDd9',
             $photo->urls['custom']
         );
     }
@@ -85,7 +79,7 @@ class PhotoTest extends BaseTest
     public function testLikePhoto()
     {
         VCR::insertCassette('photos.yml');
-        $photo = Unsplash\Photo::find('Fma1wE_zIf8');
+        $photo = Unsplash\Photo::find('_yT_vva8zSc');
         $like = $photo->like();
         VCR::eject();
 
@@ -95,7 +89,7 @@ class PhotoTest extends BaseTest
     public function testUnlikePhoto()
     {
         VCR::insertCassette('photos.yml');
-        $photo = Unsplash\Photo::find('j0g8taxHZa0');
+        $photo = Unsplash\Photo::find('_yT_vva8zSc');
         $photo->like();
         $unlike = $photo->unlike();
         VCR::eject();

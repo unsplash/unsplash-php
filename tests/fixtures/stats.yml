@@ -1,12 +1,12 @@
 [{
     "request": {
         "method": "GET",
-        "url": "https:\/\/api.unsplash.com\/stats\/total",
+        "url": "http:\/\/api.lvh.me:3000\/stats\/total",
         "headers": {
-            "Host": "api.unsplash.com",
+            "Host": "api.lvh.me:3000",
             "Accept-Encoding": null,
-            "User-Agent": "GuzzleHttp\/6.0.2 curl\/7.38.0 PHP\/5.6.11",
-            "Authorization": "Bearer 582c5d7ebe28bd707751a43c8e22dc5c0a4ba0a60dbe69d520677f47b7cfcc1b",
+            "User-Agent": "GuzzleHttp\/6.2.1 curl\/7.54.0 PHP\/7.1.23",
+            "Authorization": "Bearer 895858d78028f36e9de6b4228b0505caa872a2e02a470dcd2189760fa88aeab2",
             "Accept": null
         }
     },
@@ -19,17 +19,18 @@
         "headers": {
             "Access-Control-Allow-Origin": "*",
             "Access-Control-Request-Method": "*",
-            "Cache-Control": "max-age=7200, public",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Expose-Headers": "Link,X-Total,X-Per-Page,X-RateLimit-Limit,X-RateLimit-Remaining",
+            "Cache-Control": "no-cache, no-store, must-revalidate",
+            "Surrogate-Control": "max-age=0, stale-if-error=300",
             "Content-Type": "application\/json",
-            "Content-Length": "44",
-            "ETag": "W\/\"272769f6e39311c95c71681c7da60888\"",
-            "X-Request-Id": "829f5c0a-4fe0-4f62-8821-53bf30cbf8e2",
-            "X-RateLimit-Limit": "450",
-            "X-RateLimit-Remaining": "447",
-            "X-Runtime": "0.026500",
-            "Connection": "keep-alive",
-            "Server": "thin"
+            "X-RateLimit-Limit": "99999999",
+            "X-RateLimit-Remaining": "99999999",
+            "X-Request-Id": "3332a879-7152-41cf-aa10-416280c61bf0",
+            "X-Runtime": "0.066150",
+            "Vary": "Accept-Encoding, Origin",
+            "Content-Length": "203"
         },
-        "body": "{\"photo_downloads\":189,\"batch_downloads\":31}"
+        "body": "{\"total_photos\":0,\"photo_downloads\":0,\"photos\":0,\"downloads\":0,\"views\":0,\"likes\":0,\"photographers\":0,\"pixels\":0,\"downloads_per_second\":0,\"views_per_second\":0,\"developers\":0,\"applications\":0,\"requests\":0}"
     }
 }]

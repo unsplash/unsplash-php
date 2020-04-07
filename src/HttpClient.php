@@ -54,6 +54,15 @@ class HttpClient
      */
     public function __construct()
     {
+        $envPath = __DIR__ . '/../tests/';
+        if (class_exists('\Dotenv\Dotenv') && file_exists($envPath . ".env")) {
+            $dotenv = new \Dotenv\Dotenv($envPath);
+            $dotenv->load();
+
+            $this->scheme = getenv('HTTP_SCHEME');
+            $this->host = 'api.' . getenv('HOST');
+        }
+
         $this->httpClient = new Client(['handler' => $this->setHandler(self::$connection->getAuthorizationToken())]);
     }
 

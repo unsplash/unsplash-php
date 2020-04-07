@@ -85,7 +85,7 @@ class UserTest extends BaseTest
         $collections = $user->collections();
         VCR::eject();
 
-        $this->assertEquals('Explore Iceland', $collections[0]->title);
+        $this->assertEquals('Unsplash Awards 2019 – Finalists', $collections[0]->title);
     }
 
     public function testFindUserPrivateCollection()
@@ -95,7 +95,7 @@ class UserTest extends BaseTest
         $collections = $user->collections();
         VCR::eject();
 
-        $this->assertEquals('Land', $collections[1]->title);
+        $this->assertEquals('The Final Frontier', $collections[1]->title);
     }
 
     public function testUpdateUser()

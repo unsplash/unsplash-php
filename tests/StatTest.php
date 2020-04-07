@@ -24,8 +24,7 @@ class StatTest extends BaseTest
         Unsplash\HttpClient::$connection = $connection;
 
         $this->total = [
-            "photo_downloads" => 189,
-            "batch_downloads" => 31
+            "photo_downloads" => 0
         ];
     }
 
@@ -38,6 +37,5 @@ class StatTest extends BaseTest
         VCR::eject();
 
         $this->assertEquals($this->total['photo_downloads'], $totalStats->photo_downloads);
-        $this->assertEquals($this->total['batch_downloads'], $totalStats->batch_downloads);
     }
 }

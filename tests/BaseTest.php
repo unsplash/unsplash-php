@@ -23,12 +23,8 @@ abstract class BaseTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        // Only load env file if it exist.
-        // It will use the env variable on server if there's no file
-        if (file_exists(__DIR__ . '/.env')) {
-            $dotenv = new Dotenv(__DIR__);
-            $dotenv->load();
-        }
+        $dotenv = new Dotenv(__DIR__);
+        $dotenv->load();
 
         $this->provider = m::mock('Unsplash\OAuth2\Client\Provider\Unsplash', [
             'clientId' => 'mock_client_id',
@@ -54,7 +50,7 @@ abstract class BaseTest extends \PHPUnit_Framework_TestCase
                     }
                 }
             )
-            ->enableRequestMatchers(['method', 'url', 'host', 'query_string', 'post_fields', 'validate_authorization']);
+            ->enableRequestMatchers(['method', 'url', 'query_string', 'post_fields', 'validate_authorization']);
         VCR::turnOn();
     }
 
