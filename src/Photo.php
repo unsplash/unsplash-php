@@ -45,27 +45,6 @@ class Photo extends Endpoint
         return new ArrayObject($photosArray, $photos->getHeaders());
     }
 
-
-    /**
-     * Retrieve a single page from the list of the curated photos (front-page’s photos).
-     * Returns an ArrayObject that contains Photo objects.
-     *
-     * @param  integer $page Page from which the photos need to be retrieve
-     * @param  integer $per_page Number of element in a page
-     * @param string $order_by Order in which to retrieve photos
-     * @return ArrayObject of Photos
-     */
-    public static function curated($page = 1, $per_page = 10, $order_by = 'latest')
-    {
-        $photos = self::get("/photos/curated", [
-            'query' => ['page' => $page, 'per_page' => $per_page, 'order_by' => $order_by]
-        ]);
-
-        $photosArray = self::getArray($photos->getBody(), get_called_class());
-
-        return new ArrayObject($photosArray, $photos->getHeaders());
-    }
-
     /**
      * Retrieve the user that uploaded the photo
      *
@@ -88,10 +67,6 @@ class Photo extends Endpoint
      */
     public static function random($filters = [])
     {
-        if (isset($filters['category']) && is_array($filters['category'])) {
-            $filters['category'] = implode(',', $filters['category']);
-        }
-
         $filters['featured'] = (isset($filters['featured']) && $filters['featured']) ? 'true' : null;
 
         $photo = json_decode(self::get("photos/random", ['query' => $filters])->getBody(), true);
