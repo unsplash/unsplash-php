@@ -22,7 +22,7 @@
     }
   ],
   "require": {
-    "php": ">=5.6.0",
+    "php": ">=7.1.0",
     "guzzlehttp/guzzle": "^6.3.0",
     "league/oauth2-client": ">=1.4.2",
     "hughbertd/oauth2-unsplash": ">=1.0.3"
