@@ -166,65 +166,6 @@ Unsplash\Search::users($search, $page, $per_page);
 
 ----
 
-### Curated Collection
-
-#### Unsplash\CuratedCollection::all($page, $per_page)
-Retrieve the list of curated collections.
-
-**Arguments**
-
-  Argument     | Type | Opt/Required
----------------|------|--------------
-`$per_page`    | int  | Opt *(Default: 10 / Maximum: 30)*
-`$page`        | int  | Opt *(Default: 1)*
-
-**Example**
-
-
-```php
-Unsplash\CuratedCollection::all($page, $per_page);
-```
-
-----
-
-#### Unsplash\CuratedCollection::find($id)
-Retrieve a specific curated collection.
-
-**Arguments**
-
-  Argument     | Type | Opt/Required
----------------|------|--------------
-`$id`          | int  | Required
-
-**Example**
-
-```php
-Unsplash\CuratedCollection::find(integer $id);
-```
-
-----
-
-#### Unsplash\CuratedCollection::photos($page, $per_page)
-Retrieve photos from a curated collection.
-
-*Note:* You need to instantiate a curated collection object first.
-
-**Arguments**
-
-  Argument     | Type | Opt/Required
----------------|------|--------------
-`$per_page`    | int  | Opt *(Default: 10 / Maximum: 30)*
-`$page`        | int  | Opt *(Default: 1)*
-
-**Example**
-
-```php
-$collection = Unsplash\CuratedCollection::find(integer $id);
-$photos = $collection->photos($page, $per_page);
-```
-
-----
-
 ### Collection
 
 #### Unsplash\Collection::all($page, $per_page)
@@ -449,26 +390,6 @@ Retrieve a list of photos.
 Unsplash\Photo::all($page, $per_page, $order_by);
 ```
 
-
-----
-
-#### Unsplash\Photo::curated($page, $per_page, $order_by)
-Retrieve a list of curated photos.
-
-**Arguments**
-
-  Argument     | Type | Opt/Required
----------------|------|--------------
-`$per_page`    | int  | Opt *(Default: 10 / Maximum: 30)*
-`$page`        | int  | Opt *(Default: 1)*
-`$order_by` | string | Opt *(Default: latest / Available: oldest, popular)*
-
-**Example**
-
-```php
-Unsplash\Photo::curated($page, $per_page, $order_by);
-```
-
 ----
 
 #### Unsplash\Photo::find($id)
@@ -484,25 +405,6 @@ Retrieve a specific photo.
 
 ```php
 Unsplash\Photo::find($id);
-```
-
-----
-
-#### Unsplash\Photo::create($file_path)
-Post a photo on the user's behalf.
-
-*Note:* You need the `write_photos` permission scope
-
-**Arguments**
-
-  Argument     | Type   | Opt/Required
----------------|--------|--------------
-`$file_path`   | string | Required
-
-**Example**
-
-```php
-Unsplash\Photo::create( $file_path);
 ```
 
 ----
@@ -573,7 +475,6 @@ h | int | Opt *(Image height in pixels)*
 
 // Or apply some optional filters by passing a key value array of filters
 $filters = [
-    'featured' => true,
     'username' => 'andy_brunner',
     'query'    => 'coffee',
     'w'        => 100,
