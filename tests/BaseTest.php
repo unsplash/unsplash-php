@@ -1,6 +1,6 @@
 <?php
 
-namespace Crew\Unsplash\Tests;
+namespace Unsplash\Tests;
 
 use Mockery as m;
 use \VCR\VCR;
@@ -10,7 +10,7 @@ use \League\OAuth2\Client\Token\AccessToken;
 
 /**
  * Class BaseTest
- * @package Crew\Unsplash\Tests
+ * @package Unsplash\Tests
  */
 abstract class BaseTest extends \PHPUnit_Framework_TestCase
 {

@@ -1,13 +1,13 @@
 <?php
 
-namespace Crew\Unsplash\Tests;
+namespace Unsplash\Tests;
 
-use Crew\Unsplash;
+use Unsplash;
 use VCR\VCR;
 
 /**
  * Class EndpointTest
- * @package Crew\Unsplash\Tests
+ * @package Unsplash\Tests
  */
 class EndpointTest extends BaseTest
 {
@@ -56,7 +56,7 @@ class EndpointTest extends BaseTest
     }
 
     /**
-     * @expectedException \Crew\Unsplash\Exception
+     * @expectedException \Unsplash\Exception
      * @expectedExceptionCode 403
      */
     public function testRateLimitError()

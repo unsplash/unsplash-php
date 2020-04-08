@@ -1,13 +1,13 @@
 <?php
 
-namespace Crew\Unsplash\Tests;
+namespace Unsplash\Tests;
 
-use \Crew\Unsplash as Unsplash;
+use \Unsplash as Unsplash;
 use \League\OAuth2\Client\Token\AccessToken;
 
 /**
  * Class ConnectionTest
- * @package Crew\Unsplash\Tests
+ * @package Unsplash\Tests
  */
 class ConnectionTest extends BaseTest
 {

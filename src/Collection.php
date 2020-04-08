@@ -1,10 +1,10 @@
 <?php
 
-namespace Crew\Unsplash;
+namespace Unsplash;
 
 /**
  * Class Collection
- * @package Crew\Unsplash
+ * @package Unsplash
  * @property int $id
  */
 class Collection extends Endpoint
@@ -109,7 +109,7 @@ class Collection extends Endpoint
             "/collections/{$this->id}/remove",
             ['query' => ['photo_id' => $photo_id]]
         );
-        
+
         # Reset
         $this->photos = [];
     }

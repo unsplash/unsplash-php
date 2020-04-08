@@ -1,10 +1,10 @@
 <?php
 
-namespace Crew\Unsplash;
+namespace Unsplash;
 
 /**
  * Class Search
- * @package Crew\Unsplash
+ * @package Unsplash
  */
 class Search extends Endpoint
 {

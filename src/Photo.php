@@ -1,10 +1,10 @@
 <?php
 
-namespace Crew\Unsplash;
+namespace Unsplash;
 
 /**
  * Class Photo
- * @package Crew\Unsplash
+ * @package Unsplash
  * @property int $id
  * @property array $user
  */

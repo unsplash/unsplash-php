@@ -1,14 +1,14 @@
 <?php
 
-namespace Crew\Unsplash\Tests;
+namespace Unsplash\Tests;
 
-use \Crew\Unsplash as Unsplash;
+use \Unsplash as Unsplash;
 use \League\OAuth2\Client\Token\AccessToken;
 use \VCR\VCR;
 
 /**
  * Class HttpClientTest
- * @package Crew\Unsplash\Tests
+ * @package Unsplash\Tests
  */
 class HttpClientTest extends BaseTest
 {
@@ -47,7 +47,7 @@ class HttpClientTest extends BaseTest
             'utmSource' => 'test'
         ]);
 
-        $this->assertInstanceOf('Crew\Unsplash\Connection', Unsplash\HttpClient::$connection);
+        $this->assertInstanceOf('Unsplash\Connection', Unsplash\HttpClient::$connection);
         $this->assertEquals('Client-ID mock_application_id', Unsplash\HttpClient::$connection->getAuthorizationToken());
     }
 

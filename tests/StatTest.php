@@ -1,13 +1,13 @@
 <?php
 
-namespace Crew\Unsplash\Tests;
+namespace Unsplash\Tests;
 
-use \Crew\Unsplash as Unsplash;
+use \Unsplash as Unsplash;
 use \VCR\VCR;
 
 /**
  * Class StatTest
- * @package Crew\Unsplash\Tests
+ * @package Unsplash\Tests
  */
 class StatTest extends BaseTest
 {

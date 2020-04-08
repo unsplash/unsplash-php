@@ -1,8 +1,8 @@
 <?php
 
-namespace Crew\Unsplash\Tests;
+namespace Unsplash\Tests;
 
-use \Crew\Unsplash as Unsplash;
+use \Unsplash as Unsplash;
 use \VCR\VCR;
 
 class UserTest extends BaseTest
@@ -25,7 +25,7 @@ class UserTest extends BaseTest
     }
 
     /**
-     * @expectedException \Crew\Unsplash\Exception
+     * @expectedException \Unsplash\Exception
      * @expectedExceptionCode 404
      */
     public function testFindUnknownUser()
@@ -45,7 +45,7 @@ class UserTest extends BaseTest
     }
 
     /**
-     * @expectedException \Crew\Unsplash\Exception
+     * @expectedException \Unsplash\Exception
      * @expectedExceptionCode 401
      */
     public function testFindCurrentUserOnUnconnectedUser()

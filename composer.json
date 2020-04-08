@@ -38,12 +38,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Crew\\Unsplash\\": "src/"
+      "Unsplash\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Crew\\Unsplash\\Tests\\": "tests/"
+      "Unsplash\\Tests\\": "tests/"
     }
   }
 }

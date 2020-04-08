@@ -1,10 +1,10 @@
 <?php
 
-namespace Crew\Unsplash;
+namespace Unsplash;
 
 /**
  * Class PageResult
- * @package Crew\Unsplash
+ * @package Unsplash
  */
 class PageResult implements \ArrayAccess
 {

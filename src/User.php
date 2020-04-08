@@ -1,10 +1,10 @@
 <?php
 
-namespace Crew\Unsplash;
+namespace Unsplash;
 
 /**
  * Class User
- * @package Crew\Unsplash
+ * @package Unsplash
  * @property string $username
  */
 class User extends Endpoint
@@ -24,7 +24,7 @@ class User extends Endpoint
     public static function find($username)
     {
         $user = json_decode(self::get("/users/{$username}")->getBody(), true);
-        
+
         return new self($user);
     }
 
@@ -43,7 +43,7 @@ class User extends Endpoint
             $photos = self::get("/users/{$this->username}/photos", [
                 'query' => ['page' => $page, 'per_page' => $per_page, 'order_by' => $order_by]
             ]);
-        
+
             $this->photos["{$page}-{$per_page}-{$order_by}"] = [
                 'body' => self::getArray($photos->getBody(), __NAMESPACE__.'\\Photo'),
                 'headers' => $photos->getHeaders()
@@ -73,7 +73,7 @@ class User extends Endpoint
                 "/users/{$this->username}/collections",
                 ['query' => ['page' => $page, 'per_page' => $per_page]]
             );
-        
+
             $this->collections["{$page}-{$per_page}"] = [
                 'body' => self::getArray($collections->getBody(), __NAMESPACE__.'\\Collection'),
                 'headers' => $collections->getHeaders()
@@ -101,7 +101,7 @@ class User extends Endpoint
             $likes = self::get("/users/{$this->username}/likes", [
                 'query' => ['page' => $page, 'per_page' => $per_page, 'order_by' => $order_by]
             ]);
-        
+
             $this->likes["{$page}-{$per_page}-{$order_by}"] = [
                 'body' => self::getArray($likes->getBody(), __NAMESPACE__.'\\Photo'),
                 'headers' => $likes->getHeaders()
@@ -122,7 +122,7 @@ class User extends Endpoint
     public static function current()
     {
         $user = json_decode(self::get("/me")->getBody(), true);
-        
+
         return new self($user);
     }
 
