@@ -24,7 +24,7 @@ abstract class BaseTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         if (file_exists(__DIR__ . '/.env')) {
-            $dotenv = new Dotenv(__DIR__);
+            $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);
             $dotenv->load();
         }
 

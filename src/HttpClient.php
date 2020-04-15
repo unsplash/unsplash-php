@@ -56,7 +56,7 @@ class HttpClient
     {
         $envPath = __DIR__ . '/../tests/';
         if (class_exists('\Dotenv\Dotenv') && file_exists($envPath . ".env")) {
-            $dotenv = new \Dotenv\Dotenv($envPath);
+            $dotenv = \Dotenv\Dotenv::createImmutable($envPath);
             $dotenv->load();
 
             $this->scheme = getenv('HTTP_SCHEME');
