@@ -19,7 +19,7 @@ class Search extends Endpoint
      *                               portrait, and squarish. (Optional)
      * @param  string  $collections  Collection ID(‘s) to narrow search. If multiple, comma-separated. (Optional)
      * @param  string  $order_by     How to sort the photos. (Optional; default: relevant). 
-                                     Valid values are latest and relevant.
+     *                               Valid values are latest and relevant.
      * @return PageResult
      */
     public static function photos($search, $page = 1, $per_page = 10, $orientation = null, $collections = null, $order_by = null)
