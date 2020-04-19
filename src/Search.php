@@ -18,9 +18,11 @@ class Search extends Endpoint
      * @param  string  $orientation  Filter search results by photo orientation. Valid values are landscape,
      *                               portrait, and squarish. (Optional)
      * @param  string  $collections  Collection ID(‘s) to narrow search. If multiple, comma-separated. (Optional)
+     * @param  string  $order_by     How to sort the photos. (Optional; default: relevant). 
+                                     Valid values are latest and relevant.
      * @return PageResult
      */
-    public static function photos($search, $page = 1, $per_page = 10, $orientation = null, $collections = null)
+    public static function photos($search, $page = 1, $per_page = 10, $orientation = null, $collections = null, $order_by = null)
     {
         $query = [
             'query' => $search,
@@ -34,6 +36,10 @@ class Search extends Endpoint
 
         if ( ! empty($collections)) {
             $query['collections'] = $collections;
+        }
+
+        if ( ! empty($order_by)) {
+            $query['order_by'] = $order_by;
         }
 
         $photos = self::get(

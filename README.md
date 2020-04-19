@@ -109,6 +109,7 @@ Retrieve a single page of photo results depending on search results.
 `$per_page`    | int    | Opt *(Default: 10 / Maximum: 30)*
 `$orientation` | string | Opt *(Default: null / Available: "landscape", "portrait", "squarish")*
 `$collections` | string | Opt *(Default: null / If multiple, comma-separated)*
+`$order_by`    | string | How to sort the photos. *(Optional; default: relevant)*. Valid values are *latest* and *relevant*.
 
 **Example**
 
