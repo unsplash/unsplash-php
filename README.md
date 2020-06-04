@@ -42,7 +42,8 @@ Unsplash\HttpClient::init([
 	'utmSource' => 'NAME OF YOUR APPLICATION'
 ]);
 ```
-### Authorization workflow
+
+### User Authorization workflow
 To access actions that are non-public (i.e. uploading a photo to a specific account), you'll need a user's permission to access their data.
 
 An example of this flow can be found in /examples/oauth-flow.php
@@ -96,7 +97,7 @@ Some parameters are identical across all methods:
 
 <div id="search-photos" />
 
-#### Unsplash\Search::photos($search, $page, $per_page, $orientation, $collections)
+#### Photos
 
 Retrieve a single page of photo results depending on search results.
 
@@ -124,7 +125,7 @@ Unsplash\Search::photos($search, $page, $per_page, $orientation);
 
 ----
 
-#### Unsplash\Search::collections($search, $page, $per_page)
+#### Collections
 
 Retrieve a single page of collection results depending on search results.
 
@@ -145,7 +146,7 @@ Unsplash\Search::collections($search, $page, $per_page);
 
 ----
 
-#### Unsplash\Search::users($search, $page, $per_page)
+#### Users
 
 Retrieve a single page of user results depending on search results.
 
@@ -166,9 +167,9 @@ Unsplash\Search::users($search, $page, $per_page);
 
 ----
 
-### Collection
+### Collections
 
-#### Unsplash\Collection::all($page, $per_page)
+####
 Retrieve the list of collections.
 
 **Arguments**
@@ -183,63 +184,6 @@ Retrieve the list of collections.
 
 ```php
 Unsplash\Collection::all($page, $per_page);
-```
-
-----
-
-#### Unsplash\Collection::featured($page, $per_page)
-Retrieve list of featured collections.
-
-**Arguments**
-
-  Argument     | Type | Opt/Required
----------------|------|--------------
-`$per_page`    | int  | Opt *(Default: 10 / Maximum: 30)*
-`$page`        | int  | Opt *(Default: 1)*
-
-**Example**
-
-
-```php
-Unsplash\Collection::featured($page, $per_page);
-```
-
-----
-
-#### Unsplash\Collection::related($page, $per_page)
-Retrieve list of featured collections.
-
-*Note* You must instantiate a collection first
-
-**Arguments**
-
-  Argument     | Type | Opt/Required
----------------|------|--------------
-
-
-**Example**
-
-
-```php
-$collection = Unsplash\Collection::find($id);
-$collection->related();
-```
-
-----
-
-#### Unsplash\Collection::find($id)
-Retrieve a specific collection.
-
-**Arguments**
-
-  Argument     | Type | Opt/Required
----------------|------|--------------
-`$id`          | int  | Required
-
-**Example**
-
-```php
-Unsplash\Collection::find(integer $id);
 ```
 
 ----
@@ -261,6 +205,27 @@ Retrieve photos from a collection.
 ```php
 $collection = Unsplash\Collection::find(integer $id);
 $photos = $collection->photos($page, $per_page);
+```
+
+----
+
+#### Unsplash\Collection::related($page, $per_page)
+Retrieve list of featured collections.
+
+*Note* You must instantiate a collection first
+
+**Arguments**
+
+  Argument     | Type | Opt/Required
+---------------|------|--------------
+
+
+**Example**
+
+
+```php
+$collection = Unsplash\Collection::find($id);
+$collection->related();
 ```
 
 ----
