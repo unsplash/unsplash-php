@@ -161,19 +161,6 @@ class Collection extends Endpoint
     }
 
     /**
-     * Get a page of  featured collections
-     * @param int $page - page to retrieve
-     * @param int $per_page - num per page
-     * @return ArrayObject
-     */
-    public static function featured($page = 1, $per_page = 10)
-    {
-        $collections = self::get("/collections/featured", ['query' => ['page' => $page, 'per_page' => $per_page]]);
-        $collectionsArray = self::getArray($collections->getBody(), get_called_class());
-        return new ArrayObject($collectionsArray, $collections->getHeaders());
-    }
-
-    /**
      * Get related collections to current collection
      * @return ArrayObject
      */

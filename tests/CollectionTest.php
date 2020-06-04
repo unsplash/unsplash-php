@@ -105,14 +105,6 @@ class CollectionTest extends BaseTest
         $this->assertEquals(0, $photos->count());
     }
 
-    public function testGetFeaturedCollections()
-    {
-        VCR::insertCassette('collections.json');
-        $collection = Unsplash\Collection::featured();
-        $this->assertCount(10, $collection);
-        VCR::eject();
-    }
-
     public function testGetRelatedCollections()
     {
         VCR::insertCassette('collections.json');
