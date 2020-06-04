@@ -21,7 +21,7 @@ abstract class BaseTest extends \Mockery\Adapter\Phpunit\MockeryTestCase
 
     protected $accessToken;
 
-    public function setUp()
+    public function setUp(): void
     {
         if (file_exists(__DIR__ . '/.env')) {
             $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);

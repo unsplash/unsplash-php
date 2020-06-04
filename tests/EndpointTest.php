@@ -11,7 +11,7 @@ use VCR\VCR;
  */
 class EndpointTest extends BaseTest
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -55,12 +55,10 @@ class EndpointTest extends BaseTest
         $this->assertEquals('mock_1', $endpoint->test_1);
     }
 
-    /**
-     * @expectedException \Unsplash\Exception
-     * @expectedExceptionCode 403
-     */
     public function testRateLimitError()
     {
+        $this->expectException(\Unsplash\Exception::class);
+
         VCR::insertCassette('endpoint.json');
         Unsplash\Endpoint::__callStatic('get', ['collections/301', []]);
         VCR::eject();

@@ -11,7 +11,7 @@ use \VCR\VCR;
  */
 class CollectionTest extends BaseTest
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $connection = new Unsplash\Connection($this->provider, $this->accessToken);

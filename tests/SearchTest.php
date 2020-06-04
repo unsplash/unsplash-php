@@ -11,7 +11,7 @@ use \VCR\VCR;
  */
 class SearchTest extends BaseTest
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -70,9 +70,9 @@ class SearchTest extends BaseTest
         $users = Unsplash\Search::users("dechuck", 1, 1);
         $this->assertTrue(isset($users[0]));
         $this->assertFalse(isset($users[1]));
-        $this->assertInternalType('array', $users[0]);
+        $this->assertIsArray($users[0]);
         $users[1] = [];
-        $this->assertInternalType('array', $users[1]);
+        $this->assertIsArray($users[1]);
         $this->assertSame([], $users[1]);
         $this->assertTrue(isset($users[1]));
         unset($users[1]);

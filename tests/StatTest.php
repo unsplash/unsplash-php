@@ -16,7 +16,7 @@ class StatTest extends BaseTest
      */
     protected $total = [];
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 

@@ -11,7 +11,7 @@ use \VCR\VCR;
  */
 class PhotoTest extends BaseTest
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $connection = new Unsplash\Connection($this->provider, $this->accessToken);
@@ -115,7 +115,7 @@ class PhotoTest extends BaseTest
         VCR::insertCassette('photos.json');
         $photo = Unsplash\Photo::find('ZUaqqMxtxYk');
         $link = $photo->download();
-        $this->assertInternalType('string', $link);
+        $this->assertIsString($link);
         $this->assertNotFalse(filter_var($link, FILTER_VALIDATE_URL));
         VCR::eject();
     }

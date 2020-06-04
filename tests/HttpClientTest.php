@@ -14,7 +14,7 @@ class HttpClientTest extends BaseTest
 {
     public $connection;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -28,7 +28,7 @@ class HttpClientTest extends BaseTest
         $this->connection = new Unsplash\Connection($provider, $this->accessToken);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         Unsplash\HttpClient::$connection = null;
     }
@@ -65,12 +65,10 @@ class HttpClientTest extends BaseTest
         $this->assertEquals('Bearer mock_access_token', Unsplash\HttpClient::$connection->getAuthorizationToken());
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_Error_Notice
-     */
     public function testInitWithoutUtmSourceRaisesNotice()
     {
-        $this->setExpectedExceptionFromAnnotation();
+        $this->expectNotice(\PHPUnit\Framework\Error\Notice::class);
+
         Unsplash\HttpClient::init([
             'applicationId' => 'mock_application_id',
         ], [
@@ -79,6 +77,7 @@ class HttpClientTest extends BaseTest
             'expires_in' => time() + 3600
         ]);
     }
+
 
     public function testInitConnectionWithAccessTokenObject()
     {

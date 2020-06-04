@@ -7,7 +7,7 @@ use \VCR\VCR;
 
 class UserTest extends BaseTest
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -24,12 +24,9 @@ class UserTest extends BaseTest
         $this->assertEquals('dechuck', $user->username);
     }
 
-    /**
-     * @expectedException \Unsplash\Exception
-     * @expectedExceptionCode 404
-     */
     public function testFindUnknownUser()
     {
+        $this->expectException(\Unsplash\Exception::class);
         VCR::insertCassette('users.json');
         Unsplash\User::find('badbadnotgooduser');
         VCR::eject();
@@ -44,12 +41,9 @@ class UserTest extends BaseTest
         $this->assertNotEmpty($user->uploads_remaining);
     }
 
-    /**
-     * @expectedException \Unsplash\Exception
-     * @expectedExceptionCode 401
-     */
     public function testFindCurrentUserOnUnconnectedUser()
     {
+        $this->expectException(\Unsplash\Exception::class);
         $connection = new Unsplash\Connection($this->provider);
         Unsplash\HttpClient::$connection = $connection;
 
