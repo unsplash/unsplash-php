@@ -12,7 +12,7 @@ use \League\OAuth2\Client\Token\AccessToken;
  * Class BaseTest
  * @package Unsplash\Tests
  */
-abstract class BaseTest extends \PHPUnit_Framework_TestCase
+abstract class BaseTest extends \Mockery\Adapter\Phpunit\MockeryTestCase
 {
     /**
      * @var m\MockInterface
