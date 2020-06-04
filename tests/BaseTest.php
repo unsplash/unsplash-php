@@ -1,6 +1,6 @@
 <?php
 
-namespace Crew\Unsplash\Tests;
+namespace Unsplash\Tests;
 
 use Mockery as m;
 use \VCR\VCR;
@@ -10,9 +10,9 @@ use \League\OAuth2\Client\Token\AccessToken;
 
 /**
  * Class BaseTest
- * @package Crew\Unsplash\Tests
+ * @package Unsplash\Tests
  */
-abstract class BaseTest extends \PHPUnit_Framework_TestCase
+abstract class BaseTest extends \Mockery\Adapter\Phpunit\MockeryTestCase
 {
     /**
      * @var m\MockInterface
@@ -21,12 +21,10 @@ abstract class BaseTest extends \PHPUnit_Framework_TestCase
 
     protected $accessToken;
 
-    public function setUp()
+    public function setUp(): void
     {
-        // Only load env file if it exist.
-        // It will use the env variable on server if there's no file
         if (file_exists(__DIR__ . '/.env')) {
-            $dotenv = new Dotenv(__DIR__);
+            $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);
             $dotenv->load();
         }
 
@@ -54,7 +52,7 @@ abstract class BaseTest extends \PHPUnit_Framework_TestCase
                     }
                 }
             )
-            ->enableRequestMatchers(['method', 'url', 'host', 'query_string', 'post_fields', 'validate_authorization']);
+            ->enableRequestMatchers(['method', 'url', 'query_string', 'post_fields', 'validate_authorization']);
         VCR::turnOn();
     }
 

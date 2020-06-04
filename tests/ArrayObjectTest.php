@@ -1,16 +1,16 @@
 <?php
 
-namespace Crew\Unsplash\Tests;
+namespace Unsplash\Tests;
 
-use Crew\Unsplash;
+use Unsplash;
 
 /**
  * Class ArrayObjectTest
- * @package Crew\Unsplash\Tests
+ * @package Unsplash\Tests
  */
 class ArrayObjectTest extends BaseTest
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
     }
@@ -66,7 +66,7 @@ class ArrayObjectTest extends BaseTest
     public function testNextPage()
     {
         $headers = ['Link' => [
-            '<http://api.staging.unsplash.com/photos?page=266>; rel="last", 
+            '<http://api.staging.unsplash.com/photos?page=266>; rel="last",
             <http://api.staging.unsplash.com/photos?page=2>; rel="next"'
         ]];
 
@@ -107,7 +107,7 @@ class ArrayObjectTest extends BaseTest
 
         $this->assertEquals(265, $arrayObject->currentPage());
 	}
-	
+
     public function testRateLimitRemaining()
     {
         $headers = ['X-Ratelimit-Remaining' => ['10']];

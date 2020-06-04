@@ -1,19 +1,19 @@
 <?php
 
-namespace Crew\Unsplash;
+namespace Unsplash;
 
 use GuzzleHttp\Psr7\Response;
 
 /**
  * Class Endpoint
- * @package Crew\Unsplash
+ * @package Unsplash
  *
  * @method Response|null get(string $uri, array $arguments = null)
  * @method Response|null post(string $uri, array $arguments = null)
  * @method Response|null put(string $uri, array $arguments = null)
  * @method Response|null delete(string $uri, array $arguments = null)
 
- * @see \Crew\Unsplash\HttpClient::send()
+ * @see \Unsplash\HttpClient::send()
  */
 class Endpoint
 {
@@ -79,8 +79,8 @@ class Endpoint
      *
      * @param  string $method HTTP action to trigger
      * @param  array $arguments Array containing all the parameters pass to the magic method
-     * @throws \Crew\Unsplash\Exception if the HTTP request failed
-     * @see \Crew\Unsplash\HttpClient::send()
+     * @throws \Unsplash\Exception if the HTTP request failed
+     * @see \Unsplash\HttpClient::send()
      * @return Response|null
      */
     public static function __callStatic($method, $arguments)

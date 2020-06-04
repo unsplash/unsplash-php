@@ -1,10 +1,10 @@
 <?php
 
-namespace Crew\Unsplash;
+namespace Unsplash;
 
 /**
  * Class Stat
- * @package Crew\Unsplash
+ * @package Unsplash
  */
 class Stat extends Endpoint
 {

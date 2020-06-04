@@ -1,10 +1,10 @@
 <?php
 
-namespace Crew\Unsplash;
+namespace Unsplash;
 
 /**
  * Class Exception
- * @package Crew\Unsplash
+ * @package Unsplash
  */
 class Exception extends \Exception
 {

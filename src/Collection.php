@@ -1,10 +1,10 @@
 <?php
 
-namespace Crew\Unsplash;
+namespace Unsplash;
 
 /**
  * Class Collection
- * @package Crew\Unsplash
+ * @package Unsplash
  * @property int $id
  */
 class Collection extends Endpoint
@@ -109,7 +109,7 @@ class Collection extends Endpoint
             "/collections/{$this->id}/remove",
             ['query' => ['photo_id' => $photo_id]]
         );
-        
+
         # Reset
         $this->photos = [];
     }
@@ -158,19 +158,6 @@ class Collection extends Endpoint
         );
 
         parent::update($parameters);
-    }
-
-    /**
-     * Get a page of  featured collections
-     * @param int $page - page to retrieve
-     * @param int $per_page - num per page
-     * @return ArrayObject
-     */
-    public static function featured($page = 1, $per_page = 10)
-    {
-        $collections = self::get("/collections/featured", ['query' => ['page' => $page, 'per_page' => $per_page]]);
-        $collectionsArray = self::getArray($collections->getBody(), get_called_class());
-        return new ArrayObject($collectionsArray, $collections->getHeaders());
     }
 
     /**

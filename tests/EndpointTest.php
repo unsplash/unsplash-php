@@ -1,17 +1,17 @@
 <?php
 
-namespace Crew\Unsplash\Tests;
+namespace Unsplash\Tests;
 
-use Crew\Unsplash;
+use Unsplash;
 use VCR\VCR;
 
 /**
  * Class EndpointTest
- * @package Crew\Unsplash\Tests
+ * @package Unsplash\Tests
  */
 class EndpointTest extends BaseTest
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -32,17 +32,17 @@ class EndpointTest extends BaseTest
 
     public function testRequest()
     {
-        VCR::insertCassette('endpoint.yml');
-        $res = Unsplash\Endpoint::__callStatic('get', ['categories/2', []]);
+        VCR::insertCassette('endpoint.json');
+        $res = Unsplash\Endpoint::__callStatic('get', ['collections/300', []]);
         VCR::eject();
         $body = json_decode($res->getBody());
 
-        $this->assertEquals(2, $body->id);
+        $this->assertEquals(300, $body->id);
     }
 
     public function testRequestWithBadMethod()
     {
-        $res = Unsplash\Endpoint::__callStatic('back', ['categories/2', []]);
+        $res = Unsplash\Endpoint::__callStatic('back', ['collections/300', []]);
         $this->assertNull($res);
     }
 
@@ -55,25 +55,23 @@ class EndpointTest extends BaseTest
         $this->assertEquals('mock_1', $endpoint->test_1);
     }
 
-    /**
-     * @expectedException \Crew\Unsplash\Exception
-     * @expectedExceptionCode 403
-     */
     public function testRateLimitError()
     {
-        VCR::insertCassette('endpoint.yml');
-        Unsplash\Endpoint::__callStatic('get', ['categories/3', []]);
+        $this->expectException(\Unsplash\Exception::class);
+
+        VCR::insertCassette('endpoint.json');
+        Unsplash\Endpoint::__callStatic('get', ['collections/301', []]);
         VCR::eject();
     }
 
     public function testRateLimitResponseExists()
     {
-        VCR::insertCassette('endpoint.yml');
-        $res = Unsplash\Endpoint::__callStatic('get', ['categories/2', []]);
+        VCR::insertCassette('endpoint.json');
+        $res = Unsplash\Endpoint::__callStatic('get', ['collections/300', []]);
         VCR::eject();
         $headers = $res->getHeaders();
 
-        $this->assertEquals('4984', $headers['X-RateLimit-Remaining'][0]);
+        $this->assertEquals('99999999', $headers['X-RateLimit-Remaining'][0]);
     }
 
     public function testCanMakeArray()

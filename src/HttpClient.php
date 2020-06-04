@@ -1,6 +1,6 @@
 <?php
 
-namespace Crew\Unsplash;
+namespace Unsplash;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
@@ -14,7 +14,7 @@ use GuzzleHttp\Psr7\Request;
 
 /**
  * Class HttpClient
- * @package Crew\Unsplash
+ * @package Unsplash
  */
 class HttpClient
 {
@@ -41,10 +41,10 @@ class HttpClient
     private $authorization = null;
 
     /**
-     * Crew\Unsplash\Connection object link to the HttpClient
+     * Unsplash\Connection object link to the HttpClient
      * Need to be set on the class before running anything else
      *
-     * @example Crew\Unsplash\HttpClient::$connection = new Crew\Unsplash\Connection();
+     * @example Unsplash\HttpClient::$connection = new Unsplash\Connection();
      * @var Connection
      */
     public static $connection;
@@ -54,6 +54,15 @@ class HttpClient
      */
     public function __construct()
     {
+        $envPath = __DIR__ . '/../tests/';
+        if (class_exists('\Dotenv\Dotenv') && file_exists($envPath . ".env")) {
+            $dotenv = \Dotenv\Dotenv::createImmutable($envPath);
+            $dotenv->load();
+
+            $this->scheme = getenv('HTTP_SCHEME');
+            $this->host = 'api.' . getenv('HOST');
+        }
+
         $this->httpClient = new Client(['handler' => $this->setHandler(self::$connection->getAuthorizationToken())]);
     }
 

@@ -1,17 +1,17 @@
 <?php
 
-namespace Crew\Unsplash\Tests;
+namespace Unsplash\Tests;
 
-use \Crew\Unsplash as Unsplash;
+use \Unsplash as Unsplash;
 use \VCR\VCR;
 
 /**
  * Class PhotoTest
- * @package Crew\Unsplash\Tests
+ * @package Unsplash\Tests
  */
 class PhotoTest extends BaseTest
 {
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $connection = new Unsplash\Connection($this->provider, $this->accessToken);
@@ -21,7 +21,7 @@ class PhotoTest extends BaseTest
 
     public function testFindPhoto()
     {
-        VCR::insertCassette('photos.yml');
+        VCR::insertCassette('photos.json');
         $photo = Unsplash\Photo::find('ZUaqqMxtxYk');
         VCR::eject();
 
@@ -30,31 +30,8 @@ class PhotoTest extends BaseTest
 
     public function testFindAllPhotos()
     {
-        VCR::insertCassette('photos.yml');
+        VCR::insertCassette('photos.json');
         $photos = Unsplash\Photo::all();
-        VCR::eject();
-
-        $this->assertEquals(10, $photos->count());
-        $expectedQueryString = 'utm_source=test&utm_medium=referral&utm_campaign=api-credit';
-        $this->assertContains($expectedQueryString, $photos[0]->links['html']);
-        $this->assertContains($expectedQueryString, $photos[0]->links['download']);
-        $this->assertNotContains($expectedQueryString, $photos[0]->links['self']);
-        $this->assertContains($expectedQueryString, $photos[0]->user['links']['html']);
-    }
-
-    public function testFindCuratedPhotos()
-    {
-        VCR::insertCassette('photos.yml');
-        $photos = Unsplash\Photo::curated(1, 10, 'popular');
-        VCR::eject();
-
-        $this->assertEquals(10, $photos->count());
-    }
-
-    public function testSearchPhotos()
-    {
-        VCR::insertCassette('photos.yml');
-        $photos = Unsplash\Photo::search('coffee');
         VCR::eject();
 
         $this->assertEquals(10, $photos->count());
@@ -62,7 +39,7 @@ class PhotoTest extends BaseTest
 
     public function testPhotographer()
     {
-        VCR::insertCassette('photos.yml');
+        VCR::insertCassette('photos.json');
         $photo = Unsplash\Photo::find('ZUaqqMxtxYk');
         $photographer = $photo->photographer();
         VCR::eject();
@@ -70,38 +47,19 @@ class PhotoTest extends BaseTest
         $this->assertEquals($photo->user['username'], $photographer->username);
     }
 
-    public function testPostPhotos()
-    {
-        VCR::insertCassette('photos.yml');
-        $photo = Unsplash\Photo::create(__dir__.'/images/test.jpg');
-        VCR::eject();
-
-        $this->assertInstanceOf('Crew\Unsplash\Photo', $photo);
-        $this->assertNotNull($photo->id);
-    }
-
-    /**
-     * @expectedException \Crew\Unsplash\Exception
-     */
-    public function testPostBadPathPhoto()
-    {
-        Unsplash\Photo::create(__dir__.'/images/bad.jpg');
-    }
-
     public function testRandomPhoto()
     {
-        VCR::insertCassette('photos.yml');
+        VCR::insertCassette('photos.json');
         $photo = Unsplash\Photo::random();
         VCR::eject();
 
-        $this->assertEquals('ZUaqqMxtxYk', $photo->id);
+        $this->assertEquals('P7Lh0usGcuk', $photo->id);
     }
 
     public function testRandomPhotoWithFilters()
     {
-        VCR::insertCassette('photos.yml');
+        VCR::insertCassette('photos.json');
         $filters = [
-            'category' => [2,3],
             'featured' => true,
             'username' => 'andy_brunner',
             'query'    => 'ice',
@@ -111,17 +69,17 @@ class PhotoTest extends BaseTest
         $photo = Unsplash\Photo::random($filters);
         VCR::eject();
 
-        $this->assertEquals('ZUaqqMxtxYk', $photo->id);
+        $this->assertEquals('_-BxCUIRjuE', $photo->id);
         $this->assertEquals(
-            'https://unsplash.imgix.net/photo-1428681756973-d318f055795a?q=75&fm=jpg&w=100&h=100&fit=max&s=b223d24e28ba1ced6731e98d46cd5f83',
+            'https://images.unsplash.com/photo-1478253218275-d88ba5a9b6c7?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=100&h=100&fit=crop&ixid=eyJhcHBfaWQiOjEyMDd9',
             $photo->urls['custom']
         );
     }
 
     public function testLikePhoto()
     {
-        VCR::insertCassette('photos.yml');
-        $photo = Unsplash\Photo::find('Fma1wE_zIf8');
+        VCR::insertCassette('photos.json');
+        $photo = Unsplash\Photo::find('_yT_vva8zSc');
         $like = $photo->like();
         VCR::eject();
 
@@ -130,8 +88,8 @@ class PhotoTest extends BaseTest
 
     public function testUnlikePhoto()
     {
-        VCR::insertCassette('photos.yml');
-        $photo = Unsplash\Photo::find('j0g8taxHZa0');
+        VCR::insertCassette('photos.json');
+        $photo = Unsplash\Photo::find('_yT_vva8zSc');
         $photo->like();
         $unlike = $photo->unlike();
         VCR::eject();
@@ -141,7 +99,7 @@ class PhotoTest extends BaseTest
 
     public function testStatisticsForPhoto()
     {
-        VCR::insertCassette('photos.yml');
+        VCR::insertCassette('photos.json');
         $photo = Unsplash\Photo::find('ZUaqqMxtxYk');
         $response = $photo->statistics();
         $this->assertInstanceOf('ArrayObject', $response);
@@ -154,17 +112,17 @@ class PhotoTest extends BaseTest
 
     public function testDownloadLinkForPhoto()
     {
-        VCR::insertCassette('photos.yml');
+        VCR::insertCassette('photos.json');
         $photo = Unsplash\Photo::find('ZUaqqMxtxYk');
         $link = $photo->download();
-        $this->assertInternalType('string', $link);
+        $this->assertIsString($link);
         $this->assertNotFalse(filter_var($link, FILTER_VALIDATE_URL));
         VCR::eject();
     }
 
     public function testUpdatePhoto()
     {
-        VCR::insertCassette('photos.yml');
+        VCR::insertCassette('photos.json');
         $photo = Unsplash\Photo::find('GQcfdBoVB_g');
         $photo->update(['exif' => ['focal_length' => 10]]);
         $this->assertEquals(10, $photo->exif['focal_length']);
@@ -173,7 +131,7 @@ class PhotoTest extends BaseTest
 
     public function testAllPhotosOrderedLatest()
     {
-        VCR::insertCassette('photos.yml');
+        VCR::insertCassette('photos.json');
         $photos = Unsplash\Photo::all(1, 10, 'latest');
         VCR::eject();
 

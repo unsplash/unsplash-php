@@ -1,3 +1,17 @@
+## 3.0.0 - 2020-06-03
+
+### Removed
+- Remove functions calling deprecated API endpoints.
+  - categories
+  - anything 'curated'
+  - `GET /photos/search`
+- Remove top-level `Crew` namespace
+- Dropped PHP <= 7.2 support
+
+### Updated
+
+- Updated dependencies (primarily for dev/tests).
+
 ## 2.5.1 - 2020-04-07
 ### Added
 - Added `Accept-Encoding: gzip` to requests.

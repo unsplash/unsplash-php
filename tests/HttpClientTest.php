@@ -1,20 +1,20 @@
 <?php
 
-namespace Crew\Unsplash\Tests;
+namespace Unsplash\Tests;
 
-use \Crew\Unsplash as Unsplash;
+use \Unsplash as Unsplash;
 use \League\OAuth2\Client\Token\AccessToken;
 use \VCR\VCR;
 
 /**
  * Class HttpClientTest
- * @package Crew\Unsplash\Tests
+ * @package Unsplash\Tests
  */
 class HttpClientTest extends BaseTest
 {
     public $connection;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -28,7 +28,7 @@ class HttpClientTest extends BaseTest
         $this->connection = new Unsplash\Connection($provider, $this->accessToken);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         Unsplash\HttpClient::$connection = null;
     }
@@ -47,7 +47,7 @@ class HttpClientTest extends BaseTest
             'utmSource' => 'test'
         ]);
 
-        $this->assertInstanceOf('Crew\Unsplash\Connection', Unsplash\HttpClient::$connection);
+        $this->assertInstanceOf('Unsplash\Connection', Unsplash\HttpClient::$connection);
         $this->assertEquals('Client-ID mock_application_id', Unsplash\HttpClient::$connection->getAuthorizationToken());
     }
 
@@ -65,12 +65,10 @@ class HttpClientTest extends BaseTest
         $this->assertEquals('Bearer mock_access_token', Unsplash\HttpClient::$connection->getAuthorizationToken());
     }
 
-    /**
-     * @expectedException \PHPUnit_Framework_Error_Notice
-     */
     public function testInitWithoutUtmSourceRaisesNotice()
     {
-        $this->setExpectedExceptionFromAnnotation();
+        $this->expectNotice(\PHPUnit\Framework\Error\Notice::class);
+
         Unsplash\HttpClient::init([
             'applicationId' => 'mock_application_id',
         ], [
@@ -79,6 +77,7 @@ class HttpClientTest extends BaseTest
             'expires_in' => time() + 3600
         ]);
     }
+
 
     public function testInitConnectionWithAccessTokenObject()
     {
@@ -108,12 +107,12 @@ class HttpClientTest extends BaseTest
     {
         Unsplash\HttpClient::$connection = $this->connection;
 
-        VCR::insertCassette('categories.yml');
-        $response = (new Unsplash\HttpClient())->send("get", ['categories/2']);
+        VCR::insertCassette('collections.json');
+        $response = (new Unsplash\HttpClient())->send("get", ['collections/300']);
         $body = json_decode($response->getBody(), true);
         VCR::eject();
 
-        $this->assertEquals(2, $body['id']);
+        $this->assertEquals(300, $body['id']);
     }
 
     public function testConnectionFromHttpClient()

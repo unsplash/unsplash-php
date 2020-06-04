@@ -1,13 +1,13 @@
 <?php
 
-namespace Crew\Unsplash\Tests;
+namespace Unsplash\Tests;
 
-use \Crew\Unsplash as Unsplash;
+use \Unsplash as Unsplash;
 use \VCR\VCR;
 
 /**
  * Class StatTest
- * @package Crew\Unsplash\Tests
+ * @package Unsplash\Tests
  */
 class StatTest extends BaseTest
 {
@@ -16,7 +16,7 @@ class StatTest extends BaseTest
      */
     protected $total = [];
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
 
@@ -24,20 +24,18 @@ class StatTest extends BaseTest
         Unsplash\HttpClient::$connection = $connection;
 
         $this->total = [
-            "photo_downloads" => 189,
-            "batch_downloads" => 31
+            "photo_downloads" => 0
         ];
     }
 
     public function testFindTotalStats()
     {
-        VCR::insertCassette('stats.yml');
+        VCR::insertCassette('stats.json');
 
         $totalStats = Unsplash\Stat::total();
 
         VCR::eject();
 
         $this->assertEquals($this->total['photo_downloads'], $totalStats->photo_downloads);
-        $this->assertEquals($this->total['batch_downloads'], $totalStats->batch_downloads);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Crew\Unsplash;
+namespace Unsplash;
 
 use \League\OAuth2\Client\Grant\RefreshToken;
 use League\OAuth2\Client\Token\AccessToken;
@@ -8,7 +8,7 @@ use Unsplash\OAuth2\Client\Provider\Unsplash;
 
 /**
  * Class Connection
- * @package Crew\Unsplash
+ * @package Unsplash
  */
 class Connection
 {

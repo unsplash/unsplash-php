@@ -35,14 +35,15 @@ Note that if you're just using actions that require the [public permission scope
 Note that if utmSource is omitted from $credentials a notice will be raised
 
 ```php
-Crew\Unsplash\HttpClient::init([
+Unsplash\HttpClient::init([
 	'applicationId'	=> 'YOUR APPLICATION ID',
 	'secret'		=> 'YOUR APPLICATION SECRET',
 	'callbackUrl'	=> 'https://your-application.com/oauth/callback',
 	'utmSource' => 'NAME OF YOUR APPLICATION'
 ]);
 ```
-### Authorization workflow
+
+### User Authorization workflow
 To access actions that are non-public (i.e. uploading a photo to a specific account), you'll need a user's permission to access their data.
 
 An example of this flow can be found in /examples/oauth-flow.php
@@ -51,14 +52,14 @@ Direct them to an authorization URL (configuring any scopes before generating th
 
 ```php
 $scopes = ['public', 'write_user'];
-Crew\Unsplash\HttpClient::$connection->getConnectionUrl($scopes);
+Unsplash\HttpClient::$connection->getConnectionUrl($scopes);
 ```
 
 Upon authorization, Unsplash will return to you an authentication code via your OAuth
 callback handler. Use it to generate an access token:
 
 ```php
-Crew\Unsplash\HttpClient::$connection->generateToken($code);
+Unsplash\HttpClient::$connection->generateToken($code);
 ```
 
 With the token you can now access any additional non-public actions available for the authorized user.
@@ -96,7 +97,7 @@ Some parameters are identical across all methods:
 
 <div id="search-photos" />
 
-#### Crew\Unsplash\Search::photos($search, $page, $per_page, $orientation, $collections)
+#### Photos
 
 Retrieve a single page of photo results depending on search results.
 
@@ -119,12 +120,12 @@ $page = 3;
 $per_page = 15;
 $orientation = 'landscape';
 
-Crew\Unsplash\Search::photos($search, $page, $per_page, $orientation);
+Unsplash\Search::photos($search, $page, $per_page, $orientation);
 ```
 
 ----
 
-#### Crew\Unsplash\Search::collections($search, $page, $per_page)
+#### Collections
 
 Retrieve a single page of collection results depending on search results.
 
@@ -140,12 +141,12 @@ Retrieve a single page of collection results depending on search results.
 
 
 ```php
-Crew\Unsplash\Search::collections($search, $page, $per_page);
+Unsplash\Search::collections($search, $page, $per_page);
 ```
 
 ----
 
-#### Crew\Unsplash\Search::users($search, $page, $per_page)
+#### Users
 
 Retrieve a single page of user results depending on search results.
 
@@ -161,73 +162,14 @@ Retrieve a single page of user results depending on search results.
 
 
 ```php
-Crew\Unsplash\Search::users($search, $page, $per_page);
+Unsplash\Search::users($search, $page, $per_page);
 ```
 
 ----
 
-### Curated Collection
+### Collections
 
-#### Crew\Unsplash\CuratedCollection::all($page, $per_page)
-Retrieve the list of curated collections.
-
-**Arguments**
-
-  Argument     | Type | Opt/Required
----------------|------|--------------
-`$per_page`    | int  | Opt *(Default: 10 / Maximum: 30)*
-`$page`        | int  | Opt *(Default: 1)*
-
-**Example**
-
-
-```php
-Crew\Unsplash\CuratedCollection::all($page, $per_page);
-```
-
-----
-
-#### Crew\Unsplash\CuratedCollection::find($id)
-Retrieve a specific curated collection.
-
-**Arguments**
-
-  Argument     | Type | Opt/Required
----------------|------|--------------
-`$id`          | int  | Required
-
-**Example**
-
-```php
-Crew\Unsplash\CuratedCollection::find(integer $id);
-```
-
-----
-
-#### Crew\Unsplash\CuratedCollection::photos($page, $per_page)
-Retrieve photos from a curated collection.
-
-*Note:* You need to instantiate a curated collection object first.
-
-**Arguments**
-
-  Argument     | Type | Opt/Required
----------------|------|--------------
-`$per_page`    | int  | Opt *(Default: 10 / Maximum: 30)*
-`$page`        | int  | Opt *(Default: 1)*
-
-**Example**
-
-```php
-$collection = Crew\Unsplash\CuratedCollection::find(integer $id);
-$photos = $collection->photos($page, $per_page);
-```
-
-----
-
-### Collection
-
-#### Crew\Unsplash\Collection::all($page, $per_page)
+####
 Retrieve the list of collections.
 
 **Arguments**
@@ -241,69 +183,12 @@ Retrieve the list of collections.
 
 
 ```php
-Crew\Unsplash\Collection::all($page, $per_page);
+Unsplash\Collection::all($page, $per_page);
 ```
 
 ----
 
-#### Crew\Unsplash\Collection::featured($page, $per_page)
-Retrieve list of featured collections.
-
-**Arguments**
-
-  Argument     | Type | Opt/Required
----------------|------|--------------
-`$per_page`    | int  | Opt *(Default: 10 / Maximum: 30)*
-`$page`        | int  | Opt *(Default: 1)*
-
-**Example**
-
-
-```php
-Crew\Unsplash\Collection::featured($page, $per_page);
-```
-
-----
-
-#### Crew\Unsplash\Collection::related($page, $per_page)
-Retrieve list of featured collections.
-
-*Note* You must instantiate a collection first
-
-**Arguments**
-
-  Argument     | Type | Opt/Required
----------------|------|--------------
-
-
-**Example**
-
-
-```php
-$collection = Crew\Unsplash\Collection::find($id);
-$collection->related();
-```
-
-----
-
-#### Crew\Unsplash\Collection::find($id)
-Retrieve a specific collection.
-
-**Arguments**
-
-  Argument     | Type | Opt/Required
----------------|------|--------------
-`$id`          | int  | Required
-
-**Example**
-
-```php
-Crew\Unsplash\Collection::find(integer $id);
-```
-
-----
-
-#### Crew\Unsplash\Collection::photos($page, $per_page)
+#### Unsplash\Collection::photos($page, $per_page)
 Retrieve photos from a collection.
 
 *Note:* You need to instantiate a collection object first.
@@ -318,13 +203,34 @@ Retrieve photos from a collection.
 **Example**
 
 ```php
-$collection = Crew\Unsplash\Collection::find(integer $id);
+$collection = Unsplash\Collection::find(integer $id);
 $photos = $collection->photos($page, $per_page);
 ```
 
 ----
 
-#### Crew\Unsplash\Collection::create($title, $description, $private)
+#### Unsplash\Collection::related($page, $per_page)
+Retrieve list of featured collections.
+
+*Note* You must instantiate a collection first
+
+**Arguments**
+
+  Argument     | Type | Opt/Required
+---------------|------|--------------
+
+
+**Example**
+
+
+```php
+$collection = Unsplash\Collection::find($id);
+$collection->related();
+```
+
+----
+
+#### Unsplash\Collection::create($title, $description, $private)
 Create a collection on the user's behalf.
 
 *Note:* You need the `write_collections` permission scope
@@ -340,12 +246,12 @@ Create a collection on the user's behalf.
 **Example**
 
 ```php
-$collection = Crew\Unsplash\Collection::create($title);
+$collection = Unsplash\Collection::create($title);
 ```
 
 ----
 
-#### Crew\Unsplash\Collection::update($parameters)
+#### Unsplash\Collection::update($parameters)
 Update a collection on the user's behalf.
 
 *Note:* You need to instantiate a collection object first
@@ -361,13 +267,13 @@ Update a collection on the user's behalf.
 **Example**
 
 ```php
-$collection = Crew\Unsplash\Collection::find(int $id);
+$collection = Unsplash\Collection::find(int $id);
 $collection->update(['private' => true])
 ```
 
 ----
 
-#### Crew\Unsplash\Collection::destroy()
+#### Unsplash\Collection::destroy()
 Delete a collection on the user's behalf.
 
 *Note:* You need to instantiate a collection object first
@@ -377,13 +283,13 @@ Delete a collection on the user's behalf.
 **Example**
 
 ```php
-$collection = Crew\Unsplash\Collection::find(int $id);
+$collection = Unsplash\Collection::find(int $id);
 $collection->destroy()
 ```
 
 ----
 
-#### Crew\Unsplash\Collection::add($photo_id)
+#### Unsplash\Collection::add($photo_id)
 Add a photo in the collection on the user's behalf.
 
 *Note:* You need to instantiate a collection object first
@@ -399,13 +305,13 @@ Add a photo in the collection on the user's behalf.
 **Example**
 
 ```php
-$collection = Crew\Unsplash\Collection::find(int $id);
+$collection = Unsplash\Collection::find(int $id);
 $collection->add(int $photo_id)
 ```
 
 ----
 
-#### Crew\Unsplash\Collection::remove($photo_id)
+#### Unsplash\Collection::remove($photo_id)
 Remove a photo from the collection on the user's behalf.
 
 *Note:* You need to instantiate a collection object first
@@ -421,7 +327,7 @@ Remove a photo from the collection on the user's behalf.
 **Example**
 
 ```php
-$collection = Crew\Unsplash\Collection::find(int $id);
+$collection = Unsplash\Collection::find(int $id);
 $collection->remove(int $photo_id)
 ```
 
@@ -432,7 +338,7 @@ $collection->remove(int $photo_id)
 
 <div id="photo-all" />
 
-#### Crew\Unsplash\Photo::all($page, $per_page, $order_by)
+#### Unsplash\Photo::all($page, $per_page, $order_by)
 Retrieve a list of photos.
 
 **Arguments**
@@ -446,32 +352,12 @@ Retrieve a list of photos.
 **Example**
 
 ```php
-Crew\Unsplash\Photo::all($page, $per_page, $order_by);
-```
-
-
-----
-
-#### Crew\Unsplash\Photo::curated($page, $per_page, $order_by)
-Retrieve a list of curated photos.
-
-**Arguments**
-
-  Argument     | Type | Opt/Required
----------------|------|--------------
-`$per_page`    | int  | Opt *(Default: 10 / Maximum: 30)*
-`$page`        | int  | Opt *(Default: 1)*
-`$order_by` | string | Opt *(Default: latest / Available: oldest, popular)*
-
-**Example**
-
-```php
-Crew\Unsplash\Photo::curated($page, $per_page, $order_by);
+Unsplash\Photo::all($page, $per_page, $order_by);
 ```
 
 ----
 
-#### Crew\Unsplash\Photo::find($id)
+#### Unsplash\Photo::find($id)
 Retrieve a specific photo.
 
 **Arguments**
@@ -483,31 +369,12 @@ Retrieve a specific photo.
 **Example**
 
 ```php
-Crew\Unsplash\Photo::find($id);
+Unsplash\Photo::find($id);
 ```
 
 ----
 
-#### Crew\Unsplash\Photo::create($file_path)
-Post a photo on the user's behalf.
-
-*Note:* You need the `write_photos` permission scope
-
-**Arguments**
-
-  Argument     | Type   | Opt/Required
----------------|--------|--------------
-`$file_path`   | string | Required
-
-**Example**
-
-```php
-Crew\Unsplash\Photo::create( $file_path);
-```
-
-----
-
-#### Crew\Unsplash\Photo::update($parameters = [])
+#### Unsplash\Photo::update($parameters = [])
 Post a photo on the user's behalf.
 
 *Note:* You need the `write_photos` permission scope
@@ -522,13 +389,13 @@ You need to instantiate the Photo object first
 **Example**
 
 ```php
-$photo = Crew\Unsplash\Photo::find(string $id)
+$photo = Unsplash\Photo::find(string $id)
 $photo->update(array $parameters);
 ```
 
 ----
 
-#### Crew\Unsplash\Photo::photographer()
+#### Unsplash\Photo::photographer()
 Retrieve the photo's photographer.
 
 *Note:* You need to instantiate a photo object first
@@ -541,7 +408,7 @@ Retrieve the photo's photographer.
 
 
 ```php
-$photo = Crew\Unsplash\Photo::find(string $id);
+$photo = Unsplash\Photo::find(string $id);
 $photo->photographer();
 ```
 
@@ -549,7 +416,7 @@ $photo->photographer();
 
 <div id="photo-random" />
 
-#### Crew\Unsplash\Photo::random([featured => $value, username => $value, query => $value, w => $value, h => $value])
+#### Unsplash\Photo::random([featured => $value, username => $value, query => $value, w => $value, h => $value])
 Retrieve a random photo from specified filters. For more information regarding filtering, [refer to the Offical documentation](https://unsplash.com/documentation#get-a-random-photo).
 
 *Note:* An array needs to be passed as a parameter.
@@ -573,18 +440,17 @@ h | int | Opt *(Image height in pixels)*
 
 // Or apply some optional filters by passing a key value array of filters
 $filters = [
-    'featured' => true,
     'username' => 'andy_brunner',
     'query'    => 'coffee',
     'w'        => 100,
     'h'        => 100
 ];
-Crew\Unsplash\Photo::random($filters);
+Unsplash\Photo::random($filters);
 ```
 
 ----
 
-#### Crew\Unsplash\Photo::like()
+#### Unsplash\Photo::like()
 Like a photo on the user's behalf.
 
 *Note:* You need to instantiate a photo object first
@@ -599,13 +465,13 @@ Like a photo on the user's behalf.
 
 
 ```php
-$photo = Crew\Unsplash\Photo::find(string $id);
+$photo = Unsplash\Photo::find(string $id);
 $photo->like();
 ```
 
 ----
 
-#### Crew\Unsplash\Photo::unlike()
+#### Unsplash\Photo::unlike()
 Unlike a photo on the user's behalf.
 
 *Note:* You need to instantiate a photo object first
@@ -620,13 +486,13 @@ Unlike a photo on the user's behalf.
 
 
 ```php
-$photo = Crew\Unsplash\Photo::find(string $id);
+$photo = Unsplash\Photo::find(string $id);
 $photo->unlike();
 ```
 
 ----
 
-#### Crew\Unsplash\Photo::statistics(string $resolution, int $quantity)
+#### Unsplash\Photo::statistics(string $resolution, int $quantity)
 Retrieve total number of downloads, views and likes of a single photo, as well as the historical breakdown of these stats in a specific timeframe (default is 30 days).
 
 *Note:* You must instantiate a Photo object first
@@ -646,7 +512,7 @@ quantity | int | Opt *(Defaults to 30, can be between 1 and 30)*
 ```php
 
 
-$photo = Crew\Unsplash\Photo::find($id);
+$photo = Unsplash\Photo::find($id);
 $photo->statistics('days', 7);
 ```
 
@@ -654,7 +520,7 @@ $photo->statistics('days', 7);
 
 <div id="photo-download" />
 
-#### Crew\Unsplash\Photo::download()
+#### Unsplash\Photo::download()
 Trigger a download for a photo. This is needed to follow the ['trigger a download' API Guideline](https://help.unsplash.com/api-guidelines/more-on-each-guideline/guideline-triggering-a-download).
 
 *Note:* You must instantiate a Photo object first
@@ -670,7 +536,7 @@ Trigger a download for a photo. This is needed to follow the ['trigger a downloa
 
 
 ```php
-$photo = Crew\Unsplash\Photo::find();
+$photo = Unsplash\Photo::find();
 $photo->download();
 ```
 
@@ -678,7 +544,7 @@ $photo->download();
 
 ### User
 
-#### Crew\Unsplash\User::find($username)
+#### Unsplash\User::find($username)
 Retrieve a user's information.
 
 **Arguments**
@@ -690,12 +556,12 @@ Retrieve a user's information.
 **Example**
 
 ```php
-Crew\Unsplash\User::find($username)
+Unsplash\User::find($username)
 ```
 
 ----
 
-#### Crew\Unsplash\User::portfolio($username)
+#### Unsplash\User::portfolio($username)
 Retrieve a link to the user's portfolio page.
 
 **Arguments**
@@ -707,12 +573,12 @@ Retrieve a link to the user's portfolio page.
 **Example**
 
 ```php
-Crew\Unsplash\User::portfolio($username)
+Unsplash\User::portfolio($username)
 ```
 
 ----
 
-#### Crew\Unsplash\User::current()
+#### Unsplash\User::current()
 Retrieve the user's private information.
 
 *Note:* You need the *read_user* permission scope
@@ -724,12 +590,12 @@ Retrieve the user's private information.
 **Example**
 
 ```php
-$user = Crew\Unsplash\User::current();
+$user = Unsplash\User::current();
 ```
 
 ----
 
-#### Crew\Unsplash\User::photos($page, $per_page, $order_by)
+#### Unsplash\User::photos($page, $per_page, $order_by)
 Retrieve user's photos.
 
 *Note:* You need to instantiate a user object first
@@ -745,14 +611,14 @@ Retrieve user's photos.
 **Example**
 
 ```php
-$user = Crew\Unsplash\User::find($username);
+$user = Unsplash\User::find($username);
 $user->photos($page, $per_page);
 ```
 
 ----
 
 
-#### Crew\Unsplash\User::collections($page, $per_page)
+#### Unsplash\User::collections($page, $per_page)
 Retrieve user's collections.
 
 *Note:* You need to instantiate a user object first
@@ -768,13 +634,13 @@ Retrieve user's collections.
 **Example**
 
 ```php
-$user = Crew\Unsplash\User::find($username);
+$user = Unsplash\User::find($username);
 $user->collections($page, $per_page);
 ```
 
 ----
 
-#### Crew\Unsplash\User::likes($page, $per_page, $order_by)
+#### Unsplash\User::likes($page, $per_page, $order_by)
 Retrieve user's collections.
 
 *Note:* You need to instantiate a user object first
@@ -791,14 +657,14 @@ Retrieve user's collections.
 **Example**
 
 ```php
-$user = Crew\Unsplash\User::find($username);
+$user = Unsplash\User::find($username);
 $user->likes($page, $per_page, $order_by);
 ```
 
 ----
 
 
-#### Crew\Unsplash\User::update([$key => value])
+#### Unsplash\User::update([$key => value])
 Update current user's fields. Multiple fields can be passed in the array.
 
 *Note:* You need to instantiate a user object first
@@ -813,11 +679,11 @@ Update current user's fields. Multiple fields can be passed in the array.
 `$value`       | mixed  | required
 
 ```php
-$user = Crew\Unsplash\User::current();
+$user = Unsplash\User::current();
 $user->update(['first_name' => 'Elliot', 'last_name' => 'Alderson']);
 ```
 
-#### Crew\Unsplash\User::statistics(string $resolution, int $quantity)
+#### Unsplash\User::statistics(string $resolution, int $quantity)
 Retrieve total number of downloads, views and likes for a user, as well as the historical breakdown of these stats in a specific timeframe (default is 30 days).
 
 *Note:* You must instantiate the User object first
@@ -835,7 +701,7 @@ quantity | int | Opt *(Defaults to 30, can be between 1 and 30)*
 
 
 ```php
-$user = Crew\Unsplash\User::find($id);
+$user = Unsplash\User::find($id);
 $user->statistics('days', 7);
 ```
 

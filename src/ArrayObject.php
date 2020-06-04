@@ -1,10 +1,10 @@
 <?php
 
-namespace Crew\Unsplash;
+namespace Unsplash;
 
 /**
  * Class ArrayObject
- * @package Crew\Unsplash
+ * @package Unsplash
  */
 class ArrayObject extends \ArrayObject
 {
@@ -38,7 +38,7 @@ class ArrayObject extends \ArrayObject
     const TOTAL = 'X-Total';
 
     const PER_PAGE = 'X-Per-Page';
-    
+
     const RATE_LIMIT_REMAINING = 'X-Ratelimit-Remaining';
 
     /**

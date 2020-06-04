@@ -1,8 +1,8 @@
 sudo: false
 language: php
 php:
-  - '5.6'
-  - '7.0'
+  - '7.3'
+  - '7.4'
 cache:
   directories:
     - $HOME/.composer/cache
@@ -11,4 +11,3 @@ before_script:
   - mkdir -p build/logs
 script:
   - vendor/bin/phpunit
-  - vendor/bin/coveralls

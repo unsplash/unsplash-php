@@ -22,28 +22,27 @@
     }
   ],
   "require": {
-    "php": ">=5.6.0",
+    "php": ">=7.3.0",
     "guzzlehttp/guzzle": "^6.3.0",
     "league/oauth2-client": ">=1.4.2",
     "hughbertd/oauth2-unsplash": ">=1.0.3"
 
   },
   "require-dev": {
-    "phpunit/phpunit": "~5.1",
-    "php-vcr/php-vcr": "dev-master",
-    "php-vcr/phpunit-testlistener-vcr": "*",
-    "vlucas/phpdotenv": "dev-master",
-    "mockery/mockery": "~0.9.0",
-    "satooshi/php-coveralls": "dev-master"
+    "phpunit/phpunit": "~9.0",
+    "php-vcr/php-vcr": "~1.4",
+    "php-vcr/phpunit-testlistener-vcr": "~3.1",
+    "vlucas/phpdotenv": "~4.1.4",
+    "mockery/mockery": "~1.4.0"
   },
   "autoload": {
     "psr-4": {
-      "Crew\\Unsplash\\": "src/"
+      "Unsplash\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Crew\\Unsplash\\Tests\\": "tests/"
+      "Unsplash\\Tests\\": "tests/"
     }
   }
 }

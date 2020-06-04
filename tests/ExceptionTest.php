@@ -1,12 +1,12 @@
 <?php
 
-namespace Crew\Unsplash\Tests;
+namespace Unsplash\Tests;
 
-use Crew\Unsplash;
+use Unsplash;
 
 /**
  * Class ExceptionTest
- * @package Crew\Unsplash\Tests
+ * @package Unsplash\Tests
  */
 class ExceptionTest extends BaseTest
 {
