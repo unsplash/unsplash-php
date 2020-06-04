@@ -11,4 +11,3 @@ before_script:
   - mkdir -p build/logs
 script:
   - vendor/bin/phpunit
-  - vendor/bin/coveralls
