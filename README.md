@@ -28,23 +28,24 @@ composer require unsplash/unsplash
 
 ### Configuration
 
-Before using, configure the client with your application ID and secret. If you don't have an application ID and secret, follow the steps from the [Unsplash API](https://unsplash.com/documentation#creating-a-developer-account) to register your application.
+Before using, configure the client with your access key and secret. If you don't have an access key and secret, follow the steps from the [Unsplash API](https://unsplash.com/documentation#creating-a-developer-account) to register your application.
 
-Note that if you're just using actions that require the [public permission scope](#permission-scopes), only the `applicationId` is required.
+Note: if you're just using actions that require the [public permission scope](#permission-scopes), only the access key is required. Access key is entered as `applicationId` due to legacy reasons.
 
-Note that if utmSource is omitted from $credentials a notice will be raised
+Note: if utmSource is omitted from $credentials a notice will be raised.
 
 ```php
 Unsplash\HttpClient::init([
-	'applicationId'	=> 'YOUR APPLICATION ID',
-	'secret'		=> 'YOUR APPLICATION SECRET',
+	'applicationId'	=> 'YOUR ACCESS KEY',
+	'secret'	=> 'YOUR APPLICATION SECRET',
 	'callbackUrl'	=> 'https://your-application.com/oauth/callback',
 	'utmSource' => 'NAME OF YOUR APPLICATION'
 ]);
 ```
 
 ### User Authorization workflow
-To access actions that are non-public (i.e. uploading a photo to a specific account), you'll need a user's permission to access their data.
+
+If you need to access actions that are non-public on behalf of the user (i.e. uploading a photo to a specific account), you'll need to follow the [user authentication workflow](https://unsplash.com/documentation/user-authentication-workflow) to access their data.
 
 An example of this flow can be found in /examples/oauth-flow.php
 
@@ -67,7 +68,7 @@ With the token you can now access any additional non-public actions available fo
 
 #### Permission Scopes
 
-The current permission scopes defined by the [Unsplash API](https://unsplash.com/documentation#authorization) are:
+The current permission scopes defined by the [Unsplash API](https://unsplash.com/documentation/user-authentication-workflow#permission-scopes) are:
 
 - `public` (Access a user's public data)
 - `read_user` (Access a user's private data)
@@ -75,6 +76,8 @@ The current permission scopes defined by the [Unsplash API](https://unsplash.com
 - `read_photos` (Access private information from a user's photos)
 - `write_photos` (Post and edit photos for a user)
 - `write_likes` (Like a photo for a user)
+- `read_collections` (View a user’s private collections)
+- `write_collections` (Create and update a user’s collections)
 
 ----
 
