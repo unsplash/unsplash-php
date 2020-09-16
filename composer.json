@@ -23,7 +23,7 @@
   ],
   "require": {
     "php": ">=7.3.0",
-    "guzzlehttp/guzzle": "^6.3.0",
+    "guzzlehttp/guzzle": "^6.3.0|^7.0.1",
     "league/oauth2-client": ">=1.4.2",
     "hughbertd/oauth2-unsplash": ">=1.0.3"
 
