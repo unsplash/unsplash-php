@@ -9,10 +9,10 @@ A PHP client for the [Unsplash API](https://unsplash.com/documentation).
 
 Quick links to methods you're likely to care about:
 
-- [Get a list of new photos](#photo-all) 🎉
-- [Get a random photo](#photo-random) 🎑
-- [Trigger a photo download](#photo-download) 📡
-- [Search for a photo by keyword](#search-photos) 🕵️‍♂️
+- [GET A LIST OF PHOTOS](#photo-all) 🎉
+- [GET A LIST OF RANDOM PHOTOS](#photo-random) 🎑
+- [TRIGGER A PHOTO TO DOWNLOAD](#photo-download) 📡
+- [SEARCH FOR PHOTOS](#search-photos) 🕵️‍♂️
 
 **Note:** Every application must abide by the [API Guidelines](https://help.unsplash.com/api-guidelines/unsplash-api-guidelines). Specifically, remember to [hotlink images](https://help.unsplash.com/api-guidelines/more-on-each-guideline/guideline-hotlinking-images) and [trigger a download when appropriate](https://help.unsplash.com/api-guidelines/more-on-each-guideline/guideline-triggering-a-download).
 
