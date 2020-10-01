@@ -16,7 +16,7 @@ Quick links to methods you're likely to care about:
 
 **Note:** Every application must abide by the [API Guidelines](https://help.unsplash.com/api-guidelines/unsplash-api-guidelines). Specifically, remember to [hotlink images](https://help.unsplash.com/api-guidelines/more-on-each-guideline/guideline-hotlinking-images) and [trigger a download when appropriate](https://help.unsplash.com/api-guidelines/more-on-each-guideline/guideline-triggering-a-download).
 
-Registering your application
+Registering your application.
 Once your account has been registered for the API, log in and go to the Developers page. Go to "Your Applications", click "New Application", and fill in the required details. Initially, your aplication will be in development mode and will be limited to 50 requests per hour
 
 
