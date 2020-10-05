@@ -1,3 +1,7 @@
+## 3.1.0 - 2020-10-05
+- Add support for guzzle 7.x dependency.
+- Add optional `order_by` param to search.
+
 ## 3.0.0 - 2020-06-03
 
 ### Removed
