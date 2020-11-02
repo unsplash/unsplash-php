@@ -83,7 +83,7 @@ The current permission scopes defined by the [Unsplash API](https://unsplash.com
 
 ### API methods
 
-For more information about the the responses for each call, refer to the [official documentation](https://unsplash.com/documentation).
+For more information about the responses for each call, refer to the [official documentation](https://unsplash.com/documentation).
 
 Some parameters are identical across all methods:
 
