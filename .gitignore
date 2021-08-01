@@ -2,3 +2,4 @@ vendor/*
 tests/.env
 report/*
 build
+.idea
