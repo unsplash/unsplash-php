@@ -20,9 +20,13 @@ class Search extends Endpoint
      * @param  string  $collections  Collection ID(‘s) to narrow search. If multiple, comma-separated. (Optional)
      * @param  string  $order_by     How to sort the photos. (Optional; default: relevant). 
      *                               Valid values are latest and relevant.
+     * @param  string  $content_filter Limit results by content safety. (Optional; default: low). Valid values are low and high.
+     * @param  string  $color        Filter results by color. Optional. Valid values are: black_and_white, black, white,
+     *                               yellow, orange, red, purple, magenta, green, teal, and blue.
      * @return PageResult
      */
-    public static function photos($search, $page = 1, $per_page = 10, $orientation = null, $collections = null, $order_by = null)
+    public static function photos($search, $page = 1, $per_page = 10, $orientation = null, $collections = null,
+                                  $order_by = null, $content_filter = "low", $color = null)
     {
         $query = [
             'query' => $search,
@@ -40,6 +44,14 @@ class Search extends Endpoint
 
         if ( ! empty($order_by)) {
             $query['order_by'] = $order_by;
+        }
+
+        if ( ! empty($content_filter)) {
+            $query['content_filter'] = $content_filter;
+        }
+
+        if ( ! empty($color)) {
+            $query['color'] = $color;
         }
 
         $photos = self::get(
