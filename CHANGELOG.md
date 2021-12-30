@@ -1,3 +1,7 @@
+## 3.2.0 - 2021-12-30
+
+- Support for [Topics API](https://unsplash.com/documentation#topics)
+
 ## 3.1.0 - 2020-10-05
 - Add support for guzzle 7.x dependency.
 - Add optional `order_by` param to search.
