@@ -1,3 +1,7 @@
+## 3.2.1 - 2022-01-17
+
+- Relax guzzle version
+
 ## 3.2.0 - 2021-12-30
 
 - Support for [Topics API](https://unsplash.com/documentation#topics)
