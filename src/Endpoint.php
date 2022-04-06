@@ -181,6 +181,10 @@ class Endpoint
         ]);
 
         array_walk_recursive($parameters, function (&$link) use ($queryString) {
+            
+            if ($link === null) {
+                return;
+            }
 
             $parsedUrl = parse_url($link);
 
