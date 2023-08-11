@@ -23,6 +23,8 @@ class Search extends Endpoint
      * @param  string  $content_filter Limit results by content safety. (Optional; default: low). Valid values are low and high.
      * @param  string  $color        Filter results by color. Optional. Valid values are: black_and_white, black, white,
      *                               yellow, orange, red, purple, magenta, green, teal, and blue.
+     * @param  string  $lang         Search language code. Optional. Valid values here:
+     *                               https://unsplash.com/documentation#supported-languages
      * @return PageResult
      */
     public static function photos($search, $page = 1, $per_page = 10, $orientation = null, $collections = null,
