@@ -26,7 +26,7 @@ class Search extends Endpoint
      * @return PageResult
      */
     public static function photos($search, $page = 1, $per_page = 10, $orientation = null, $collections = null,
-                                  $order_by = null, $content_filter = "low", $color = null)
+                                  $order_by = null, $content_filter = "low", $color = null, $lang = null)
     {
         $query = [
             'query' => $search,
@@ -52,6 +52,10 @@ class Search extends Endpoint
 
         if ( ! empty($color)) {
             $query['color'] = $color;
+        }
+
+        if ( ! empty($lang)) {
+            $query['lang'] = $lang;
         }
 
         $photos = self::get(
